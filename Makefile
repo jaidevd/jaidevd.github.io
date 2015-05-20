@@ -77,7 +77,7 @@ deploy: publish
 	fi
 	if test -d _build/$(DEPLOYREPOSITORY); \
 	then echo "  (repository directory exists)"; \
-	else cd _build && git clone git@github.com:jakevdp/$(DEPLOYREPOSITORY).git; \
+	else cd _build && git clone git@github.com:jaidevd/$(DEPLOYREPOSITORY).git; \
 	fi
 	cd _build/$(DEPLOYREPOSITORY) && git pull
 	rsync -r $(OUTPUTDIR)/* _build/$(DEPLOYREPOSITORY)/
