@@ -21,7 +21,7 @@ BLOG_AUTHOR = "Jaidev Deshpande"  # (translatable)
 BLOG_TITLE = "Broca's Brain"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "http://localhost:8000/"
+SITE_URL = "https://jaidevd.github.io/blog/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://localhost:8000/"
@@ -130,14 +130,18 @@ TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/archive.html", "Archive"),
-        ("/categories/", "Tags"),
-        ("/rss.xml", "RSS feed"),
+        ('/index.html', 'Home', 'icon-home'),
+        ('/archive.html', 'Archives', 'icon-folder-open-alt'),
+        ('/categories/index.html', 'Tags', 'icon-tags'),
+        ('/rss.xml', 'RSS', 'icon-rss'),
+        ('https://jaidevd.github.io', 'About me', 'icon-user'),
+        ('https://twitter.com/jaidevd', 'My Twitter', 'icon-twitter'),
+        ('https://github.com/jaidevd', 'My Github', 'icon-github'),
     ),
 }
 
 # Name of the theme to use.
-THEME = "bootstrap3"
+THEME = "zen-ipython"
 
 # Primary color of your theme. This will be used to customize your theme and
 # auto-generate related colors in POSTS_SECTION_COLORS. Must be a HEX value.
