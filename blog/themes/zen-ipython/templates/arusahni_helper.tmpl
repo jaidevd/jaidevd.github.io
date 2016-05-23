@@ -108,9 +108,6 @@ lang="{{ lang }}">
 <%def name="post_social(post)">
     <!-- AddThis Button BEGIN -->
     <div class="addthis_toolbox addthis_default_style addthis_32x32_style"
-        addthis:url="${post.permalink(absolute=True)}"
-        addthis:title="${post.title()}"
-        style="padding-top: 30px;">
         <a class="addthis_button_facebook"></a>
         <a class="addthis_button_twitter"></a>
         <a class="addthis_button_google_plusone_share"></a>
@@ -119,8 +116,6 @@ lang="{{ lang }}">
     </div>
     <!-- AddThis Button END -->
 </%def>
-
-
 {% endmacro %}
 
 {% macro html_feedlinks() %}
