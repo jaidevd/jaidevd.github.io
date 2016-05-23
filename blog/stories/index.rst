@@ -1,4 +1,4 @@
-.. title: Index
+.. title: Broca's Brain
 .. slug: index
 .. date: 2016-05-23 18:56:53 UTC+05:30
 .. tags: 
@@ -7,6 +7,5 @@
 .. description: 
 .. type: text
 
-======================================
-Welcome to Jaidev Deshpande's Website!
-======================================
+
+Hello, World!
