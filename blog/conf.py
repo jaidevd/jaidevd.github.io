@@ -21,7 +21,7 @@ BLOG_AUTHOR = "Jaidev Deshpande"  # (translatable)
 BLOG_TITLE = "Broca's Brain"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "https://jaidevd.github.io/blog/"
+SITE_URL = "https://jaidevd.github.io/brocasbrain/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://localhost:8000/"
@@ -182,7 +182,7 @@ PAGES = (
     ("stories/*.rst", "stories", "story.tmpl"),
     ("stories/*.txt", "stories", "story.tmpl"),
     ("stories/*.html", "stories", "story.tmpl"),
-    ("posts/*.ipynb", "stories", "post.tmpl"),
+    ("posts/*.ipynb", "stories", "story.tmpl"),
 )
 
 
@@ -468,7 +468,7 @@ HIDDEN_AUTHORS = ['Guest']
 
 # Final location for the main blog page and sibling paginated pages is
 # output / TRANSLATION[lang] / INDEX_PATH / index-*.html
-# INDEX_PATH = ""
+INDEX_PATH = "blog"
 
 # Optional HTML that displayed on “main” blog index.html files.
 # May be used for a greeting. (translatable)
