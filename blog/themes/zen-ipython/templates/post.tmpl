@@ -29,6 +29,15 @@
         <div class="body">
             {{ post.text() }}
         </div>
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_default_style addthis_32x32_style"
+            <a class="addthis_button_facebook"></a>
+            <a class="addthis_button_twitter"></a>
+            <a class="addthis_button_google_plusone_share"></a>
+            <a class="addthis_button_compact"></a>
+            <a class="addthis_counter addthis_bubble_style"></a>
+        </div>
+        <!-- AddThis Button END -->
         {{ helper.html_pager(post) }}
         {% if not post.meta('nocomments') and site_has_comments %}
             {{ comments.comment_form(post.permalink(absolute=True), post.title(), post.base_path) }}
