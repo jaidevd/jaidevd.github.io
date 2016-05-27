@@ -1,0 +1,4 @@
+Sitemap: https://jaidevd.github.io/blog/sitemapindex.xml
+
+User-Agent: *
+Host: jaidevd.github.io
