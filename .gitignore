@@ -4,3 +4,8 @@
 output
 .doit*db
 blog/themes/
+
+# LaTeX
+*.aux
+*.log
+*.pdf
