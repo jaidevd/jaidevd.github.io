@@ -1,0 +1,6 @@
+*.pyc
+*.ipynb_checkpoints
+*cache*
+output
+.doit*db
+blog/themes/
