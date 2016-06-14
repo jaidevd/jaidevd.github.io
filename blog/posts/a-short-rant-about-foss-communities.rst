@@ -1,4 +1,4 @@
-.. title: A Short Rant About FOSS Communities
+.. title: Evangelism in FOSS
 .. slug: a-short-rant-about-foss-communities
 .. date: 2016-06-14 19:54:09 UTC+05:30
 .. tags: 
