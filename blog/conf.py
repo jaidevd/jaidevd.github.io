@@ -916,7 +916,6 @@ MathJax.Hub.Config({
     tex2jax: {
         inlineMath: [ ['$','$'], ["\\\(","\\\)"] ],
         displayMath: [ ['$$','$$'], ["\\\[","\\\]"] ],
-        processEscapes: true
     },
     displayAlign: 'left', // Change this to 'center' to center equations.
     "HTML-CSS": {
@@ -937,7 +936,7 @@ MathJax.Hub.Config({
 # IPYNB_CONFIG = {}
 # With the following example configuration you can use a custom jinja template
 # called `toggle.tpl` which has to be located in your site/blog main folder:
-# IPYNB_CONFIG = {'Exporter':{'template_file': 'toggle'}}
+IPYNB_CONFIG = {'Exporter':{'template_file': 'toggle'}}
 
 # What Markdown extensions to enable?
 # You will also get gist, nikola and podcast because those are
@@ -1128,7 +1127,7 @@ UNSLUGIFY_TITLES = True
 # If webassets is installed, bundle JS and CSS into single files to make
 # site loading faster in a HTTP/1.1 environment but is not recommended for
 # HTTP/2.0 when caching is used. Defaults to True.
-# USE_BUNDLES = True
+# USE_BUNDLES = False
 
 # Plugins you don't want to use. Be careful :-)
 # DISABLED_PLUGINS = ["render_galleries"]
