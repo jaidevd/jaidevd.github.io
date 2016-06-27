@@ -1,7 +1,7 @@
 .. title: rstmath
 .. slug: rstmath
 .. date: 2016-06-27 16:01:51 UTC+05:30
-.. tags: mathjax
+.. tags:
 .. category: 
 .. link: 
 .. description: 

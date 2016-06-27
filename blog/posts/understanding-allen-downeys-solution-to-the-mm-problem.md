@@ -2,7 +2,7 @@
 .. title: Understanding Allen Downey's Solution to the M&M Problem
 .. slug: understanding-allen-downeys-solution-to-the-mm-problem
 .. date: 2016-06-19 20:13:56 UTC+05:30
-.. tags: learning, bayes, programming, math, mathjax
+.. tags: learning, bayes, programming, math
 .. category: 
 .. link: 
 .. description: 
