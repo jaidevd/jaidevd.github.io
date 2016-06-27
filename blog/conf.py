@@ -21,7 +21,7 @@ BLOG_AUTHOR = "Jaidev Deshpande"  # (translatable)
 BLOG_TITLE = "Broca's Brain"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "https://jaidevd.github.io/"
+SITE_URL = "http://jaidevd.github.io/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://localhost:8000/"
@@ -134,7 +134,7 @@ NAVIGATION_LINKS = {
         ('/archive.html', 'Archives', 'icon-folder-open-alt'),
         ('/categories/index.html', 'Tags', 'icon-tags'),
         ('/rss.xml', 'RSS', 'icon-rss'),
-        ('https://jaidevd.github.io', 'About me', 'icon-user'),
+        ('http://jaidevd.github.io', 'About me', 'icon-user'),
         ('https://twitter.com/jaidevd', 'My Twitter', 'icon-twitter'),
         ('https://github.com/jaidevd', 'My Github', 'icon-github'),
     ),
@@ -385,7 +385,7 @@ POSTS_SECTIONS = True
 # If you do not want to display a tag publicly, you can mark it as hidden.
 # The tag will not be displayed on the tag list page, the tag cloud and posts.
 # Tag pages will still be generated.
-HIDDEN_TAGS = ['mathjax']
+# HIDDEN_TAGS = ['mathjax']
 
 # Only include tags on the tag list/overview page if there are at least
 # TAGLIST_MINIMUM_POSTS number of posts or more with every tag. Every tag
