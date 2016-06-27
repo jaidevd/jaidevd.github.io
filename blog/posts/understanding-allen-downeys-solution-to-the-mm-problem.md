@@ -20,7 +20,7 @@ paper and a calculator.
 
 Downey is also very careful about pointing out the difference between how
 functions and operations manifest themselves in math and in programming. For
-example, a function (say, \\[f(x)\\]) in mathematics can be implemented in software
+example, a function (say, \\( f(x) \\)) in mathematics can be implemented in software
 by a number of things:
 
 * An array, containing only data
