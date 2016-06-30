@@ -17,10 +17,11 @@ to be solved by hand first, if you expect to have a clear enough understanding
 of the concept. I can vouch for this way of learning complex concepts. The way
 I learnt the backpropagation algorithm (and its derivation), was with a pen,
 paper and a calculator.
+<!-- TEASER_END -->
 
 Downey is also very careful about pointing out the difference between how
 functions and operations manifest themselves in math and in programming. For
-example, a function (say, \\( f(x) \\)) in mathematics can be implemented in software
+example, a function (say, \\[ f(x) \\]) in mathematics can be implemented in software
 by a number of things:
 
 * An array, containing only data
@@ -44,4 +45,4 @@ Bayes' Theorem
 
 Simply put, it says that given data $D$ and a hypothesis $H$
 
-$ P(H|D) = \frac_{}{} $
+$$ P(H|D) = \frac{P(H)P(D|H)}{P(D)} $$
