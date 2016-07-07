@@ -1,0 +1,12 @@
+/*
+ * custom.css
+ * Copyright (C) 2016 jaidevd
+ *
+ * Distributed under terms of the MIT license.
+ */
+
+#social {width:1000px; margin:0 auto 0 auto; text-align:center;}
+#social div
+{
+display:inline-block;
+}

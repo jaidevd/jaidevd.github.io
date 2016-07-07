@@ -9,3 +9,6 @@ blog/themes/
 *.aux
 *.log
 *.pdf
+
+# ipynb exports
+*.slides.html
