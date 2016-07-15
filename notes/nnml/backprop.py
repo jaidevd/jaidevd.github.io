@@ -20,15 +20,17 @@ import numpy as np
 np.random.seed(1)
 
 
+def sigmoid(x):
+    return 1.0 / (1 + np.exp(-x))
+
+
 class Backprop(object):
 
-    def __init__(self, alpha=0.3):
+    def __init__(self, alpha=0.3, activation=sigmoid):
         self.theta1 = np.random.random((3, 2))
         self.theta2 = np.random.random((3,))
         self.alpha = alpha
-
-    def logit(self, x):
-        return 1.0 / (1 + np.exp(-x))
+        self.activation = activation
 
     def loss(self, sample, target, online):
         if online:
@@ -46,6 +48,7 @@ class Backprop(object):
 
     def fit(self, X, y, n_iter=10000, verbose=True, online=False):
         i = 0
+        losses = []
         while i < n_iter:
             if online:
                 for j in range(X.shape[0]):
@@ -56,8 +59,11 @@ class Backprop(object):
                 self._learn_epoch(sample, target)
             if verbose:
                 if i % 100 == 0:
-                    print i, self.loss(sample, target, online)
+                    loss = self.loss(sample, target, online)
+                    print i, loss
+                    losses.append(loss)
             i += 1
+        return losses
 
     def _learn_sample(self, sample, target):
         prediction, l1_op, sample = self.predict_sample(sample)
@@ -94,22 +100,27 @@ class Backprop(object):
 
     def predict_epoch(self, X):
         X = np.c_[X, np.ones((X.shape[0], 1))]
-        l1_op = self.logit(np.dot(X, self.theta1))
+        l1_op = self.activation(np.dot(X, self.theta1))
         l2_activation = np.c_[l1_op, np.ones((l1_op.shape[0], 1))]
-        prediction = self.logit(np.dot(l2_activation, self.theta2))
+        prediction = self.activation(np.dot(l2_activation, self.theta2))
         return prediction, l2_activation, X
 
     def predict_sample(self, sample):
         sample = np.r_[sample, 1]
-        l1_op = self.logit(np.dot(sample, self.theta1))
+        l1_op = self.activation(np.dot(sample, self.theta1))
         l2_activation = np.r_[l1_op, 1]
-        l2_op = self.logit(np.dot(l2_activation, self.theta2))
+        l2_op = self.activation(np.dot(l2_activation, self.theta2))
         return l2_op, l2_activation, sample
 
 
 if __name__ == '__main__':
     X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+    # from sklearn.preprocessing import StandardScaler
+    # X = StandardScaler().fit_transform(X)
     t = [0, 1, 1, 0]
     bp = Backprop()
-    bp.fit(X, t, 1000000)
+    loss = bp.fit(X, t, 1000000)
     print bp.predict_epoch(X)[0]
+    import matplotlib.pyplot as plt
+    plt.plot(loss)
+    plt.show()
