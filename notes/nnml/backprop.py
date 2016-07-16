@@ -16,12 +16,89 @@
 
 
 import numpy as np
+from sklearn.datasets import make_circles
 
 np.random.seed(1)
 
 
 def sigmoid(x):
     return 1.0 / (1 + np.exp(-x))
+
+
+class MultilayerPerceptron(object):
+
+    def __init__(self, layers, alpha=0.3, activation=sigmoid):
+        self.layers = layers
+        self.alpha = alpha
+        self.activation = activation
+        # initializing the network
+        self.weights = []
+        for i, n_neurons in enumerate(layers[:-1]):
+            theta = np.random.rand(n_neurons + 1, layers[i + 1])
+            self.weights.append(theta)
+
+    def loss(self, sample, target):
+        return np.sum(np.abs(self.predict_epoch(sample)[0] - target) ** 2)
+
+    def fit(self, X, y, n_iter=10000, verbose=True):
+        i = 0
+        losses = []
+        while i < n_iter:
+            self._learn_epoch(X, y)
+            if verbose:
+                if i % 100 == 0:
+                    loss = self.loss(X, y, False)
+                    print i, loss
+                    losses.append(loss)
+            i += 1
+        return losses
+
+    def predict_epoch(self, X):
+        l_input = np.c_[X, np.ones((X.shape[0], 1))]
+        activations = []
+        for i, theta in enumerate(self.weights):
+            l_output = self.activation(np.dot(l_input, theta))
+            if i != len(self.weights) - 1:
+                l_input = np.c_[l_output, np.ones((l_output.shape[0], 1))]
+                activations.append(l_input)
+        activations.append(np.c_[X, np.ones((X.shape[0], 1))])
+        return l_output.ravel(), activations
+
+    def _learn_epoch(self, X, target):
+        # prediction, l2_activation, X = self.predict_epoch(X)
+        # delk = (target - prediction) * prediction * (1 - prediction)
+        # delw2 = self.alpha * np.dot(delk, l2_activation)
+        # delin = np.dot(delk.reshape(-1, 1), self.theta2.reshape(1, -1))
+        # delj = delin * l2_activation * (1 - l2_activation)
+        # delw1 = self.alpha * np.dot(delj.T, X)
+        # delw1 = delw1[:(X.shape[1] - 1), :].T
+        # self.theta1 += delw1
+        # self.theta2 += delw2
+
+        # weights between 3rd and 4th layer
+        prediction, activations = self.predict_epoch(X)
+        delk = (target - prediction) * prediction * (1 - prediction)
+        l3_activation = activations[-1]
+        l2_activation = activations[-2]
+        l1_activation = activations[-3]
+        delw3 = self.alpha * np.dot(delk, l3_activation)
+
+        # weights between 2nd and 3rd layer
+        delin = np.dot(delk.reshape(-1, 1), self.weights[-1].reshape(1, -1))
+        delj = delin * l3_activation * l3_activation * (1 - l3_activation)
+        delw2 = self.alpha * np.dot(delj.T, l2_activation)
+        delw2 = delw2[:(l2_activation.shape[1] - 1), :].T
+
+        # weights between 1st and 2nd layer
+        delin = np.dot(delk.reshape(-1, 1), self.weights[-2].reshape(1, -1))
+        delj = delin * l2_activation * l2_activation * (1 - l2_activation)
+        delw1 = self.alpha * np.dot(delj.T, l1_activation)
+        delw1 = delw1[:(l1_activation.shape[1] - 1), :].T
+
+        # updating
+        self.weights[0] += delw1
+        self.weights[1] += delw2
+        self.weights[2] += delw3
 
 
 class Backprop(object):
@@ -114,13 +191,6 @@ class Backprop(object):
 
 
 if __name__ == '__main__':
-    X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-    # from sklearn.preprocessing import StandardScaler
-    # X = StandardScaler().fit_transform(X)
-    t = [0, 1, 1, 0]
-    bp = Backprop()
-    loss = bp.fit(X, t, 1000000)
-    print bp.predict_epoch(X)[0]
-    import matplotlib.pyplot as plt
-    plt.plot(loss)
-    plt.show()
+    X, y = make_circles(factor=0.1, noise=0.08)
+    mlp = MultilayerPerceptron(layers=[2, 4, 2, 1])
+    mlp.fit(X, y)
