@@ -25,6 +25,37 @@ def sigmoid(x):
     return 1.0 / (1 + np.exp(-x))
 
 
+class Layer(object):
+    """
+    1. ALL WEIGHTS ARE INCOMING WEIGHTS
+    2. Attaching the bias is the current layer's responsibility."""
+
+    def __init__(self, n_nodes, kind, theta=None, activation=sigmoid, biased=True,
+                 name=None):
+        kind = kind.lower()
+        assert kind in "input output hidden".split(), "Invalid layer type"
+        if (theta is None) and (kind != "input"):
+            raise TypeError("Hidden layer must have incoming weights.")
+        elif (kind == "input") and (theta is not None):
+            raise TypeError("Input layer doesn't have incoming weights.")
+        self.kind = kind
+        self.n_nodes = n_nodes
+        self.theta = theta
+        self.activation = activation
+        self.biased = biased
+        self.name = name
+
+    def fit(self, X):
+        if self.kind == "input":
+            self.input = self.output = X
+        else:
+            if self.biased:
+                X = np.c_[X, np.ones((X.shape[0],))]
+            self.input = X
+            self.output = self.activation(np.dot(X, self.theta))
+        return self.output
+
+
 class MultilayerPerceptron(object):
 
     def __init__(self, layers, alpha=0.3, activation=sigmoid):
@@ -64,41 +95,37 @@ class MultilayerPerceptron(object):
         activations.append(np.c_[X, np.ones((X.shape[0], 1))])
         return l_output.ravel(), activations
 
-    def _learn_epoch(self, X, target):
-        # prediction, l2_activation, X = self.predict_epoch(X)
-        # delk = (target - prediction) * prediction * (1 - prediction)
-        # delw2 = self.alpha * np.dot(delk, l2_activation)
-        # delin = np.dot(delk.reshape(-1, 1), self.theta2.reshape(1, -1))
-        # delj = delin * l2_activation * (1 - l2_activation)
-        # delw1 = self.alpha * np.dot(delj.T, X)
-        # delw1 = delw1[:(X.shape[1] - 1), :].T
-        # self.theta1 += delw1
-        # self.theta2 += delw2
+    def _get_correction(self, i, j, yi, yj, target):
+        assert j - i == 1, "Invalid layer pair."
+        if j == len(self.layers):
+            return (yj - target) * yj * (1 - yi) * yi
 
+    def _learn_epoch(self, X, target):
         # weights between 3rd and 4th layer
         prediction, activations = self.predict_epoch(X)
-        delk = (target - prediction) * prediction * (1 - prediction)
-        l3_activation = activations[-1]
-        l2_activation = activations[-2]
-        l1_activation = activations[-3]
-        delw3 = self.alpha * np.dot(delk, l3_activation)
-
-        # weights between 2nd and 3rd layer
-        delin = np.dot(delk.reshape(-1, 1), self.weights[-1].reshape(1, -1))
-        delj = delin * l3_activation * l3_activation * (1 - l3_activation)
-        delw2 = self.alpha * np.dot(delj.T, l2_activation)
-        delw2 = delw2[:(l2_activation.shape[1] - 1), :].T
-
-        # weights between 1st and 2nd layer
-        delin = np.dot(delk.reshape(-1, 1), self.weights[-2].reshape(1, -1))
-        delj = delin * l2_activation * l2_activation * (1 - l2_activation)
-        delw1 = self.alpha * np.dot(delj.T, l1_activation)
-        delw1 = delw1[:(l1_activation.shape[1] - 1), :].T
-
-        # updating
-        self.weights[0] += delw1
-        self.weights[1] += delw2
-        self.weights[2] += delw3
+        # delk = (target - prediction) * prediction * (1 - prediction)
+        # l3_activation = activations[-1]
+        # l2_activation = activations[-2]
+        # l1_activation = activations[-3]
+        # delw3 = self.alpha * np.dot(delk, l3_activation)
+        #
+        # # weights between 2nd and 3rd layer
+        # delin = np.dot(delk.reshape(-1, 1), self.weights[-1].reshape(1, -1))
+        # delj = delin * l3_activation * l3_activation * (1 - l3_activation)
+        # delw2 = self.alpha * np.dot(delj.T, l2_activation)
+        # del2 = delw2[:(l2_activation.shape[1] - 1), :].T
+        #
+        # # weights between 1st and 2nd layer
+        # delin = np.dot(delk.reshape(-1, 1), self.weights[-2].reshape(1, -1))
+        # delj = delin * l2_activation * l2_activation * (1 - l2_activation)
+        # delw1 = self.alpha * np.dot(delj.T, l1_activation)
+        # delw1 = delw1[:(l1_activation.shape[1] - 1), :].T
+        #
+        # # updating
+        # self.weights[0] += delw1
+        # self.weights[1] += delw2
+        # self.weights[2] += delw3
+        return
 
 
 class Backprop(object):
@@ -193,4 +220,4 @@ class Backprop(object):
 if __name__ == '__main__':
     X, y = make_circles(factor=0.1, noise=0.08)
     mlp = MultilayerPerceptron(layers=[2, 4, 2, 1])
-    mlp.fit(X, y)
+    mlp.fit(X, y, n_iter=1)
