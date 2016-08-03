@@ -19,9 +19,12 @@ and
 
 $$ \frac{\partial y_{i}}{\partial z_{i}} = y_{i}(1 - y_{i}) $$
 
-* Cost function: negative log probability of the right answers
+* Cost function: negative log probability of the right answers (The Cross-Entropy)
 
 $$ C = -\sum_{j}t_{j} log y_{j} $$
 
 * The steepness of dC/dy exactly balances the flatnes of dy/dz
+
+Neuro-probabilistic language models
+----------------------------------
 
