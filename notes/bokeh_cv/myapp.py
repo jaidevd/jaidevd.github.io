@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from bokeh.plotting import figure, curdoc
 from bokeh.driving import count
 
@@ -20,8 +21,10 @@ curdoc().add_root(p)
 
 @count()
 def callback(i):
-    accuracy = np.random.random()
-    recall = np.random.random()
+    x = np.random.rand(10, 2)
+    df = pd.DataFrame(x, columns="accuracy recall".split())
+    accuracy = x[:, 0].mean()
+    recall = x[:, 1].mean()
 
     # accuracy data
     acc_data = {}
