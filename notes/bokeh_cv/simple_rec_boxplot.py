@@ -24,12 +24,12 @@ x = np.random.rand(10, 3)
 x[:, 2] = 1
 df = pd.DataFrame(x, columns="accuracy recall n_iter".split())
 output_file("boxplot.html")
-p = BoxPlot(df, values="accuracy", label="n_iter", xscale="linear")
+p = BoxPlot(df, values="accuracy", label="n_iter")
 for i in range(5):
     x = np.random.rand(10, 3)
     x[:, 2] = df['n_iter'].max() + 1
     xdf = pd.DataFrame(x, columns="accuracy recall n_iter".split())
     df = pd.concat((df, xdf), axis=0)
     df.index = np.arange(df.shape[0])
-    p = BoxPlot(df, values="accuracy", label="n_iter", xscale="linear")
+    p = BoxPlot(df, values="accuracy", label="n_iter")
 show(p)
