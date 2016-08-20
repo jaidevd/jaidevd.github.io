@@ -1,48 +1,29 @@
 # coding: utf-8
-sample = np.array([[0, 0]])
-target = np.array([[, 0]])
-target = np.array([[1, 0]])
-layers = [2, 3, 2]
-w1 = rand(3, 2)
-w2 = rand(2, 3)
-b1 = rand(3, 1)
-b2 = rand(2, 1)
-a1 = sample.T
-a1
-dot(w1, a1)
-dot(w1, a1.T)
-dot(w1, a1) + b1
-z2 = dot(w1, a1) + b1
-z2
-get_ipython().magic(u'ls ')
+import numpy as np
+
+
 def sigmoid(x):
     return 1.0 / (1 + np.exp(-x))
+
+sample = np.array([[0, 0]])
+target = np.array([[1, 0]])
+
+layers = [2, 3, 2]
+
+w1 = np.random.rand(3, 2)
+w2 = np.random.rand(2, 3)
+b1 = np.random.rand(3, 1)
+b2 = np.random.rand(2, 1)
+
+a1 = sample.T
+z2 = np.dot(w1, a1) + b1
 a2 = sigmoid(z2)
-z3 = dot(w2, a2) + b2
-z3
+z3 = np.dot(w2, a2) + b2
 a3 = sigmoid(z3)
 target = target.T
-target
-a3
 del3 = - (target - a3) * a3 * (1 - a3)
-del3
-dot(w2, del3)
-dot(w2.T, del3)
-dot(w2.T, del3) * a2 * (1 - a2)
-del2 = _
-dot(del3, a2.T)
-gradw2 = _
-w2
+del2 = np.dot(w2.T, del3) * a2 * (1 - a2)
+gradw2 = np.dot(del3, a2.T)
 gradb2 = del3
-dot(del2, a1.T)
-gradw1 = _
-w1
+gradw1 = np.dot(del2, a1.T)
 gradb1 = del2
-del2
-b1
-w1
-w2
-w1
-b1
-w2
-b2
