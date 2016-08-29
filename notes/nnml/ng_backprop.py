@@ -2,6 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+np.random.seed(42)
+
 
 def sigmoid(x):
     return 1.0 / (1 + np.exp(-x))
