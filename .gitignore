@@ -6,9 +6,9 @@ output
 blog/themes/
 
 # LaTeX
-*.aux
-*.log
-*.pdf
+blog/cv/*.aux
+blog/cv/*.log
+blog/cv/*.pdf
 
 # ipynb exports
 *.slides.html

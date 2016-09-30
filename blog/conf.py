@@ -136,6 +136,7 @@ NAVIGATION_LINKS = {
         ('/archive.html', 'Archives', 'icon-folder-open-alt'),
         ('/categories/index.html', 'Tags', 'icon-tags'),
         ('/rss.xml', 'RSS', 'icon-rss'),
+        ('/jd_cv.pdf', 'My CV', 'icon-file-text'),
         ("https://www.goodreads.com/review/list/8656004", "Reading List", "icon-book")
     ),
 }
