@@ -4,7 +4,7 @@
 .. tags: 
 .. category: 
 .. link: 
-.. description: 
+.. description: Thoughts on data science, machine learning and signal processing
 .. type: text
 
 
