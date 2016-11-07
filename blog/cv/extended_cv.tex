@@ -15,12 +15,12 @@
 %	EDUCATION SECTION
 %----------------------------------------------------------------------------------------
 
-%\begin{rSection}{Education}
-%
-%{\bf University of Pune} \hfill {\em July 2012} \\ 
-%B.E. in Electronics
-%
-%\end{rSection}
+\begin{rSection}{Education}
+
+{\bf University of Pune} \hfill {\em July 2012} \\ 
+B.E. in Electronics
+
+\end{rSection}
 
 %----------------------------------------------------------------------------------------
 %	WORK EXPERIENCE SECTION
@@ -30,38 +30,95 @@
 
 \begin{rSubsection}{Cube26 Software Pvt Ltd}{Novemer 2015 - Present}{Data
     Scientist}{New Delhi}
-\item Design, implementation and maintenance of machine learning resources for
-    the \href{http://bit.ly/2bB0uGK}{ReosMessage app}.
-\item Managing data science operations.
-\item Design and deployment of server-side code for various data-driven
-    applications.
-\item Building deep learning models for applications in computer vision and
-    NLP.
+\item {\bf Design, implementation and maintenance of machine learning resources for
+    the \href{http://bit.ly/2bB0uGK}{ReosMessage app}.}\\
+    The \href{http://bit.ly/2bB0uGK}{ReosMessage app} is an SMS app for Android
+    that improves user experience in a data-driven way. I am handling the data
+    science side of some of these features in the app. I have built and am
+    maintaining the machine learning models that the app uses to classify
+    messages into categories like personal, transactional (banking transactions,
+    recharge notifications, OTPs) and spam. The app receives millions of
+    messages per month. I am in-charge of leveraging this dataset to improve
+    the classification accuracy of different machine learning models used for
+    the app. My preprocessing libraries use Apache Spark and pandas, and the
+    machine learning models are built with scikit-learn. I also have built
+    a backend library that continuously benchmarks different algorithms against
+    this dataset, and keeps picking the the algorithm with the best performance
+    for the app. The algorithm also needs to be ported to the Android frontend.
+    I have also developed and am maintaining a library that uses Android's
+    Native Development Kit to port machine learning algorithms in C++ into a
+    system library that the Android code uses.
+\item {\bf Design and deployment of server-side code for various data-driven
+    applications.}\\
+    There are various other data-intensive projects at Cube26, like search for
+    music, videos and wikipedia articles that involves my work. I have built a
+    natural language interface using NLTK, word2vec (gensim) for the
+    Elasticsearch indexes that store this data. This interface turns English
+    language queries into Elasticsearch queries and uses them to run the
+    search.
+\item {\bf Building deep learning models for applications in computer vision and
+    NLP.}\\
+    The \href{http://bit.ly/2dlIoNg}{Reos Camera App} has a feature called
+    "artify" which takes the input image from the camera and uses a
+    convolutional neural network (CNN) to learn the "styles" from the painting
+    to apply this style to the input image. I am a part of the team that built
+    and trained this CNN. We used the Keras library with a theano backend to
+    implement the CNN and have deployed it on an nVIDIA Titan X GPU for
+    production.
 \end{rSubsection}
 
 \begin{rSubsection}{iDataLabs}{September 2015 - December 2015}{Consultant}{New
     Delhi}
-\item Developing a model for predicting marketing leads for software vendors.
+\item {\bf Developing a model for predicting marketing leads for software vendors.}\\
+    This project consisted mainly of taking data provided by different software
+    vendors, augmented it with the proprietory data curated by iDataLabs and
+    building a prediction model with scikit-learn, after doing exhaustive grid
+    search analysis, to generate marketing leads that had a high likelihood of
+    paying off.
+
 \end{rSubsection}
 
 \begin{rSubsection}{DataCulture Analytics}{January 2015 - September 2015}{Chief
     Data Scientist}{New Delhi}
-\item Developing a predictive analytics platform for e-commerce and logistics
-    solutions.
-\item Building and maintaining a recommendation system for recommending
-    logistics partners for various e-commerce companies.
+\item {\bf Developing a predictive analytics platform for e-commerce and logistics
+    solutions.}\\
+    This was a fairly open-ended and broad project which involved us building a
+    dashboard which would show real time statistics for common metrics used in
+    the logistics industry. I used Apache Spark to develop streaming
+    applications which would compute these metrics and feed them into a
+    database from which the database would read. Clients like Delhivery,
+    Snapdeal, Junglee games were able to use this dashboard to monitor the
+    performance of their logistics infrastructure.
+\item {\bf Building and maintaining a recommendation system for recommending
+    logistics partners for various e-commerce companies.}\\
+    Different online marketplaces have a number of options when it comes to
+    getting products delivered from the sellers to the buyers. This project
+    involved building a content-based recommendation system to recommend the
+    best possible logistics solutions to the vendor - based on where the buyer
+    and the seller were located and using other features based on the item
+    being transported.
+
 \end{rSubsection}
 
-\begin{rSubsection}{Enthought, Inc}{July 2013 - December 2015}{Scientific
+\begin{rSubsection}{Enthought, Inc}{April 2012 - December 2015}{Scientific
     Software Developer}{Mumbai}
-\item Developing automated data analysis and visualization software.
-\item Core developer of the Canopy Python distribution and data analysis
-    environemnt.
-\item Built a continuous integration and delivery platform from scratch.
-\end{rSubsection}
-
-\begin{rSubsection}{Enthought, Inc}{April 2012 - July 2013}{Intern}{Mumbai}
-\item Worked on Python tools for exploratory data analysis.
+\item {\bf Developing automated data analysis and visualization software.}\\
+    The \href{https://www.enthought.com/products/canopy/}{Canopy Data Analysis environment} contains an
+    integrated environment for automating basic exploratory data analysis. I
+    developed this environment using Enthought's internal GUI toolkits and a
+    combination of numerical libraries in Python like Pandas, Scikit-Learn and
+    matplotlib.
+\item {\bf Core developer of the Canopy Python distribution and data analysis
+    environemnt.}\\
+    I was involved in the design, maintainance and debugging of the Canopy
+    project from its beginning in various capacities.
+\item {\bf Built a continuous integration and delivery platform from scratch.}\\
+    When I started working at Enthought, I was tasked with building and
+    maintaining a QA system. I used Jenkins to automate the running of various
+    unit and integration tests within Canopy, building the package and then
+    running system tests on it. I helped the entire development effort move to
+    a continuous integration paradigm and speed up the development cycle
+    drastically.
 \end{rSubsection}
 
 \begin{rSubsection}{Tata Institute of Fundamental Research}{August 2011 -

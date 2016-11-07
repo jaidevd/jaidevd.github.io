@@ -9,6 +9,10 @@ blog/themes/
 blog/cv/*.aux
 blog/cv/*.log
 blog/cv/*.pdf
+blog/cv/*.out
 
 # ipynb exports
 *.slides.html
+
+# text files for the Holmes post
+blog/posts/holmes
