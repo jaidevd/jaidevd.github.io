@@ -16,3 +16,6 @@ blog/cv/*.out
 
 # text files for the Holmes post
 blog/posts/holmes
+
+# vim swap files
+*.swp
