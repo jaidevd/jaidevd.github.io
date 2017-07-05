@@ -5,18 +5,18 @@
 * dropthebit.com
 */
 /**
-  @license html2canvas v0.34 <http://html2canvas.hertzen.com>
+  @license html2canvas v0.34 <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Released under MIT License
  */
 (function(window, document, undefined){
 
 /*
-  html2canvas v0.34 <http://html2canvas.hertzen.com>
+  html2canvas v0.34 <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Released under MIT License
  */
@@ -89,7 +89,7 @@ _html2canvas.Util.getCSS = function (el, attribute) {
         // Check if we are not dealing with pixels, (Opera has issues with this)
         // Ported from jQuery css.js
         // From the awesome hack by Dean Edwards
-        // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
+        // https//erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
 
         // If we're not dealing with a regular pixel number
         // but a number that has a weird ending, we need to convert it to pixels
@@ -239,7 +239,7 @@ _html2canvas.Util.Extend = function (options, defaults) {
  * Derived from jQuery.contents()
  * Copyright 2010, John Resig
  * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://jquery.org/license
+ * https//jquery.org/license
  */
 _html2canvas.Util.Children = function( elem ) {
 
@@ -286,13 +286,13 @@ _html2canvas.Util.Children = function( elem ) {
 };
 
 /*
-  html2canvas v0.34 <http://html2canvas.hertzen.com>
+  html2canvas v0.34 <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Contributor(s):
-      Niklas von Hertzen <http://www.twitter.com/niklasvh>
-      André Fiedler      <http://www.twitter.com/sonnenkiste>
+      Niklas von Hertzen <https//www.twitter.com/niklasvh>
+      André Fiedler      <https//www.twitter.com/sonnenkiste>
 
   Released under MIT License
  */
@@ -740,9 +740,9 @@ _html2canvas.Generate.ListRoman = function(number) {
 
 })();
 /*
-  html2canvas v0.34 <http://html2canvas.hertzen.com>
+  html2canvas v0.34 <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Released under MIT License
 */
@@ -767,9 +767,9 @@ _html2canvas.Parse = function ( images, options ) {
             canvas.width = canvas.height = 10;
             img.src = [
             "data:image/svg+xml,",
-            "<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'>",
+            "<svg xmlns='https//www.w3.org/2000/svg' width='10' height='10'>",
             "<foreignObject width='10' height='10'>",
-            "<div xmlns='http://www.w3.org/1999/xhtml' style='width:10;height:10;'>",
+            "<div xmlns='https//www.w3.org/1999/xhtml' style='width:10;height:10;'>",
             "sup",
             "</div>",
             "</foreignObject>",
@@ -931,7 +931,7 @@ _html2canvas.Parse = function ( images, options ) {
 
 
 
-        // http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever (handtinywhite.gif)
+        // https//probablyprogramming.com/2009/03/15/the-tiniest-gif-ever (handtinywhite.gif)
         img.src = "data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACwAAAAAAQABAAACAkQBADs=";
         img.width = 1;
         img.height = 1;
@@ -1047,7 +1047,7 @@ _html2canvas.Parse = function ( images, options ) {
             ctx.setVariable("fillStyle", color);
 
             /*
-              need to be defined in the order as defined in http://www.w3.org/TR/CSS21/fonts.html#font-shorthand
+              need to be defined in the order as defined in https//www.w3.org/TR/CSS21/fonts.html#font-shorthand
               to properly work in Firefox
             */
             ctx.setVariable("font", font_style+ " " + font_variant  + " " + bold + " " + size + " " + family);
@@ -1274,7 +1274,7 @@ _html2canvas.Parse = function ( images, options ) {
                 return;
             /*
                  TODO really need to figure out some more accurate way to try and find the position.
-                 as defined in http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-position, it does not even have a specified "correct" position, so each browser
+                 as defined in https//www.w3.org/TR/CSS21/generate.html#propdef-list-style-position, it does not even have a specified "correct" position, so each browser
                  may display it whatever way it feels like.
                  "The position of the list-item marker adjacent to floats is undefined in CSS 2.1. CSS 2.1 does not specify the precise location of the marker box or its position in the painting order"
 
@@ -2035,9 +2035,9 @@ _html2canvas.Parse = function ( images, options ) {
             parseDOM( body );
             img.src = [
             "data:image/svg+xml,",
-            "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='" + size.width + "' height='" + size.height + "'>",
+            "<svg xmlns='https//www.w3.org/2000/svg' version='1.1' width='" + size.width + "' height='" + size.height + "'>",
             "<foreignObject width='" + size.width + "' height='" + size.height + "'>",
-            "<html xmlns='http://www.w3.org/1999/xhtml' style='margin:0;'>",
+            "<html xmlns='https//www.w3.org/1999/xhtml' style='margin:0;'>",
             html.replace(/\#/g,"%23"),
             "</html>",
             "</foreignObject>",
@@ -2076,9 +2076,9 @@ function h2czContext(zindex) {
 }
 
 /*
-  html2canvas v0.34 <http://html2canvas.hertzen.com>
+  html2canvas v0.34 <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Released under MIT License
  */
@@ -2115,7 +2115,7 @@ _html2canvas.Preload = function( options ) {
 
     function isSameOrigin(url){
         link.href = url;
-        link.href = link.href; // YES, BELIEVE IT OR NOT, that is required for IE9 - http://jsfiddle.net/niklasvh/2e48b/
+        link.href = link.href; // YES, BELIEVE IT OR NOT, that is required for IE9 - https//jsfiddle.net/niklasvh/2e48b/
         var origin = link.protocol + link.host;
         return (origin === pageOrigin);
     }
@@ -2437,9 +2437,9 @@ _html2canvas.Preload = function( options ) {
 
 
 /*
-  html2canvas v0.34 <http://html2canvas.hertzen.com>
+  html2canvas v0.34 <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Released under MIT License
 */
@@ -2481,9 +2481,9 @@ function h2cRenderContext(width, height) {
 }
 
 /*
-  html2canvas v0.34 <http://html2canvas.hertzen.com>
+  html2canvas v0.34 <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Released under MIT License
 */
@@ -2548,9 +2548,9 @@ _html2canvas.Renderer = function(parseQueue, options){
 };
 
 /*
-  html2canvas v0.34 <http://html2canvas.hertzen.com>
+  html2canvas v0.34 <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Released under MIT License
 */
@@ -2647,9 +2647,9 @@ html2canvas.Renderer = {
 };
 
 /*
-  html2canvas v0.34 <http://html2canvas.hertzen.com>
+  html2canvas v0.34 <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Released under MIT License
 */
@@ -2665,7 +2665,7 @@ _html2canvas.Renderer.Canvas = function( options ) {
     _createCalled = false,
     canvasReadyToDraw = false,
     methods,
-    flashMaxSize = 2880; // flash bitmap limited to 2880x2880px // http://stackoverflow.com/questions/2033792/argumenterror-error-2015-invalid-bitmapdata
+    flashMaxSize = 2880; // flash bitmap limited to 2880x2880px // https//stackoverflow.com/questions/2033792/argumenterror-error-2015-invalid-bitmapdata
 
 
     if (canvas.getContext){
@@ -2882,9 +2882,9 @@ window.html2canvas = html2canvas;
 
 
 /**
-  @license html2canvas v0.34 <http://html2canvas.hertzen.com>
+  @license html2canvas v0.34 <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Released under MIT License
  */
@@ -3009,7 +3009,7 @@ function extendJQuery($){
     };
 	
 	// jquery.event.drag - v 2.2
-	// Copyright (c) 2010 Three Dub Media - http://threedubmedia.com
+	// Copyright (c) 2010 Three Dub Media - https//threedubmedia.com
 	// REQUIRES: jquery 1.7.x
 
 	(function(f){f.fn.drag=function(b,a,c){var d="string"==typeof b?b:"",h=f.isFunction(b)?b:f.isFunction(a)?a:null;0!==d.indexOf("drag")&&(d="drag"+d);c=(b==h?a:c)||{};return h?this.bind(d,c,h):this.trigger(d)};var h=f.event,g=h.special,c=g.drag={defaults:{which:1,distance:0,not:":input",handle:null,relative:!1,drop:!0,click:!1},datakey:"dragdata",noBubble:!0,add:function(b){var a=f.data(this,c.datakey),e=b.data||{};a.related+=1;f.each(c.defaults,function(b){void 0!==e[b]&&(a[b]=e[b])})},remove:function(){f.data(this, c.datakey).related-=1},setup:function(){if(!f.data(this,c.datakey)){var b=f.extend({related:0},c.defaults);f.data(this,c.datakey,b);h.add(this,"touchstart mousedown",c.init,b);this.attachEvent&&this.attachEvent("ondragstart",c.dontstart)}},teardown:function(){(f.data(this,c.datakey)||{}).related||(f.removeData(this,c.datakey),h.remove(this,"touchstart mousedown",c.init),c.textselect(!0),this.detachEvent&&this.detachEvent("ondragstart",c.dontstart))},init:function(b){if(!c.touched){var a=b.data,e; if(!(0!=b.which&&0<a.which&&b.which!=a.which)&&!f(b.target).is(a.not)&&(!a.handle||f(b.target).closest(a.handle,b.currentTarget).length))if(c.touched="touchstart"==b.type?this:null,a.propagates=1,a.mousedown=this,a.interactions=[c.interaction(this,a)],a.target=b.target,a.pageX=b.pageX,a.pageY=b.pageY,a.dragging=null,e=c.hijack(b,"draginit",a),a.propagates){if((e=c.flatten(e))&&e.length)a.interactions=[],f.each(e,function(){a.interactions.push(c.interaction(this,a))});a.propagates=a.interactions.length; !1!==a.drop&&g.drop&&g.drop.handler(b,a);c.textselect(!1);c.touched?h.add(c.touched,"touchmove touchend",c.handler,a):h.add(document,"mousemove mouseup",c.handler,a);if(!c.touched||a.live)return!1}}},interaction:function(b,a){var e=f(b)[a.relative?"position":"offset"]()||{top:0,left:0};return{drag:b,callback:new c.callback,droppable:[],offset:e}},handler:function(b){var a=b.data;switch(b.type){case !a.dragging&&"touchmove":b.preventDefault();case !a.dragging&&"mousemove":if(Math.pow(b.pageX-a.pageX, 2)+Math.pow(b.pageY-a.pageY,2)<Math.pow(a.distance,2))break;b.target=a.target;c.hijack(b,"dragstart",a);a.propagates&&(a.dragging=!0);case "touchmove":b.preventDefault();case "mousemove":if(a.dragging){c.hijack(b,"drag",a);if(a.propagates){!1!==a.drop&&g.drop&&g.drop.handler(b,a);break}b.type="mouseup"}default:c.touched?h.remove(c.touched,"touchmove touchend",c.handler):h.remove(document,"mousemove mouseup",c.handler),a.dragging&&(!1!==a.drop&&g.drop&&g.drop.handler(b,a),c.hijack(b,"dragend",a)), c.textselect(!0),!1===a.click&&a.dragging&&f.data(a.mousedown,"suppress.click",(new Date).getTime()+5),a.dragging=c.touched=!1}},hijack:function(b,a,e,d,g){if(e){var n=b.originalEvent,p=b.type,l=a.indexOf("drop")?"drag":"drop",j,m=d||0,i,k,d=!isNaN(d)?d:e.interactions.length;b.type=a;b.originalEvent=null;e.results=[];do if((i=e.interactions[m])&&!("dragend"!==a&&i.cancelled))k=c.properties(b,e,i),i.results=[],f(g||i[l]||e.droppable).each(function(d,g){k.target=g;b.isPropagationStopped=function(){return!1}; j=g?h.dispatch.call(g,b,k):null;!1===j?("drag"==l&&(i.cancelled=!0,e.propagates-=1),"drop"==a&&(i[l][d]=null)):"dropinit"==a&&i.droppable.push(c.element(j)||g);"dragstart"==a&&(i.proxy=f(c.element(j)||i.drag)[0]);i.results.push(j);delete b.result;if("dropinit"!==a)return j}),e.results[m]=c.flatten(i.results),"dropinit"==a&&(i.droppable=c.flatten(i.droppable)),"dragstart"==a&&!i.cancelled&&k.update();while(++m<d);b.type=p;b.originalEvent=n;return c.flatten(e.results)}},properties:function(b,a,e){var d= e.callback;d.drag=e.drag;d.proxy=e.proxy||e.drag;d.startX=a.pageX;d.startY=a.pageY;d.deltaX=b.pageX-a.pageX;d.deltaY=b.pageY-a.pageY;d.originalX=e.offset.left;d.originalY=e.offset.top;d.offsetX=d.originalX+d.deltaX;d.offsetY=d.originalY+d.deltaY;d.drop=c.flatten((e.drop||[]).slice());d.available=c.flatten((e.droppable||[]).slice());return d},element:function(b){if(b&&(b.jquery||1==b.nodeType))return b},flatten:function(b){return f.map(b,function(a){return a&&a.jquery?f.makeArray(a):a&&a.length?c.flatten(a): a})},textselect:function(b){f(document)[b?"unbind":"bind"]("selectstart",c.dontstart).css("MozUserSelect",b?"":"none");document.unselectable=b?"off":"on"},dontstart:function(){return!1},callback:function(){}};c.callback.prototype={update:function(){g.drop&&this.available.length&&f.each(this.available,function(b){g.drop.locate(this,b)})}};var n=h.dispatch;h.dispatch=function(b){if(0<f.data(this,"suppress."+b.type)-(new Date).getTime())f.removeData(this,"suppress."+b.type);else return n.apply(this, arguments)};var p=h.fixHooks.touchstart=h.fixHooks.touchmove=h.fixHooks.touchend=h.fixHooks.touchcancel={props:"clientX clientY pageX pageY screenX screenY".split(" "),filter:function(b,a){if(a){var c=a.touches&&a.touches[0]||a.changedTouches&&a.changedTouches[0]||null;c&&f.each(p.props,function(a,f){b[f]=c[f]})}return b}};g.draginit=g.dragstart=g.dragend=c})(jQuery);
@@ -3017,9 +3017,9 @@ function extendJQuery($){
 
 
 /*
-  html2canvas @VERSION@ <http://html2canvas.hertzen.com>
+  html2canvas @VERSION@ <https//html2canvas.hertzen.com>
   Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
-  http://www.twitter.com/niklasvh
+  https//www.twitter.com/niklasvh
 
   Released under MIT License
 */
@@ -3038,7 +3038,7 @@ function extendJQuery($){
         }, 50);
     };
 	
-	var jQueryUrl = 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js';
+	var jQueryUrl = 'https//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js';
 	if( !w.jQuery ){
 		loadScript(jQueryUrl, init);
 	} else {
