@@ -19,3 +19,8 @@ blog/posts/holmes
 
 # vim swap files
 *.swp
+
+# doit files
+*.bak
+*.dat
+*.dir
