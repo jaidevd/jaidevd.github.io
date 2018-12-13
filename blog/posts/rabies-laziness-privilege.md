@@ -121,7 +121,9 @@ lamenting that it was a wasted trip, but with a much louder voice saying,
 <p>I'm fine now. There's not much pain or swelling. All that's left is for me to
 take the periodical vaccine shots spread over a month.</p>
 <br>
-<p>I kept reading all news reports I could find on dog bites. There's clearly
+<p>I kept reading all news reports I could find on dog bites. The WHO [says that](https://www.who.int/features/factfiles/rabies/en/)
+over 59,000 people die of rabies every year. That means almost every other
+rabies victim is an Indian. There may be some
 sampling bias, of course. But even in this little cranny of rabies and dog bite
 related deaths, things are clearly very bleak. Inadequate treatment is what kills dog
 bite patients. You take the vaccine but ignore the wound, an infection will
