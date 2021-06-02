@@ -24,3 +24,6 @@ blog/posts/holmes
 *.bak
 *.dat
 *.dir
+
+public/
+resources/
