@@ -1,0 +1,1 @@
+window.onload=wrapTable();function wrapTable(){const a=document.querySelectorAll('table');a.forEach(a=>{const b=document.createElement('div');b.className='table-wrapper',a.parentElement.replaceChild(b,a),b.appendChild(a)})}
