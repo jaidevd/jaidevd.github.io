@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Organizing a Bookshelf with Multivariate Analysis | Jaidev&#39;s Blog</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="http://jaidevd.com/css/main.min.0564082dc658ec59ca122dd2fd20110a2c5deb5ab5636ddec8b19222113d4fbd.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80129098-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Jaidev&#39;s Blog</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/about/">About Me</a>
+  
+    <a class="color-link nav-link" href="/archive/">Archive</a>
+  
+  <a class="color-link nav-link" href="http://jaidevd.com/index.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="http://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Organizing a Bookshelf with Multivariate Analysis</h1>
+    
+    <time>August 27, 2015</time>
+    
+    <div>
+        <p>
+        <p>I have recently moved from Pune to Delhi. I had spent only a year in Pune, having moved there from Mumbai, where I lived for three years. Whenever I move, the bulk of my luggage consists of books and clothes. My stay in Pune was just a transition, so I never bothered to unpack and store all my stuff too carefully. Thus, a corner of my bedroom in my Pune apartment always looked like this:
+
+
+
+    <img class="article-image" src="/posts/bookshelf/before.jpg" alt="My first image">
+    
+
+</p>
+<p>The actual volume of books that I carried from Pune to Delhi is about twice of what is seen in the picture. My house in Delhi has six bookshelves, three in the living room and three in another room that I&rsquo;ve made into a study. Naturally, I wanted to arrange my nearly 200 books in a manner that would be convenient to access, and such that the arrangement made some thematic sense. For example, I should not have to go to the living room to get one of my books on data analysis, and my partner shouldn&rsquo;t have to keep coming into the study to get one of her novels. Also, books that deal with similar subjects should naturally lie together. Obviously, arraging books semantically and such that they look good on the shelves isn&rsquo;t a data analysis problem as such, and even a haphazard, arbitrary arrangement of books would still work well for most practical purposes, but I still thought making it data driven would be a fun exercise.</p>
+<!-- TEASER_END -->
+<p>An obvious method was to arrange the books alphabetically, but I rejected that for two reasons. First, there are some books that one identifies by the name of the author instead of by the title (for example, &ldquo;Wes McKinney&rsquo;s book on Pandas&rdquo; is easier for me to remember than &ldquo;Python for Data Analysis&rdquo;). Therefore, the immediate question was whether to sort alphabetically the names of the authors or the titles of the book. Secondly, even if I picked one of these attributes by which to arrange the books, that would make the arrangement look physically very ugly. It would also not ensure that books with similar themes or genres lie together. (I would not have <a href="http://www.amazon.com/Computer-Vision-Modern-Approach-Edition/dp/013608592X"><em>Computer Vision: A Modern Approach</em> by Forsyth and Ponce</a> positioned next to <a href="http://www.amazon.com/Day-Jackal-Frederick-Forsyth/dp/0451239377"><em>The Day of the Jackal</em> by Fredrick Forsyth</a>)</p>
+<p>I also briefly considered using the Dewey Decimal System, but it became quickly apparent that it is only worthwhile for huge libraries, and sometimes not even then. So after a bit of thinking, I laid down the following rules that the arrangement should follow:</p>
+<ol>
+<li>Books should be arranged by height</li>
+<li>Books by the same author should be positioned next to each other.</li>
+<li>A shelf should house at most two genres of books.</li>
+</ol>
+<p>Since I had six bookshelves, it seemed natural that I should partition titles into six clusters in an unsupervised manner.</p>
+<h2 id="getting-and-preprocessing-the-data">Getting and Preprocessing the Data</h2>
+<p>To perform clustering on the book titles, I started annotating books by the names of their author, their height in millimeters and there genres and subgenres. The resulting dataset is available <a href="https://gist.githubusercontent.com/jaidevd/23aef12e9bf56c618c41/raw/c05e98672b8d52fa0cb94aad80f75eb78342e5d4/books_new.csv">here</a>, and looks somewhat like this:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">pandas</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">pd</span>
+url <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;https://gist.githubusercontent.com/jaidevd/23aef12e9bf56c618c41/raw/c05e98672b8d52fa0cb94aad80f75eb78342e5d4/books_new.csv&#34;</span>
+df <span style="color:#000;font-weight:bold">=</span> pd<span style="color:#000;font-weight:bold">.</span>read_csv(url, index_col<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Title&#39;</span>)
+df<span style="color:#000;font-weight:bold">.</span>head()</code></pre></div>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Author</th>
+      <th>Genre</th>
+      <th>SubGenre</th>
+      <th>Height</th>
+      <th>Publisher</th>
+    </tr>
+    <tr>
+      <th>Title</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Fundamentals of Wavelets</th>
+      <td>Goswami, Jaideva</td>
+      <td>tech</td>
+      <td>signal_processing</td>
+      <td>228</td>
+      <td>Wiley</td>
+    </tr>
+    <tr>
+      <th>Data Smart</th>
+      <td>Foreman, John</td>
+      <td>tech</td>
+      <td>data_science</td>
+      <td>235</td>
+      <td>Wiley</td>
+    </tr>
+    <tr>
+      <th>God Created the Integers</th>
+      <td>Hawking, Stephen</td>
+      <td>tech</td>
+      <td>mathematics</td>
+      <td>197</td>
+      <td>Penguin</td>
+    </tr>
+    <tr>
+      <th>Superfreakonomics</th>
+      <td>Dubner, Stephen</td>
+      <td>science</td>
+      <td>economics</td>
+      <td>179</td>
+      <td>HarperCollins</td>
+    </tr>
+    <tr>
+      <th>Orientalism</th>
+      <td>Said, Edward</td>
+      <td>nonfiction</td>
+      <td>history</td>
+      <td>197</td>
+      <td>Penguin</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>For convenience, I ignored the first names of the authors. I also only considered the last names of the first author of those books that have multiple authors.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df[<span style="color:#d14">&#39;Author&#39;</span>] <span style="color:#000;font-weight:bold">=</span> df[<span style="color:#d14">&#39;Author&#39;</span>]<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">str</span>)<span style="color:#000;font-weight:bold">.</span>apply(<span style="color:#000;font-weight:bold">lambda</span> x: x<span style="color:#000;font-weight:bold">.</span>split(<span style="color:#d14">&#39;,&#39;</span>)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>lower())</code></pre></div>
+<p>The author, genre and subgenre of the books are categorical variables, so they have to be converted into dummy numerical variables first, and then the height attribute has to be added to the resulting dataset.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.feature_extraction</span> <span style="color:#000;font-weight:bold">import</span> DictVectorizer
+
+<span style="color:#998;font-style:italic"># Get dummy vectors for categorical data</span>
+authorVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#999">False</span>)
+dummyAuthors <span style="color:#000;font-weight:bold">=</span> authorVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(author<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;Author&#39;</span>]])
+genreVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#999">False</span>)
+dummyGenres <span style="color:#000;font-weight:bold">=</span> genreVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(genre<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;Genre&#39;</span>]])
+subgenVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#999">False</span>)
+dummySubGenres <span style="color:#000;font-weight:bold">=</span> subgenVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(subgen<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;SubGenre&#39;</span>]])
+
+X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[dummyAuthors, dummyGenres, dummySubGenres]
+
+<span style="color:#998;font-style:italic"># Add height to the dataset</span>
+X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[X, df[<span style="color:#d14">&#39;Height&#39;</span>]<span style="color:#000;font-weight:bold">.</span>values]</code></pre></div>
+<h2 id="analysis-and-visualization">Analysis and Visualization</h2>
+<p>Before the clustering, let&rsquo;s run a basic PCA reduction on the dataset and take a look at the scatterplot. Let&rsquo;s also create a convex hull around the scatter plot and take a look at which book titles make up the vertices of the hull.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
+plt<span style="color:#000;font-weight:bold">.</span>style<span style="color:#000;font-weight:bold">.</span>use(<span style="color:#d14">&#39;ggplot&#39;</span>)
+
+
+<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.preprocessing</span> <span style="color:#000;font-weight:bold">import</span> StandardScaler
+<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.decomposition</span> <span style="color:#000;font-weight:bold">import</span> PCA
+<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.spatial</span> <span style="color:#000;font-weight:bold">import</span> ConvexHull
+
+
+<span style="color:#998;font-style:italic"># Standard normalization</span>
+scaler <span style="color:#000;font-weight:bold">=</span> StandardScaler()
+X <span style="color:#000;font-weight:bold">=</span> scaler<span style="color:#000;font-weight:bold">.</span>fit_transform(X)
+
+<span style="color:#998;font-style:italic"># Dimensionality reduction</span>
+pca <span style="color:#000;font-weight:bold">=</span> PCA(n_components<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>)
+x_red <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>fit_transform(X)
+
+
+hull <span style="color:#000;font-weight:bold">=</span> ConvexHull(x_red)
+plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">15</span>, <span style="color:#099">15</span>))
+plt<span style="color:#000;font-weight:bold">.</span>scatter(x_red[:, <span style="color:#099">0</span>], x_red[:, <span style="color:#099">1</span>], s<span style="color:#000;font-weight:bold">=</span><span style="color:#099">50</span>)
+<span style="color:#000;font-weight:bold">for</span> vertex <span style="color:#000;font-weight:bold">in</span> hull<span style="color:#000;font-weight:bold">.</span>vertices:
+    plt<span style="color:#000;font-weight:bold">.</span>annotate(df<span style="color:#000;font-weight:bold">.</span>index[vertex], xy<span style="color:#000;font-weight:bold">=</span>x_red[vertex, :])</code></pre></div>
+<p><img src="/img/bookshelf-2.png" alt=""></p>
+<p>At this stage the scatter plot looks like it is making sense. The cluster at the top right seems like the fiction cluster, the one at the top center might be graphic novels and the one at the bottom might be history. There is still some ambiguity, as the plot says nothing about which attributes are varying as we move away from the origin towards the vertices of the hull.</p>
+<p>To examine the variation among the attributes in detail, let&rsquo;s use a biplot superimposed on the scatterplot. Let&rsquo;s also perform the clustering with KMeans, with six centroids, each denoting a shelf.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.cluster</span> <span style="color:#000;font-weight:bold">import</span> KMeans
+
+
+km <span style="color:#000;font-weight:bold">=</span> KMeans(n_clusters<span style="color:#000;font-weight:bold">=</span><span style="color:#099">6</span>, n_jobs<span style="color:#000;font-weight:bold">=-</span><span style="color:#099">1</span>)
+clusters <span style="color:#000;font-weight:bold">=</span> km<span style="color:#000;font-weight:bold">.</span>fit_predict(x_red)
+
+xvector <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>components_[<span style="color:#099">0</span>]
+yvector <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>components_[<span style="color:#099">1</span>]
+
+xs <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>transform(X)[:,<span style="color:#099">0</span>]
+ys <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>transform(X)[:,<span style="color:#099">1</span>]
+
+
+
+columns <span style="color:#000;font-weight:bold">=</span> df<span style="color:#000;font-weight:bold">.</span>Author<span style="color:#000;font-weight:bold">.</span>unique()<span style="color:#000;font-weight:bold">.</span>tolist() <span style="color:#000;font-weight:bold">+</span> \
+          df<span style="color:#000;font-weight:bold">.</span>Genre<span style="color:#000;font-weight:bold">.</span>unique()<span style="color:#000;font-weight:bold">.</span>tolist() <span style="color:#000;font-weight:bold">+</span> \
+          df<span style="color:#000;font-weight:bold">.</span>SubGenre<span style="color:#000;font-weight:bold">.</span>unique()<span style="color:#000;font-weight:bold">.</span>tolist() <span style="color:#000;font-weight:bold">+</span> [<span style="color:#d14">&#39;Height&#39;</span>]
+
+plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">15</span>, <span style="color:#099">15</span>))
+
+<span style="color:#998;font-style:italic"># Creating the biplot</span>
+mXS, mYS <span style="color:#000;font-weight:bold">=</span> xs<span style="color:#000;font-weight:bold">.</span>max(), ys<span style="color:#000;font-weight:bold">.</span>max()
+xVec, yVec <span style="color:#000;font-weight:bold">=</span> xvector <span style="color:#000;font-weight:bold">*</span> mXS, yvector <span style="color:#000;font-weight:bold">*</span> mYS
+largeAttrs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sqrt(xVec <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">+</span> yVec <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>)
+maxAttrs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>argsort(largeAttrs)[::<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][:<span style="color:#099">10</span>]
+<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">5</span>):
+    plt<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span>xvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(xs), yvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(ys),
+              color<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;r&#39;</span>, width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.0005</span>, head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.0025</span>)
+    plt<span style="color:#000;font-weight:bold">.</span>text(<span style="color:#000;font-weight:bold">-</span>xvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(xs)<span style="color:#000;font-weight:bold">*</span><span style="color:#099">1.2</span>, yvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(ys)<span style="color:#000;font-weight:bold">*</span><span style="color:#099">1.2</span>,
+             columns[maxAttrs[i]], color<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;r&#39;</span>)
+
+plt<span style="color:#000;font-weight:bold">.</span>scatter(xs, ys, c<span style="color:#000;font-weight:bold">=</span>clusters, s<span style="color:#000;font-weight:bold">=</span><span style="color:#099">50</span>)
+
+<span style="color:#000;font-weight:bold">for</span> vertex <span style="color:#000;font-weight:bold">in</span> hull<span style="color:#000;font-weight:bold">.</span>vertices:
+    plt<span style="color:#000;font-weight:bold">.</span>annotate(df<span style="color:#000;font-weight:bold">.</span>index[vertex], xy<span style="color:#000;font-weight:bold">=</span>x_red[vertex, :])</code></pre></div>
+<p><img src="/img/bookshelf-3.png" alt=""></p>
+<p>The lines denote how the different attributes of the book vary among the titles, and the six colored clusters are how I arranged my books among the six shelves. After the arragement dictated by the clustering output, they looked a bit better:</p>
+<p>
+
+
+    <img class="article-image" src="/posts/bookshelf/bookshelf-4.jpeg" alt="My first image">
+    
+
+
+
+
+
+    <img class="article-image" src="/posts/bookshelf/bookshelf-5.jpeg" alt="My first image">
+    
+
+</p>
+<p>I might have gone quite overboard with personal data analytics with this exercise, but at least I learnt how to make biplots. The kitchen is next.</p>
+
+        </p>
+    </div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "brocasbrain" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/personal">#personal</a>
+        
+            <a class="tag" href="/tags/analytics">#analytics</a>
+        
+            <a class="tag" href="/tags/pca">#PCA</a>
+        
+            <a class="tag" href="/tags/dataviz">#dataviz</a>
+        
+      
+    </div>
+
+
+	
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="http://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

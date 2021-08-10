@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://jaidevd.com/archive/</loc>
+    <lastmod>2021-05-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/</loc>
+    <lastmod>2021-05-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/personal/</loc>
+    <lastmod>2018-12-13T14:48:07+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/</loc>
+    <lastmod>2018-12-13T14:48:07+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/rabies-laziness-privilege/</loc>
+    <lastmod>2018-12-13T14:48:07+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/story/</loc>
+    <lastmod>2018-12-13T14:48:07+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/</loc>
+    <lastmod>2018-12-13T14:48:07+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/computervision/</loc>
+    <lastmod>2018-08-17T14:52:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/deeplearning/</loc>
+    <lastmod>2018-08-17T14:52:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/imagesegmentation/</loc>
+    <lastmod>2018-08-17T14:52:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/keras/</loc>
+    <lastmod>2018-08-17T14:52:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/python/</loc>
+    <lastmod>2018-08-17T14:52:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/tensorflow/</loc>
+    <lastmod>2018-08-17T14:52:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/</loc>
+    <lastmod>2018-08-17T14:52:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/playing-with-the-konmari-method/</loc>
+    <lastmod>2016-08-03T13:42:55+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/productivity/</loc>
+    <lastmod>2016-08-03T13:42:55+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/bayes/</loc>
+    <lastmod>2016-07-17T14:19:40+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/machinelearning/</loc>
+    <lastmod>2016-07-17T14:19:40+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/linearity-bayesian-classifiers/</loc>
+    <lastmod>2016-07-17T14:19:40+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/perceptron/</loc>
+    <lastmod>2016-07-17T14:19:40+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/perceptron-convergence/</loc>
+    <lastmod>2016-07-06T14:45:55+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/math/</loc>
+    <lastmod>2016-07-06T14:45:55+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/probability/</loc>
+    <lastmod>2016-06-30T18:33:41+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/mm-problem/</loc>
+    <lastmod>2016-06-30T18:33:41+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/evangelism/</loc>
+    <lastmod>2016-06-14T19:54:09+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/evangelism-in-foss/</loc>
+    <lastmod>2016-06-14T19:54:09+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/rant/</loc>
+    <lastmod>2016-06-14T19:54:09+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/analytics/</loc>
+    <lastmod>2015-08-27T00:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/dataviz/</loc>
+    <lastmod>2015-08-27T00:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/bookshelf/</loc>
+    <lastmod>2015-08-27T00:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/pca/</loc>
+    <lastmod>2015-08-27T00:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/emd/</loc>
+    <lastmod>2015-06-20T16:46:54+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/fourier/</loc>
+    <lastmod>2015-06-20T16:46:54+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/fourier-limitations/</loc>
+    <lastmod>2015-06-20T16:46:54+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/nonstationary/</loc>
+    <lastmod>2015-06-20T16:46:54+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/pyhht/</loc>
+    <lastmod>2015-06-20T16:46:54+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/signalprocessing/</loc>
+    <lastmod>2015-06-20T16:46:54+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/posts/emd-edge-effects/</loc>
+    <lastmod>2014-04-18T12:10:15+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/tags/interpolation/</loc>
+    <lastmod>2014-04-18T12:10:15+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jaidevd.com/about/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

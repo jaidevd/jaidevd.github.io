@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>interpolation on Jaidev&#39;s Blog</title>
+    <link>http://jaidevd.com/tags/interpolation/</link>
+    <description>Recent content in interpolation on Jaidev&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Apr 2014 12:10:15 +0530</lastBuildDate>
+    
+	<atom:link href="http://jaidevd.com/tags/interpolation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Edge Effects in Empirical Mode Decomposition</title>
+      <link>http://jaidevd.com/posts/emd-edge-effects/</link>
+      <pubDate>Fri, 18 Apr 2014 12:10:15 +0530</pubDate>
+      
+      <guid>http://jaidevd.com/posts/emd-edge-effects/</guid>
+      <description>It has been a little over three years since I started working on a Python implementation of the Hilbert Huang Transform. When I first presented it at SciPy India 2011 (video) it was just a collection of small scripts, without packaging, testing or even docstrings. Over time PyHHT has garnered some interest, and I have, since the last few weeks, found the time to regularly work on it. I have been able to come up with a decent implementation of empirical mode decomposition, pretty much in line with everything described in the original paper by Huang et al.</description>
+    </item>
+    
+  </channel>
+</rss>

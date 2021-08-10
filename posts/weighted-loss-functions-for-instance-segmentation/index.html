@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Weighted Loss Functions for Instance Segmentation | Jaidev&#39;s Blog</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="http://jaidevd.com/css/main.min.0564082dc658ec59ca122dd2fd20110a2c5deb5ab5636ddec8b19222113d4fbd.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80129098-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Jaidev&#39;s Blog</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/about/">About Me</a>
+  
+    <a class="color-link nav-link" href="/archive/">Archive</a>
+  
+  <a class="color-link nav-link" href="http://jaidevd.com/index.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="http://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Weighted Loss Functions for Instance Segmentation</h1>
+    
+    <time>August 17, 2018</time>
+    
+    <div>
+        <p>
+        <p>This post is a follow up to my talk, <em>Practical Image Classification &amp; Object Detection</em> at PyData Delhi 2018. You can watch the talk here:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/mCQYXHJKZW8?start=5351" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</p>
+<p>and see the slides <a href="https://speakerdeck.com/jaidevd/practical-image-classification-and-object-detection">here</a>.</p>
+<p>I spoke at length about the different kinds of problems in computer vision and how they are interpreted in deep learning architectures. I spent a fair bit of time on instance and semantic segmentation (for an introduction to these problems, watch <a href="https://cs.stanford.edu/people/jcjohns/">Justin Johnson</a>&lsquo;s lecture from the Stanford CS231 course <a href="https://www.youtube.com/watch?v=nDPWywWRIRo">here</a>). In short, semantic segmentation deals with designating each pixel of an image as belonging to a class, and instance segmentation deals with identifying which instance of a class each pixel belongs to. The following images show an example of semantic versus instance segmentation.</p>
+<p><img src="/img/segmentation.png" alt=""></p>
+<p>At the outset, a semantic segmentation output can be converted to an instance segmentation output by detecting boundaries and labeling each enclosing object individually. Semantic segmentation is essentially a classification problem that is applied at each pixel of and image, and can be evaluated with any suitable classification metric. A useful metric to evaluate how capable a model is of learning the boundaries that are required for instance segmentation is called mAP of IoU - mean average precision of the intersection over union. This metric is designed specifically to evaluate instance segmentation performance. Here&rsquo;s a brief explanation of how it works.</p>
+<p>Imagine that we&rsquo;re solving a binary semantic segmentation problem, where the task is to simply predict if a pixel belongs to the background or foreground. We first create, as the ground truth, an image with two circular objects in it. Note that the circles, at the point where they are closest to each other, are separated by very few pixels.</p>
+<p><img src="/img/weighted-loss-functions-for-instance-segmentation_2_0.png" alt=""></p>
+<p>Now imagine that we have a model that is good at semantic segmentation, but not so much at instance segmentation. So it (somewhat) wrongly predicts a labeled output that is <em>almost</em> identical to the ground truth, except it fills the gap that separates the two circles. After all, the circles are <em>almost</em> touching anyway.</p>
+<p><img src="/img/weighted-loss-functions-for-instance-segmentation_4_0.png" alt=""></p>
+<p>Since this a binary classification problem, and we can tell that there is clear class imbalance, let&rsquo;s use the <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html">F1 score</a> to evaluate our prediction.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.metrics</span> <span style="color:#000;font-weight:bold">import</span> f1_score
+<span style="color:#000;font-weight:bold">print</span>(f1_score(x<span style="color:#000;font-weight:bold">.</span>ravel(), prediction<span style="color:#000;font-weight:bold">.</span>ravel()))
+
+<span style="color:#998;font-style:italic"># 0.9860563110515227</span></code></pre></div>
+<p>That&rsquo;s not bad at all. There are a very small number of pixels where the model is mistaken - the ones in the area where the circles are not supposed to be touching. Let&rsquo;s take a look at how well the other metric - mAP of IoU - does with this prediction. Here are a couple of functions that implement the mAP of IoU computation. Followed by a detailed explanation of the metric.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">iou</span>(masks_true, masks_pred):
+    <span style="color:#d14">&#34;&#34;&#34;
+</span><span style="color:#d14">    Get the IOU between each predicted mask and each true mask.
+</span><span style="color:#d14">
+</span><span style="color:#d14">    Parameters
+</span><span style="color:#d14">    ----------
+</span><span style="color:#d14">
+</span><span style="color:#d14">    masks_true : array-like
+</span><span style="color:#d14">        A 3D array of shape (n_true_masks, image_height, image_width)
+</span><span style="color:#d14">    masks_pred : array-like
+</span><span style="color:#d14">        A 3D array of shape (n_predicted_masks, image_height, image_width)
+</span><span style="color:#d14">
+</span><span style="color:#d14">    Returns
+</span><span style="color:#d14">    -------
+</span><span style="color:#d14">    array-like
+</span><span style="color:#d14">        A 2D array of shape (n_true_masks, n_predicted_masks), where
+</span><span style="color:#d14">        the element at position (i, j) denotes the IoU between the `i`th true
+</span><span style="color:#d14">        mask and the `j`th predicted mask.
+</span><span style="color:#d14">
+</span><span style="color:#d14">    &#34;&#34;&#34;</span>
+    <span style="color:#000;font-weight:bold">if</span> masks_true<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>:] <span style="color:#000;font-weight:bold">!=</span> masks_pred<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>:]:
+        <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#39;Predicted masks have wrong shape!&#39;</span>)
+    n_true_masks, height, width <span style="color:#000;font-weight:bold">=</span> masks_true<span style="color:#000;font-weight:bold">.</span>shape
+    n_pred_masks <span style="color:#000;font-weight:bold">=</span> masks_pred<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]
+    m_true <span style="color:#000;font-weight:bold">=</span> masks_true<span style="color:#000;font-weight:bold">.</span>copy()<span style="color:#000;font-weight:bold">.</span>reshape(n_true_masks, height <span style="color:#000;font-weight:bold">*</span> width)<span style="color:#000;font-weight:bold">.</span>T
+    m_pred <span style="color:#000;font-weight:bold">=</span> masks_pred<span style="color:#000;font-weight:bold">.</span>copy()<span style="color:#000;font-weight:bold">.</span>reshape(n_pred_masks, height <span style="color:#000;font-weight:bold">*</span> width)
+    numerator <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(m_pred, m_true)
+    denominator <span style="color:#000;font-weight:bold">=</span> m_pred<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">+</span> m_true<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)
+    <span style="color:#000;font-weight:bold">return</span> numerator <span style="color:#000;font-weight:bold">/</span> (denominator <span style="color:#000;font-weight:bold">-</span> numerator)
+
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">evaluate_image</span>(masks_true, masks_pred, thresholds):
+    <span style="color:#d14">&#34;&#34;&#34;
+</span><span style="color:#d14">    Get the average precision for the true and predicted masks of a single image,
+</span><span style="color:#d14">    averaged over a set of thresholds
+</span><span style="color:#d14">
+</span><span style="color:#d14">    Parameters
+</span><span style="color:#d14">    ----------
+</span><span style="color:#d14">    masks_true : array-like
+</span><span style="color:#d14">        A 3D array of shape (n_true_masks, image_height, image_width)
+</span><span style="color:#d14">    masks_pred : array-like
+</span><span style="color:#d14">        A 3D array of shape (n_predicted_masks, image_height, image_width)
+</span><span style="color:#d14">
+</span><span style="color:#d14">    Returns
+</span><span style="color:#d14">    -------
+</span><span style="color:#d14">    float
+</span><span style="color:#d14">        The mean average precision of intersection over union between
+</span><span style="color:#d14">        all pairs of true and predicted region masks.
+</span><span style="color:#d14">
+</span><span style="color:#d14">    &#34;&#34;&#34;</span>
+    int_o_un <span style="color:#000;font-weight:bold">=</span> iou(masks_true, masks_pred)
+    benched <span style="color:#000;font-weight:bold">=</span> int_o_un <span style="color:#000;font-weight:bold">&gt;</span> thresholds
+    tp <span style="color:#000;font-weight:bold">=</span> benched<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)  <span style="color:#998;font-style:italic"># noqa</span>
+    fp <span style="color:#000;font-weight:bold">=</span> (benched<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>)
+    fn <span style="color:#000;font-weight:bold">=</span> (benched<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>)
+    <span style="color:#000;font-weight:bold">return</span> np<span style="color:#000;font-weight:bold">.</span>mean(tp <span style="color:#000;font-weight:bold">/</span> (tp <span style="color:#000;font-weight:bold">+</span> fp <span style="color:#000;font-weight:bold">+</span> fn))</code></pre></div>
+<p>Note that the IoU between any pair of binary masks can be any real number in $ [0, 1] $.
+Therefore, it is necessary to apply a threshold the IoUs between all pairs of predicted and true masks, to get a meaningful evaluation. The convention used by many Kaggle competitions is to have a set of thresholds from 0.5 to 0.95 in steps of 0.05. In the following cell, we create this set of thresholds and use them to evaluate the metric.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># make the thresholds</span>
+THRESHOLDS <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>arange(<span style="color:#099">0.5</span>, <span style="color:#099">1</span>, <span style="color:#099">0.05</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">10</span>, <span style="color:#099">1</span>, <span style="color:#099">1</span>)
+
+<span style="color:#998;font-style:italic"># segment the ground truth image into constituent masks</span>
+bg <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros(x<span style="color:#000;font-weight:bold">.</span>shape)
+true_mask_1 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
+true_mask_1[o1r, o1c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+true_mask_2 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
+true_mask_2[o2r, o2c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+y_true <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([true_mask_1, true_mask_2])
+
+<span style="color:#998;font-style:italic"># reshape the prediction matrix to fit the format required by</span>
+<span style="color:#998;font-style:italic"># the `evaluate_image` function</span>
+y_pred <span style="color:#000;font-weight:bold">=</span> prediction<span style="color:#000;font-weight:bold">.</span>reshape((<span style="color:#099">1</span>,) <span style="color:#000;font-weight:bold">+</span> prediction<span style="color:#000;font-weight:bold">.</span>shape)
+
+map_iou <span style="color:#000;font-weight:bold">=</span> evaluate_image(y_true, y_pred, THRESHOLDS)
+<span style="color:#000;font-weight:bold">print</span>(map_iou)  <span style="color:#998;font-style:italic"># 0.0</span></code></pre></div>
+<p><img src="/img/frustrated_jackie_chan.png" alt=""></p>
+<p>That was by design. On careful inspection, it is apparent that both of the <em>true</em> masks account for less than half the area occupied by the <em>predicted</em> mask. Thus, the <em>predicted</em> mask has in IoU of less than 0.5 with each <em>true</em> mask. Since we start thresholding the IoU values at 0.5, the prediction did not register a true positive with either of the true masks - ultimately leading to a score of zero.</p>
+<p>Let&rsquo;s try another hacked prediction, where we create two circular objects again, but this time they share the same centers as their ground truth counterparts, and have a radius that is less than the true radius by six units. Then, let&rsquo;s evaluate both the metrics again on these new predictions.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xnew <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">256</span>, <span style="color:#099">256</span>))
+cy, cx <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">80</span>, <span style="color:#099">80</span>
+radius_new <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">58</span>
+cy2 <span style="color:#000;font-weight:bold">=</span> cx2 <span style="color:#000;font-weight:bold">=</span> (np<span style="color:#000;font-weight:bold">.</span>sqrt(cy <span style="color:#000;font-weight:bold">**</span><span style="color:#099">2</span> <span style="color:#000;font-weight:bold">+</span> cx <span style="color:#000;font-weight:bold">**</span><span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#099">64</span>) <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>cos(np<span style="color:#000;font-weight:bold">.</span>pi <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">4</span>) <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
+o1r, o1c <span style="color:#000;font-weight:bold">=</span> draw<span style="color:#000;font-weight:bold">.</span>circle(cy, cx, radius_new)
+o2r, o2c <span style="color:#000;font-weight:bold">=</span> draw<span style="color:#000;font-weight:bold">.</span>circle(cy2, cx2, radius_new)
+xnew[o1r, o1c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+xnew[o2r, o2c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">5</span>, <span style="color:#099">5</span>))
+plt<span style="color:#000;font-weight:bold">.</span>imshow(xnew, cmap<span style="color:#000;font-weight:bold">=</span>plt<span style="color:#000;font-weight:bold">.</span>cm<span style="color:#000;font-weight:bold">.</span>gray)
+plt<span style="color:#000;font-weight:bold">.</span>axis(<span style="color:#d14">&#39;off&#39;</span>)
+_ <span style="color:#000;font-weight:bold">=</span> plt<span style="color:#000;font-weight:bold">.</span>title(<span style="color:#d14">&#39;Another Prediction&#39;</span>, fontsize<span style="color:#000;font-weight:bold">=</span><span style="color:#099">20</span>)</code></pre></div>
+<p><img src="/img/weighted-loss-functions-for-instance-segmentation_12_0.png" alt=""></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># segment the predicted image into constituent masks</span>
+bg <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros(xnew<span style="color:#000;font-weight:bold">.</span>shape)
+predicted_mask_1 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
+predicted_mask_1[o1r, o1c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+predicted_mask_2 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
+predicted_mask_2[o2r, o2c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+y_pred <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([predicted_mask_1, predicted_mask_2])
+
+fscore <span style="color:#000;font-weight:bold">=</span> f1_score(y_true<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>ravel(), y_pred<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>ravel())
+<span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#34;F1 Score: {}&#34;</span><span style="color:#000;font-weight:bold">.</span>format(fscore))
+<span style="color:#998;font-style:italic"># F1 Score: 0.9014126584439418</span>
+
+map_iou <span style="color:#000;font-weight:bold">=</span> evaluate_image(y_true, y_pred, THRESHOLDS)
+<span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#34;MAP of IoU: {}&#34;</span><span style="color:#000;font-weight:bold">.</span>format(map_iou))
+<span style="color:#998;font-style:italic"># MAP of IoU: 0.7</span></code></pre></div>
+<p>The pixelwise accuracy (the F1 score) has taken a hit, since the prediction has lost two circular rings surrounding the true masks, but is still not bad. However, the IoU has shot up disproportionately! This shows that the MAP of IoU penalizes incorrect region separation a lot more than it rewards pixelwise correctness.</p>
+<p>As a more general example, suppose we have $K$ true masks, and $L$ predicted masks. Then, in order to calculate the MAP of IoU, we construct a matrix $I \in \mathbb R^{K \times L}$ as follows:</p>
+<table>
+<thead>
+<tr>
+<th align="center">$p_{1}$</th>
+<th align="center">$p_{2}$</th>
+<th align="center">$p_{3}$</th>
+<th align="center">$…$</th>
+<th align="center">$p_{l}$</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">$a_{1}$</td>
+<td align="center">$O_{11}$</td>
+<td align="center">$O_{12}$</td>
+<td align="center">$O_{13}$</td>
+<td align="center">$…$</td>
+<td align="center">$O_{1L}$</td>
+</tr>
+<tr>
+<td align="center">$a_{2}$</td>
+<td align="center">$O_{21}$</td>
+<td align="center">$O_{22}$</td>
+<td align="center">$O_{23}$</td>
+<td align="center">$…$</td>
+<td align="center">$O_{2L}$</td>
+</tr>
+<tr>
+<td align="center">$a_{3}$</td>
+<td align="center">$O_{31}$</td>
+<td align="center">$O_{32}$</td>
+<td align="center">$O_{33}$</td>
+<td align="center">$…$</td>
+<td align="center">$O_{3L}$</td>
+</tr>
+<tr>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr>
+<td align="center">$a_K$</td>
+<td align="center">$O_{K1}$</td>
+<td align="center">$O_{K2}$</td>
+<td align="center">$O_{K3}$</td>
+<td align="center">$…$</td>
+<td align="center">$O_{Kl}$</td>
+</tr>
+</tbody>
+</table>
+<p>where $O_{k, l}$ is the IoU of the $k$th true mask and the $l$th predicted mask. This matrix is whatt the <code>iou</code> function written above generates. Given our set of thresholds, $\Theta = {0.5, 0.55, 0.6, &hellip; 0.9, 0.95}$, we can filter $I$ with all of them one by one. At each threshold $\theta_{i} \in \Theta$, we calculate a boolean matrix $I_{\theta_{i}} = I &gt; \theta_{i}$. Using this matrix, we compute the following values:</p>
+<ul>
+<li>$t^{+}(\theta_{i})$: The number of true positives - the number of predicted masks that found a match with a true mask. This is equal to the number of rows in $I_{\theta_{i}}$ that have at least one positive value.</li>
+<li>$f^{+}(\theta_{i})$: The number of false positives - the number of predicted masks that found no match with a true mask. This is equal to the number of rows in $I_{\theta_{i}}$ that have no positive value.</li>
+<li>$f^{-}(\theta_{i})$: The number of false negatives - the number of true masks that found no predicted match. This is equal to the number of columns in $I_{\theta_{i}}$ that have no positive value.</li>
+</ul>
+<p>With these values computed for all thresholds $\theta_{i} \in \Theta$, we finally calculate the MAP of IoU as follows:</p>
+<p>$$ \cfrac{1}{|\Theta|}\sum_{\theta_{i} \in \Theta}\cfrac{t^{+}(\theta_{i})}{t^{+}(\theta_{i}) + f^{+}(\theta_{i}) + f^{-}(\theta_{i})}$$</p>
+<p>This measure is what the <code>evaluate_image</code> function written above calculates.</p>
+<p>A popular neural network architecture to perform semantic / instance segmentation is the UNet:
+<img src="/img/unet.png" alt=""></p>
+<p>It puts together the best properties of a network that are useful for pixel segmentation:</p>
+<ol>
+<li>It is fully convolutional</li>
+<li>It doesn&rsquo;t suffer because of the size of the image</li>
+<li>It incorporates learnable upsampling</li>
+</ol>
+<p>A Keras implementation of a typical UNet is provided <a href="https://github.com/jaidevd/jaidevd.github.io/blob/source/blog/posts/code/unet.py">here</a>. This model can be compiled and trained as usual, with a suitable optimizer and loss. For semantic segmentation, the obvious choice is the categorical crossentropy loss. For instance segmentation, however, as we have demonstrated, pixelwise accuracy is not enough, and the model must learn the separation between nearby objects. Normally such separation can be done with <a href="https://en.wikipedia.org/wiki/Mathematical_morphology">morphological operations</a> on the images, but these operations cannot easily be made a part of the learning of the model. So the alternative is to force the network to learn region separations in an entirely data-driven manner. The <a href="https://arxiv.org/abs/1505.04597">UNet paper</a> provides an interesting way of doing this - introducing pre-computed weight maps into the loss function which penalizes the loss near the boundaries of regions more than elsewhere. These weight maps are calculated as follows:</p>
+<p>$$ w(\mathbf{x}) = w_{c}(\mathbf{x}) + w_{0} \times exp \Biggl( -\frac{(d_{1}(\mathbf{x}) + d_{2}(\mathbf{x}))^2}{2\sigma^2} \Biggr)$$</p>
+<p>Here, $w_{c}$, $d_{1}$ and $d_{2}$ are all functions over a two dimensional image such that:</p>
+<ul>
+<li>$w_{c}: \mathbb R^{m\times n} \rightarrow \mathbb R^{m\times n}$ is the class probability map.</li>
+<li>$d_{1}: \mathbb R^{m\times n} \rightarrow \mathbb R^{m\times n}$ is the distance to the border of the nearest cell,</li>
+<li>$d_{2}: \mathbb R^{m\times n} \rightarrow \mathbb R^{m\times n}$ is the distance to the border of the second nearest cell.</li>
+</ul>
+<p>A vectorized implementation of $w$ is provided below in the <code>make_weight_map</code> function.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">skimage.segmentation</span> <span style="color:#000;font-weight:bold">import</span> find_boundaries
+
+w0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">10</span>
+sigma <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">5</span>
+
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">make_weight_map</span>(masks):
+    <span style="color:#d14">&#34;&#34;&#34;
+</span><span style="color:#d14">    Generate the weight maps as specified in the UNet paper
+</span><span style="color:#d14">    for a set of binary masks.
+</span><span style="color:#d14">    
+</span><span style="color:#d14">    Parameters
+</span><span style="color:#d14">    ----------
+</span><span style="color:#d14">    masks: array-like
+</span><span style="color:#d14">        A 3D array of shape (n_masks, image_height, image_width),
+</span><span style="color:#d14">        where each slice of the matrix along the 0th axis represents
+</span><span style="color:#d14">	one binary mask.
+</span><span style="color:#d14">
+</span><span style="color:#d14">    Returns
+</span><span style="color:#d14">    -------
+</span><span style="color:#d14">    array-like
+</span><span style="color:#d14">        A 2D array of shape (image_height, image_width)
+</span><span style="color:#d14">    
+</span><span style="color:#d14">    &#34;&#34;&#34;</span>
+    nrows, ncols <span style="color:#000;font-weight:bold">=</span> masks<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>:]
+    masks <span style="color:#000;font-weight:bold">=</span> (masks <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)
+    distMap <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((nrows <span style="color:#000;font-weight:bold">*</span> ncols, masks<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
+    X1, Y1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>meshgrid(np<span style="color:#000;font-weight:bold">.</span>arange(nrows), np<span style="color:#000;font-weight:bold">.</span>arange(ncols))
+    X1, Y1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[X1<span style="color:#000;font-weight:bold">.</span>ravel(), Y1<span style="color:#000;font-weight:bold">.</span>ravel()]<span style="color:#000;font-weight:bold">.</span>T
+    <span style="color:#000;font-weight:bold">for</span> i, mask <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(masks):
+        <span style="color:#998;font-style:italic"># find the boundary of each mask,</span>
+        <span style="color:#998;font-style:italic"># compute the distance of each pixel from this boundary</span>
+        bounds <span style="color:#000;font-weight:bold">=</span> find_boundaries(mask, mode<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;inner&#39;</span>)
+        X2, Y2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>nonzero(bounds)
+        xSum <span style="color:#000;font-weight:bold">=</span> (X2<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">-</span> X1<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>
+        ySum <span style="color:#000;font-weight:bold">=</span> (Y2<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">-</span> Y1<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>
+        distMap[:, i] <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sqrt(xSum <span style="color:#000;font-weight:bold">+</span> ySum)<span style="color:#000;font-weight:bold">.</span>min(axis<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>)
+    ix <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>arange(distMap<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>])
+    <span style="color:#000;font-weight:bold">if</span> distMap<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>:
+        d1 <span style="color:#000;font-weight:bold">=</span> distMap<span style="color:#000;font-weight:bold">.</span>ravel()
+        border_loss_map <span style="color:#000;font-weight:bold">=</span> w0 <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>exp((<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">*</span> (d1) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">/</span> (<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> (sigma <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>)))
+    <span style="color:#000;font-weight:bold">else</span>:
+        <span style="color:#000;font-weight:bold">if</span> distMap<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>:
+            d1_ix, d2_ix <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>argpartition(distMap, <span style="color:#099">1</span>, axis<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>)[:, :<span style="color:#099">2</span>]<span style="color:#000;font-weight:bold">.</span>T
+        <span style="color:#000;font-weight:bold">else</span>:
+            d1_ix, d2_ix <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>argpartition(distMap, <span style="color:#099">2</span>, axis<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>)[:, :<span style="color:#099">2</span>]<span style="color:#000;font-weight:bold">.</span>T
+        d1 <span style="color:#000;font-weight:bold">=</span> distMap[ix, d1_ix]
+        d2 <span style="color:#000;font-weight:bold">=</span> distMap[ix, d2_ix]
+        border_loss_map <span style="color:#000;font-weight:bold">=</span> w0 <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>exp((<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">*</span> (d1 <span style="color:#000;font-weight:bold">+</span> d2) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">/</span> (<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> (sigma <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>)))
+    xBLoss <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((nrows, ncols))
+    xBLoss[X1, Y1] <span style="color:#000;font-weight:bold">=</span> border_loss_map
+    <span style="color:#998;font-style:italic"># class weight map</span>
+    loss <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((nrows, ncols))
+    w_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">-</span> masks<span style="color:#000;font-weight:bold">.</span>sum() <span style="color:#000;font-weight:bold">/</span> loss<span style="color:#000;font-weight:bold">.</span>size
+    w_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">-</span> w_1
+    loss[masks<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> w_1
+    loss[masks<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> w_0
+    ZZ <span style="color:#000;font-weight:bold">=</span> xBLoss <span style="color:#000;font-weight:bold">+</span> loss
+    <span style="color:#000;font-weight:bold">return</span> ZZ</code></pre></div>
+<p>Here is an example of how the weight map affects a set of masks. We generate three circular regions such that two of them are much closer to each other than the third one. The weight map functions magnifies the values in the region that is close to boundaries more than other values.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">params <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#099">20</span>, <span style="color:#099">16</span>, <span style="color:#099">10</span>), (<span style="color:#099">44</span>, <span style="color:#099">16</span>, <span style="color:#099">10</span>), (<span style="color:#099">47</span>, <span style="color:#099">47</span>, <span style="color:#099">10</span>)]
+masks <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">3</span>, <span style="color:#099">64</span>, <span style="color:#099">64</span>))
+<span style="color:#000;font-weight:bold">for</span> i, (cx, cy, radius) <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(params):
+    rr, cc <span style="color:#000;font-weight:bold">=</span> draw<span style="color:#000;font-weight:bold">.</span>circle(cx, cy, radius)
+    masks[i, rr, cc] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+fig, (ax1, ax2) <span style="color:#000;font-weight:bold">=</span> plt<span style="color:#000;font-weight:bold">.</span>subplots(ncols<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">12</span>, <span style="color:#099">5</span>))
+ax1<span style="color:#000;font-weight:bold">.</span>imshow(masks<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>))
+ax1<span style="color:#000;font-weight:bold">.</span>set_axis_off()
+ax1<span style="color:#000;font-weight:bold">.</span>set_title(<span style="color:#d14">&#39;True Masks&#39;</span>, fontsize<span style="color:#000;font-weight:bold">=</span><span style="color:#099">15</span>)
+
+weights <span style="color:#000;font-weight:bold">=</span> make_weight_map(masks)
+pos <span style="color:#000;font-weight:bold">=</span> ax2<span style="color:#000;font-weight:bold">.</span>imshow(weights)
+ax2<span style="color:#000;font-weight:bold">.</span>set_axis_off()
+ax2<span style="color:#000;font-weight:bold">.</span>set_title(<span style="color:#d14">&#39;Weights&#39;</span>, fontsize<span style="color:#000;font-weight:bold">=</span><span style="color:#099">15</span>)
+_ <span style="color:#000;font-weight:bold">=</span> fig<span style="color:#000;font-weight:bold">.</span>colorbar(pos, ax<span style="color:#000;font-weight:bold">=</span>ax2)</code></pre></div>
+<p><img src="/img/weighted-loss-functions-for-instance-segmentation_18_0.png" alt=""></p>
+<p>Application of these weight maps to the output of neural network and then finally computing the compunded loss is somewhat involved. A fully convolutional network like the UNet - since it has no dense layers at the end - needs 1 x 1 convolutions at the end to convert the convolutions from the previous layer to produce something on which categorical softmax can work. The output layer produces a volumne of size $h \times w \times K$, where $h$ and $w$ are the image height and width respectively and $K$ is the number of classes. Denoting the <em>unactivated</em> output of the channel correspoding to the $k$th class as $a_{k}(\mathbf{x})$, the softmax activation is computed as</p>
+<p>$$ p_{k}(\mathbf{x}) = \cfrac{exp(a_{k}(\mathbf{x}))}{\sum_{k'=1}^{K}exp(a_{k&rsquo;}(\mathbf{x}))} $$</p>
+<p>Then, a modified cross entropy loss is calculated as</p>
+<p>$$E = \sum w(\mathbf{x})log(p_{l(\mathbf{x)}}(\mathbf{x}))$$</p>
+<p>where $w(\mathbf{x})$ is the weight map function and $l(\mathbf{x})$ denotes the true label of each pixel, Thus, computing $E$ amounts to:</p>
+<ol>
+<li>computing the softmax activation</li>
+<li>using the true labels as a mask for this activation, (note how the function $l(\mathbf{x})$ is used),</li>
+<li>summing the masked output along the dimension corresponding to the $K$ and taking it&rsquo;s log</li>
+<li>multiply the log output with the weight map and aggregate the result across pixels</li>
+</ol>
+<p>When using Keras with a Tensorflow backend, the crossentropy loss, by default, is a <a href="https://github.com/keras-team/keras/blob/2.2.2/keras/backend/tensorflow_backend.py#L3181">manual computation of cross entropy</a>, which doesn&rsquo;t allow for weighing the loss explicitly. The manual computation is necessary because the corresponding Tensorflow <a href="https://www.tensorflow.org/api_docs/python/tf/losses/softmax_cross_entropy">loss</a> expects logits, whereas Keras losses expect probabilities.</p>
+<p>Besides, it is clear that the loss we need isn&rsquo;t the usual categorical crossentropy. Notice that the weights have to be applied to the log of the activation <em>before</em> the pixelwise sum is evaluated. My solution to this was to incorporate the weighing of the log of the activation into the Keras model itself, and leave only the aggregation to the loss function. Thus, the model ends up doing more than just generating the final set of softmax activations. It also takes the log of the activations and applies the weights to it. Therefore, the weight maps too become a part of the computational graph of the model - unlike in the case of conventional class weights, where it can be supplied at the time of loss calculation. So now the model takes three inputs - the images, their labels and their weight maps.</p>
+<p>Thanks to Keras&rsquo; beautiful functional API, all of this amounts to adding a few non-trainable layers to the model and writing a custom loss function to mimic only the aggregation of the categorical crossentropy function.</p>
+<p>The entire script for the model is available <a href="https://github.com/jaidevd/jaidevd.github.io/blob/source/blog/posts/code/weighted_loss_unet.py">here</a>, but the essence of it is as follows:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">keras.layers</span> <span style="color:#000;font-weight:bold">import</span> Input, Conv2D, Lambda, multiply <span style="color:#998;font-style:italic"># etc</span>
+<span style="color:#998;font-style:italic"># Start making the UNET model as usual</span>
+
+image_input <span style="color:#000;font-weight:bold">=</span> Input(shape<span style="color:#000;font-weight:bold">=</span>(image_height, image_width, n_channels))
+conv1 <span style="color:#000;font-weight:bold">=</span> Conv2D(<span style="color:#099">64</span>, <span style="color:#099">3</span>)(image_input)
+
+<span style="color:#998;font-style:italic"># add other layers</span>
+
+<span style="color:#998;font-style:italic"># Final 1 x 1 trainable conv layer that does the softmax.</span>
+softmax_op <span style="color:#000;font-weight:bold">=</span> Conv2D(n_classes, <span style="color:#099">1</span>, activation<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;softmax&#39;</span>)(previous_layer)
+
+<span style="color:#998;font-style:italic"># Add a few non trainable layers to mimic the computation of the crossentropy</span>
+<span style="color:#998;font-style:italic"># loss, so that the actual loss function just has to peform the</span>
+<span style="color:#998;font-style:italic"># aggregation.</span>
+normalize_activation <span style="color:#000;font-weight:bold">=</span> Lambda(
+    <span style="color:#000;font-weight:bold">lambda</span> x: x <span style="color:#000;font-weight:bold">/</span> tf<span style="color:#000;font-weight:bold">.</span>reduce_sum(x, <span style="color:#0086b3">len</span>(x<span style="color:#000;font-weight:bold">.</span>get_shape()) <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, <span style="color:#999">True</span>)
+)(softmax_op)
+clip_activation <span style="color:#000;font-weight:bold">=</span> Lambda(
+    <span style="color:#000;font-weight:bold">lambda</span> x: tf<span style="color:#000;font-weight:bold">.</span>clip_by_value(x, _epsilon, <span style="color:#099">1.</span> <span style="color:#000;font-weight:bold">-</span> _epsilon)
+)(normalize_activation)
+log_activation <span style="color:#000;font-weight:bold">=</span> Lambda(<span style="color:#000;font-weight:bold">lambda</span> x: K<span style="color:#000;font-weight:bold">.</span>log(x))(clip_activation)
+
+<span style="color:#998;font-style:italic"># Add a new input to serve as the source for the weight maps</span>
+weight_map_ip <span style="color:#000;font-weight:bold">=</span> Input(shape<span style="color:#000;font-weight:bold">=</span>(image_height, image_width))
+weighted_softmax <span style="color:#000;font-weight:bold">=</span> multiply([log_activation, weight_map_ip])
+
+model <span style="color:#000;font-weight:bold">=</span> Model(inputs<span style="color:#000;font-weight:bold">=</span>[image_input, weight_map_ip], outputs<span style="color:#000;font-weight:bold">=</span>[weighted_softmax])</code></pre></div>
+<p>This model can now be compiled and trained as usual. Note that the three <code>Lambda</code> layers are identical to the operations in the <a href="https://github.com/keras-team/keras/blob/2.2.2/keras/backend/tensorflow_backend.py#L3181"><code>keras.backend.tensorflow_backend.catgorical_crossentropy</code></a>. So essentially we have swallowed most of the functionality of the cross entropy loss into the model itself. I should re-emphasize that this had to be done because the weighted loss we wanted could not have been possible with the default loss function, since the scaling of the log of the activations (with the precomputed weights) has to be done <em>before</em> the loss is aggregated.</p>
+<p>I discovered the UNet paper a few months ago during the <a href="https://www.kaggle.com/c/data-science-bowl-2018">Data Science Bowl 2018</a> competition on Kaggle. I spent a better part of three weeks on implementing the weight maps and incorporating them into my UNet. And it paid off fairly well - I jumped 504 places on the public leaderboard. In hindsight, data augmentation would have had the same (or perhaps a better) effect, but that fact that I was able to all of this shows how beautifully Keras&rsquo; (and indeed, Tensorflow&rsquo;s) functional API has been designed.</p>
+<h3 id="references">References</h3>
+<p>Olaf Ronneberger, Philipp Fischer: “U-Net: Convolutional Networks for Biomedical Image Segmentation”, 2015; <a href='http://arxiv.org/abs/1505.04597'>arXiv:1505.04597</a>.</p>
+
+        </p>
+    </div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "brocasbrain" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/computervision">#computervision</a>
+        
+            <a class="tag" href="/tags/imagesegmentation">#imagesegmentation</a>
+        
+            <a class="tag" href="/tags/python">#python</a>
+        
+            <a class="tag" href="/tags/keras">#keras</a>
+        
+            <a class="tag" href="/tags/tensorflow">#tensorflow</a>
+        
+            <a class="tag" href="/tags/deeplearning">#deeplearning</a>
+        
+      
+    </div>
+
+
+	
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="http://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

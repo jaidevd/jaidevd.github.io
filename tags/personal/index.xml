@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>personal on Jaidev&#39;s Blog</title>
+    <link>http://jaidevd.com/tags/personal/</link>
+    <description>Recent content in personal on Jaidev&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Dec 2018 14:48:07 +0530</lastBuildDate>
+    
+	<atom:link href="http://jaidevd.com/tags/personal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rabies, Laziness &amp; Privilege</title>
+      <link>http://jaidevd.com/posts/rabies-laziness-privilege/</link>
+      <pubDate>Thu, 13 Dec 2018 14:48:07 +0530</pubDate>
+      
+      <guid>http://jaidevd.com/posts/rabies-laziness-privilege/</guid>
+      <description>It was the night of the recent 5-state assembly elections. One of my company&amp;rsquo;s clients is a major news channel, and I was at the studio late into the night, until the election commission announced that they had cancelled their press conference which was supposed to make an announcement about the final vote counts in Madhya Pradesh. A colleague offered to drop me home, and I got off at the gate of my colony, not wanting to subject my colleague to navigating the labyrinth that is any gated colony in South Delhi.</description>
+    </item>
+    
+    <item>
+      <title>Playing With the Konmari Method</title>
+      <link>http://jaidevd.com/posts/playing-with-the-konmari-method/</link>
+      <pubDate>Wed, 03 Aug 2016 13:42:55 +0530</pubDate>
+      
+      <guid>http://jaidevd.com/posts/playing-with-the-konmari-method/</guid>
+      <description>I heard about the bestseller The Life-Changing Magic of Tidying Up at a SciPy talk about deculttering your data science project. The speakers admitted they hadn&amp;rsquo;t read it - they were simply trying to point out that tidying up your space and tidying up your software project are both similar.
+  I&amp;rsquo;ve been married and living with my wife for about a year now. After we moved into &amp;ldquo;our own home&amp;rdquo; last year, we have both undergone major role reversals when it comes to tidying up.</description>
+    </item>
+    
+    <item>
+      <title>Evangelism in Foss</title>
+      <link>http://jaidevd.com/posts/evangelism-in-foss/</link>
+      <pubDate>Tue, 14 Jun 2016 19:54:09 +0530</pubDate>
+      
+      <guid>http://jaidevd.com/posts/evangelism-in-foss/</guid>
+      <description>One of the most dangerous things that can affect any FOSS community is the tendency of evangelism for the sake of evangelism. Promoting the Python stack, expanding the userbase, etc, should come only as a consequence of the content we produce as developers. If evangelism even remotely becomes one of your goals, your quality is sure to suffer. And it&amp;rsquo;s not just the empirical evidence that prompts me to say this.</description>
+    </item>
+    
+    <item>
+      <title>Organizing a Bookshelf with Multivariate Analysis</title>
+      <link>http://jaidevd.com/posts/bookshelf/</link>
+      <pubDate>Thu, 27 Aug 2015 00:00:00 +0530</pubDate>
+      
+      <guid>http://jaidevd.com/posts/bookshelf/</guid>
+      <description>I have recently moved from Pune to Delhi. I had spent only a year in Pune, having moved there from Mumbai, where I lived for three years. Whenever I move, the bulk of my luggage consists of books and clothes. My stay in Pune was just a transition, so I never bothered to unpack and store all my stuff too carefully. Thus, a corner of my bedroom in my Pune apartment always looked like this: The actual volume of books that I carried from Pune to Delhi is about twice of what is seen in the picture.</description>
+    </item>
+    
+  </channel>
+</rss>

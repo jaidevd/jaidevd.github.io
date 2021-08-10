@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Edge Effects in Empirical Mode Decomposition | Jaidev&#39;s Blog</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="http://jaidevd.com/css/main.min.0564082dc658ec59ca122dd2fd20110a2c5deb5ab5636ddec8b19222113d4fbd.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-80129098-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Jaidev&#39;s Blog</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/about/">About Me</a>
+  
+    <a class="color-link nav-link" href="/archive/">Archive</a>
+  
+  <a class="color-link nav-link" href="http://jaidevd.com/index.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="http://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Edge Effects in Empirical Mode Decomposition</h1>
+    
+    <time>April 18, 2014</time>
+    
+    <div>
+        <p>
+        <p>It has been a little over three years since I started working on a <a href="http://github.com/jaidevd/pyhht">Python
+implementation of the Hilbert Huang
+Transform</a>. When I first presented it at SciPy
+India 2011
+(<a href="http://urtalk.kpoint.com/kapsule/gcc-57b6c86b-2f12-4244-950c-a34360a2cc1f/t/hilberthuang-transform">video</a>)
+it was just a collection of small scripts, without packaging, testing or even
+docstrings. Over time PyHHT has garnered some interest, and I have, since the
+last few weeks, found the time to regularly work on it. I have been able to
+come up with a decent implementation of <a href="http://en.wikipedia.org/wiki/Hilbert%E2%80%93Huang_transform">empirical mode
+decomposition</a>,
+pretty much in line with everything described in the <a href="http://tec.earth.sinica.edu.tw/research/report/paper/20070711HHT.pdf">original
+paper</a> by Huang et
+al. The other
+parts of HHT, like the Hilbert spectrum and its time frequency representations
+are right around the corner.</p>
+<!-- TEASER_END -->
+<p>This blogpost, and many more that will follow, will hopefully help me track the
+progress of PyHHT. Who knows, doing this might even help me with the
+documentaiton later on. Currently PyHHT is under heavy development, and I cannot comment on either the
+stability or the correctness of the entire Python module. However, early on when developing
+more sohpisticated modules, I realized that it would have to be very modular,
+so as to enable better and more fine-tuned testing. The library is organized
+primarily into three modules:</p>
+<ol>
+<li>pyhht.emd - The main classes and functions that perform EMD.</li>
+<li>pyhht.utils - miscellaneous utility functions that help the EMD algorithms.</li>
+<li>pyhht.visualization - pretty plotting for IMFs (and for the Hilbert spectrum, coming soon.)</li>
+</ol>
+<p>Out of this, the EMD algorithm itself is fairly straightforward. Although it does have a
+lot of heuristics that make its results more &ldquo;reasonable&rdquo;. As an example of
+these heuristics, this post discusses the effects that boundary conditions of
+the EMD algorithm might have on the resulting <a href="http://en.wikipedia.org/wiki/Hilbert%E2%80%93Huang_transform#Intrinsic_Mode_Functions_.28IMF.29">intrinsic mode functions
+</a>.</p>
+<p>Let us constuct a simple signal with two pure sinusoids with consummate
+frequencies:</p>
+<p>$$ s(t) = \sin (2\pi f_{1}t) + \sin (2\pi f_{2}t) $$</p>
+<p>where $f_{1} = 10 Hz$ and $f_{2} = 5 Hz$</p>
+<p>To highlight the idea of how EMD processes the residue (or the trend) in a
+signal, let&rsquo;s add a linear ramp to the signal. (For the sake of simplicity,
+let&rsquo;s just add the timestamps to the signal.)</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">mpl</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
+<span style="color:#000;font-weight:bold">%</span>matplotlib inline
+
+
+mpl<span style="color:#000;font-weight:bold">.</span>style<span style="color:#000;font-weight:bold">.</span>use(<span style="color:#d14">&#39;ggplot&#39;</span>)
+mpl<span style="color:#000;font-weight:bold">.</span>rcParams[<span style="color:#d14">&#39;figure.figsize&#39;</span>] <span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">10.0</span>, <span style="color:#099">8.0</span>)
+
+
+n_points <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1000</span>
+f1, f2 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">5</span>, <span style="color:#099">10</span>
+time_samples <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linspace(<span style="color:#099">0</span>, <span style="color:#099">1</span>, n_points)
+mode1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sin(<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>pi <span style="color:#000;font-weight:bold">*</span> f1 <span style="color:#000;font-weight:bold">*</span> time_samples)
+mode2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sin(<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>pi <span style="color:#000;font-weight:bold">*</span> f2 <span style="color:#000;font-weight:bold">*</span> time_samples)
+trend <span style="color:#000;font-weight:bold">=</span> time_samples
+
+signal <span style="color:#000;font-weight:bold">=</span> mode1 <span style="color:#000;font-weight:bold">+</span> mode2 <span style="color:#000;font-weight:bold">+</span> trend
+
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal)</code></pre></div>
+<p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_3_1.png" alt=""></p>
+<p>We would expect an ideal EMD algorithm to produce two IMFs, one corresponding to each of our unimodal signals, and then to extract the residue too. Let&rsquo;s write a naive sifting loop.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.signal</span> <span style="color:#000;font-weight:bold">import</span> argrelmin, argrelmax
+<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.interpolate</span> <span style="color:#000;font-weight:bold">import</span> splrep, splev
+
+tol <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.05</span>
+
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">ndiff_extrema_zcrossing</span>(x):
+    <span style="color:#d14">&#34;&#34;&#34;Get the difference between the number of zero crossings and extrema.&#34;&#34;&#34;</span>
+    n_max <span style="color:#000;font-weight:bold">=</span> argrelmax(x)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]
+    n_min <span style="color:#000;font-weight:bold">=</span> argrelmin(x)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]
+    n_zeros <span style="color:#000;font-weight:bold">=</span> (x[:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> x[<span style="color:#099">1</span>:] <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>sum()
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">abs</span>((n_max <span style="color:#000;font-weight:bold">+</span> n_min) <span style="color:#000;font-weight:bold">-</span> n_zeros)
+
+
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">sift</span>(x):
+    <span style="color:#d14">&#34;&#34;&#34;One sifting iteration.&#34;&#34;&#34;</span>
+    maxima <span style="color:#000;font-weight:bold">=</span> argrelmax(x)[<span style="color:#099">0</span>]
+    minima <span style="color:#000;font-weight:bold">=</span> argrelmin(x)[<span style="color:#099">0</span>]
+    x_upper <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((maxima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
+    x_upper[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> maxima
+    x_upper[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
+    x_lower <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((minima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
+    x_lower[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> minima
+    x_lower[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
+    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_upper, x[x_upper<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
+    upper_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
+    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_lower, x[x_lower<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
+    lower_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
+    mean_amplitude <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(upper_envelop <span style="color:#000;font-weight:bold">-</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
+    local_mean <span style="color:#000;font-weight:bold">=</span> (upper_envelop <span style="color:#000;font-weight:bold">+</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
+    amplitude_error <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(local_mean) <span style="color:#000;font-weight:bold">/</span> mean_amplitude
+    <span style="color:#000;font-weight:bold">return</span> x <span style="color:#000;font-weight:bold">-</span> local_mean, amplitude_error<span style="color:#000;font-weight:bold">.</span>sum()
+
+
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">emd</span>(x, n_imfs):
+    imfs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
+    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">xrange</span>(n_imfs):
+        mode <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
+        <span style="color:#000;font-weight:bold">while</span> (ndiff_extrema_zcrossing(mode) <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">1</span>):
+            mode, amplitude_error <span style="color:#000;font-weight:bold">=</span> sift(mode)
+            <span style="color:#000;font-weight:bold">if</span> amplitude_error <span style="color:#000;font-weight:bold">&lt;=</span> tol:
+                <span style="color:#000;font-weight:bold">break</span>
+        imfs[i, :] <span style="color:#000;font-weight:bold">=</span> mode
+    imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :] <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
+    <span style="color:#000;font-weight:bold">return</span> imfs</code></pre></div>
+<p>Let&rsquo;s extract and visualize the IMFs to see if they meet our expectations.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>
+imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, n_imfs)
+plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
+plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
+<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
+    plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
+    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf {}&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
+<p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_7_1.png" alt=""></p>
+<p>On closer inspection of the residue, it seems like it contains the true residue (the ramp) superimposed on an IMF that we haven&rsquo;t yet sifted out. Let&rsquo;s see what happens when we increment the expected number of IMFs.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">3</span>
+imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, n_imfs)
+plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
+plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
+<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
+    plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
+    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf {}&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
+<p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_9_1.png" alt=""></p>
+<p>We&rsquo;ve finally reached a stopping point beyond which sifting is not possible. While the decomposition itself is valid, the inferences we draw from it can be quite misleading. In a broad sense, here is what is wrong with the decomposition:</p>
+<ol>
+<li>Qualitatively, the residue is supposed to be a somewhat linear, monotonically increasing function.</li>
+<li>The number if IMFs should be two.</li>
+<li>The IMFs should at least appear to be pure sinudoids.</li>
+</ol>
+<p>To get to the heart of the problem, let&rsquo;s go back to our original signal and try to step through the sifting process. The first thing we do to an input signal is to construct upper and lower envelopes by interpolating with cubic splines its local maxima and local minima respectively, and then subtracting the mean of these envelopes from the signal.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_envelopes</span>(x):
+    <span style="color:#d14">&#34;&#34;&#34;Compute the upper and lower envelopes of a signal.&#34;&#34;&#34;</span>
+    maxima <span style="color:#000;font-weight:bold">=</span> argrelmax(x)[<span style="color:#099">0</span>]
+    minima <span style="color:#000;font-weight:bold">=</span> argrelmin(x)[<span style="color:#099">0</span>]
+    x_upper <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((maxima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
+    x_upper[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> maxima
+    x_upper[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
+    x_lower <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((minima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
+    x_lower[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> minima
+    x_lower[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
+    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_upper, x[x_upper<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
+    upper_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
+    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_lower, x[x_lower<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
+    lower_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
+    <span style="color:#000;font-weight:bold">return</span> upper_envelop, lower_envelop
+
+upper, lower <span style="color:#000;font-weight:bold">=</span> get_envelopes(signal)
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal, <span style="color:#d14">&#39;b&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;signal&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, upper, <span style="color:#d14">&#39;r--&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;upper envelope&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, lower, <span style="color:#d14">&#39;g--&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;lower envelope&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>legend()</code></pre></div>
+<p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_11_1.png" alt=""></p>
+<p>If we zoom in on the left and right edges of the plot, here&rsquo;s what we see.</p>
+<p><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">121</span>)
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[:<span style="color:#099">100</span>], signal[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;b&#39;</span>,
+         time_samples[:<span style="color:#099">100</span>], upper[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;r--&#39;</span>,
+	 time_samples[:<span style="color:#099">100</span>], lower[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;g--&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">122</span>)
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[<span style="color:#099">900</span>:], signal[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;b&#39;</span>,
+         time_samples[<span style="color:#099">900</span>:], upper[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;r--&#39;</span>,
+	 time_samples[<span style="color:#099">900</span>:], lower[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;g--&#39;</span>)</code></pre></div>
+<img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_13_1.png" alt=""></p>
+<p>It turns out that the envelopes constructed here are not <em>true</em> envelopes, in that the signal is leaking out of their bounds. This is because the naive interpolation method assumes the endpoints of the signal to be knots in the interpolation. Consequently, the splines cannot numerically &ldquo;compensate&rdquo; for the slope of the signal near the endpoints.</p>
+<p>But if we don&rsquo;t consider the endpoints of the signals as the endpoints of the splines, what is the alternative? It&rsquo;s not like we have any more data, so we just make some. The solution, simply put, consists of:</p>
+<ol>
+<li>selecting $k$ maxima and $k$ minima closest to each endpoint, and extending them symmetrically beyond the edges,</li>
+<li>constructing the upper and lower envelopes with these extended extrema</li>
+<li>slicing off these envelopes with the indices of the original signal</li>
+</ol>
+<p>This is how it looks when $k = 2$:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pyhht.utils</span> <span style="color:#000;font-weight:bold">import</span> boundary_conditions
+tmin, tmax, xmin, xmax <span style="color:#000;font-weight:bold">=</span> boundary_conditions(signal, time_samples, nbsym<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>)
+
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal, <span style="color:#d14">&#39;b&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>plot(tmin, xmin, <span style="color:#d14">&#39;go&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;minima&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>plot(tmax, xmax, <span style="color:#d14">&#39;ro&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;maxima&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>vlines(tmax[<span style="color:#099">2</span>], <span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">3</span>, <span style="color:#d14">&#39;r&#39;</span>,<span style="color:#d14">&#39;dashdot&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;axis of symmetry&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>vlines(tmin[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">3</span>], <span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">3</span>, <span style="color:#d14">&#39;g&#39;</span>, <span style="color:#d14">&#39;dashdot&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;axis of symmetry&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>legend(loc<span style="color:#000;font-weight:bold">=</span><span style="color:#099">4</span>)</code></pre></div>
+<p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_16_1.png" alt=""></p>
+<p>The dotted lines represent the axes about which the extrapolated extrema are symmetric. Now we can use these new data points to reconstruct our envelopes, as follows.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tck <span style="color:#000;font-weight:bold">=</span> splrep(tmin, xmin)
+lower_env <span style="color:#000;font-weight:bold">=</span> splev(time_samples, tck)
+tck <span style="color:#000;font-weight:bold">=</span> splrep(tmax, xmax)
+upper_env <span style="color:#000;font-weight:bold">=</span> splev(time_samples, tck)
+
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal, <span style="color:#d14">&#39;b&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, upper_env, <span style="color:#d14">&#39;r-.&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, lower_env, <span style="color:#d14">&#39;g-.&#39;</span>)</code></pre></div>
+<p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_18_1.png" alt=""></p>
+<p>It can be seen that the splines don&rsquo;t terminate at the endpoints of the signal itself. As before, here are the plots of the edges of this interpolation.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">121</span>)
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[:<span style="color:#099">100</span>], signal[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;b&#39;</span>,
+         time_samples[:<span style="color:#099">100</span>], upper_env[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;r--&#39;</span>,
+	 time_samples[:<span style="color:#099">100</span>], lower_env[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;g--&#39;</span>)
+plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">122</span>)
+plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[<span style="color:#099">900</span>:], signal[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;b&#39;</span>,
+         time_samples[<span style="color:#099">900</span>:], upper_env[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;r--&#39;</span>,
+	 time_samples[<span style="color:#099">900</span>:], lower_env[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;g--&#39;</span>)</code></pre></div>
+<p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_20_1.png" alt=""></p>
+<p>The &ldquo;leakage&rdquo; of the signal beyond the envelopes is far less drastic, and we&rsquo;re much closer to a <em>true</em> envelope now. It&rsquo;s still not a perfect envelope, but I&rsquo;m not entirely sure on whether that is a function of the sampling rate (I doubt it) or the order of symmetry, or anything else. I suspect it might have to do with the the degree of the interpolating polynomial. Perhaps a higher order polynomial might eliminate this little leakage, but I&rsquo;m sure it won&rsquo;t work well for the rest of the signal, the bulk of which is far more critical to the decomposition. Anyhow, let&rsquo;s see how EMD fares with this added heuristic. For this we will have to redefine the <code>sift</code> and <code>emd</code> functions from before.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pyhht.utils</span> <span style="color:#000;font-weight:bold">import</span> extr
+
+
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">sift</span>(x, ts):
+    <span style="color:#d14">&#34;&#34;&#34;One sifting iteration.&#34;&#34;&#34;</span>
+    tmin, tmax, xmin, xmax <span style="color:#000;font-weight:bold">=</span> boundary_conditions(x, ts)
+    tck <span style="color:#000;font-weight:bold">=</span> splrep(tmin, xmin)
+    lower_envelop <span style="color:#000;font-weight:bold">=</span> splev(ts, tck)
+    tck <span style="color:#000;font-weight:bold">=</span> splrep(tmax, xmax)
+    upper_envelop <span style="color:#000;font-weight:bold">=</span> splev(ts, tck)
+    mean_amplitude <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(upper_envelop <span style="color:#000;font-weight:bold">-</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
+    local_mean <span style="color:#000;font-weight:bold">=</span> (upper_envelop <span style="color:#000;font-weight:bold">+</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
+    amplitude_error <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(local_mean) <span style="color:#000;font-weight:bold">/</span> mean_amplitude
+    <span style="color:#000;font-weight:bold">return</span> x <span style="color:#000;font-weight:bold">-</span> local_mean, amplitude_error<span style="color:#000;font-weight:bold">.</span>sum()
+
+
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">emd</span>(x, ts, n_imfs):
+    imfs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
+    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">xrange</span>(n_imfs):
+        ix <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+        mode <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
+        nmin, nmax, nzero <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">map</span>(<span style="color:#0086b3">len</span>, extr(mode))
+        <span style="color:#000;font-weight:bold">while</span> <span style="color:#0086b3">abs</span>((nmin <span style="color:#000;font-weight:bold">+</span> nmax) <span style="color:#000;font-weight:bold">-</span> nzero) <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">1</span>:
+            mode, amplitude_error <span style="color:#000;font-weight:bold">=</span> sift(mode, ts)
+            <span style="color:#000;font-weight:bold">if</span> amplitude_error <span style="color:#000;font-weight:bold">&lt;=</span> tol:
+                <span style="color:#000;font-weight:bold">break</span>
+        imfs[i, :] <span style="color:#000;font-weight:bold">=</span> mode
+    imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :] <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
+    <span style="color:#000;font-weight:bold">return</span> imfs
+
+
+n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>
+imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, time_samples, n_imfs<span style="color:#000;font-weight:bold">=</span>n_imfs)
+plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
+plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
+<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
+    plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
+    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf {}&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
+<p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_22_0.png" alt=""></p>
+<p>This decomposition is a clearly better approximation of the original components. You can easily tell the two unimodal components from earlier, and even the residue is much closer to the linear trend that we had included in the signal.</p>
+<p>The interesting thing to note here is that this signal was very straightforward, and even then the edge effects of sifting were severe. There&rsquo;s no telling how these might affect the decomposition of real world data.</p>
+<p>There are many more heuristics involved in a good implementation of empirical mode decomposition. Following posts will deal with them in more detail.</p>
+
+        </p>
+    </div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "brocasbrain" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/signalprocessing">#signalprocessing</a>
+        
+            <a class="tag" href="/tags/pyhht">#pyhht</a>
+        
+            <a class="tag" href="/tags/emd">#emd</a>
+        
+            <a class="tag" href="/tags/interpolation">#interpolation</a>
+        
+      
+    </div>
+
+
+	
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="http://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>story on Jaidev&#39;s Blog</title>
+    <link>http://jaidevd.com/tags/story/</link>
+    <description>Recent content in story on Jaidev&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Dec 2018 14:48:07 +0530</lastBuildDate>
+    
+	<atom:link href="http://jaidevd.com/tags/story/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rabies, Laziness &amp; Privilege</title>
+      <link>http://jaidevd.com/posts/rabies-laziness-privilege/</link>
+      <pubDate>Thu, 13 Dec 2018 14:48:07 +0530</pubDate>
+      
+      <guid>http://jaidevd.com/posts/rabies-laziness-privilege/</guid>
+      <description>It was the night of the recent 5-state assembly elections. One of my company&amp;rsquo;s clients is a major news channel, and I was at the studio late into the night, until the election commission announced that they had cancelled their press conference which was supposed to make an announcement about the final vote counts in Madhya Pradesh. A colleague offered to drop me home, and I got off at the gate of my colony, not wanting to subject my colleague to navigating the labyrinth that is any gated colony in South Delhi.</description>
+    </item>
+    
+  </channel>
+</rss>
