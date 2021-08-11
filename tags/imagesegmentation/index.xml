@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>imagesegmentation on Jaidev&#39;s Blog</title>
-    <link>http://jaidevd.com/tags/imagesegmentation/</link>
+    <link>https://jaidevd.com/tags/imagesegmentation/</link>
     <description>Recent content in imagesegmentation on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 17 Aug 2018 14:52:19 +0530</lastBuildDate>
     
-	<atom:link href="http://jaidevd.com/tags/imagesegmentation/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaidevd.com/tags/imagesegmentation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Weighted Loss Functions for Instance Segmentation</title>
-      <link>http://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/</link>
+      <link>https://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
       
-      <guid>http://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/</guid>
+      <guid>https://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/</guid>
       <description>This post is a follow up to my talk, Practical Image Classification &amp;amp; Object Detection at PyData Delhi 2018. You can watch the talk here:   and see the slides here.
 I spoke at length about the different kinds of problems in computer vision and how they are interpreted in deep learning architectures. I spent a fair bit of time on instance and semantic segmentation (for an introduction to these problems, watch Justin Johnson&amp;lsquo;s lecture from the Stanford CS231 course here).</description>
     </item>

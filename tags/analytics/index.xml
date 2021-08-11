@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>analytics on Jaidev&#39;s Blog</title>
-    <link>http://jaidevd.com/tags/analytics/</link>
+    <link>https://jaidevd.com/tags/analytics/</link>
     <description>Recent content in analytics on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Aug 2015 00:00:00 +0530</lastBuildDate>
     
-	<atom:link href="http://jaidevd.com/tags/analytics/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaidevd.com/tags/analytics/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Organizing a Bookshelf with Multivariate Analysis</title>
-      <link>http://jaidevd.com/posts/bookshelf/</link>
+      <link>https://jaidevd.com/posts/bookshelf/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0530</pubDate>
       
-      <guid>http://jaidevd.com/posts/bookshelf/</guid>
+      <guid>https://jaidevd.com/posts/bookshelf/</guid>
       <description>I have recently moved from Pune to Delhi. I had spent only a year in Pune, having moved there from Mumbai, where I lived for three years. Whenever I move, the bulk of my luggage consists of books and clothes. My stay in Pune was just a transition, so I never bothered to unpack and store all my stuff too carefully. Thus, a corner of my bedroom in my Pune apartment always looked like this: The actual volume of books that I carried from Pune to Delhi is about twice of what is seen in the picture.</description>
     </item>
     

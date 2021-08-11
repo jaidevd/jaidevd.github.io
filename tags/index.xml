@@ -2,237 +2,237 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jaidev&#39;s Blog</title>
-    <link>http://jaidevd.com/tags/</link>
+    <link>https://jaidevd.com/tags/</link>
     <description>Recent content in Tags on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 13 Dec 2018 14:48:07 +0530</lastBuildDate>
     
-	<atom:link href="http://jaidevd.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaidevd.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>personal</title>
-      <link>http://jaidevd.com/tags/personal/</link>
+      <link>https://jaidevd.com/tags/personal/</link>
       <pubDate>Thu, 13 Dec 2018 14:48:07 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/personal/</guid>
+      <guid>https://jaidevd.com/tags/personal/</guid>
       <description></description>
     </item>
     
     <item>
       <title>story</title>
-      <link>http://jaidevd.com/tags/story/</link>
+      <link>https://jaidevd.com/tags/story/</link>
       <pubDate>Thu, 13 Dec 2018 14:48:07 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/story/</guid>
+      <guid>https://jaidevd.com/tags/story/</guid>
       <description></description>
     </item>
     
     <item>
       <title>computervision</title>
-      <link>http://jaidevd.com/tags/computervision/</link>
+      <link>https://jaidevd.com/tags/computervision/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/computervision/</guid>
+      <guid>https://jaidevd.com/tags/computervision/</guid>
       <description></description>
     </item>
     
     <item>
       <title>deeplearning</title>
-      <link>http://jaidevd.com/tags/deeplearning/</link>
+      <link>https://jaidevd.com/tags/deeplearning/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/deeplearning/</guid>
+      <guid>https://jaidevd.com/tags/deeplearning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>imagesegmentation</title>
-      <link>http://jaidevd.com/tags/imagesegmentation/</link>
+      <link>https://jaidevd.com/tags/imagesegmentation/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/imagesegmentation/</guid>
+      <guid>https://jaidevd.com/tags/imagesegmentation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>keras</title>
-      <link>http://jaidevd.com/tags/keras/</link>
+      <link>https://jaidevd.com/tags/keras/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/keras/</guid>
+      <guid>https://jaidevd.com/tags/keras/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python</title>
-      <link>http://jaidevd.com/tags/python/</link>
+      <link>https://jaidevd.com/tags/python/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/python/</guid>
+      <guid>https://jaidevd.com/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tensorflow</title>
-      <link>http://jaidevd.com/tags/tensorflow/</link>
+      <link>https://jaidevd.com/tags/tensorflow/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/tensorflow/</guid>
+      <guid>https://jaidevd.com/tags/tensorflow/</guid>
       <description></description>
     </item>
     
     <item>
       <title>productivity</title>
-      <link>http://jaidevd.com/tags/productivity/</link>
+      <link>https://jaidevd.com/tags/productivity/</link>
       <pubDate>Wed, 03 Aug 2016 13:42:55 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/productivity/</guid>
+      <guid>https://jaidevd.com/tags/productivity/</guid>
       <description></description>
     </item>
     
     <item>
       <title>bayes</title>
-      <link>http://jaidevd.com/tags/bayes/</link>
+      <link>https://jaidevd.com/tags/bayes/</link>
       <pubDate>Sun, 17 Jul 2016 14:19:40 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/bayes/</guid>
+      <guid>https://jaidevd.com/tags/bayes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>machinelearning</title>
-      <link>http://jaidevd.com/tags/machinelearning/</link>
+      <link>https://jaidevd.com/tags/machinelearning/</link>
       <pubDate>Sun, 17 Jul 2016 14:19:40 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/machinelearning/</guid>
+      <guid>https://jaidevd.com/tags/machinelearning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>perceptron</title>
-      <link>http://jaidevd.com/tags/perceptron/</link>
+      <link>https://jaidevd.com/tags/perceptron/</link>
       <pubDate>Sun, 17 Jul 2016 14:19:40 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/perceptron/</guid>
+      <guid>https://jaidevd.com/tags/perceptron/</guid>
       <description></description>
     </item>
     
     <item>
       <title>math</title>
-      <link>http://jaidevd.com/tags/math/</link>
+      <link>https://jaidevd.com/tags/math/</link>
       <pubDate>Wed, 06 Jul 2016 14:45:55 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/math/</guid>
+      <guid>https://jaidevd.com/tags/math/</guid>
       <description></description>
     </item>
     
     <item>
       <title>probability</title>
-      <link>http://jaidevd.com/tags/probability/</link>
+      <link>https://jaidevd.com/tags/probability/</link>
       <pubDate>Thu, 30 Jun 2016 18:33:41 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/probability/</guid>
+      <guid>https://jaidevd.com/tags/probability/</guid>
       <description></description>
     </item>
     
     <item>
       <title>evangelism</title>
-      <link>http://jaidevd.com/tags/evangelism/</link>
+      <link>https://jaidevd.com/tags/evangelism/</link>
       <pubDate>Tue, 14 Jun 2016 19:54:09 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/evangelism/</guid>
+      <guid>https://jaidevd.com/tags/evangelism/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rant</title>
-      <link>http://jaidevd.com/tags/rant/</link>
+      <link>https://jaidevd.com/tags/rant/</link>
       <pubDate>Tue, 14 Jun 2016 19:54:09 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/rant/</guid>
+      <guid>https://jaidevd.com/tags/rant/</guid>
       <description></description>
     </item>
     
     <item>
       <title>analytics</title>
-      <link>http://jaidevd.com/tags/analytics/</link>
+      <link>https://jaidevd.com/tags/analytics/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/analytics/</guid>
+      <guid>https://jaidevd.com/tags/analytics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>dataviz</title>
-      <link>http://jaidevd.com/tags/dataviz/</link>
+      <link>https://jaidevd.com/tags/dataviz/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/dataviz/</guid>
+      <guid>https://jaidevd.com/tags/dataviz/</guid>
       <description></description>
     </item>
     
     <item>
       <title>PCA</title>
-      <link>http://jaidevd.com/tags/pca/</link>
+      <link>https://jaidevd.com/tags/pca/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/pca/</guid>
+      <guid>https://jaidevd.com/tags/pca/</guid>
       <description></description>
     </item>
     
     <item>
       <title>emd</title>
-      <link>http://jaidevd.com/tags/emd/</link>
+      <link>https://jaidevd.com/tags/emd/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/emd/</guid>
+      <guid>https://jaidevd.com/tags/emd/</guid>
       <description></description>
     </item>
     
     <item>
       <title>fourier</title>
-      <link>http://jaidevd.com/tags/fourier/</link>
+      <link>https://jaidevd.com/tags/fourier/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/fourier/</guid>
+      <guid>https://jaidevd.com/tags/fourier/</guid>
       <description></description>
     </item>
     
     <item>
       <title>nonstationary</title>
-      <link>http://jaidevd.com/tags/nonstationary/</link>
+      <link>https://jaidevd.com/tags/nonstationary/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/nonstationary/</guid>
+      <guid>https://jaidevd.com/tags/nonstationary/</guid>
       <description></description>
     </item>
     
     <item>
       <title>pyhht</title>
-      <link>http://jaidevd.com/tags/pyhht/</link>
+      <link>https://jaidevd.com/tags/pyhht/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/pyhht/</guid>
+      <guid>https://jaidevd.com/tags/pyhht/</guid>
       <description></description>
     </item>
     
     <item>
       <title>signalprocessing</title>
-      <link>http://jaidevd.com/tags/signalprocessing/</link>
+      <link>https://jaidevd.com/tags/signalprocessing/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/signalprocessing/</guid>
+      <guid>https://jaidevd.com/tags/signalprocessing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>interpolation</title>
-      <link>http://jaidevd.com/tags/interpolation/</link>
+      <link>https://jaidevd.com/tags/interpolation/</link>
       <pubDate>Fri, 18 Apr 2014 12:10:15 +0530</pubDate>
       
-      <guid>http://jaidevd.com/tags/interpolation/</guid>
+      <guid>https://jaidevd.com/tags/interpolation/</guid>
       <description></description>
     </item>
     
