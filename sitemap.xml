@@ -3,12 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jaidevd.com/archive/</loc>
-    <lastmod>2021-05-29T00:00:00+00:00</lastmod>
+    <loc>https://jaidevd.com/</loc>
+    <lastmod>2021-10-26T12:45:21+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://jaidevd.com/</loc>
+    <loc>https://jaidevd.com/bucketlist/</loc>
+    <lastmod>2021-10-26T12:45:21+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaidevd.com/archive/</loc>
     <lastmod>2021-05-29T00:00:00+00:00</lastmod>
   </url>
   
