@@ -1,0 +1,3 @@
+[submodule "wordle"]
+	path = wordle
+	url = git@github.com:jaidevd/wordle.git
