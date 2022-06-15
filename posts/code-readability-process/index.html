@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>A Process for Improving Code Readability | Jaidev&#39;s Blog</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.f00aabec90e8a82642492fc0302810b79803dc6cb6ba56f7c6220b6532e0c297.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'G-R6EBGCKHP1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Jaidev&#39;s Blog</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/about/">About Me</a>
+  
+    <a class="color-link nav-link" href="/archive/">Archive</a>
+  
+  <a class="color-link nav-link" href="https://jaidevd.com/index.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">A Process for Improving Code Readability</h1>
+    
+    <time>June 12, 2022</time>
+    
+    <div>
+        <p>
+        <p>I took a <a href="https://onlinedegree.iitm.ac.in/course_pages/BSCCS2002.html">course</a>
+on data structures and algorithms over the last few months. It is being offered
+as a part of IIT Madras&rsquo; <a href="https://onlinedegree.iitm.ac.in">Online Degree Program</a>
+in Data Science and Programming, taught by <a href="https://www.cmi.ac.in/~madhavan/">Prof Madhavan Mukund</a>.
+The program is a MOOC in a true sense, with tens of thousands of students
+enrolling each year. The DSA course itself is offered every trimester,
+and sees an average of ~700 enrollments every time. It is easy to see how
+communication becomes critical in running a MOOC at this scale. There is, of
+course, the operational and logistical communication that goes into the
+smooth running of the course. But more relevant is communicating the
+<em>content</em> of the course (the course is also highly interactive - in addition
+to weekly office hours, there are Discourse forums where students, TAs and
+faculty are active).</p>
+<p>Communicating anything about programming is no joke,
+especially when the programming experience of students varies widely from
+novices to ninjas. Experienced developers may have perfected the art of
+communicating with <a href="https://www.youtube.com/watch?v=qpdYRPL3SVE">commit messages</a>,
+or via group chats. However, I&rsquo;m not aware of any widely adopted protocol or
+best practices which help people teach and learn coding better. The
+<a href="https://en.wikipedia.org/wiki/Stack_Exchange#Site_features">StackExchange model</a>
+comes very close, but it&rsquo;s not particularly well suited to
+pedagogy.</p>
+<p>Let us assume that there are broadly to aspects of programming when it comes to
+teaching programming - ideas and code. So, how do</p>
+<ol>
+<li>teachers communicate programming ideas to students?</li>
+<li>teachers communicate nuances of code to students?</li>
+<li>students communicate on either aspect with each other, (especially when asking for help)?</li>
+<li>students communicate with the teachers?</li>
+</ol>
+<p>I clearly don&rsquo;t have specific answers to these, but I can certainly think of
+many things which could help.</p>
+<hr>
+<h2 id="communication-as-code">Communication as Code</h2>
+<p>One of the pleasures of <a href="https://www.youtube.com/watch?v=oHZNBBUlD-0">listening to Madhavan Mukund</a>
+is that his speech is like other people&rsquo;s writing.
+Writing is easy. In the middle of writing a sentence, I can decide
+that I could have written the beginning better. Then I can always go
+back, change the beginning and rephrase the sentence as many times as I like.
+Speaking is difficult. If I realize that I messed up my sentence in the middle
+of speaking it, I will most certainly fumble. In his lectures, Madhavan says
+<em>exactly</em> what he intends to say. This ability can only come from a place of the deepest expertise
+and clarity (I recently found out that he does do retakes.
+A part of me died that day - I won&rsquo;t lie. Even so, knowing how much editing
+should take place in a recording so as to make a perfectly effective point is a
+rare skill). The lectures typically contained Python code and discussion on them,
+but the code eventually got a bit too verbose and ultimately started looking a
+lot less Pythonic. The course could really use code that was a lot more readable.</p>
+<p>But do I know this for sure? I, as an experienced Python developer,
+have a certain opinion on the merits of readable code. Do these supposed merits
+extend to <em>teaching</em> data structures and
+algorithms? Eventually, I stopped reading too much into the on-screen code,
+and instead started listening to what Madhavan was saying in English. This I
+translated to pseudocode, and then to Python. And what he was saying in
+English was so clear and precise, that it might well have been the pseudocode.
+This strategy worked well for me - even though I got an embarrassing B+ in
+the course, if I had resorted to simply reading the on-screen code and
+deciphering what it was doing, I&rsquo;d have failed the course for sure. The
+on-screen code was way more verbose than Madhavan&rsquo;s
+explanations (of course, all code is <em>by definition</em> more verbose than its
+pseudocode, but not unnecessarily so). Listening to explanations, following it up with your
+own implementation, and then trying to reconcile it with the on-screen code
+was very counterproductive.</p>
+<p>Metrics for the readability of natural language (like the <a href="https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests">Flesch-Kinkaid</a> tests
+for English) are well understood and widely adopted. I don&rsquo;t know of similar
+metrics for the readability of code. There has been <a href="https://web.eecs.umich.edu/~weimerw/p/weimer-tse2010-readability-preprint.pdf">some</a> <a href="https://www.springerprofessional.de/en/measuring-the-extent-of-source-code-readability-using-regression/15905742">work</a>
+around designing such a metric - but eventually all of it boils down to the
+subjective opinion of relatively few people (English readability, too, is
+subjective, but a lot more people speak English than write code).
+And that&rsquo;s how it should be, too, but the fact remains that there isn&rsquo;t one
+comprehensive, widely accepted measure of code readability. The good news is
+that just like in natural language, writing readable code can be taught and
+learnt (Uncle Bob wrote and entire book on this, after all).</p>
+<p>While code readability itself may not be easily measurable,
+what we need to <em>do</em> in order to write readable code is well accepted. We all
+know to use meaningful variable names, short and well documented functions,
+classes that are not too deep in the inheritance tree (or worse, an
+inheritance graph), etc. In most cases, it seems like readable code comes
+from making code as close to natural language as possible. So now we can ask a
+more focused question: We know that readable code serves
+experienced developers well - does it also serve students equally well? Or
+would they rather study a piece of Python code that is so verbose,
+so much like C, that GCC could actually compile it with little modification?</p>
+<p>This distinction between how experts and novices perceive readable code is
+critical. Primarily, because it is prima-facie difficult to &ldquo;sell&rdquo; readable code
+to novices. Consider this for instance: how would you convince a student that
+a list comprehension is better than even the simplest <code>for</code> loop? The latter isn&rsquo;t
+technically wrong at all. In fact, it can be argued that unlike list
+comprehensions, <code>for</code> loops are universal and therefore should be preferred -
+they are instantly recognizable to anyone. On the other hand, list
+comprehensions are idiomatic only in some languages. List comprehensions over
+<code>for</code> loops is not an easy pitch.</p>
+<p>I asked a few senior developers whether they would sell the merits of
+clean code to their mentees, and if so, how? Everyone agreed that it was a
+difficult problem. There are no jobs in clean / readable code as such.
+It does not even have the satisfaction of writing code that &ldquo;just works&rdquo;.
+So how do people inculcate these habits among their mentees? Some of them don&rsquo;t
+care, some of them enforce it and others chisel away at the habits of their
+mentees until it sticks. A friend also reminded me that great
+programmers can come from all three categories of mentees. This was a wake up
+call. Readable code has a lot more to do with long-term benefits for a team
+or a community than with short-term <em>individual</em> ability.</p>
+<p>This is precisely the thesis of Donald Knuth&rsquo;s philosophy of <a href="https://www-cs-faculty.stanford.edu/~knuth/lp.html">literate programming</a>:</p>
+<blockquote>
+<p>Let us change our traditional attitude to the construction of programs:
+Instead of imagining that our main task is to instruct a computer what to do,
+let us concentrate rather on explaining to human beings what we want a
+computer to do.</p>
+</blockquote>
+<p>If teaching programming isn&rsquo;t about <em>explaining to human beings what we want a
+computer to do</em>, what is it about? Can we talk about a programme so clearly
+in English that the actual code becomes secondary? This is precisely what led to
+a lot of my learning during the DSA course. Here I come full circle to my
+argument about code and natural language - a readable version of a program is
+one that can most easily be translated to natural language. If a human can
+read a piece of code and <em>narrate</em> it to others, we can call it readable
+(assuming, of course, that the speaker is a good communicator and the listeners
+have the requisite amount of programming skills).</p>
+<h2 id="examples-improving-readability">Examples: Improving Readability</h2>
+<p>I took the implementations of three relatively straightforward algorithms -
+mergesort, breadth-first search and Dijkstra&rsquo;s algorithm - from the course
+material and tried to make them more readable, while recording my attempts. I
+thus ended up with the &ldquo;before&rdquo; and &ldquo;after&rdquo; versions for each algorithm. I
+then asked a bunch of people which version they found more readable, and here
+are the results.</p>
+<h3 id="1-mergesort">1. Mergesort</h3>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/VD-yDppwxl0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>37 people saw the before and after versions of the code, and 27 of them (~73%)
+of them found the &ldquo;after&rdquo; version of the code more readable.</p>
+<p>(Interestingly, some of my friends also attributed the readability of the code
+to factors external to the code itself - like font sizes, colors and how an IDE
+might render whitespaces. Sure, these external factors are largely based on
+peoples&rsquo; taste and preferences, but it is still worthwhile optimizing one&rsquo;s
+developer environment for better optical readability.)</p>
+<h3 id="2-breadth-first-search">2. Breadth-first Search</h3>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/TFcZQqQ2oe8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Again, 37 people saw this, and 28 of them (~75%) preferred the &ldquo;after&rdquo; version.
+(At lease one of the 9 who favoured the &ldquo;before&rdquo; version did so because they did not know
+what a Python <a href="https://docs.python.org/3/library/collections.html#collections.deque">deque</a>
+is - I wonder how many others were put off by that).</p>
+<h3 id="3-dijkstras-shortest-path-algorithm">3. Dijkstra&rsquo;s Shortest Path Algorithm</h3>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/4MmdHO4MFnQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>27 people saw this and 23 of them (~85%) agreed that the &ldquo;after&rdquo; version was
+more readable.</p>
+<h2 id="distilling-the-process">Distilling the Process</h2>
+<p>In an attempt to carve a process out of what I&rsquo;ve done in the videos above, I
+have slotted everything I have done in the following categories:</p>
+<h3 id="0-perfect-information">0. Perfect Information</h3>
+<p>This is an obvious prerequisite. Without knowing the problem (and the solution)
+well enough at the lowest level of abstraction, attempting to write readable
+code is tantamount to premature optimization.</p>
+<h3 id="1-decide-on-the-level-of-abstraction">1. Decide on the Level of Abstraction</h3>
+<p>In the first place, isolating where your problem lies within an entire stack of
+insanely complex logic is very difficult. To add to that, when a problem spans
+multiple levels of abstraction, lack of readability can severely hurt problem
+solving. When dealing with such variety in abstraction, it is often a good idea
+to <a href="https://ell.stackexchange.com/questions/89687/what-does-abstract-away-from-mean">abstract away</a>
+the lowest levels of code, making them as simple as they can be. This typically
+boils down to deciding whether to write a new function or a class. In the
+extreme case you might find yourself writing a function that is being used
+exactly once in an entire application. But code reuse is only one aspect of a
+function. Other major aspects are logical isolation and repeatability. In his
+<a href="https://www.youtube.com/watch?v=5ScwkHb7hBA">talk on Developer UX</a>, Francois
+Chollet stresses the importance of reducing of cognitive load on users. That is
+precisely what good abstraction does, and indeed the best API design often
+emerges from such abstractions. Unfortunately, we typically see clean and simple API design
+as primarily user-facing. We should extend the same empathy to our fellow
+developer. After all, every layer of abstraction is <em>someone&rsquo;s</em> API. It&rsquo;s
+turtles all the way down.</p>
+<h3 id="2-clear-parameter-and-variable-names">2. Clear parameter and variable names</h3>
+<p><img src="https://www.commitstrip.com/wp-content/uploads/2015/10/Strip-Trouver-le-nom-de-variable-english650-final.jpg" alt=""></p>
+<p>This, too, is easier said than done. But with enough practice (or after being
+bitten enough times by your own unreadable code), good variable naming becomes
+a habit. If you stick to it, you will soon reach a stage where you will not be
+able to stomach iterator variables named as <code>i</code>, <code>j</code>, <code>k</code>. It is not that
+single-letter names don&rsquo;t have their place, but words, phrases and
+abbreviations are a lot more sticky. A well chosen name acts as an
+anchor point. You could come back to a piece of code years later, and
+reconstruct your memory of the program with nothing more than a
+single well named object.</p>
+<h3 id="3-idiomatic-programming---know-your-language">3. Idiomatic Programming - know your language</h3>
+<p>Here&rsquo;s the most useful piece of advice written in the entire <a href="https://docs.python.org/3/">official
+documentation for Python</a> - a little note under the
+Library Reference section says</p>
+<blockquote>
+<p>keep this under your pillow</p>
+</blockquote>
+<p>Idiomatic programming rests on knowing which features a language has,
+and utilizing them to the greatest extent. For instance, swapping the values of
+variables in Python can be done simply with tuple unpacking - as against using a temporary
+variable, which would be un-Pythonic. Almost every use of idiomatic code can be
+associated with reduced verbosity.</p>
+<h4 id="31-know-the-standard-library">3.1. Know the standard library</h4>
+<p>On the first day of my very first job, I was told that I&rsquo;d be expected to know
+the Python standard library very well. A decade later, I&rsquo;m still discovering
+modules in it. A colleague of mine once wrote a JSON parser in Python.
+Someone told him that he could just do <code>import json; json.loads(...)</code>. He didn&rsquo;t
+speak to anyone for two days. (In his defence, he was a competitive programmer.)</p>
+<p>I doubt if it is possible to find someone who knows the standard library of
+<em>any</em> language, let alone Python, like the back of their hand. But the good
+news is that the offerings of a standard library are discoverable. However,
+even these opportunities at discovery can be easily missed. I would
+definitely use Google if I don&rsquo;t know the solution to a problem. I probably
+won&rsquo;t use Google if I <em>don&rsquo;t know</em> that my solution is sub-optimal. In the
+Dijkstra example above, I managed to save a few lines of code because
+I simply <em>happened</em> to know that <a href="https://docs.python.org/3/library/math.html#math.inf"><code>math.inf</code></a>
+exists. This was superior knowledge, not superior skill. Regular code reviews
+are a good way to improve upon this lack of knowledge.</p>
+<h4 id="32-know-common-data-structures">3.2. Know common data structures</h4>
+<blockquote>
+<p>&ldquo;Bad programmers worry about the code. Good programmers worry about data
+structures and their relationships.&rdquo;</p>
+<p>-<cite> Linus Torvalds</cite></p>
+</blockquote>
+<p>Choosing the right data structure for a problem has more to do with performance
+than with elegance or readability. For example, it is clear that types like sets
+and dictionaries, which are optimized for search are better for checking
+memberships of elements instead of simpler collections, like lists.
+But once a set has been chosen over a list, code must be rewritten for
+the better usage of its methods and optimization of its costs.</p>
+<p>For a &ldquo;batteries included&rdquo; language like Python, data structures tend to be
+highly synergistic - which means that often, explicit typecasting can be
+avoided. Instead, there will almost always be a method that returns a view of
+the object that you really need. Consider, for example, two dictionaries, <code>X</code>
+and <code>Y</code>. Suppose you have to do something with the keys present in
+exactly one of them. Typically, to find such keys, I would simply iterate.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ind_keys <span style="color:#000;font-weight:bold">=</span> [key <span style="color:#000;font-weight:bold">for</span> key <span style="color:#000;font-weight:bold">in</span> X <span style="color:#000;font-weight:bold">if</span> key <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> Y]</code></pre></div>
+<p>But I did not know until recently, that a collection of dictionary keys in
+Python behaves a lot like a set! So the symmetric difference operator (<code>^</code>) that
+we generally use on a pair sets can also be used on a pair of <code>dict_keys</code>
+objects:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ind_keys <span style="color:#000;font-weight:bold">=</span> X<span style="color:#000;font-weight:bold">.</span>keys() <span style="color:#000;font-weight:bold">^</span> Y<span style="color:#000;font-weight:bold">.</span>keys()</code></pre></div>
+<p>Keeping up with this knowledge is tough for even the most experienced
+developers - especially as newer versions of libraries and languages come up.
+Here, too, regular code reviews (preferably from multiple reviewers with varying
+levels of expertise) are immensely useful.</p>
+<hr>
+<p>These steps need to be rinsed and repeated, since each of them affects the
+others. For instance, its likely that you discover a data structure that
+simplifies (or even eliminates the need for) a function, ultimately hoisting
+the program to a higher level of abstraction. So, a single pass through these
+steps alone may not suffice. And, as usual, it always helps to have an
+experienced programmer review your code. As long as your reviewer doesn&rsquo;t
+feel like they are solving a Holmesian mystery, you&rsquo;re good.</p>
+
+        </p>
+    </div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "brocasbrain" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    <div class="page-footer">
+        
+    </div>
+
+
+	
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>
