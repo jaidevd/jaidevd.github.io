@@ -6,10 +6,19 @@
     <description>Recent content in python on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Aug 2018 14:52:19 +0530</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jun 2022 05:00:00 +0530</lastBuildDate>
     
 	<atom:link href="https://jaidevd.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Process for Readable Code</title>
+      <link>https://jaidevd.com/posts/code-readability-process/</link>
+      <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
+      
+      <guid>https://jaidevd.com/posts/code-readability-process/</guid>
+      <description>I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&amp;rsquo; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time.</description>
+    </item>
     
     <item>
       <title>Weighted Loss Functions for Instance Segmentation</title>

@@ -6,10 +6,73 @@
     <description>Recent content in Tags on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Dec 2018 14:48:07 +0530</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jun 2022 05:00:00 +0530</lastBuildDate>
     
 	<atom:link href="https://jaidevd.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>algorithms</title>
+      <link>https://jaidevd.com/tags/algorithms/</link>
+      <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
+      
+      <guid>https://jaidevd.com/tags/algorithms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>code</title>
+      <link>https://jaidevd.com/tags/code/</link>
+      <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
+      
+      <guid>https://jaidevd.com/tags/code/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data structures</title>
+      <link>https://jaidevd.com/tags/data-structures/</link>
+      <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
+      
+      <guid>https://jaidevd.com/tags/data-structures/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>learning</title>
+      <link>https://jaidevd.com/tags/learning/</link>
+      <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
+      
+      <guid>https://jaidevd.com/tags/learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mooc</title>
+      <link>https://jaidevd.com/tags/mooc/</link>
+      <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
+      
+      <guid>https://jaidevd.com/tags/mooc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://jaidevd.com/tags/python/</link>
+      <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
+      
+      <guid>https://jaidevd.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>readability</title>
+      <link>https://jaidevd.com/tags/readability/</link>
+      <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
+      
+      <guid>https://jaidevd.com/tags/readability/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>personal</title>
@@ -62,15 +125,6 @@
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
       
       <guid>https://jaidevd.com/tags/keras/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://jaidevd.com/tags/python/</link>
-      <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/python/</guid>
       <description></description>
     </item>
     
