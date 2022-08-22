@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.0564082dc658ec59ca122dd2fd20110a2c5deb5ab5636ddec8b19222113d4fbd.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.4489152aa37495358ae3b877a4e43874cbbd9f8a8dd121ed39b7e4a5bc075bd4.css"/>
 
     
     
@@ -29,16 +29,14 @@
     
  
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'G-R6EBGCKHP1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
 }
 </script>
 </head>
@@ -148,7 +146,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -188,7 +186,7 @@ continuous functions, not discrete structures. And that has been the downfall
 of many a programmer.</p>
 <p>What follows is just narcissistic note-taking, which I hope won&rsquo;t let me forget
 what I&rsquo;ve already learnt.</p>
-<h2 id="bayes-theorem">Bayes&rsquo; Theorem</h2>
+<h2 id="bayes-theorem">Bayes' Theorem</h2>
 <p>Simply put, it says that given data $D$ and a hypothesis $H$</p>
 <p>$$ \begin{equation} P(H|D) = \frac{P(H)P(D|H)}{P(D)} \end{equation} $$</p>
 <p>where
@@ -290,13 +288,13 @@ One is yellow and one is green. The problem is:</p>
     </tr>
   </tbody>
 </table>
-<p>As we proceed with this problem, we&rsquo;ll also see how it serves as a good example of the diachronic interpretation of the Bayes&rsquo; theorem - i.e., how it helps us update our belief about a given hypothesis once we&rsquo;ve seen more data.</p>
+<p>As we proceed with this problem, we&rsquo;ll also see how it serves as a good example of the diachronic interpretation of the Bayes' theorem - i.e., how it helps us update our belief about a given hypothesis once we&rsquo;ve seen more data.</p>
 <ol>
 <li>Our <em>priors</em> about the two hypotheses would be naive, in that we would expect both hypotheses to be equiprobable, since we haven&rsquo;t considered the color distribution yet. Thus, $ P(H_{a}) = P(H_{b}) = \frac{1}{2}$</li>
-<li>The likelihoods for the respective hypotheses can be readily obtained from the color distribution. Recall that $P(D|H_{a})$ is simply the probability that the observed data (one green, one yellow) is true for hypothesis $H_{a}$. Thus, $P(D|H_{a})$ equals the probability that the yellow M&amp;M is from 1994 *and* the green one is from 1996. From the table, these values are both $\frac{1}{5}$. Thus, $P(D|H_{a}) = \frac{1}{25}$. Similarly, $P(D|H_{b}) = \frac{14}{100} \times \frac{10}{100} = \frac{7}{500}$.</li>
-<li>Note that for each hypothesis, the product of the first two columns makes up the numerator of the right hand side of Bayes&rsquo; equation.</li>
+<li>The likelihoods for the respective hypotheses can be readily obtained from the color distribution. Recall that $P(D|H_{a})$ is simply the probability that the observed data (one green, one yellow) is true for hypothesis $H_{a}$. Thus, $P(D|H_{a})$ equals the probability that the yellow M&amp;M is from 1994 <em>and</em> the green one is from 1996. From the table, these values are both $\frac{1}{5}$. Thus, $P(D|H_{a}) = \frac{1}{25}$. Similarly, $P(D|H_{b}) = \frac{14}{100} \times \frac{10}{100} = \frac{7}{500}$.</li>
+<li>Note that for each hypothesis, the product of the first two columns makes up the numerator of the right hand side of Bayes' equation.</li>
 </ol>
-<p>So far so good, but I was stuck for a while before I could understand Downey&rsquo;s explanation of how he calculated the normalizing constant for the two cases. He writes that the third column is just the sum of the products of the first two columns. This means, that the normalizing constant is just the sum of the numerators for the respective Bayes&rsquo; equations for the two scenarios. So,</p>
+<p>So far so good, but I was stuck for a while before I could understand Downey&rsquo;s explanation of how he calculated the normalizing constant for the two cases. He writes that the third column is just the sum of the products of the first two columns. This means, that the normalizing constant is just the sum of the numerators for the respective Bayes' equations for the two scenarios. So,</p>
 <p>$$ P(D) = P(H_{a})P(D|H_{a}) + P(H_{b})P(D|H_{b})$$</p>
 <p>Thus,</p>
 <p>$$ P(D) = \frac{1}{2} \times \frac{1}{25} + \frac{1}{2} \times \frac{7}{500} = \frac{27}{1000} $$</p>
@@ -460,7 +458,7 @@ One is yellow and one is green. The problem is:</p>
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.0564082dc658ec59ca122dd2fd20110a2c5deb5ab5636ddec8b19222113d4fbd.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.4489152aa37495358ae3b877a4e43874cbbd9f8a8dd121ed39b7e4a5bc075bd4.css"/>
 
     
     
@@ -29,16 +29,14 @@
     
  
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'G-R6EBGCKHP1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
 }
 </script>
 </head>
@@ -148,7 +146,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -163,7 +161,7 @@ if (!doNotTrack) {
         <p>
         <p>I took a <a href="https://onlinedegree.iitm.ac.in/course_pages/BSCCS2002.html">course</a>
 on data structures and algorithms over the last few months. It is being offered
-as a part of IIT Madras&rsquo; <a href="https://onlinedegree.iitm.ac.in">Online Degree Program</a>
+as a part of IIT Madras' <a href="https://onlinedegree.iitm.ac.in">Online Degree Program</a>
 in Data Science and Programming, taught by <a href="https://www.cmi.ac.in/~madhavan/">Prof Madhavan Mukund</a>.
 The program is a MOOC in a true sense, with tens of thousands of students
 enrolling each year. The DSA course itself is offered every trimester,
@@ -297,7 +295,7 @@ of them found the &ldquo;after&rdquo; version of the code more readable.</p>
 <p>(Interestingly, some of my friends also attributed the readability of the code
 to factors external to the code itself - like font sizes, colors and how an IDE
 might render whitespaces. Sure, these external factors are largely based on
-peoples&rsquo; taste and preferences, but it is still worthwhile optimizing one&rsquo;s
+peoples' taste and preferences, but it is still worthwhile optimizing one&rsquo;s
 developer environment for better optical readability.)</p>
 <h3 id="2-breadth-first-search">2. Breadth-first Search</h3>
 
@@ -399,12 +397,12 @@ avoided. Instead, there will almost always be a method that returns a view of
 the object that you really need. Consider, for example, two dictionaries, <code>X</code>
 and <code>Y</code>. Suppose you have to do something with the keys present in
 exactly one of them. Typically, to find such keys, I would simply iterate.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ind_keys <span style="color:#000;font-weight:bold">=</span> [key <span style="color:#000;font-weight:bold">for</span> key <span style="color:#000;font-weight:bold">in</span> X <span style="color:#000;font-weight:bold">if</span> key <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> Y]</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ind_keys <span style="color:#000;font-weight:bold">=</span> [key <span style="color:#000;font-weight:bold">for</span> key <span style="color:#000;font-weight:bold">in</span> X <span style="color:#000;font-weight:bold">if</span> key <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> Y]</code></pre></div>
 <p>But I did not know until recently, that a collection of dictionary keys in
 Python behaves a lot like a set! So the symmetric difference operator (<code>^</code>) that
 we generally use on a pair sets can also be used on a pair of <code>dict_keys</code>
 objects:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ind_keys <span style="color:#000;font-weight:bold">=</span> X<span style="color:#000;font-weight:bold">.</span>keys() <span style="color:#000;font-weight:bold">^</span> Y<span style="color:#000;font-weight:bold">.</span>keys()</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ind_keys <span style="color:#000;font-weight:bold">=</span> X<span style="color:#000;font-weight:bold">.</span>keys() <span style="color:#000;font-weight:bold">^</span> Y<span style="color:#000;font-weight:bold">.</span>keys()</code></pre></div>
 <p>Keeping up with this knowledge is tough for even the most experienced
 developers - especially as newer versions of libraries and languages come up.
 Here, too, regular code reviews (preferably from multiple reviewers with varying
@@ -584,7 +582,7 @@ feel like they are solving a Holmesian mystery, you&rsquo;re good.</p>
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

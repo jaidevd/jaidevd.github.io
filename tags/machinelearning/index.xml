@@ -6,11 +6,7 @@
     <description>Recent content in machinelearning on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Jul 2016 14:19:40 +0530</lastBuildDate>
-    
-	<atom:link href="https://jaidevd.com/tags/machinelearning/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 17 Jul 2016 14:19:40 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/machinelearning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>On the Linearity of Bayesian Classifiers</title>
       <link>https://jaidevd.com/posts/linearity-bayesian-classifiers/</link>

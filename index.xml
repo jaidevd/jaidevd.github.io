@@ -6,18 +6,14 @@
     <description>Recent content on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Oct 2021 12:45:21 +0530</lastBuildDate>
-    
-	<atom:link href="https://jaidevd.com/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 17 Jun 2022 05:00:00 +0530</lastBuildDate><atom:link href="https://jaidevd.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Process for Readable Code</title>
       <link>https://jaidevd.com/posts/code-readability-process/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
       
       <guid>https://jaidevd.com/posts/code-readability-process/</guid>
-      <description>I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&amp;rsquo; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time.</description>
+      <description>I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&#39; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time.</description>
     </item>
     
     <item>
@@ -54,7 +50,7 @@
       
       <guid>https://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/</guid>
       <description>This post is a follow up to my talk, Practical Image Classification &amp;amp; Object Detection at PyData Delhi 2018. You can watch the talk here:   and see the slides here.
-I spoke at length about the different kinds of problems in computer vision and how they are interpreted in deep learning architectures. I spent a fair bit of time on instance and semantic segmentation (for an introduction to these problems, watch Justin Johnson&amp;lsquo;s lecture from the Stanford CS231 course here).</description>
+I spoke at length about the different kinds of problems in computer vision and how they are interpreted in deep learning architectures. I spent a fair bit of time on instance and semantic segmentation (for an introduction to these problems, watch Justin Johnson&amp;rsquo;s lecture from the Stanford CS231 course here).</description>
     </item>
     
     <item>

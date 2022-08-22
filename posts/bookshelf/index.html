@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.0564082dc658ec59ca122dd2fd20110a2c5deb5ab5636ddec8b19222113d4fbd.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.4489152aa37495358ae3b877a4e43874cbbd9f8a8dd121ed39b7e4a5bc075bd4.css"/>
 
     
     
@@ -29,16 +29,14 @@
     
  
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'G-R6EBGCKHP1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
 }
 </script>
 </head>
@@ -148,7 +146,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -181,7 +179,7 @@ if (!doNotTrack) {
 <p>Since I had six bookshelves, it seemed natural that I should partition titles into six clusters in an unsupervised manner.</p>
 <h2 id="getting-and-preprocessing-the-data">Getting and Preprocessing the Data</h2>
 <p>To perform clustering on the book titles, I started annotating books by the names of their author, their height in millimeters and there genres and subgenres. The resulting dataset is available <a href="https://gist.githubusercontent.com/jaidevd/23aef12e9bf56c618c41/raw/c05e98672b8d52fa0cb94aad80f75eb78342e5d4/books_new.csv">here</a>, and looks somewhat like this:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">pandas</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">pd</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">pandas</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">pd</span>
 url <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;https://gist.githubusercontent.com/jaidevd/23aef12e9bf56c618c41/raw/c05e98672b8d52fa0cb94aad80f75eb78342e5d4/books_new.csv&#34;</span>
 df <span style="color:#000;font-weight:bold">=</span> pd<span style="color:#000;font-weight:bold">.</span>read_csv(url, index_col<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Title&#39;</span>)
 df<span style="color:#000;font-weight:bold">.</span>head()</code></pre></div>
@@ -250,17 +248,17 @@ df<span style="color:#000;font-weight:bold">.</span>head()</code></pre></div>
 </table>
 </div>
 <p>For convenience, I ignored the first names of the authors. I also only considered the last names of the first author of those books that have multiple authors.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df[<span style="color:#d14">&#39;Author&#39;</span>] <span style="color:#000;font-weight:bold">=</span> df[<span style="color:#d14">&#39;Author&#39;</span>]<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">str</span>)<span style="color:#000;font-weight:bold">.</span>apply(<span style="color:#000;font-weight:bold">lambda</span> x: x<span style="color:#000;font-weight:bold">.</span>split(<span style="color:#d14">&#39;,&#39;</span>)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>lower())</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df[<span style="color:#d14">&#39;Author&#39;</span>] <span style="color:#000;font-weight:bold">=</span> df[<span style="color:#d14">&#39;Author&#39;</span>]<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">str</span>)<span style="color:#000;font-weight:bold">.</span>apply(<span style="color:#000;font-weight:bold">lambda</span> x: x<span style="color:#000;font-weight:bold">.</span>split(<span style="color:#d14">&#39;,&#39;</span>)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>lower())</code></pre></div>
 <p>The author, genre and subgenre of the books are categorical variables, so they have to be converted into dummy numerical variables first, and then the height attribute has to be added to the resulting dataset.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
 <span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.feature_extraction</span> <span style="color:#000;font-weight:bold">import</span> DictVectorizer
 
 <span style="color:#998;font-style:italic"># Get dummy vectors for categorical data</span>
-authorVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#999">False</span>)
+authorVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>)
 dummyAuthors <span style="color:#000;font-weight:bold">=</span> authorVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(author<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;Author&#39;</span>]])
-genreVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#999">False</span>)
+genreVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>)
 dummyGenres <span style="color:#000;font-weight:bold">=</span> genreVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(genre<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;Genre&#39;</span>]])
-subgenVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#999">False</span>)
+subgenVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>)
 dummySubGenres <span style="color:#000;font-weight:bold">=</span> subgenVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(subgen<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;SubGenre&#39;</span>]])
 
 X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[dummyAuthors, dummyGenres, dummySubGenres]
@@ -269,7 +267,7 @@ X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;f
 X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[X, df[<span style="color:#d14">&#39;Height&#39;</span>]<span style="color:#000;font-weight:bold">.</span>values]</code></pre></div>
 <h2 id="analysis-and-visualization">Analysis and Visualization</h2>
 <p>Before the clustering, let&rsquo;s run a basic PCA reduction on the dataset and take a look at the scatterplot. Let&rsquo;s also create a convex hull around the scatter plot and take a look at which book titles make up the vertices of the hull.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
 plt<span style="color:#000;font-weight:bold">.</span>style<span style="color:#000;font-weight:bold">.</span>use(<span style="color:#d14">&#39;ggplot&#39;</span>)
 
 
@@ -295,7 +293,7 @@ plt<span style="color:#000;font-weight:bold">.</span>scatter(x_red[:, <span styl
 <p><img src="/img/bookshelf-2.png" alt=""></p>
 <p>At this stage the scatter plot looks like it is making sense. The cluster at the top right seems like the fiction cluster, the one at the top center might be graphic novels and the one at the bottom might be history. There is still some ambiguity, as the plot says nothing about which attributes are varying as we move away from the origin towards the vertices of the hull.</p>
 <p>To examine the variation among the attributes in detail, let&rsquo;s use a biplot superimposed on the scatterplot. Let&rsquo;s also perform the clustering with KMeans, with six centroids, each denoting a shelf.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.cluster</span> <span style="color:#000;font-weight:bold">import</span> KMeans
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.cluster</span> <span style="color:#000;font-weight:bold">import</span> KMeans
 
 
 km <span style="color:#000;font-weight:bold">=</span> KMeans(n_clusters<span style="color:#000;font-weight:bold">=</span><span style="color:#099">6</span>, n_jobs<span style="color:#000;font-weight:bold">=-</span><span style="color:#099">1</span>)
@@ -508,7 +506,7 @@ plt<span style="color:#000;font-weight:bold">.</span>scatter(xs, ys, c<span styl
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

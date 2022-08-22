@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.0564082dc658ec59ca122dd2fd20110a2c5deb5ab5636ddec8b19222113d4fbd.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.4489152aa37495358ae3b877a4e43874cbbd9f8a8dd121ed39b7e4a5bc075bd4.css"/>
 
     
     
@@ -29,16 +29,14 @@
     
  
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'G-R6EBGCKHP1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
 }
 </script>
 </head>
@@ -148,7 +146,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -181,14 +179,14 @@ an alternative view of nonlinear and nonstationary phenomena.</p>
 <h2 id="the-problem">The Problem</h2>
 <p><strong>Note</strong>: To run the code snippets on this page, you will need the PyTFTB module, which can be found <a href="http://github.com/scikit-signal/pytftb">here</a>.</p>
 <p>To begin with, let us construct a nonstationary signal, and try to glean its time and frequency characteristics. Consider the signal obtained as follows:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
 <span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">mpl</span>
 <span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
 <span style="color:#000;font-weight:bold">from</span> <span style="color:#555">tftb.generators</span> <span style="color:#000;font-weight:bold">import</span> fmconst
 <span style="color:#000;font-weight:bold">%</span>matplotlib inline</code></pre></div>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mpl<span style="color:#000;font-weight:bold">.</span>style<span style="color:#000;font-weight:bold">.</span>use(<span style="color:#d14">&#39;ggplot&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mpl<span style="color:#000;font-weight:bold">.</span>style<span style="color:#000;font-weight:bold">.</span>use(<span style="color:#d14">&#39;ggplot&#39;</span>)
 mpl<span style="color:#000;font-weight:bold">.</span>rcParams[<span style="color:#d14">&#39;figure.figsize&#39;</span>] <span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">10.0</span>, <span style="color:#099">8.0</span>)</code></pre></div>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_points <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">128</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_points <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">128</span>
 mode1, iflaw1 <span style="color:#000;font-weight:bold">=</span> fmconst(n_points, fnorm<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
 mode2, iflaw2 <span style="color:#000;font-weight:bold">=</span> fmconst(n_points, fnorm<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.3</span>)
 signal <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>r_[mode1, mode2]
@@ -199,7 +197,7 @@ plt<span style="color:#000;font-weight:bold">.</span>xlim(<span style="color:#09
 and the other half has a normalized frequency of 0.3. If we look at the energy
 spectrum of this signal, sure enough, there are two peaks at the respective
 frequencies:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>fft<span style="color:#000;font-weight:bold">.</span>fftshift(np<span style="color:#000;font-weight:bold">.</span>fft<span style="color:#000;font-weight:bold">.</span>fft(signal))
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>fft<span style="color:#000;font-weight:bold">.</span>fftshift(np<span style="color:#000;font-weight:bold">.</span>fft<span style="color:#000;font-weight:bold">.</span>fft(signal))
 plt<span style="color:#000;font-weight:bold">.</span>plot(np<span style="color:#000;font-weight:bold">.</span>linspace(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.5</span>, <span style="color:#099">0.5</span>, <span style="color:#099">256</span>), np<span style="color:#000;font-weight:bold">.</span>abs(X) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>)
 plt<span style="color:#000;font-weight:bold">.</span>xlim(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.5</span>, <span style="color:#099">0.5</span>)
 plt<span style="color:#000;font-weight:bold">.</span>xlabel(<span style="color:#d14">&#34;Normalized Frequency&#34;</span>)</code></pre></div>
@@ -237,7 +235,7 @@ as we shall see.</p>
 put, transforms contiguous chunks of the input and aggregates the result in a 2
 dimensional form, where one axis represents frequency and the other represents
 time. PyTFTB has an <a href="http://pytftb.readthedocs.org/en/latest/apiref/tftb.processing.html#tftb.processing.linear.ShortTimeFourierTransform">STFT implementation</a> which we can use as follows:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">tftb.processing</span> <span style="color:#000;font-weight:bold">import</span> ShortTimeFourierTransform
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">tftb.processing</span> <span style="color:#000;font-weight:bold">import</span> ShortTimeFourierTransform
 stft <span style="color:#000;font-weight:bold">=</span> ShortTimeFourierTransform(signal)
 stft<span style="color:#000;font-weight:bold">.</span>run()
 stft<span style="color:#000;font-weight:bold">.</span>plot()</code></pre></div>
@@ -268,7 +266,7 @@ shown above, which is highly impractical.</p>
 <h2 id="a-counterexample">A counterexample</h2>
 <p>As an example of how this approach can go wrong, take a look at the following
 signal:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">tftb.generators</span> <span style="color:#000;font-weight:bold">import</span> fmsin
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">tftb.generators</span> <span style="color:#000;font-weight:bold">import</span> fmsin
 sig, iflaw <span style="color:#000;font-weight:bold">=</span> fmsin(<span style="color:#099">256</span>, <span style="color:#099">0.1</span>, <span style="color:#099">0.3</span>, period<span style="color:#000;font-weight:bold">=</span><span style="color:#099">64</span>)
 plt<span style="color:#000;font-weight:bold">.</span>plot(np<span style="color:#000;font-weight:bold">.</span>real(sig))
 plt<span style="color:#000;font-weight:bold">.</span>xlim(<span style="color:#099">0</span>, <span style="color:#099">256</span>)</code></pre></div>
@@ -277,7 +275,7 @@ plt<span style="color:#000;font-weight:bold">.</span>xlim(<span style="color:#09
 sinusoidally between 0.1 and 0.3. The time-frequency distribution of this
 signal should look somewhat like a sine wave. Here&rsquo;s the spectrogram of the
 STFT of this signal:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stft <span style="color:#000;font-weight:bold">=</span> ShortTimeFourierTransform(sig)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stft <span style="color:#000;font-weight:bold">=</span> ShortTimeFourierTransform(sig)
 stft<span style="color:#000;font-weight:bold">.</span>run()
 stft<span style="color:#000;font-weight:bold">.</span>plot()</code></pre></div>
 <p><img src="/img/fourier-5.png" alt=""></p>
@@ -460,7 +458,7 @@ decomposition algorithm makes the results of the Hilbert spectral analysis more 
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

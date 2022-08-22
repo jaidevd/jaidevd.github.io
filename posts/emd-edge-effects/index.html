@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.0564082dc658ec59ca122dd2fd20110a2c5deb5ab5636ddec8b19222113d4fbd.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.4489152aa37495358ae3b877a4e43874cbbd9f8a8dd121ed39b7e4a5bc075bd4.css"/>
 
     
     
@@ -29,16 +29,14 @@
     
  
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'G-R6EBGCKHP1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
 }
 </script>
 </head>
@@ -148,7 +146,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -201,7 +199,7 @@ frequencies:</p>
 <p>To highlight the idea of how EMD processes the residue (or the trend) in a
 signal, let&rsquo;s add a linear ramp to the signal. (For the sake of simplicity,
 let&rsquo;s just add the timestamps to the signal.)</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
 <span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">mpl</span>
 <span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
 <span style="color:#000;font-weight:bold">%</span>matplotlib inline
@@ -223,7 +221,7 @@ signal <span style="color:#000;font-weight:bold">=</span> mode1 <span style="col
 plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal)</code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_3_1.png" alt=""></p>
 <p>We would expect an ideal EMD algorithm to produce two IMFs, one corresponding to each of our unimodal signals, and then to extract the residue too. Let&rsquo;s write a naive sifting loop.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.signal</span> <span style="color:#000;font-weight:bold">import</span> argrelmin, argrelmax
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.signal</span> <span style="color:#000;font-weight:bold">import</span> argrelmin, argrelmax
 <span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.interpolate</span> <span style="color:#000;font-weight:bold">import</span> splrep, splev
 
 tol <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.05</span>
@@ -258,7 +256,7 @@ tol <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">
 
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">emd</span>(x, n_imfs):
     imfs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
-    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">xrange</span>(n_imfs):
+    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> xrange(n_imfs):
         mode <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
         <span style="color:#000;font-weight:bold">while</span> (ndiff_extrema_zcrossing(mode) <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">1</span>):
             mode, amplitude_error <span style="color:#000;font-weight:bold">=</span> sift(mode)
@@ -268,22 +266,22 @@ tol <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">
     imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :] <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
     <span style="color:#000;font-weight:bold">return</span> imfs</code></pre></div>
 <p>Let&rsquo;s extract and visualize the IMFs to see if they meet our expectations.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>
 imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, n_imfs)
 plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
 plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
 <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
     plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
-    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf {}&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
+    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf </span><span style="color:#d14">{}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_7_1.png" alt=""></p>
 <p>On closer inspection of the residue, it seems like it contains the true residue (the ramp) superimposed on an IMF that we haven&rsquo;t yet sifted out. Let&rsquo;s see what happens when we increment the expected number of IMFs.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">3</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">3</span>
 imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, n_imfs)
 plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
 plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
 <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
     plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
-    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf {}&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
+    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf </span><span style="color:#d14">{}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_9_1.png" alt=""></p>
 <p>We&rsquo;ve finally reached a stopping point beyond which sifting is not possible. While the decomposition itself is valid, the inferences we draw from it can be quite misleading. In a broad sense, here is what is wrong with the decomposition:</p>
 <ol>
@@ -292,7 +290,7 @@ plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#
 <li>The IMFs should at least appear to be pure sinudoids.</li>
 </ol>
 <p>To get to the heart of the problem, let&rsquo;s go back to our original signal and try to step through the sifting process. The first thing we do to an input signal is to construct upper and lower envelopes by interpolating with cubic splines its local maxima and local minima respectively, and then subtracting the mean of these envelopes from the signal.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_envelopes</span>(x):
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_envelopes</span>(x):
     <span style="color:#d14">&#34;&#34;&#34;Compute the upper and lower envelopes of a signal.&#34;&#34;&#34;</span>
     maxima <span style="color:#000;font-weight:bold">=</span> argrelmax(x)[<span style="color:#099">0</span>]
     minima <span style="color:#000;font-weight:bold">=</span> argrelmin(x)[<span style="color:#099">0</span>]
@@ -315,7 +313,7 @@ plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, lower, <
 plt<span style="color:#000;font-weight:bold">.</span>legend()</code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_11_1.png" alt=""></p>
 <p>If we zoom in on the left and right edges of the plot, here&rsquo;s what we see.</p>
-<p><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">121</span>)
+<p><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">121</span>)
 plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[:<span style="color:#099">100</span>], signal[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;b&#39;</span>,
          time_samples[:<span style="color:#099">100</span>], upper[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;r--&#39;</span>,
 	 time_samples[:<span style="color:#099">100</span>], lower[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;g--&#39;</span>)
@@ -332,7 +330,7 @@ plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[<span sty
 <li>slicing off these envelopes with the indices of the original signal</li>
 </ol>
 <p>This is how it looks when $k = 2$:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pyhht.utils</span> <span style="color:#000;font-weight:bold">import</span> boundary_conditions
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pyhht.utils</span> <span style="color:#000;font-weight:bold">import</span> boundary_conditions
 tmin, tmax, xmin, xmax <span style="color:#000;font-weight:bold">=</span> boundary_conditions(signal, time_samples, nbsym<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>)
 
 plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal, <span style="color:#d14">&#39;b&#39;</span>)
@@ -343,7 +341,7 @@ plt<span style="color:#000;font-weight:bold">.</span>vlines(tmin[<span style="co
 plt<span style="color:#000;font-weight:bold">.</span>legend(loc<span style="color:#000;font-weight:bold">=</span><span style="color:#099">4</span>)</code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_16_1.png" alt=""></p>
 <p>The dotted lines represent the axes about which the extrapolated extrema are symmetric. Now we can use these new data points to reconstruct our envelopes, as follows.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tck <span style="color:#000;font-weight:bold">=</span> splrep(tmin, xmin)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tck <span style="color:#000;font-weight:bold">=</span> splrep(tmin, xmin)
 lower_env <span style="color:#000;font-weight:bold">=</span> splev(time_samples, tck)
 tck <span style="color:#000;font-weight:bold">=</span> splrep(tmax, xmax)
 upper_env <span style="color:#000;font-weight:bold">=</span> splev(time_samples, tck)
@@ -353,7 +351,7 @@ plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, upper_en
 plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, lower_env, <span style="color:#d14">&#39;g-.&#39;</span>)</code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_18_1.png" alt=""></p>
 <p>It can be seen that the splines don&rsquo;t terminate at the endpoints of the signal itself. As before, here are the plots of the edges of this interpolation.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">121</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">121</span>)
 plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[:<span style="color:#099">100</span>], signal[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;b&#39;</span>,
          time_samples[:<span style="color:#099">100</span>], upper_env[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;r--&#39;</span>,
 	 time_samples[:<span style="color:#099">100</span>], lower_env[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;g--&#39;</span>)
@@ -363,7 +361,7 @@ plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[<span sty
 	 time_samples[<span style="color:#099">900</span>:], lower_env[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;g--&#39;</span>)</code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_20_1.png" alt=""></p>
 <p>The &ldquo;leakage&rdquo; of the signal beyond the envelopes is far less drastic, and we&rsquo;re much closer to a <em>true</em> envelope now. It&rsquo;s still not a perfect envelope, but I&rsquo;m not entirely sure on whether that is a function of the sampling rate (I doubt it) or the order of symmetry, or anything else. I suspect it might have to do with the the degree of the interpolating polynomial. Perhaps a higher order polynomial might eliminate this little leakage, but I&rsquo;m sure it won&rsquo;t work well for the rest of the signal, the bulk of which is far more critical to the decomposition. Anyhow, let&rsquo;s see how EMD fares with this added heuristic. For this we will have to redefine the <code>sift</code> and <code>emd</code> functions from before.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pyhht.utils</span> <span style="color:#000;font-weight:bold">import</span> extr
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pyhht.utils</span> <span style="color:#000;font-weight:bold">import</span> extr
 
 
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">sift</span>(x, ts):
@@ -381,7 +379,7 @@ plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[<span sty
 
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">emd</span>(x, ts, n_imfs):
     imfs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
-    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">xrange</span>(n_imfs):
+    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> xrange(n_imfs):
         ix <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
         mode <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
         nmin, nmax, nzero <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">map</span>(<span style="color:#0086b3">len</span>, extr(mode))
@@ -400,7 +398,7 @@ plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style=
 plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
 <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
     plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
-    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf {}&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
+    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf </span><span style="color:#d14">{}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_22_0.png" alt=""></p>
 <p>This decomposition is a clearly better approximation of the original components. You can easily tell the two unimodal components from earlier, and even the residue is much closer to the linear trend that we had included in the signal.</p>
 <p>The interesting thing to note here is that this signal was very straightforward, and even then the edge effects of sifting were severe. There&rsquo;s no telling how these might affect the decomposition of real world data.</p>
@@ -566,7 +564,7 @@ plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

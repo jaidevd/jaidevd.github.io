@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.0564082dc658ec59ca122dd2fd20110a2c5deb5ab5636ddec8b19222113d4fbd.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.4489152aa37495358ae3b877a4e43874cbbd9f8a8dd121ed39b7e4a5bc075bd4.css"/>
 
     
     
@@ -29,16 +29,14 @@
     
  
     
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'G-R6EBGCKHP1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
 }
 </script>
 </head>
@@ -148,7 +146,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -173,7 +171,7 @@ if (!doNotTrack) {
 <p>where $\mathbf{C}$ is the covariance matrix of the dataset $X = [\mathbf{x_{1}}, \mathbf{x_{2}}, &hellip; \mathbf{x_{n}}]$, and $\mathbf{\mu_{i}}$ is the mean of the input vectors belonging to the $i$th class, for $i \in [1, 2]$, then the decision function can be rewritten as</p>
 <p>$$ y = \mathbf{w^{T}x} + b $$</p>
 <p>To verify this, let&rsquo;s make up a classification problem and train a Gaussian Bayes classifier on it.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
 <span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
 <span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.preprocessing</span> <span style="color:#000;font-weight:bold">import</span> StandardScaler
 <span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.naive_bayes</span> <span style="color:#000;font-weight:bold">import</span> GaussianNB
@@ -186,7 +184,7 @@ plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="
 plt<span style="color:#000;font-weight:bold">.</span>scatter(x1[:, <span style="color:#099">0</span>], x1[:, <span style="color:#099">1</span>], marker<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;o&#34;</span>, c<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;g&#34;</span>)
 plt<span style="color:#000;font-weight:bold">.</span>scatter(x2[:, <span style="color:#099">0</span>], x2[:, <span style="color:#099">1</span>], marker<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;x&#34;</span>, c<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;r&#34;</span>)</code></pre></div>
 <p><img src="/img/linear-bayes-1.png" alt=""></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># adding labels and normalizing data</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># adding labels and normalizing data</span>
 x1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[x1, np<span style="color:#000;font-weight:bold">.</span>ones((<span style="color:#099">1000</span>, <span style="color:#099">1</span>))]
 x2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[x2, np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">1000</span>, <span style="color:#099">1</span>))]
 X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>r_[x1, x2]
@@ -195,7 +193,7 @@ np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#00
 y <span style="color:#000;font-weight:bold">=</span> X[:, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
 X <span style="color:#000;font-weight:bold">=</span> X[:, :<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
 y[y <span style="color:#000;font-weight:bold">!=</span> <span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span></code></pre></div>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># define a function to help us draw a decision boundary</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># define a function to help us draw a decision boundary</span>
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">draw_decision_boundary</span>(clf, X, y):
     x_min, x_max <span style="color:#000;font-weight:bold">=</span> X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>min() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>max() <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
     y_min, y_max <span style="color:#000;font-weight:bold">=</span> X[:, <span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>min() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, X[:, <span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>max() <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
@@ -214,7 +212,7 @@ draw_decision_boundary(clf, X, y)</code></pre></div>
 <p><img src="/img/linear-bayes-2.png" alt=""></p>
 <h3 id="estimation-of-the-weights-and-the-bias">Estimation of the weights and the bias</h3>
 <p>With a little bit of <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> hacking, we can produce $\mathbf{w}$ and $b$ in the equations above from the covariance matrix of $\mathbf{X}$ and its classwise means.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">C <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>cov(X<span style="color:#000;font-weight:bold">.</span>T)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">C <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>cov(X<span style="color:#000;font-weight:bold">.</span>T)
 mu1 <span style="color:#000;font-weight:bold">=</span> X[y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>, :]<span style="color:#000;font-weight:bold">.</span>mean(<span style="color:#099">0</span>)
 mu2 <span style="color:#000;font-weight:bold">=</span> X[y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>, :]<span style="color:#000;font-weight:bold">.</span>mean(<span style="color:#099">0</span>)
 
@@ -223,7 +221,7 @@ weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:
 intercept <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(np<span style="color:#000;font-weight:bold">.</span>dot(mu2<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>), c_inverse)<span style="color:#000;font-weight:bold">.</span>ravel(), mu2) <span style="color:#000;font-weight:bold">-</span> \
             np<span style="color:#000;font-weight:bold">.</span>dot(np<span style="color:#000;font-weight:bold">.</span>dot(mu1<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>), c_inverse)<span style="color:#000;font-weight:bold">.</span>ravel(), mu1)</code></pre></div>
 <p>Now that we have the estimated weights and the intercept, let&rsquo;s create a Perceptron classifier from these and see its performance.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.linear_model</span> <span style="color:#000;font-weight:bold">import</span> Perceptron
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.linear_model</span> <span style="color:#000;font-weight:bold">import</span> Perceptron
 
 clf <span style="color:#000;font-weight:bold">=</span> Perceptron()
 clf<span style="color:#000;font-weight:bold">.</span>fit(X, y) <span style="color:#998;font-style:italic"># Note that this is only necessary to fool sklearn</span>
@@ -393,7 +391,7 @@ draw_decision_boundary(clf, X, y)</code></pre></div>
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>
