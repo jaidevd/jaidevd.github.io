@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jaidevd.com/tags/ai/</loc>
+    <lastmod>2022-09-30T19:47:39+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/computervision/</loc>
+    <lastmod>2022-09-30T19:47:39+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/posts/obj-detection-stratification/</loc>
+    <lastmod>2022-09-30T19:47:39+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/</loc>
+    <lastmod>2022-09-30T19:47:39+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/objectdetection/</loc>
+    <lastmod>2022-09-30T19:47:39+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/posts/</loc>
+    <lastmod>2022-09-30T19:47:39+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/pytorch/</loc>
+    <lastmod>2022-09-30T19:47:39+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/statistics/</loc>
+    <lastmod>2022-09-30T19:47:39+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/</loc>
+    <lastmod>2022-09-30T19:47:39+05:30</lastmod>
+  </url><url>
     <loc>https://jaidevd.com/posts/code-readability-process/</loc>
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
@@ -14,25 +41,16 @@
     <loc>https://jaidevd.com/tags/data-structures/</loc>
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
-    <loc>https://jaidevd.com/</loc>
-    <lastmod>2022-06-17T05:00:00+05:30</lastmod>
-  </url><url>
     <loc>https://jaidevd.com/tags/learning/</loc>
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/mooc/</loc>
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
-    <loc>https://jaidevd.com/posts/</loc>
-    <lastmod>2022-06-17T05:00:00+05:30</lastmod>
-  </url><url>
     <loc>https://jaidevd.com/tags/python/</loc>
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/readability/</loc>
-    <lastmod>2022-06-17T05:00:00+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/</loc>
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/bucketlist/</loc>
@@ -49,9 +67,6 @@
   </url><url>
     <loc>https://jaidevd.com/tags/story/</loc>
     <lastmod>2018-12-13T14:48:07+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/computervision/</loc>
-    <lastmod>2018-08-17T14:52:19+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/deeplearning/</loc>
     <lastmod>2018-08-17T14:52:19+05:30</lastmod>

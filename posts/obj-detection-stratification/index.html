@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Effective Train/Test Stratification for Object Detection | Jaidev&#39;s Blog</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.4489152aa37495358ae3b877a4e43874cbbd9f8a8dd121ed39b7e4a5bc075bd4.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Jaidev&#39;s Blog</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/about/">About Me</a>
+  
+    <a class="color-link nav-link" href="/archive/">Archive</a>
+  
+  <a class="color-link nav-link" href="https://jaidevd.com/index.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Effective Train/Test Stratification for Object Detection</h1>
+    
+    <time>September 30, 2022</time>
+    
+    <div>
+        <p>
+        <p>There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural
+networks for specific tasks. Primarily, it stems from the lack of training data. To a
+layperson it would seem ridiculous that a pretrained vision model (containing millions of
+parameters, trained on millions of images) could learn to solve highly specific
+problems. Therefore, when fine-tuned models <em>do</em> perform well, they seem all the more <a href="https://www.pnas.org/doi/10.1073/pnas.1907373117">miraculous</a>.
+But on the other hand, we also know that it is easier to move from <a href="https://davidepstein.com/the-range/">the general
+or the abstract to the specific</a>, than the reverse.</p>
+<p>However, it is this specialization that, when overdone, leads to overfitting. In
+shallow learning with small data, the problem of overfitting is well understood,
+and has many solutions like regularization and cross validation, among other
+things. Further, these methods can be applied independent of whether it is a
+classification or a regression problem. This is because both the model (a
+shallow one) and the data (structured, relational) can be <em>reasoned</em> about.
+Coefficients of linear models, kernel functions and splits of trees have very well studied
+geometrical interpretations, as do the multivariate statistics of the data
+itself. In deep networks, however, an equivalent geometrical or statistical
+<em>reasoning</em> is not for the faint of heart, even if it is possible at all.
+Not to mention that cross validating deep networks is prohibitively expensive,
+and regularizing a deep network beyond what its architecture already supports is
+practically unfeasible (you wouldn&rsquo;t want to change regularization rates of
+arbitrary layers in a deep network in the process of fine-tuning, if you can
+help it).</p>
+<p>Ultimately, avoiding overfitting boils down to presenting samples to the model
+that are  <em>most representative</em> of the data which the model is expected to encounter.
+This is where the disparity between unstructured data like images and text on
+the one hand, and structured, relational data on the other, becomes very
+apparent. In the following sections, I&rsquo;ll discuss the problem of picking
+representative samples of data in the context of object detection. I&rsquo;ll propose
+some methods of fixing this problem, followed by three experiments where I have
+applied these methods, and their results. (You may choose to skim through the
+next two somewhat theoretical sections, and <a href="#examples--illustrations">skip directly to the
+examples</a>.)</p>
+<h2 id="stratification-in-object-detection">Stratification in Object Detection</h2>
+<p>Let us first note that overfitting has many signs - divergence in training
+and validation loss curves, bad values in class-imbalance metrics, high sensitivity
+to noise, etc. None of which are solely indicative. Alleviating these
+<em>individual</em> symptoms may be necessary, but not sufficient to avoid overfitting.
+For example, simply ensuring that validation error reduces with training error
+may not be enough. First of all, the divergence between train and validation errors
+must be interpreted in a relative sense - there is no value of difference between
+them which may be considered low enough. Secondly, even if the divergence is low, we may still
+see samples on which the model performs badly - and all we can do is oversample
+them or augment them.</p>
+<p>Examples of this phenomenon crop up routinely in object detection problems.
+In simpler ML tasks like classification or regression, alleviating a single
+symptom might be enough. But object detection is a <em>compound</em> problem - it has
+to identify the &ldquo;what&rdquo; and the &ldquo;where&rdquo;. Thus, object detection models usually
+work by minimizing two losses - one for <em>classification</em> of objects, and another
+for a regression task which locates <em>where</em> an object lies. It is
+further compounded because the classes are not always mutually exclusive and
+collectively exhaustive.
+Given a finite number of classes, any subset of them can occur any number of
+times in a given image (in fact, it helps to think of this as a word-count
+distribution in a corpus of text documents - just like any number of words can
+occur any number of times in document, any number of object classes can occur
+any number of times in an image). Because of this <em>compounding</em> of label
+occurrences in a dataset, stratification becomes highly non-trivial.</p>
+<p>For instance, consider how we think about stratification in classification
+tasks. Let&rsquo;s say that there are primarily three types of classification
+problems:</p>
+<ul>
+<li>Binary classification - each input maps to exactly one of two
+outputs.</li>
+<li>Multiclass classification - each input maps to exactly one of $k$ outputs ($k &gt; 2$)</li>
+<li>Multilabel classification - the output is a result of multiple draws from a
+set $S$ of unique labels <em>with replacement</em>.</li>
+</ul>
+<p>It is easy to see that stratification can be readily applied to the first two
+kinds of problems. In the third case, however, the idea of a
+<em>representative subset</em> becomes
+somewhat intangible. Worse, if we
+throw in regression, then we are left with no
+straightforward way to classify train/test splits.</p>
+<p>At the heart of it, stratification relies on the idea that labels follow some
+known distribution, and that the train and validation subsets should
+both be drawn from the same distribution. For the three classification types
+mentioned above, these distributions are, respectively, Bernoulli, Categorical
+and Multinomial (or even Dirichlet-multinomial, see the last section).</p>
+<p>But for compound problems like object detection, not only can we not pick a
+distribution <em>apriori</em>, but even if we did, estimating and then sampling it
+would be too much trouble. (Statistically, the distributions of labels in binary
+and multiclass classification are univariate, i.e. the sample drawn from the
+distribution is a scalar. But in multilabel problems, entire vectors have to be
+drawn from a multivariate distribution.)</p>
+<p>So then we&rsquo;re left with the following hack:</p>
+<ol>
+<li>train and evaluate the model on random splits,</li>
+<li>find common attributes of samples on which the model produces the
+greatest loss,</li>
+<li>find some way of boosting the model&rsquo;s performance on the &ldquo;bad&rdquo; samples.</li>
+</ol>
+<p>The last item here provides the most room for creativity. There
+are many ways of penalizing the model for <em>specific</em> data samples, including
+sample-wise weight updates, custom loss functions, etc.</p>
+<p>But these methods are not without their challenges. For instance, in object detection,
+it&rsquo;s not too useful to attach a weight to an
+entire image - the model isn&rsquo;t learning an attribute of the &ldquo;entire&rdquo; image at
+all.
+It is instead learning attributes of highly localized objects within the image.
+Similarly, customizing the loss to penalize specific behaviour is a gamble.
+There&rsquo;s no way to know whether it will help unless it is accompanied
+by rigorous experimentation (and if you have the time to do that much
+work, then fine-tuning an object detection model on a small dataset is perhaps the least of
+your problems). So our only real choice at this point, is to analyze bad samples
+in a fully empirical manner, and see how we could have done better. Typically, in
+object detection, identifying where the model is making the most mistakes
+translates into identifying classes and sizes of objects that the model usually
+gets wrong. Most such errors result from some combination of the following effects:</p>
+<ul>
+<li>Certain classes of objects are not classified correctly (misclassifications).</li>
+<li>Some are not detected at all (false negatives).</li>
+<li>The model thinks there are specific types of objects where there are none
+(false positives).</li>
+<li>The model fails to locate objects that are either too small, too large, or
+some specific size (overfitting or underfitting in the regression part of the
+model).</li>
+</ul>
+<p>We know what to do to alleviate each of these <em>individual</em>
+problems. They can all be mitigated with better sampling and stratification. But
+when they all occur together in a single sample (say, an image), a
+stratification method has to be created. Essentially, when we talk of
+stratifying a dataset into a train/test split - the question we must
+first answer is: stratify the data by <em>what</em>?</p>
+<h2 id="attributes-of-target-variables">Attributes of Target Variables</h2>
+<p>The target vectors for binary and multiclass problems look like
+this:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">y_bin   <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#099">1</span>, <span style="color:#099">0</span>, <span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">...</span>]
+y_multi <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>, <span style="color:#099">2</span>, <span style="color:#099">0</span>, <span style="color:#099">2</span>, <span style="color:#099">2</span>, <span style="color:#099">1</span>, <span style="color:#099">2</span>, <span style="color:#099">2</span>, <span style="color:#000;font-weight:bold">...</span>]</code></pre></div>
+<p>Both of these are easy to interpret, and can be straightaway used for
+stratification. But here&rsquo;s what the target (or annotation) of a detection dataset
+looks like:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
+  {
+    <span style="color:#000080">&#34;boxes&#34;</span>: [
+    	[<span style="color:#099">506.97</span>, <span style="color:#099">352.39</span>, <span style="color:#099">609.44</span>, <span style="color:#099">419.26</span>],
+    	[<span style="color:#099">446.55</span>, <span style="color:#099">298.58</span>, <span style="color:#099">537.16</span>, <span style="color:#099">363.30</span>],
+    	[<span style="color:#099">314.60</span>, <span style="color:#099">147.72</span>, <span style="color:#099">640.00</span>, <span style="color:#099">480.00</span>]
+    ],
+    <span style="color:#000080">&#34;labels&#34;</span>: [<span style="color:#d14">&#34;bowl&#34;</span>, <span style="color:#d14">&#34;bowl&#34;</span>, <span style="color:#d14">&#34;dining table&#34;</span>]
+  },
+  {
+    <span style="color:#000080">&#34;boxes&#34;</span>: [
+    	[<span style="color:#099">36.8300</span>, <span style="color:#099">113.6800</span>, <span style="color:#099">601.2200</span>, <span style="color:#099">396.9000</span>],
+    	[<span style="color:#099">105.0400</span>, <span style="color:#099">167.1500</span>, <span style="color:#099">271.0600</span>, <span style="color:#099">293.6500</span>]
+    ],
+    <span style="color:#000080">&#34;labels&#34;</span>: [<span style="color:#d14">&#34;banana&#34;</span>, <span style="color:#d14">&#34;apple&#34;</span>]
+  }
+]</code></pre></div>
+<p>(These are the annotations for a couple of samples from the <a href="https://cocodataset.org/#home">MS COCO dataset</a>. They
+tell us that the first image contains two bowls and a dining table, and the
+second one contains a banana and an apple. It also contains information on <em>where</em> they are in the
+image.)</p>
+<p>If the label $y$ is a simple enough (or univariate) object - like the <code>y_bin</code> and <code>y_multi</code> above - it&rsquo;s easy to use $y$ for stratification.
+But how do you stratify a dataset based on a $y$ that has a fairly complex
+structure, like the one in the second example?</p>
+<p>The key idea is,</p>
+<blockquote>
+<p>As a learning task evolves from simple forms like binary or multiclass classification,
+to complex ones like detection, the variable $y$ <em>acquires additional attributes</em>.
+Thus, for optimal stratification, most of (if not all of) the available attributes
+should be leveraged.</p>
+</blockquote>
+<p>Let&rsquo;s take a deeper look at what this means for two extreme cases.</p>
+<p>In binary or multiclass problems, $\mathbf{y}$ only has <em>one</em> attribute, i.e. its
+membership of some class. $\mathbf{y}$ can itself be interpreted as a single Bernoulli or
+categorical random variable. In other
+words, we have a distribution over the training dataset. Given a label $y_i$,
+this distribution tells us the probability of that label occurring in the
+dataset.</p>
+<p>In detection, however, each target annotation has multiple attributes (the
+label, the corners of the bounding box, its size, etc), each of
+which can be random variable in its own right. Looking
+at the example annotation above, we can define a few of these RVs which capture
+different attributes of the target:</p>
+<ul>
+<li>The RV $X$ = number of objects in the image</li>
+<li>The RV $Y$ = average area of the bounding boxes as percentage of the total image size</li>
+<li>The RV $Z$ = average distance of the center of a bounding box from the
+closest image border (is a box closest to the left, right, top or bottom
+edge? And what&rsquo;s the distance to that closest edge?)</li>
+</ul>
+<p>How are these RVs useful? They&rsquo;re useful because:</p>
+<ul>
+<li>We will want to stratify by $X$, because we don&rsquo;t want to train on images that
+have too many objects and validate on images that have too few.</li>
+<li>We will want to stratify by $Y$, because we don&rsquo;t want to train on images that
+have large objects, and then validate images that have small ones.</li>
+<li>We will want to stratify by $Z$, because we don&rsquo;t want to train on images that
+are square in the center of the image, and validate on those where objects are
+along the edges, perhaps only partially captured by the camera.</li>
+</ul>
+<p>Now, depending on which of these mistakes the model is making, we could choose
+which RV to stratify the data by. But we&rsquo;d be lucky if the model is making only one of
+these types of mistakes (see the examples below)! It&rsquo;s common for fine-tuned
+models to make many different types of mistakes. Each of these RVs represent
+some aspect of our data. Any of these aspects could end up being
+underrepresented in our train/test splits! So, we may not have the luxury of
+stratifying our dataset based on <em>only one</em> RV.</p>
+<p>But the good news is that all of these RVs have the same support - the images in dataset.
+So we can think of the dataset as a <em>joint probability distribution</em> over $X$,
+$Y$ and $Z$. In other words, we can ask questions like &ldquo;What is the probability
+of an image having three objects, such that the average area of them is 200
+pixels, and most of the objects are within 5 pixels of the edges?&rdquo;. This
+probability can be denoted by $f_{X, Y, Z}(3, 200, 5)$. And when we choose to
+stratify by this JPD, we are essentially ensuring that the answer to this
+question does not change between the train and test sets, i.e.</p>
+<p>$$ f_{X_{train}, Y_{train}, Z_{train}}(x, y, z) \approx f_{X_{test}, Y_{test}, Z_{test}}(x, y, z) $$</p>
+<p>Here we&rsquo;ve considered only three very specific aspects of object annotations as RVs,
+and imagined a JPD composed of them. But there&rsquo;s no rule of thumb about what
+aspect should be considered a good candidate for stratification. Actually that
+would depend entirely on what a particular model gets wrong in a particular
+dataset. Generally, any aspect of a target variable that is <em>quantifiable</em> is a good candidate for adding to the JPD.</p>
+<p>In the following section, I describe three different examples, in which
+I have tried to make this JPD-sampling approach more methodical.</p>
+<h2 id="examples--illustrations">Examples &amp; Illustrations</h2>
+<p>In order to demonstrate how different stratification strategies can be devised
+for different problems, I have picked three object detection datasets. For each
+of them, I have compared the performance of a model trained and validated with a
+random split, with that of an identical model trained and validated on a
+stratified split. The datasets range from highly chaotic (varying backgrounds,
+image sizes, object classes) to somewhat homogenous (fixed camera, a unique
+background, small number of objects of a similar size, etc). Depending on how
+chaotic or homogenous a dataset is, we will be able to experiment with different
+stratification methods.</p>
+<h3 id="common-configuration-for-all-experiments">Common configuration for all experiments</h3>
+<p>The examples cover three different datasets. The samples are deliberately kept
+small (upto ~200 images each) for a few reasons:</p>
+<ul>
+<li>we want to give the model a hard time, ensuring it extracts the most learning
+out of a relatively small sample (but not unfairly small)</li>
+<li>large datasets of object annotations are anyway hard to come by - they are
+pretty expensive to create.</li>
+<li>a small dataset is easier to visually inspect and debug</li>
+<li>the small size takes nothing away from the point I&rsquo;m trying to make - in fact
+smaller datasets reinforce it.</li>
+</ul>
+<p>For each of the three datasets, we do a total of 40 experiments (a number I
+picked considering solely my GPU performance and how much time I could spend on
+a series of experiments). In each such experiment:</p>
+<ul>
+<li>we start with a <a href="https://pytorch.org/vision/stable/models/faster_rcnn.html">torchvision implementation of Faster-RCNN</a></li>
+<li>do a random 60:40 split of the data</li>
+<li>fine-tune the model and collect mAP IoU scores for each image in the test subset.</li>
+</ul>
+<p>These scores are collected for all 40 runs and called random split scores.</p>
+<p>Then, we select the samples for which the random split score was relatively the worst, and try
+to identify what the model is failing at. Based on that, we devise
+stratification strategies, and repeat the 40 experiments - except this time, the
+split is stratified, not random. We ensure that the no other hyperparameters are
+different from the random split runs, and that the model runs for the same number of
+epochs starting from the base model each time. The new group of scores is called
+the stratified split scores. Now we can compare the two groups
+of 40 numbers.</p>
+<p>For each experiment, we ask</p>
+<blockquote>
+<p>All other things being the same, does <em>stratification alone</em> improve the average mAP IoU?
+If so, is the improvement statistically significant?</p>
+</blockquote>
+<h3 id="example-1-chess-pieces-detection">Example 1: Chess Pieces Detection</h3>
+<p><a href="https://public.roboflow.com/object-detection/chess-full">This dataset</a>
+contains 202 images of a chess board with pieces. This represents a
+fairly homogenous dataset, where the images vary in only very few aspects.
+The orientation of the board and the camera position are mostly fixed. The only variation
+between the images is the presence and position of different chess pieces.</p>
+<p>After the 40 random splits, we see an average mAP IoU of 0.4</p>
+
+
+
+    <img class="article-image" src="/posts/obj-detection-stratification/chess-random-bad.png" alt="Chess bad examples">
+    
+
+
+<p>The images that showed the worst metrics had many false
+negatives, particularly cases of single pieces not being detected. Among those,
+the model was especially bad at recognizing bishops and queens when they appear
+by themselves. Given that, it was clear that the data needed to be stratified by
+how many pieces are present on the board. Surprisingly, this actually decreased
+the performance by a percent!</p>
+<p>However, if we look at the distribution of number of pieces in each image, it
+turns out that 102 of the 202 images have only one chess piece in them! No
+surprise, then, that the model gets a few bishops and queens wrong.</p>
+
+
+
+    <img class="article-image" src="/posts/obj-detection-stratification/chess-nobj.png" alt="number of chess pieces per image">
+    
+
+
+<p>Further, this presents a unique opportunity. Since almost half the images have
+only one object in them, that subset can be treated as a multiclass problem and
+stratified simply based on which piece is present in each of those 102 images.
+The remaining 100 images can then be separately stratified by the total number
+of pieces in them.</p>
+<p>This second strategy yields an improvement of 6%, which is statistically significant.
+(a one sided T-test with the alternate hypothesis that the stratified split
+scores are higher, yields a P value of 0.001).</p>
+<p>To summarize, this is an example of how we can get somewhat better results with
+a trivial stratification method, when the data is mostly homogenous.</p>
+<h3 id="example-2-pedestrian-detection-with-the-penn-fudan-dataset">Example 2: Pedestrian Detection with the Penn-Fudan Dataset</h3>
+<p><a href="https://www.cis.upenn.edu/~jshi/ped_html/">This dataset</a> comes from the <a href="https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html">torchvision fine-tuning tutorial</a>. It is an instance
+segmentation dataset, and contains 170 images of pedestrians against roads, sidewalks and
+crossings. It is significantly more heterogenous than the last dataset, since
+the image backgrounds vary a lot (pictures taken at different locations) - but
+that diversity is somewhat tempered by the fact that the task only involves
+detecting a single type of object (foreground vs background, where the
+foreground is a pedestrian).</p>
+<p>After doing the default 40 runs with the random splits, we get an average mAP
+IoU of 0.5. Here are 5 of the most problematic images from the dataset:</p>
+
+
+
+    <img class="article-image" src="/posts/obj-detection-stratification/pedestrian-bad.png" alt="pedestrian predictions random split">
+    
+
+
+<p>At first glance, it looks like there are many false positives - every image
+seems to have one or more &ldquo;central&rdquo; pedestrians, but the model also picks up
+many smaller objects all over the image. This suggests that perhaps
+stratification needs to happen by the size of the annotations (since the image
+sizes are not fixed, we consider the percentage of the image size that an
+annotation occupies). But it turns out that stratification by mask size alone
+does not help at all (it only adds a measly percent to the random split scores).</p>
+<p>On digging deeper into the images with bad IoUs, it turns out that the model is
+greatly overestimating the number of objects. As seen in the image above, the
+model is quite good at detecting humans - but alas, not all of them are &ldquo;pedestrians&rdquo;!
+In addition, the authors mention that the dataset deliberately ignores occluded
+objects. So now we add another dimension to the stratification - that of the
+number of pedestrians in each image.</p>
+<p>Consider two random variables, $X$ and $Y$ denoting respectively the number of
+pedestrians per image, and the foreground area occupied by the masks in each
+image. We need to stratify the dataset by both $X$ and $Y$. It turns out that
+$X$ and $Y$ can be described with a Poisson and a log-normal distribution quite well.
+If such distributions are to be found in the annotations, then their JPDs can be
+helpful in stratifying the data. However, in this case, for the sake of
+simplicity we still proceed with a purely empirical distribution.</p>
+
+
+
+    <img class="article-image" src="/posts/obj-detection-stratification/pedestrian-hist2d.png" alt="distribution of size and number of pedestrians">
+    
+
+
+<p>Combining $X$ and $Y$ can be done with a 2D histogram as shown above. Each cell in the
+histogram has a set of images that have the same number of pedestrians, and nearly the same foreground area.
+Each cell can thus be assigned a unique ID, and that ID can then be used for stratification
+(<em>Caution</em>: In this case, stratification is not directly possible from the
+histogram shown above - note that many cells have only one image in them. Do
+these images go in the train split or the test split? This can be fixed by
+carefully adjusting bin edges when computing the histogram, such that each cell
+has at least two images).
+To see if the stratification has actually worked, we can always estimate the RVs
+independently in the train and test splits, and see if they match closely
+enough.</p>
+
+
+
+    <img class="article-image" src="/posts/obj-detection-stratification/pedestrian-rvs.png" alt="train test distribution of random variables">
+    
+
+
+<p>After performing another 40 runs with this JPD-sampling strategy, the average
+scores increase to 0.53 - the additional 3% is <em>not</em> statistically significant
+(we could not reject the null hypothesis of a one sided T-test),
+but the variance of the stratified split scores is drastically lower - which
+suggests that the model may be reaching its limits. I still count this as a win,
+because with the stratification, there is very little uncertainty about how well
+the model will score. In other words, the model is showing it&rsquo;s &ldquo;true&rdquo;
+potential.</p>
+<p>(On further analysis of the predictions, it turns out that the model is indeed
+performing much better in a <em>detection</em> sense - it detects humans very well. The mAP IoU scores are low because the model can&rsquo;t
+differentiate between <em>humans</em> and <em>pedestrians</em>, and the test labels only care about pedestrians.
+And indeed, the training data gives us
+no such differentiation explicitly - it simply ignores humans that are not
+pedestrians, leading to the large number of false positives in the predictions.
+Instead of pushing and squeezing the model even harder, it is easier to solve
+this problem in post-processing of the predictions, such as by non-maximal
+suppression and morphological operations to eliminate occluded objects.)</p>
+<h3 id="example-3-subset-of-ms-coco">Example 3: Subset of MS COCO</h3>
+<p>The last experiment was performed on 200 random samples from the MS COCO
+dataset, consisting of eight labels - apple, banana, bowl, broccoli, carrot, cup,
+dining table and knife. I selected these labels because I was looking for subsets
+of the images with a common theme (this is a subset of the labels which is likely to occur in kitchens).
+In the other two datasets we could expect some homogeneity. This
+dataset lies at the other extreme, even with the label filters I chose.
+This sample is highly chaotic - objects vary by
+size, count, even presence. The backgrounds vary too - only a few of
+the images are actually from a kitchen!</p>
+<p>Since, unlike the other datasets, here we have eight classes, the metric needed
+to be modified a bit - we compute the average mAP of IoU for each class over the
+test images, and then average them for each image. In the first 40 experiments
+with random splits, this class-wise averaged metric was 0.3. (This was surprising
+since the base model is itself trained on COCO! It should have seen each of
+these 200 images before.)</p>
+<p>Looking at the results, it was found that:</p>
+<ol>
+<li>The model almost always fails to recognize apples (the rarest class).</li>
+<li>It thinks that any flat surface with other objects on it is a dining table
+(the second most frequent class).</li>
+<li>It fails to recognize cups when they are tiny (compared to the image size).</li>
+</ol>
+
+
+
+    <img class="article-image" src="/posts/obj-detection-stratification/coco-class-count.png" alt="frequencies of classes in coco">
+    
+
+
+<p>These three are the most frequent and the rarest classes in the dataset. Thus,
+one way to stratify the dataset would have been by how many apples, dining tables and
+cups there are in each image. This approach would be a generalization of what we did
+in the previous example with the RVs $X$ and $Y$ - here we are doing a joint
+stratification based on three RVs (one for counts of apples, cups and dining
+tables). But, since the
+labels were of a <a href="https://en.wikipedia.org/wiki/Dirichlet-multinomial_distribution">Dirichlet-multinomial</a> nature (refer to the word-count analogy I&rsquo;ve used
+earlier), I wanted to see if there&rsquo;s a more methodical way to
+stratify data of this nature.</p>
+<p>If we look solely at the image-wise class count data, it is very tempting to
+treat the grouping of this data as a topic modeling problem, just like we do for
+text corpora. <a href="https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation">LDA</a>, a topic modeling method, posits that there exist latent
+(abstract or unseen) groups of words. All such groups share a common theme, and
+are therefore interpreted as &ldquo;topics&rdquo;. Natural language texts, then, can be
+interpret as the <em>effect</em> of mixing words from these topics. Thus, each document
+in a corpus &ldquo;belongs&rdquo; to each topic to some extent. There&rsquo;s no reason that
+this analogy could not be applied to a set of images with multiple classes, each
+of which can occur zero or more times in a single image. Let&rsquo;s take the analogy
+a bit further. Suppose, we want to caption each image in our dataset by
+describing (in English) how many of each type of objects it contains. Now, if we
+were to apply LDA to these captions (and if it worked well enough), we could
+assign a topic to each caption, and therefore each image! We then just pick
+samples from each topic.</p>
+<p>However, in a practical sense, LDA needs both a sufficiently large vocabulary (ours only has
+eight words!) and a sufficiently large corpus of documents (ours only has 200)
+in order to make sense. So then we fall back to the next best thing that can be done
+with the label count data: <em>clustering</em>.</p>
+<p>If we look for eight clusters (it&rsquo;s a coincidence that we have eight labels, and
+the default number of clusters used in <a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">sklearn&rsquo;s implementation of KMeans</a> is
+also eight) in our label count dataset, we see that each cluster is dominated by
+a single class.</p>
+
+
+
+    <img class="article-image" src="/posts/obj-detection-stratification/coco-cluster.png" alt="clustering label counts in coco">
+    
+
+
+<p>We can now easily draw samples from each of these clusters in a 60:40 ratio, combine
+them into train and test splits, and that would count as a stratified split. The
+results from this strategy were no better than the random split. This new model
+does get most of the cups right (the cluster dominated by cups is one of the
+largest - they&rsquo;re sufficiently well represented). But that increase in
+performance is negated by the model getting sizes of the dining tables
+thoroughly wrong. The predicted dining tables are either much larger or much
+smaller than the true boxes. This gives us another hint - so far we have the
+cluster IDs as one stratification key, maybe we need to look for size
+distributions of different classes too?</p>
+
+
+
+    <img class="article-image" src="/posts/obj-detection-stratification/coco-size-kde.png" alt="distribution of sizes in coco">
+    
+
+
+<p>We look at the KDEs of the sizes of different labels in the dataset. And voila!
+The distribution of the sizes for dining tables is very strongly bimodal! This
+means that there are mainly two sizes of dining tables in the dataset which can
+reasonably be called &ldquo;small tables&rdquo; and &ldquo;large tables&rdquo;. Finally, to compensate
+the model&rsquo;s performance with dining table sizes, we can stratify the data by one
+additional RV, i.e. whether a dining table exists, and if it does, is it
+small or large?</p>
+<p>Stratifying by a joint distribution of the cluster IDs and this additional RV,
+and repeating the 40 experiments, we get a boost of only 2%, but it <em>is</em>
+statistically significant. And while the average performance does not increase
+much (since we&rsquo;re averaging metrics across classes), the mAP of IoU for
+dining tables, cups and apples show an increase, albeit at the cost of broccoli
+and carrots.</p>
+<p>(My craft is but a reflection of my self. My model, like me, is apparently blind to healthy food. It&rsquo;s difficult to feel too bad about broccoli going unnoticed.)</p>
+<hr>
+<h2 id="conclusion-we-can-do-better-than-random-splits-even-in-computer-vision">Conclusion: We can do better than random splits, even in computer vision</h2>
+<p>When training deep networks on unstructured data we generally tend to neglect
+statistical inference. But we don&rsquo;t have to leave the poor black box to fend for
+itself. Curated train/test splits can go a long way in helping the models
+overcome common pitfalls. None of the stratification methods described above are
+hard and fast, or even guaranteed to improve performance. Indeed, in one of the
+three examples, the improvement was not statistically significant. And whatever
+marginal improvement we saw in the other two was not numerically significant.
+But note that these experiments have been carried out within very harsh
+constraints - only ~200 images, only 20-30 epochs, small train:test ratios, no
+image augmentation, no hyperparameter tuning, etc. We <em>deliberately wanted</em> to squeeze the last bit of
+performance from the model based on nothing but better train/test splits. If we
+start relaxing these constraints, the models will only improve.</p>
+<p>So why bother, in the first place, with this painful exercise of first
+identifying aspects of labels that can be modeled with distributions, then
+combining them into a JPD and then finally sampling from it?</p>
+<p>These experiments are only a few illustrations of how stratification can be
+done more intelligently. These hacks become necessary because sometimes, the limitations on the data and
+the model are all too real. In these examples, I did want the model to have a hard time. But in most other problems, both my model and I will have a hard time
+all by ourselves, without anyone imposing additional restrictions.</p>
+<p>I have myself said, on many occasions, that hacking around with a model beyond reasonable limits is usually not worth the trouble. This post is for when it <em>is</em> worth the trouble.
+When they are cornered, a desperate ML researcher will go to any
+lengths - even if that means taking a <a href="https://www.youtube.com/watch?v=gn2EmVHDJIw">sledgehammer to an underground vault</a> and
+digging out old statistics textbooks.</p>
+<hr>
+<p><strong>PS:</strong> The scripts and notebooks used to run these examples are available
+<a href="https://github.com/jaidevd/obj-detection-stratification">here</a>. I apologize for the poorly structured code and lack of documentation - I
+did not initially write them for others to use. The only reason I am sharing it
+here is so that I myself don&rsquo;t misplace it. If you would like to use them in
+any way, please leave a comment below and I&rsquo;ll get them ready to use.</p>
+
+        </p>
+    </div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "brocasbrain" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/statistics">#statistics</a>
+        
+            <a class="tag" href="/tags/computervision">#computervision</a>
+        
+            <a class="tag" href="/tags/objectdetection">#objectdetection</a>
+        
+            <a class="tag" href="/tags/pytorch">#pytorch</a>
+        
+            <a class="tag" href="/tags/ai">#ai</a>
+        
+      
+    </div>
+
+
+	
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

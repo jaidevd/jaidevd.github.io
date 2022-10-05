@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pytorch on Jaidev&#39;s Blog</title>
+    <link>https://jaidevd.com/tags/pytorch/</link>
+    <description>Recent content in pytorch on Jaidev&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Sep 2022 19:47:39 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Effective Train/Test Stratification for Object Detection</title>
+      <link>https://jaidevd.com/posts/obj-detection-stratification/</link>
+      <pubDate>Fri, 30 Sep 2022 19:47:39 +0530</pubDate>
+      
+      <guid>https://jaidevd.com/posts/obj-detection-stratification/</guid>
+      <description>There&amp;rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks for specific tasks. Primarily, it stems from the lack of training data. To a layperson it would seem ridiculous that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general or the abstract to the specific, than the reverse.</description>
+    </item>
+    
+  </channel>
+</rss>
