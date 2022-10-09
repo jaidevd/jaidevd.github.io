@@ -1,3 +1,6 @@
 [submodule "wordle"]
 	path = wordle
 	url = git@github.com:jaidevd/wordle.git
+[submodule "cards"]
+	path = cards
+	url = git@github.com:jaidevd/cah-labeler.git
