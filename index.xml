@@ -13,7 +13,7 @@
       <pubDate>Fri, 30 Sep 2022 19:47:39 +0530</pubDate>
       
       <guid>https://jaidevd.com/posts/obj-detection-stratification/</guid>
-      <description>There&amp;rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks for specific tasks. Primarily, it stems from the lack of training data. To a layperson it would seem ridiculous that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general or the abstract to the specific, than the reverse.</description>
+      <description>There&amp;rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks for specific tasks, which primarily stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general to the specific, than the reverse.</description>
     </item>
     
     <item>

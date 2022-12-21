@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.4489152aa37495358ae3b877a4e43874cbbd9f8a8dd121ed39b7e4a5bc075bd4.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.31fecf973606ecac3baad0bb0ffd9ffec08dd155e50cf9d84df019ed21d331d8.css"/>
 
     
     
@@ -43,7 +43,7 @@ if (!doNotTrack) {
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jaidevd.com/posts/obj-detection-stratification/thumbnail-pedestrian-bad.png"/>
 <meta name="twitter:title" content="Effective Train/Test Stratification for Object Detection"/>
-<meta name="twitter:description" content="There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks for specific tasks. Primarily, it stems from the lack of training data. To a layperson it would seem ridiculous that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general or the abstract to the specific, than the reverse."/>
+<meta name="twitter:description" content="There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks for specific tasks, which primarily stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general to the specific, than the reverse."/>
 
 
     <body>
@@ -165,12 +165,13 @@ if (!doNotTrack) {
     <div>
         <p>
         <p>There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural
-networks for specific tasks. Primarily, it stems from the lack of training data. To a
-layperson it would seem ridiculous that a pretrained vision model (containing millions of
+networks for specific tasks, which primarily stems from the lack of training data. It would seem ridiculous to a
+layperson that a pretrained vision model (containing millions of
 parameters, trained on millions of images) could learn to solve highly specific
 problems. Therefore, when fine-tuned models <em>do</em> perform well, they seem all the more <a href="https://www.pnas.org/doi/10.1073/pnas.1907373117">miraculous</a>.
 But on the other hand, we also know that it is easier to move from <a href="https://davidepstein.com/the-range/">the general
-or the abstract to the specific</a>, than the reverse.</p>
+to the specific</a>, than the reverse.
+Specialization <em>after</em> generalization is easier than the reverse.</p>
 <p>However, it is this specialization that, when overdone, leads to overfitting. In
 shallow learning with small data, the problem of overfitting is well understood,
 and has many solutions like regularization and cross validation, among other

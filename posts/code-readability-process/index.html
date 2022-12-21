@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.4489152aa37495358ae3b877a4e43874cbbd9f8a8dd121ed39b7e4a5bc075bd4.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.31fecf973606ecac3baad0bb0ffd9ffec08dd155e50cf9d84df019ed21d331d8.css"/>
 
     
     
@@ -172,20 +172,20 @@ enrolling each year. The DSA course itself is offered every trimester,
 and sees an average of ~700 enrollments every time. It is easy to see how
 communication becomes critical in running a MOOC at this scale. There is, of
 course, the operational and logistical communication that goes into the
-smooth running of the course. But more relevant is communicating the
-<em>content</em> of the course (the course is also highly interactive - in addition
+smooth running of the course. But communicating the
+<em>content</em> of the course is more relevant (the course is also highly interactive - in addition
 to weekly office hours, there are Discourse forums where students, TAs and
 faculty are active).</p>
 <p>Communicating anything about programming is no joke,
 especially when the programming experience of students varies widely from
 novices to ninjas. Experienced developers may have perfected the art of
 communicating with <a href="https://www.youtube.com/watch?v=qpdYRPL3SVE">commit messages</a>,
-or via group chats. However, I&rsquo;m not aware of any widely adopted protocol or
-best practices which help people teach and learn coding better. The
+or through group chats. However, I don&rsquo;t know of any widely adopted protocol or
+best practices which help people <em>teach and learn</em> coding better. The
 <a href="https://en.wikipedia.org/wiki/Stack_Exchange#Site_features">StackExchange model</a>
 comes very close, but it&rsquo;s not particularly well suited to
 pedagogy.</p>
-<p>Let us assume that there are broadly to aspects of programming when it comes to
+<p>Let us assume that there are broadly two aspects of programming when it comes to
 teaching programming - ideas and code. So, how do</p>
 <ol>
 <li>teachers communicate programming ideas to students?</li>
@@ -202,7 +202,7 @@ is that his speech is like other people&rsquo;s writing.
 Writing is easy. In the middle of writing a sentence, I can decide
 that I could have written the beginning better. Then I can always go
 back, change the beginning and rephrase the sentence as many times as I like.
-Speaking is difficult. If I realize that I messed up my sentence in the middle
+Speaking, on the other hand, is difficult. If I realize that I messed up my sentence in the middle
 of speaking it, I will most certainly fumble. In his lectures, Madhavan says
 <em>exactly</em> what he intends to say. This ability can only come from a place of the deepest expertise
 and clarity (I recently found out that he does do retakes.
@@ -212,14 +212,16 @@ rare skill). The lectures typically contained Python code and discussion on them
 but the code eventually got a bit too verbose and ultimately started looking a
 lot less Pythonic. The course could really use code that was a lot more readable.</p>
 <p>But do I know this for sure? I, as an experienced Python developer,
-have a certain opinion on the merits of readable code. Do these supposed merits
+have a certain opinion on the merits of readable code. Do these <em>supposed</em> merits
 extend to <em>teaching</em> data structures and
 algorithms? Eventually, I stopped reading too much into the on-screen code,
 and instead started listening to what Madhavan was saying in English. This I
-translated to pseudocode, and then to Python. And what he was saying in
-English was so clear and precise, that it might well have been the pseudocode.
-This strategy worked well for me - even though I got an embarrassing B+ in
-the course, if I had resorted to simply reading the on-screen code and
+translated to pseudocode, and then to Python.</p>
+<p>What he was saying in
+English was so clear and precise, that it almost passes for pseudocode.
+This strategy - of listening to English and then writing Python, instead of
+reading Python and trying to understand - worked well for me (even though I got an embarrassing B+ in
+the course). If I had resorted to simply reading the on-screen code and
 deciphering what it was doing, I&rsquo;d have failed the course for sure. The
 on-screen code was way more verbose than Madhavan&rsquo;s
 explanations (of course, all code is <em>by definition</em> more verbose than its
@@ -240,30 +242,31 @@ learnt (Uncle Bob wrote and entire book on this, after all).</p>
 what we need to <em>do</em> in order to write readable code is well accepted. We all
 know to use meaningful variable names, short and well documented functions,
 classes that are not too deep in the inheritance tree (or worse, an
-inheritance graph), etc. In most cases, it seems like readable code comes
+inheritance graph), etc. It would be safe to say that readable code comes
 from making code as close to natural language as possible. So now we can ask a
 more focused question: We know that readable code serves
-experienced developers well - does it also serve students equally well? Or
+experienced developers well - does it also serve <em>students</em> equally well? Or
 would they rather study a piece of Python code that is so verbose,
 so much like C, that GCC could actually compile it with little modification?</p>
-<p>This distinction between how experts and novices perceive readable code is
-critical. Primarily, because it is prima-facie difficult to &ldquo;sell&rdquo; readable code
-to novices. Consider this for instance: how would you convince a student that
-a list comprehension is better than even the simplest <code>for</code> loop? The latter isn&rsquo;t
-technically wrong at all. In fact, it can be argued that unlike list
-comprehensions, <code>for</code> loops are universal and therefore should be preferred -
+<p>It is critical to make a distinction between how experts and novices perceive readable code - primarily because it is prima-facie difficult to &ldquo;sell&rdquo; readable code
+to novices. Consider this: how would you convince a student that
+a list comprehension is better than even the simplest <code>for</code> loop? Would you do this at all?
+A <code>for</code> loop is not at all technically wrong. In fact, it can be argued that unlike list
+comprehensions, <code>for</code> loops are universal, and therefore should be preferred
+because
 they are instantly recognizable to anyone. On the other hand, list
 comprehensions are idiomatic only in some languages. List comprehensions over
 <code>for</code> loops is not an easy pitch.</p>
 <p>I asked a few senior developers whether they would sell the merits of
 clean code to their mentees, and if so, how? Everyone agreed that it was a
 difficult problem. There are no jobs in clean / readable code as such.
-It does not even have the satisfaction of writing code that &ldquo;just works&rdquo;.
-So how do people inculcate these habits among their mentees? Some of them don&rsquo;t
+Most programmers need to finish writing code that &ldquo;just works&rdquo; - readability of
+their code is secondary, at best, and at worst, simply irrelevant.
+So how do people inculcate these habits among their mentees? It turns out that some of them don&rsquo;t
 care, some of them enforce it and others chisel away at the habits of their
 mentees until it sticks. A friend also reminded me that great
 programmers can come from all three categories of mentees. This was a wake up
-call. Readable code has a lot more to do with long-term benefits for a team
+call: readable code has a lot more to do with long-term benefits for a team
 or a community than with short-term <em>individual</em> ability.</p>
 <p>This is precisely the thesis of Donald Knuth&rsquo;s philosophy of <a href="https://www-cs-faculty.stanford.edu/~knuth/lp.html">literate programming</a>:</p>
 <blockquote>
