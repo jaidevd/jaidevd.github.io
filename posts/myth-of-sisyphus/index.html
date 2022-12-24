@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Open World Games and the Myth of Sisyphus | Jaidev&#39;s Blog</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.31fecf973606ecac3baad0bb0ffd9ffec08dd155e50cf9d84df019ed21d331d8.css"/>
+
+    
+    
+    
+
+    
+    
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jaidevd.com/posts/myth-of-sisyphus/thumbnail-game-collage.png"/>
+<meta name="twitter:title" content="Open World Games and the Myth of Sisyphus"/>
+<meta name="twitter:description" content="Dedicated to the memory of Kevin Conroy. There was only ever one true Batman.
+ You have been playing for months. Slowly and steadily, you have harvested every collectable - making yourself stronger and stronger until you can kill the toughest enemies. Every enemy defeated, every monster slain. No side quest remains which is worth doing. Those which are not worth doing are also done, because you are a completionist (which is a dignified way of saying that you have no life)."/>
+
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Jaidev&#39;s Blog</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/about/">About Me</a>
+  
+    <a class="color-link nav-link" href="/archive/">Archive</a>
+  
+  <a class="color-link nav-link" href="https://jaidevd.com/index.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Open World Games and the Myth of Sisyphus</h1>
+    
+    <time>December 24, 2022</time>
+    
+    <div>
+        <p>
+        <p><em>Dedicated to the memory of Kevin Conroy. There was only ever one true Batman.</em></p>
+<hr>
+<p>You have been playing for months. Slowly and steadily, you have harvested every
+collectable - making yourself stronger and stronger until you can kill the
+toughest enemies. Every enemy defeated, every monster slain. No side quest
+remains which is worth
+doing. Those which are not worth doing are also done, because you are a
+completionist (which is a dignified way of saying that you have no life). No
+part of the open world remains unexplored - you have climbed the tallest
+mountain and dived the deepest sea. All of this, you have done on the highest
+difficulty level. All the DLC is exhausted, too. The strongest creature in the world
+is you.</p>
+<!--TEASER_END -->
+
+
+
+    <img class="article-image" src="/posts/myth-of-sisyphus/thumbnail-game-collage.png" alt="Open World Games">
+    
+
+
+<p>What do you do now?</p>
+<blockquote>
+<p>And when Alexander saw the breadth of his domain, he wept, for there were no
+more worlds to conquer.</p>
+</blockquote>
+<p>This post is woven out of several journal entries I wrote about games I
+have played, and some of the most important books I have read recently. This is
+not a thesis or a contention - it is simply an exploration of loosely, tenuously
+connected themes I found in games and books.</p>
+<blockquote>
+<p>&ldquo;One does not discover the absurd without being tempted to write a manual of
+happiness.&quot;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p><cite> - Albert Camus</cite></p>
+</blockquote>
+<hr>
+<p>I never really knew what people mean by grinding in video games - and when I did hear
+the word, I certainly did not appreciate its negative connotations. My
+brother used to grumble about how collecting Riddler
+trophies became a “chore” (it is
+<a href="https://youtu.be/tFvXeA4VeQo">one of the most hated things</a> among otherwise
+fanatic <em>Batman: Arkham</em> players). I would dismiss the grumbling thinking that
+collecting those trophies was simply an optional part of the game - you did not
+<em>have</em> to do it. In the Arkham games, side missions have no consequence apart from the
+XP boosts. They do not add to or take away anything from the gameplay
+experience.</p>
+<p>Then, <em>Arkham Knight</em> came along. As I neared the end of the game, I realized that
+I could not sustain my attitude towards Riddler trophies. <em>Arkham Knight</em> rewards
+you for being a completionist - complete the whole game and you are rewarded
+with a breathtaking cutscene (I won’t spoil it here, but search for “the
+Knightfall Protocol” on YouTube). Unfortunately, reaching a 100% meant collecting all
+of the Riddler trophies - all 243 of them - which is <a href="https://www.youtube.com/watch?v=Z42O_hS_y-8&amp;ab_channel=JaxonPham">maddening</a>.
+Now I knew what my brother meant.</p>
+<p>And even going around collecting the trophies is not <em>grinding</em> in the true
+sense of the word. A grinding process in a well-designed crafting system not only inches
+you towards the 100% completion, but also makes your character better and
+stronger (Arkham games don&rsquo;t have a very sophisticated crafting system or build
+tree). It wasn’t until I played <em>Fallout 4</em> that I really understood this. In
+<em>Fallout 4</em>, I’ve spent hours scouring the wasteland on foot, scavenging for rare
+materials (like lead or adhesive) so I could use them to build better
+radiation-resistant armour or
+weapons to kill special enemies.
+Even though I spent more time scavenging in <em>Fallout 4</em> than collecting
+Riddler trophies in <em>Arkham Knight</em> - the former felt a lot more rewarding,
+because it was building up to something more than just a cutscene (albeit a
+spectacular one).</p>
+<p>The hours spent wandering the wasteland in <em>Fallout 4</em> quickly became days and
+weeks and months. And then, in early 2020, I acquired the mother of all open
+world games - <em>The Witcher 3: Wild Hunt</em>. This was just before the pandemic, and the
+lockdown meant that I’d have a lot more time to play games. What was months for
+<em>Fallout 4</em> became years for <em>the Witcher</em>. I’m playing the game to this day, and
+I’m not done. I still have more character builds to try, difficulty levels to
+beat, potions to brew and in-game choice trees to explore (there are nearly <a href="https://www.youtube.com/watch?v=C0-e0QE2Eg4&amp;ab_channel=IGN">40
+different ways</a> to
+end that game).</p>
+<p>I have no reasonable answer for why I’m still playing that game 3 years later.
+The YouTube channel Gameological Dig makes an <a href="https://www.youtube.com/watch?v=DlnzZU12oH8&amp;ab_channel=GameologicalDig">excellent attempt</a> to explain what
+made <em>the Witcher 3</em> revolutionary. The sophisticated crafting system, the
+poignant writing, pacing and the stellar voice acting all contribute to the
+appeal of the game. As the video states, every interaction with side characters
+is heavy with personal history and emotion. This makes it easy to justify side
+quests. In addition to these, there are plenty of design principles which the
+developers
+have employed which make the game more addictive. Moreover, it is a game based
+on a well known series of fantasy books - so the game world is already full of
+myth and lore (something that is absent in Fallout). The open world itself is
+very detailed (CD Project Red invented the <a href="https://www.youtube.com/watch?v=TL9ccQCAqgU&amp;ab_channel=LukeStephens">30 second rule</a> to keep the world engaging.
+The YouTuber Luke Stephens has a fantastic <a href="https://www.youtube.com/watch?v=a20rYOIY0gk&amp;ab_channel=LukeStephens">series</a> of <a href="https://www.youtube.com/watch?v=Cmgj3oiFhFc&amp;&amp;ab_channel=LukeStephens">videos</a> where he has applied
+this rule to various games, including <em>the Witcher 3</em>, to see how it affects the
+game).
+Finally, the combat isn’t all hacking and slashing - you have to pause and think
+hard before engaging an enemy (it takes preparation within the game too).</p>
+<p>And yet, none of this saves me from the bleak moment that comes at the end of
+the game. In that moment, I am Sisyphus, watching the rock roll hopelessly to the bottom of the
+mountain.</p>
+<p>Yes, I do look forward to the next playthrough - this time, perhaps on
+a higher difficulty level, or with a different set of weapons. “I’ll have to
+build my character all over gain, that will take weeks…”, I think with a groan.
+But I still do it. All to check off an arbitrary item on an invisible to-do
+list. And if I do manage to finish this invisible to-do list, there will be another
+one for another game. And I’ll keep pushing that boulder up the hill over and
+over again.</p>
+<h2 id="one-must-imagine-sisyphus-happy">One must imagine Sisyphus happy</h2>
+<p>Open world games are absurd and thoroughly meaningless. But then, so is life.
+Like in the games, the moral or economic worth of whatever we seek in life is
+determined by a wholly arbitrary value system. Just how arbitrary these value
+systems are is a discussion which would exhaust all conscious thought in the
+universe, if we let it. What matters is that they <em>are</em> arbitrary. If they
+were not, there would be no room for more than one religion or ideology. Only a
+Descartes would have the courage to question whether an ideology has been merely
+dreamt up, or if it is the result of critical scrutiny. The rest of us do not
+have the time to subject everything, everyday to scepticism.</p>
+<p>And thus, the void
+left behind by the absence of critical judgement starts getting filled with
+Sisyphean systems - just like in the games. We dream up minimaps, side-quests
+and collectathons in life, just like in the games. These dreamt
+up objectives seem meaningful to us only because other people believe them to be
+meaningful. They are worth whatever we, as a civilization, decide they are
+worth.</p>
+<p>But the world is indifferent to it. As Mihaly Csikszentmihalyi writes,</p>
+<blockquote>
+<p>&ldquo;The foremost reason happiness is so hard to achieve is that the universe was not
+designed with the comfort of human beings in mind&hellip; natural processes do not
+take human desires into account.&quot;<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+</blockquote>
+<p>It is natural that Csikszentmihalyi, as the
+foremost expert on enjoyment, begins his book with a chapter titled
+&ldquo;Happiness Revisited&rdquo;. But it is just as unsurprising that the focal point of
+this chapter is a section titled &ldquo;The Roots of Discontent&rdquo; (I refer to
+Csikszentmihalyi and his book several times in this article. It is a matter of
+some pride to me that by the time I am drafting this, I can finally pronounce and
+spell his last name without assistance.) He echoes Camus' suggestion of a happy
+Sisyphus,</p>
+<blockquote>
+<p>&hellip; there is no inherent problem in our desire to escalate our goals, as long as
+we enjoy the struggle along the way. The problem arises when people are so
+fixated on what they want to achieve that they cease to derive pleasure from the
+present. When that happens, they forfeit their chance of contentment.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+</blockquote>
+<p>Just as your life is indifferent to what
+your character does within a game (unless you’re a professional gamer),
+the universe is also indifferent to whatever invisible checklist you
+write for yourself. This is not difficult to see. But once seen, it cannot be
+unseen. Trying to reconcile the indifferent universe
+with human endeavour (or failing to doing so) is at the very root of existential thought. Becoming
+conscious of the pointlessness of this uphill task has inspired centuries of
+lament. The very awareness of this
+problem is the real problem. It is no
+accident that the greatest soliloquy written in the English language is &ldquo;To be,
+or not to be, that is the question&hellip;&quot;<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>. It ends with a
+conclusion that seems all too inevitable - &ldquo;conscience makes cowards of us all&rdquo;.</p>
+<p>This realisation is crippling. If nothing matters, why bother doing anything at all? This
+paralyzing thought echoes throughout history. It was there long before
+Shakespeare or Camus. And it will be there, as long as there is a place in the
+universe where conscious thought exists. It is central to the human condition.
+Dostoevsky wrote, in <em>Notes from the Underground</em>,</p>
+<blockquote>
+<p>… the direct, immediate, legitimate fruit of heightened consciousness is
+inertia, that is, the deliberate refusal to do anything… all spontaneous
+people, men of action, are active because they are stupid and limited.<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+</blockquote>
+<p>The Urdu poet Mirza Ghalib
+(who was both a notorious cynic and a hopeless romantic - I see no contradiction),
+wrote along similar lines</p>
+<blockquote>
+<p>The prison of life and bonds of sorrow are one and the same.
+Why, then, should one be free of suffering whilst they live?</p>
+<p>Why despair, O Ghalib! The world will go on, even without you.<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
+</blockquote>
+<p>The inevitability of this despair is thus established. After the despair comes
+acceptance. And it is only from this acceptance that hope can sprout. Camus, in
+his essays on absurdism acknowledges that the most important question in life is
+whether it is worth living. He ruthlessly simplifies the problem by introducing
+a proxy - &ldquo;There is but one serious philosophical problem and that is
+suicide.&quot;<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>
+This brutal simplification is necessary, it strips off the convenience of
+misinterpretation. He argues further that it is only when confronted with this stark
+realization, that we can truly begin to fix the problem.</p>
+<blockquote>
+<p>Sisyphus… knows the whole extent of his wretched condition; it is what he
+thinks of during this descent. The lucidity that was to constitute his torture
+at the same time crowns his victory. There is no fate that cannot be
+surmounted by scorn.<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup></p>
+</blockquote>
+<p>We need not even arrive at this acceptance from a
+metaphysical perspective, like Camus did. The journalist Oliver Burkeman suggests that not only is
+acceptance of the absurd eminently
+practical, it may even be therapeutic!</p>
+<blockquote>
+<p>The day will never arrive when you finally have everything under control -
+when the flood of emails has been contained; when your to-do lists have
+stopped getting longer; when you&rsquo;re meeting all your obligations at work and
+in your home life; when nobody&rsquo;s angry with you for missing a deadline or
+dropping the ball; and when the fully optimized person you&rsquo;ve become can turn,
+at long last, to the things life is really supposed to be about. Let&rsquo;s start
+by admitting defeat: none of this is ever going to happen.</p>
+<p>But you know what? That&rsquo;s <em>excellent</em> news.<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup></p>
+</blockquote>
+<p>(Emphasis in original)</p>
+<p>This is how Burkeman concludes the introduction to his book
+<em>Four Thousand Weeks - Time Management for Morals</em>. The remainder of the book is
+a refreshing, subversive take on productivity - exhorting readers to instead
+embrace their finitude, and appreciate what they really <em>can</em> exercise control over.
+Csikszentmihalyi lays the foundations of the flow experience in very much the same
+terms.</p>
+<h2 id="finding-flow---getting-sisyphus-to-enjoy-himself">Finding Flow - Getting Sisyphus to Enjoy Himself</h2>
+
+
+
+    <img class="article-image" src="/posts/myth-of-sisyphus/cookie-popcorn.jpg" alt="Dog, Beer and Popcorn">
+    
+
+
+<p>My wife takes a brief summer vacation every year. This is when I usually catch up on my gaming.
+I pour myself a beer, make some popcorn (although it is more for my dog&rsquo;s benefit -
+nothing makes her sit quietly by my side like the smell of popcorn). I also use
+this time to catch up on my other hobbies and side-projects. This year, my
+wife’s travels ended up lasting three weeks. I spent all that time playing
+<em>God of War (2018)</em> and reading Csikszentmihalyi. In any other year, I would have
+just replayed <em>Arkham Knight</em>, <em>Fallout 4</em> or <em>The Witcher</em>. But this year, one of the
+most anticipated entries in the <em>God of War</em> franchise, <em>God of War: Ragnarök</em> was going to come
+out in November. I&rsquo;d had it&rsquo;s prequel lying around for ages which I&rsquo;d never started playing.
+So I started playing it - mostly as homework for <em>Ragnarök</em>.</p>
+<p>I just couldn&rsquo;t stop playing it!</p>
+<p>I&rsquo;m currently in my first NG+ playthrough. Like other games, its the side quests
+that make it addictive. I absolutely loved hunting down the Valkyries and
+painstakingly learning how to defeat them.
+When I played the game a second time, I got to them as
+quickly as possible. <em>God of War</em> takes place across the multiple realms of Norse
+myth, of which two realms - Muspelheim (the fire
+realm) and Niflheim (the fog realm) - are optional; you can finish
+the game without setting foot in them. The first time I played the game, I went
+through the rigmarole of  playing through them simply because I didn’t know
+better, and I needed the loot there for upgrading weapons and armour. Once I was
+done with them, I would never go back. But during my second playthrough, I
+realized that I kept going back to both Muspelheim and Niflheim every time
+I was bored with the main storyline (which takes place in the default realm -
+Midgard).</p>
+<p>This was remarkable. What seemed a
+punishment once had become something I looked forward to.
+I realized that after a very long time, I was actually enjoying the experience more than
+the rewards!</p>
+<p>How do these side quests go from annoying distractions to becoming the central
+purpose of the game? How do you get a player to ignore the central storyline? I
+imagine that like me, most gamers, are in it for the story and the campaign.
+What do designers do that brings about such a significant change in the players'
+attitude? Side quests are the most ridiculous things to be addicted to. But I
+can’t describe in words the sense of satisfaction I’d get when Kratos
+successfully beats a Valkyrie and rips her wings off (but not before she
+<a href="https://youtu.be/-b-DaQGKlUg?t=61">literally wipes the floor</a> with him many times over).
+I’ve never felt that kind of satisfaction in any other game.</p>
+<p>It’s because of the loop that the game has instilled in my mind. The loop has a
+sense of familiarity that would take me weeks to build in any other game
+(perhaps with the exception of the <em>Arkham</em> games - renowned for their
+revolutionary combat system). Try hitting, get hit, learn how to hit well, learn
+how to not get hit, learn enemy moves,
+get better weapons, defeat harder enemies, earn rewards, <em>ad inifitum</em><sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup>.
+Keep doing this until there&rsquo;s a sense of accomplishment.</p>
+<p>Sure, this sense of achievement is based on a wholly arbitrary checkpoint - but
+that does not bother me anymore. The game, thus, has done something remarkable.
+It has made me addicted, but not
+in a mindless way. It definitely takes skill, patience and practice to do well.
+I&rsquo;d go so far as to say that it takes study. It has converted something
+Sisyphean into something heavily, obsessively sought.
+I&rsquo;d need coffee before beginning to code,
+but I could probably be sleep deprived and still play God of War for hours and
+hours. How does a game accomplish all of this? Perhaps the answer lies in what
+Csikszentmihalyi calls the <em>conditions of Flow</em>.</p>
+
+
+
+    <img class="article-image" src="/posts/myth-of-sisyphus/flow-channel.png" alt="">
+    
+
+
+<p>While Csikszentmihalyi devotes an entire chapter to the conditions conducive to
+flow, I think the single most important condition is,</p>
+<blockquote>
+<p>&hellip; enjoyment comes at a very specific point: whenever the opportunities for
+action (challenges) perceived by the individual are equal to his or her capabilities<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup></p>
+</blockquote>
+<p>The chart above highlights a &ldquo;flow channel&rdquo; - the region where the player&rsquo;s
+skills and the challenges they face are commensurate. If a non-skilled player
+faces a difficult challenge, they become anxious. If a skilled player faces an
+easy task, they get bored.</p>
+<p>Video games have solved this problem. Most modern games begin with
+tutorials disguised as stories - players usually don&rsquo;t even realize that
+they&rsquo;re being taught. Enemy upscaling is an absolute life-saver in <em>The Witcher</em>
+(eventually Geralt becomes so powerful that defeating enemies becomes boring -
+unless the player decides to turn on the enemy upscaling feature). In <em>God of
+War</em>, the Valkyries are easily the toughest bosses - who are usually located in
+isolated areas known as &ldquo;Odin&rsquo;s Hidden Chambers&rdquo;. The game does not let you
+simply walk into one of these - essentially ensuring that you have done your
+homework. Thus, video game design has grown to navigate the flow
+channel remarkably well, by employing various mechanics such as in-game
+tutorials, scaling enemies, and ensuring that the players don&rsquo;t end up in
+dangerous situations prematurely.</p>
+<p>Csikszentmihalyi, too, emphasizes design heavily. When mentioning activities
+that his respondents described as &ldquo;flow inducing&rdquo;, he further deconstructs the
+conditions of flow as follows:</p>
+<blockquote>
+<p>What makes these activities conducive to flow is that they were <em>designed</em> to
+make optimal experience easier to achieve. They have rules that require the
+learning of skills, they set up goals, they provide feedback, and they make
+control possible<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup>.</p>
+</blockquote>
+<p>(Emphasis in original)</p>
+<p>The lead gameplay designer on God of War, Jason McDonald, mirrors these ideas in his
+<a href="https://youtu.be/kX8Jn3XPoWQ">talk about reinventing God of War&rsquo;s gameplay</a>.</p>
+<p>In summary, it seems that achieving flow is a matter of good design. So, if
+Sisyphus' environment - the rock and the mountain included - was designed well
+enough, could we get him to enjoy himself? Further, his life and his universe,
+unlike ours, is not chaotic. On the one hand we have a Sisyphean rut, and on the
+other, the ineffable chaos of daily life. These are two extremes of a spectrum.
+Do all our activities sit on this spectrum?</p>
+<p>It is certainly tempting to think so. The closer something is to the Sisyphean end,
+the better suited it is for gamification. On the other hand, something that is
+closer to the chaotic end is, to begin with, not boring.
+But that alone does not make it fun. We still have to seek <em>some</em> order in the chaos.</p>
+<p>We are thus left with a precarious tradeoff.
+But as it turns out, there is little merit in actually solving it - even if you
+had the godlike ability to do so.</p>
+<h2 id="the-future-is-today---ragnarök-is-now">The Future is Today - Ragnarök is Now</h2>
+<p>There seems to be deep-seated cultural,
+perhaps even religious, motivation for solving this tradeoff. Almost all
+religious cosmologies in the west are linear. We&rsquo;re all headed somewhere,
+hopefully to a peaceful void. As Charles Dickens wrote in <em>A Christmas Carol</em>,
+we&rsquo;re all fellow passengers to the grave. The abstract future thus
+becomes some fixed point in time; even if, paradoxically, we have no idea how
+far we are from it. It is natural, then, that we want to pull our lives away
+from the chaos and towards order - hopefully well before Armageddon.</p>
+<p>Eschatology in the east,
+however, is either cyclic (like in Hinduism or Buddhism) or simply absent (like
+in the Tao or Shinto). Future never comes because everywhen is simultaneously the past
+and the future of sometime else. (The only western
+myth that has a cyclic religious cosmology is Norse. It is in this
+mythology that the latest <em>God of War</em> games are set - what a delicious
+coincidence!)</p>
+<p>In the same spirit, Burkeman makes an argument that the future will never arrive - at
+least not the future we plan for.</p>
+<blockquote>
+<p>&hellip; you can&rsquo;t depend on fulfilment arriving at some distant point in the
+future, once you&rsquo;ve got your life in order, or met the world&rsquo;s critera for
+success.<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup></p>
+</blockquote>
+<p>This supposedly ideal future is problematic because there is no progress bar to
+tell us how close we are (one of the universally hated things in gaming, too,
+is an invisible progress bar). Sure, we replace the progress bar with
+checkpoints - finishing college, getting a job, doing great work, having great
+relationships, retiring, dying.</p>
+<p>But, look around yourself - I bet the happiest
+and most interesting people you know have little respect for progress bars or
+checkpoints. They might have finished college but they are constantly learning.
+Getting a good job isn&rsquo;t a checkpoint for them - they&rsquo;ve transcended that. They
+thrive on challenges, and they certainly don&rsquo;t intend to retire. These are
+people who possess, as Csikszentmihalyi calls it, an <em>autotelic self</em><sup id="fnref:14"><a href="#fn:14" class="footnote-ref" role="doc-noteref">14</a></sup>.
+They identify challenges and set goals. They are capable of getting fully
+immersed in activity - with sustained, active attention. And above all, they&rsquo;ve
+learned to enjoy immediate experience. In other words, they&rsquo;ve transcended
+existential dread.</p>
+<p>Call one of them right now.</p>
+<hr>
+<p>It&rsquo;s the end of 2022. Gaming consoles aren&rsquo;t getting any cheaper since the global
+chip shortage, but I&rsquo;m finally going to play <em>God of War: Ragnarök</em> before the year ends.</p>
+<p>It is only from the debris of Ragnarök that hope can sprout. And I have exactly the right
+book to help me with making the most of the debris: Tim Harford&rsquo;s <em>Messy: How to
+be Resilient in a Tidy-minded World</em>.</p>
+<p>Watch this space for more essays on books and games.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>[P88] Camus, Albert. <em>The Myth of Sisyphus</em>. Penguin Modern Classics, 2013.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>[P8] Csikszentmihalyi, Mihalyi. <em>Flow: The Psychology of Optimal
+Experience</em>. Rider Books, 2002.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Csikszentmihalyi, P10&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>Shakespeare. <em>Hamlet</em>. Act 3, Scene 1.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>Dostoevsky, Fyodor. <em>Notes from the Underground</em>. <a href="https://www.gutenberg.org/files/600/600-h/600-h.htm#chap05">Project Gutenberg eBook
+edition</a>. Part I, Chapter V.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>The Urdu version, romanized, can be found on <a href="https://www.rekhta.org/ghazals/dil-hii-to-hai-na-sang-o-khisht-dard-se-bhar-na-aae-kyuun-mirza-ghalib-ghazals">rekhta.org</a>&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p>Camus, P5&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p>Camus, P87-88&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p>[P14] Burkeman, Oliver. <em>Four Thousand Weeks: Time Management for
+Mortals</em>. Penguin Vintage, 2022&#160;<a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:10" role="doc-endnote">
+<p>Combat in video games must be a lot more than just button-mashing.
+Funnily, if you do too much of that in the <em>Arkham</em> games, the Riddler taunts Batman:
+&lsquo;You&rsquo;re a cheat and a liar. A dressed-up strongman playing with expensive toys.
+&ldquo;World&rsquo;s greatest detective?&rdquo; Hah! And everyone from Gotham to Star City believes it!&rsquo;&#160;<a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:11" role="doc-endnote">
+<p>Csikszentmihalyi, P52&#160;<a href="#fnref:11" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:12" role="doc-endnote">
+<p>Csikszentmihalyi, P72&#160;<a href="#fnref:12" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:13" role="doc-endnote">
+<p>Burkeman, P204&#160;<a href="#fnref:13" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:14" role="doc-endnote">
+<p>Csikszentmihalyi, P208&#160;<a href="#fnref:14" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+        </p>
+    </div>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "brocasbrain" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/personal">#personal</a>
+        
+            <a class="tag" href="/tags/gaming">#gaming</a>
+        
+            <a class="tag" href="/tags/flow">#flow</a>
+        
+            <a class="tag" href="/tags/absurdism">#absurdism</a>
+        
+            <a class="tag" href="/tags/books">#books</a>
+        
+            <a class="tag" href="/tags/reading">#reading</a>
+        
+      
+    </div>
+
+
+	
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>
