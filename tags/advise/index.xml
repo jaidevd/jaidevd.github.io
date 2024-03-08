@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>advise on Jaidev&#39;s Blog</title>
+    <link>https://jaidevd.com/tags/advise/</link>
+    <description>Recent content in advise on Jaidev&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 22 Nov 2017 10:04:06 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/advise/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How Not to Ask Questions After a Talk</title>
+      <link>https://jaidevd.com/posts/how-not-to-ask-questions/</link>
+      <pubDate>Wed, 22 Nov 2017 10:04:06 +0530</pubDate>
+      
+      <guid>https://jaidevd.com/posts/how-not-to-ask-questions/</guid>
+      <description>Dedicated to the memory of Mrutyunjay Mishra (M2). He was a torrent of ideas. He encouraged me to write this post because as much as he talked endlessly without pausing to breathe, he hated wasteful discourse.
+New Delhi, January 2024
+ PyCon India 2017 ended last weekend in Delhi. The conference escaped the infamous winter smog-storm by a whisker. In the last few years, PyCon India has grown to become the largest PyCon outside of North America, with over a thousand participants attending from all over the country.</description>
+    </item>
+    
+  </channel>
+</rss>
