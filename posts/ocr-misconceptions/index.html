@@ -205,9 +205,9 @@ these misconceptions<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role=
 There’s nothing wrong with quadrilaterals, after all. Rectangles are just
 ridiculously easy to manage across different kinds of media, and they are easier
 to store. If the OCR detects a perfect rectangle in a document, it’s easy to
-reproduce that rectangle very precisely in HTML as an SVG rectangle. Even in
+reproduce that rectangle very precisely in HTML as an <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/rect">SVG rectangle</a>. Even in
 PDFs it’s easier to add rectangular annotations and text boxes. It’s not like
-SVG or PDF annotations can’t be polygons, but rectangles just <em>fit</em>.</p>
+SVG or PDF annotations <a href="https://pypdf.readthedocs.io/en/latest/modules/annotations.html">can’t be polygons</a>, but rectangles just <em>fit</em>.</p>
 
 
 
@@ -215,7 +215,7 @@ SVG or PDF annotations can’t be polygons, but rectangles just <em>fit</em>.</p
     
 
 
-<p>In this example, Azure FormRecognizer’s prebuilt-layout model (for consistency,
+<p>In this example, <a href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept-layout?view=doc-intel-4.0.0&amp;tabs=sample-code">Azure FormRecognizer’s prebuilt-layout</a> model (for consistency,
 all my observations in this post are based on the same model) predicts the green
 box.Note that it’s not a rectangle. FormRecognizer (and many other OCR tools)
 produce bounding boxes as an array of eight floats, i.e. an (x, y) tuple for
@@ -227,7 +227,7 @@ inch vertically over nearly four horizontal inches. So the deviation of the
 predicted rectangle from the true rectangle isn’t drastic. But if I wanted to
 determine the precise angle this word makes with the horizontal axis, I cannot
 use the green box. I have to then rely on the slopes of the top and the bottom
-edges of the enclosing rectangle*.*</p>
+edges of the <em>enclosing</em> rectangle.</p>
 <p>So the seemingly obvious recipe is as follows: if the OCR doesn’t give you a
 perfect rectangle<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, find the minimum and maximum of the x and y coordinates.</p>
 <p>Let’s now see how even this method can go wrong.</p>
@@ -254,7 +254,7 @@ unreasonably larger than the OCR bounding box.</p>
 had a 4-number system of storing bounding boxes - the x and y coordinates of the
 top left corner, the width and the height. This was convenient because I could
 directly use these four numbers to create all sorts of assets: an SVG rectangle,
-a matplotlib rectangle, and a PDF annotation too. But now I needed a fifth
+a <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.patches.Rectangle.html">matplotlib rectangle</a>, and a PDF annotation too. But now I needed a fifth
 parameter, the angle which the text makes with the horizontal axis.</p>
 <h3 id="even-if-boxes-are-rectangular-with-sides-parallel-to-the-axes-their-orientation-is-still-ambiguous">Even if boxes are rectangular, with sides parallel to the axes, their orientation is still ambiguous</h3>
 <p>Even if the previous misconceptions do not hold, i.e. even if the bounding box
@@ -303,7 +303,7 @@ English words written vertically.</p>
     
 
 
-<p>This image shows a Vietnamese edict from 1765 written with Chinese characters.
+<p>This image shows a <a href="https://en.wikipedia.org/wiki/Horizontal_and_vertical_writing_in_East_Asian_scripts#Vietnamese">Vietnamese edict from 1765</a> written with Chinese characters.
 Formrecognizer correctly identifies the bounding boxes. In addition, their
 top-left corners are indeed those vertices that are closest to the origin of the
 XY plane.</p>
@@ -338,7 +338,7 @@ that any fixed side makes with the X-axis.</li>
 </ol>
 <p>If you’d like to learn more about how to comprehensive layout analysis with
 tools like Azure FormRecognizer, drop a comment below.</p>
-<p><em>Acknowledgements:</em> Many thanks to Harshad Saykhedkar and Dhruv Gupta for
+<p><em>Acknowledgements:</em> Many thanks to <a href="https://in.linkedin.com/in/harshadss">Harshad Saykhedkar</a> and <a href="https://www.linkedin.com/in/dhrvg">Dhruv Gupta</a> for
 reviewing  drafts of this post.</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
