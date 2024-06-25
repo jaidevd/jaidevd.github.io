@@ -326,7 +326,7 @@ you better have left room in your code to handle them.</p>
 <ol>
 <li>If bounding boxes are not rectangular, approximate them such that the corners
 of the estimated rectangle are as close as possible to the corners of the
-original box (in the MSE sense).</li>
+original box (in the mean-squared-error<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> sense).</li>
 <li><em>Do not</em> approximate rectangles by taking the minimum and maximum values of
 the x and y coordinates of the corners. See the second figure for an example
 of how this can go wrong.</li>
@@ -357,6 +357,14 @@ of 0.5 means that a bounding box is half as wide as the page). So
 ultimately, the smallest rounding error can result in a deviation worth many
 pixels. Given all that, bboxes not being perfect rectangles isn&rsquo;t all that
 surprising. Thank heavens, at least convexity of the polygons is guaranteed.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Suppose the predicted quadrilateral is defined as the set
+$ \{(x_i, y_i) | i \in [1, 4]\} $, then the estimated rectangle should be
+$ \{(x'_i, y'_i) | i \in [1, 4]\} $ such that the following error is minimized:</p>
+<p>$$ \frac{1}{4} \sum_{i=1}^{4} (x'_i - x_i)^2 + (y'_i - y_i)^2 $$
+In other words, the average Euclidean distance between the original vertices
+and the estimated vertices ought to be as low as possible.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
