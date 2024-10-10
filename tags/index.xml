@@ -6,537 +6,427 @@
     <description>Recent content in Tags on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Jun 2024 22:04:01 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Oct 2024 15:47:35 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>documentprocessing</title>
-      <link>https://jaidevd.com/tags/documentprocessing/</link>
-      <pubDate>Fri, 21 Jun 2024 22:04:01 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/documentprocessing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>geometry</title>
-      <link>https://jaidevd.com/tags/geometry/</link>
-      <pubDate>Fri, 21 Jun 2024 22:04:01 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/geometry/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>layoutanalysis</title>
-      <link>https://jaidevd.com/tags/layoutanalysis/</link>
-      <pubDate>Fri, 21 Jun 2024 22:04:01 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/layoutanalysis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ocr</title>
-      <link>https://jaidevd.com/tags/ocr/</link>
-      <pubDate>Fri, 21 Jun 2024 22:04:01 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/ocr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>bookreview</title>
-      <link>https://jaidevd.com/tags/bookreview/</link>
-      <pubDate>Tue, 21 May 2024 00:00:00 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/bookreview/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>jacklondon</title>
-      <link>https://jaidevd.com/tags/jacklondon/</link>
-      <pubDate>Tue, 21 May 2024 00:00:00 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/jacklondon/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>reading</title>
-      <link>https://jaidevd.com/tags/reading/</link>
-      <pubDate>Tue, 21 May 2024 00:00:00 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/reading/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>socialism</title>
-      <link>https://jaidevd.com/tags/socialism/</link>
-      <pubDate>Tue, 21 May 2024 00:00:00 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/socialism/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>colonialism</title>
-      <link>https://jaidevd.com/tags/colonialism/</link>
-      <pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/colonialism/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>history</title>
-      <link>https://jaidevd.com/tags/history/</link>
-      <pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/history/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>india</title>
-      <link>https://jaidevd.com/tags/india/</link>
-      <pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/india/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>science-writing</title>
-      <link>https://jaidevd.com/tags/science-writing/</link>
-      <pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/science-writing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>writing</title>
-      <link>https://jaidevd.com/tags/writing/</link>
-      <pubDate>Mon, 12 Feb 2024 00:00:00 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/writing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>absurdism</title>
-      <link>https://jaidevd.com/tags/absurdism/</link>
-      <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/absurdism/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>books</title>
-      <link>https://jaidevd.com/tags/books/</link>
-      <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/books/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>flow</title>
-      <link>https://jaidevd.com/tags/flow/</link>
-      <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/flow/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>gaming</title>
-      <link>https://jaidevd.com/tags/gaming/</link>
-      <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
-      
-      <guid>https://jaidevd.com/tags/gaming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>personal</title>
+      <title>Personal</title>
       <link>https://jaidevd.com/tags/personal/</link>
-      <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
-      
+      <pubDate>Thu, 10 Oct 2024 15:47:35 +0530</pubDate>
       <guid>https://jaidevd.com/tags/personal/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ai</title>
+      <title>Socialmedia</title>
+      <link>https://jaidevd.com/tags/socialmedia/</link>
+      <pubDate>Thu, 10 Oct 2024 15:47:35 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/socialmedia/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Documentprocessing</title>
+      <link>https://jaidevd.com/tags/documentprocessing/</link>
+      <pubDate>Fri, 21 Jun 2024 22:04:01 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/documentprocessing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Geometry</title>
+      <link>https://jaidevd.com/tags/geometry/</link>
+      <pubDate>Fri, 21 Jun 2024 22:04:01 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/geometry/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Layoutanalysis</title>
+      <link>https://jaidevd.com/tags/layoutanalysis/</link>
+      <pubDate>Fri, 21 Jun 2024 22:04:01 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/layoutanalysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ocr</title>
+      <link>https://jaidevd.com/tags/ocr/</link>
+      <pubDate>Fri, 21 Jun 2024 22:04:01 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/ocr/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bookreview</title>
+      <link>https://jaidevd.com/tags/bookreview/</link>
+      <pubDate>Tue, 21 May 2024 00:00:00 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/bookreview/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jacklondon</title>
+      <link>https://jaidevd.com/tags/jacklondon/</link>
+      <pubDate>Tue, 21 May 2024 00:00:00 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/jacklondon/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reading</title>
+      <link>https://jaidevd.com/tags/reading/</link>
+      <pubDate>Tue, 21 May 2024 00:00:00 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/reading/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Socialism</title>
+      <link>https://jaidevd.com/tags/socialism/</link>
+      <pubDate>Tue, 21 May 2024 00:00:00 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/socialism/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Colonialism</title>
+      <link>https://jaidevd.com/tags/colonialism/</link>
+      <pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/colonialism/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>History</title>
+      <link>https://jaidevd.com/tags/history/</link>
+      <pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/history/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>India</title>
+      <link>https://jaidevd.com/tags/india/</link>
+      <pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/india/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Science-Writing</title>
+      <link>https://jaidevd.com/tags/science-writing/</link>
+      <pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/science-writing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Writing</title>
+      <link>https://jaidevd.com/tags/writing/</link>
+      <pubDate>Mon, 12 Feb 2024 00:00:00 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/writing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Absurdism</title>
+      <link>https://jaidevd.com/tags/absurdism/</link>
+      <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/absurdism/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Books</title>
+      <link>https://jaidevd.com/tags/books/</link>
+      <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/books/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Flow</title>
+      <link>https://jaidevd.com/tags/flow/</link>
+      <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/flow/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gaming</title>
+      <link>https://jaidevd.com/tags/gaming/</link>
+      <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/gaming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ai</title>
       <link>https://jaidevd.com/tags/ai/</link>
       <pubDate>Fri, 30 Sep 2022 19:47:39 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/ai/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>computervision</title>
+      <title>Computervision</title>
       <link>https://jaidevd.com/tags/computervision/</link>
       <pubDate>Fri, 30 Sep 2022 19:47:39 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/computervision/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>objectdetection</title>
+      <title>Objectdetection</title>
       <link>https://jaidevd.com/tags/objectdetection/</link>
       <pubDate>Fri, 30 Sep 2022 19:47:39 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/objectdetection/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>pytorch</title>
+      <title>Pytorch</title>
       <link>https://jaidevd.com/tags/pytorch/</link>
       <pubDate>Fri, 30 Sep 2022 19:47:39 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/pytorch/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>statistics</title>
+      <title>Statistics</title>
       <link>https://jaidevd.com/tags/statistics/</link>
       <pubDate>Fri, 30 Sep 2022 19:47:39 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/statistics/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>algorithms</title>
+      <title>Algorithms</title>
       <link>https://jaidevd.com/tags/algorithms/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/algorithms/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>code</title>
+      <title>Code</title>
       <link>https://jaidevd.com/tags/code/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/code/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>data structures</title>
+      <title>Data Structures</title>
       <link>https://jaidevd.com/tags/data-structures/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/data-structures/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>learning</title>
+      <title>Learning</title>
       <link>https://jaidevd.com/tags/learning/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/learning/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>mooc</title>
+      <title>Mooc</title>
       <link>https://jaidevd.com/tags/mooc/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/mooc/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>python</title>
+      <title>Python</title>
       <link>https://jaidevd.com/tags/python/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/python/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>readability</title>
+      <title>Readability</title>
       <link>https://jaidevd.com/tags/readability/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/readability/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>productivity</title>
+      <title>Productivity</title>
       <link>https://jaidevd.com/tags/productivity/</link>
       <pubDate>Sat, 08 May 2021 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/productivity/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>steinbeck</title>
+      <title>Steinbeck</title>
       <link>https://jaidevd.com/tags/steinbeck/</link>
       <pubDate>Tue, 29 Dec 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/steinbeck/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>travel</title>
+      <title>Travel</title>
       <link>https://jaidevd.com/tags/travel/</link>
       <pubDate>Tue, 29 Dec 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/travel/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>dalit-literature</title>
+      <title>Dalit-Literature</title>
       <link>https://jaidevd.com/tags/dalit-literature/</link>
       <pubDate>Fri, 10 Jul 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/dalit-literature/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>marathi</title>
+      <title>Marathi</title>
       <link>https://jaidevd.com/tags/marathi/</link>
       <pubDate>Fri, 10 Jul 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/marathi/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>delhi</title>
+      <title>Delhi</title>
       <link>https://jaidevd.com/tags/delhi/</link>
       <pubDate>Fri, 15 May 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/delhi/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>classics</title>
+      <title>Classics</title>
       <link>https://jaidevd.com/tags/classics/</link>
       <pubDate>Tue, 19 Feb 2019 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/classics/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>story</title>
+      <title>Story</title>
       <link>https://jaidevd.com/tags/story/</link>
       <pubDate>Thu, 13 Dec 2018 14:48:07 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/story/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>deeplearning</title>
+      <title>Deeplearning</title>
       <link>https://jaidevd.com/tags/deeplearning/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/deeplearning/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>imagesegmentation</title>
+      <title>Imagesegmentation</title>
       <link>https://jaidevd.com/tags/imagesegmentation/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/imagesegmentation/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>keras</title>
+      <title>Keras</title>
       <link>https://jaidevd.com/tags/keras/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/keras/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>tensorflow</title>
+      <title>Tensorflow</title>
       <link>https://jaidevd.com/tags/tensorflow/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/tensorflow/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>advice</title>
+      <title>Advice</title>
       <link>https://jaidevd.com/tags/advice/</link>
       <pubDate>Wed, 22 Nov 2017 10:04:06 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/advice/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>bayes</title>
+      <title>Bayes</title>
       <link>https://jaidevd.com/tags/bayes/</link>
       <pubDate>Sun, 17 Jul 2016 14:19:40 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/bayes/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>machinelearning</title>
+      <title>Machinelearning</title>
       <link>https://jaidevd.com/tags/machinelearning/</link>
       <pubDate>Sun, 17 Jul 2016 14:19:40 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/machinelearning/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>perceptron</title>
+      <title>Perceptron</title>
       <link>https://jaidevd.com/tags/perceptron/</link>
       <pubDate>Sun, 17 Jul 2016 14:19:40 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/perceptron/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>math</title>
+      <title>Math</title>
       <link>https://jaidevd.com/tags/math/</link>
       <pubDate>Wed, 06 Jul 2016 14:45:55 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/math/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>probability</title>
+      <title>Probability</title>
       <link>https://jaidevd.com/tags/probability/</link>
       <pubDate>Thu, 30 Jun 2016 18:33:41 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/probability/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>evangelism</title>
+      <title>Evangelism</title>
       <link>https://jaidevd.com/tags/evangelism/</link>
       <pubDate>Tue, 14 Jun 2016 19:54:09 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/evangelism/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>rant</title>
+      <title>Rant</title>
       <link>https://jaidevd.com/tags/rant/</link>
       <pubDate>Tue, 14 Jun 2016 19:54:09 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/rant/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>analytics</title>
+      <title>Analytics</title>
       <link>https://jaidevd.com/tags/analytics/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/analytics/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>dataviz</title>
+      <title>Dataviz</title>
       <link>https://jaidevd.com/tags/dataviz/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/dataviz/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>PCA</title>
       <link>https://jaidevd.com/tags/pca/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/pca/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>emd</title>
+      <title>Emd</title>
       <link>https://jaidevd.com/tags/emd/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/emd/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>fourier</title>
+      <title>Fourier</title>
       <link>https://jaidevd.com/tags/fourier/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/fourier/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>nonstationary</title>
+      <title>Nonstationary</title>
       <link>https://jaidevd.com/tags/nonstationary/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/nonstationary/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>pyhht</title>
+      <title>Pyhht</title>
       <link>https://jaidevd.com/tags/pyhht/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/pyhht/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>signalprocessing</title>
+      <title>Signalprocessing</title>
       <link>https://jaidevd.com/tags/signalprocessing/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/signalprocessing/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>interpolation</title>
+      <title>Interpolation</title>
       <link>https://jaidevd.com/tags/interpolation/</link>
       <pubDate>Fri, 18 Apr 2014 12:10:15 +0530</pubDate>
-      
       <guid>https://jaidevd.com/tags/interpolation/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

@@ -40,8 +40,7 @@ if (!doNotTrack) {
 }
 </script>
 </head>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Edge Effects in Empirical Mode Decomposition"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Edge Effects in Empirical Mode Decomposition"/>
 <meta name="twitter:description" content="It has been a little over three years since I started working on a Python implementation of the Hilbert Huang Transform. When I first presented it at SciPy India 2011 (video) it was just a collection of small scripts, without packaging, testing or even docstrings. Over time PyHHT has garnered some interest, and I have, since the last few weeks, found the time to regularly work on it. I have been able to come up with a decent implementation of empirical mode decomposition, pretty much in line with everything described in the original paper by Huang et al."/>
 
 
@@ -150,7 +149,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -203,89 +202,89 @@ frequencies:</p>
 <p>To highlight the idea of how EMD processes the residue (or the trend) in a
 signal, let&rsquo;s add a linear ramp to the signal. (For the sake of simplicity,
 let&rsquo;s just add the timestamps to the signal.)</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">mpl</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
-<span style="color:#000;font-weight:bold">%</span>matplotlib inline
-
-
-mpl<span style="color:#000;font-weight:bold">.</span>style<span style="color:#000;font-weight:bold">.</span>use(<span style="color:#d14">&#39;ggplot&#39;</span>)
-mpl<span style="color:#000;font-weight:bold">.</span>rcParams[<span style="color:#d14">&#39;figure.figsize&#39;</span>] <span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">10.0</span>, <span style="color:#099">8.0</span>)
-
-
-n_points <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1000</span>
-f1, f2 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">5</span>, <span style="color:#099">10</span>
-time_samples <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linspace(<span style="color:#099">0</span>, <span style="color:#099">1</span>, n_points)
-mode1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sin(<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>pi <span style="color:#000;font-weight:bold">*</span> f1 <span style="color:#000;font-weight:bold">*</span> time_samples)
-mode2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sin(<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>pi <span style="color:#000;font-weight:bold">*</span> f2 <span style="color:#000;font-weight:bold">*</span> time_samples)
-trend <span style="color:#000;font-weight:bold">=</span> time_samples
-
-signal <span style="color:#000;font-weight:bold">=</span> mode1 <span style="color:#000;font-weight:bold">+</span> mode2 <span style="color:#000;font-weight:bold">+</span> trend
-
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">mpl</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">%</span>matplotlib inline
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mpl<span style="color:#000;font-weight:bold">.</span>style<span style="color:#000;font-weight:bold">.</span>use(<span style="color:#d14">&#39;ggplot&#39;</span>)
+</span></span><span style="display:flex;"><span>mpl<span style="color:#000;font-weight:bold">.</span>rcParams[<span style="color:#d14">&#39;figure.figsize&#39;</span>] <span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">10.0</span>, <span style="color:#099">8.0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>n_points <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1000</span>
+</span></span><span style="display:flex;"><span>f1, f2 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">5</span>, <span style="color:#099">10</span>
+</span></span><span style="display:flex;"><span>time_samples <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linspace(<span style="color:#099">0</span>, <span style="color:#099">1</span>, n_points)
+</span></span><span style="display:flex;"><span>mode1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sin(<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>pi <span style="color:#000;font-weight:bold">*</span> f1 <span style="color:#000;font-weight:bold">*</span> time_samples)
+</span></span><span style="display:flex;"><span>mode2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sin(<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>pi <span style="color:#000;font-weight:bold">*</span> f2 <span style="color:#000;font-weight:bold">*</span> time_samples)
+</span></span><span style="display:flex;"><span>trend <span style="color:#000;font-weight:bold">=</span> time_samples
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>signal <span style="color:#000;font-weight:bold">=</span> mode1 <span style="color:#000;font-weight:bold">+</span> mode2 <span style="color:#000;font-weight:bold">+</span> trend
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal)</span></span></code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_3_1.png" alt=""></p>
 <p>We would expect an ideal EMD algorithm to produce two IMFs, one corresponding to each of our unimodal signals, and then to extract the residue too. Let&rsquo;s write a naive sifting loop.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.signal</span> <span style="color:#000;font-weight:bold">import</span> argrelmin, argrelmax
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.interpolate</span> <span style="color:#000;font-weight:bold">import</span> splrep, splev
-
-tol <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.05</span>
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">ndiff_extrema_zcrossing</span>(x):
-    <span style="color:#d14">&#34;&#34;&#34;Get the difference between the number of zero crossings and extrema.&#34;&#34;&#34;</span>
-    n_max <span style="color:#000;font-weight:bold">=</span> argrelmax(x)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]
-    n_min <span style="color:#000;font-weight:bold">=</span> argrelmin(x)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]
-    n_zeros <span style="color:#000;font-weight:bold">=</span> (x[:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> x[<span style="color:#099">1</span>:] <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>sum()
-    <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">abs</span>((n_max <span style="color:#000;font-weight:bold">+</span> n_min) <span style="color:#000;font-weight:bold">-</span> n_zeros)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">sift</span>(x):
-    <span style="color:#d14">&#34;&#34;&#34;One sifting iteration.&#34;&#34;&#34;</span>
-    maxima <span style="color:#000;font-weight:bold">=</span> argrelmax(x)[<span style="color:#099">0</span>]
-    minima <span style="color:#000;font-weight:bold">=</span> argrelmin(x)[<span style="color:#099">0</span>]
-    x_upper <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((maxima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
-    x_upper[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> maxima
-    x_upper[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
-    x_lower <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((minima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
-    x_lower[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> minima
-    x_lower[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
-    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_upper, x[x_upper<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
-    upper_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
-    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_lower, x[x_lower<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
-    lower_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
-    mean_amplitude <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(upper_envelop <span style="color:#000;font-weight:bold">-</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
-    local_mean <span style="color:#000;font-weight:bold">=</span> (upper_envelop <span style="color:#000;font-weight:bold">+</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
-    amplitude_error <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(local_mean) <span style="color:#000;font-weight:bold">/</span> mean_amplitude
-    <span style="color:#000;font-weight:bold">return</span> x <span style="color:#000;font-weight:bold">-</span> local_mean, amplitude_error<span style="color:#000;font-weight:bold">.</span>sum()
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">emd</span>(x, n_imfs):
-    imfs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
-    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> xrange(n_imfs):
-        mode <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
-        <span style="color:#000;font-weight:bold">while</span> (ndiff_extrema_zcrossing(mode) <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">1</span>):
-            mode, amplitude_error <span style="color:#000;font-weight:bold">=</span> sift(mode)
-            <span style="color:#000;font-weight:bold">if</span> amplitude_error <span style="color:#000;font-weight:bold">&lt;=</span> tol:
-                <span style="color:#000;font-weight:bold">break</span>
-        imfs[i, :] <span style="color:#000;font-weight:bold">=</span> mode
-    imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :] <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
-    <span style="color:#000;font-weight:bold">return</span> imfs</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.signal</span> <span style="color:#000;font-weight:bold">import</span> argrelmin, argrelmax
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.interpolate</span> <span style="color:#000;font-weight:bold">import</span> splrep, splev
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tol <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.05</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">ndiff_extrema_zcrossing</span>(x):
+</span></span><span style="display:flex;"><span>    <span style="color:#d14">&#34;&#34;&#34;Get the difference between the number of zero crossings and extrema.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    n_max <span style="color:#000;font-weight:bold">=</span> argrelmax(x)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>    n_min <span style="color:#000;font-weight:bold">=</span> argrelmin(x)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>    n_zeros <span style="color:#000;font-weight:bold">=</span> (x[:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> x[<span style="color:#099">1</span>:] <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>sum()
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">abs</span>((n_max <span style="color:#000;font-weight:bold">+</span> n_min) <span style="color:#000;font-weight:bold">-</span> n_zeros)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">sift</span>(x):
+</span></span><span style="display:flex;"><span>    <span style="color:#d14">&#34;&#34;&#34;One sifting iteration.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    maxima <span style="color:#000;font-weight:bold">=</span> argrelmax(x)[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>    minima <span style="color:#000;font-weight:bold">=</span> argrelmin(x)[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>    x_upper <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((maxima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
+</span></span><span style="display:flex;"><span>    x_upper[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> maxima
+</span></span><span style="display:flex;"><span>    x_upper[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>    x_lower <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((minima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
+</span></span><span style="display:flex;"><span>    x_lower[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> minima
+</span></span><span style="display:flex;"><span>    x_lower[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_upper, x[x_upper<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
+</span></span><span style="display:flex;"><span>    upper_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
+</span></span><span style="display:flex;"><span>    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_lower, x[x_lower<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
+</span></span><span style="display:flex;"><span>    lower_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
+</span></span><span style="display:flex;"><span>    mean_amplitude <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(upper_envelop <span style="color:#000;font-weight:bold">-</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>    local_mean <span style="color:#000;font-weight:bold">=</span> (upper_envelop <span style="color:#000;font-weight:bold">+</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>    amplitude_error <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(local_mean) <span style="color:#000;font-weight:bold">/</span> mean_amplitude
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> x <span style="color:#000;font-weight:bold">-</span> local_mean, amplitude_error<span style="color:#000;font-weight:bold">.</span>sum()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">emd</span>(x, n_imfs):
+</span></span><span style="display:flex;"><span>    imfs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> xrange(n_imfs):
+</span></span><span style="display:flex;"><span>        mode <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">while</span> (ndiff_extrema_zcrossing(mode) <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">1</span>):
+</span></span><span style="display:flex;"><span>            mode, amplitude_error <span style="color:#000;font-weight:bold">=</span> sift(mode)
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">if</span> amplitude_error <span style="color:#000;font-weight:bold">&lt;=</span> tol:
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>        imfs[i, :] <span style="color:#000;font-weight:bold">=</span> mode
+</span></span><span style="display:flex;"><span>    imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :] <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> imfs</span></span></code></pre></div>
 <p>Let&rsquo;s extract and visualize the IMFs to see if they meet our expectations.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>
-imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, n_imfs)
-plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
-plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
-<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
-    plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
-    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf </span><span style="color:#d14">{}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, n_imfs)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf </span><span style="color:#d14">{}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</span></span></code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_7_1.png" alt=""></p>
 <p>On closer inspection of the residue, it seems like it contains the true residue (the ramp) superimposed on an IMF that we haven&rsquo;t yet sifted out. Let&rsquo;s see what happens when we increment the expected number of IMFs.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">3</span>
-imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, n_imfs)
-plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
-plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
-<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
-    plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
-    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf </span><span style="color:#d14">{}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">3</span>
+</span></span><span style="display:flex;"><span>imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, n_imfs)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf </span><span style="color:#d14">{}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</span></span></code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_9_1.png" alt=""></p>
 <p>We&rsquo;ve finally reached a stopping point beyond which sifting is not possible. While the decomposition itself is valid, the inferences we draw from it can be quite misleading. In a broad sense, here is what is wrong with the decomposition:</p>
 <ol>
@@ -294,37 +293,37 @@ plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#
 <li>The IMFs should at least appear to be pure sinudoids.</li>
 </ol>
 <p>To get to the heart of the problem, let&rsquo;s go back to our original signal and try to step through the sifting process. The first thing we do to an input signal is to construct upper and lower envelopes by interpolating with cubic splines its local maxima and local minima respectively, and then subtracting the mean of these envelopes from the signal.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_envelopes</span>(x):
-    <span style="color:#d14">&#34;&#34;&#34;Compute the upper and lower envelopes of a signal.&#34;&#34;&#34;</span>
-    maxima <span style="color:#000;font-weight:bold">=</span> argrelmax(x)[<span style="color:#099">0</span>]
-    minima <span style="color:#000;font-weight:bold">=</span> argrelmin(x)[<span style="color:#099">0</span>]
-    x_upper <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((maxima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
-    x_upper[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> maxima
-    x_upper[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
-    x_lower <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((minima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
-    x_lower[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> minima
-    x_lower[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
-    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_upper, x[x_upper<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
-    upper_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
-    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_lower, x[x_lower<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
-    lower_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
-    <span style="color:#000;font-weight:bold">return</span> upper_envelop, lower_envelop
-
-upper, lower <span style="color:#000;font-weight:bold">=</span> get_envelopes(signal)
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal, <span style="color:#d14">&#39;b&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;signal&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, upper, <span style="color:#d14">&#39;r--&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;upper envelope&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, lower, <span style="color:#d14">&#39;g--&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;lower envelope&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>legend()</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_envelopes</span>(x):
+</span></span><span style="display:flex;"><span>    <span style="color:#d14">&#34;&#34;&#34;Compute the upper and lower envelopes of a signal.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    maxima <span style="color:#000;font-weight:bold">=</span> argrelmax(x)[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>    minima <span style="color:#000;font-weight:bold">=</span> argrelmin(x)[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>    x_upper <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((maxima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
+</span></span><span style="display:flex;"><span>    x_upper[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> maxima
+</span></span><span style="display:flex;"><span>    x_upper[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>    x_lower <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((minima<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span>,))
+</span></span><span style="display:flex;"><span>    x_lower[<span style="color:#099">1</span>:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> minima
+</span></span><span style="display:flex;"><span>    x_lower[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_upper, x[x_upper<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
+</span></span><span style="display:flex;"><span>    upper_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
+</span></span><span style="display:flex;"><span>    tck <span style="color:#000;font-weight:bold">=</span> splrep(x_lower, x[x_lower<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)])
+</span></span><span style="display:flex;"><span>    lower_envelop <span style="color:#000;font-weight:bold">=</span> splev(np<span style="color:#000;font-weight:bold">.</span>arange(x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]), tck)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> upper_envelop, lower_envelop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>upper, lower <span style="color:#000;font-weight:bold">=</span> get_envelopes(signal)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal, <span style="color:#d14">&#39;b&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;signal&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, upper, <span style="color:#d14">&#39;r--&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;upper envelope&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, lower, <span style="color:#d14">&#39;g--&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;lower envelope&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>legend()</span></span></code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_11_1.png" alt=""></p>
 <p>If we zoom in on the left and right edges of the plot, here&rsquo;s what we see.</p>
-<p><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">121</span>)
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[:<span style="color:#099">100</span>], signal[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;b&#39;</span>,
-         time_samples[:<span style="color:#099">100</span>], upper[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;r--&#39;</span>,
-	 time_samples[:<span style="color:#099">100</span>], lower[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;g--&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">122</span>)
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[<span style="color:#099">900</span>:], signal[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;b&#39;</span>,
-         time_samples[<span style="color:#099">900</span>:], upper[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;r--&#39;</span>,
-	 time_samples[<span style="color:#099">900</span>:], lower[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;g--&#39;</span>)</code></pre></div>
+<p><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">121</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[:<span style="color:#099">100</span>], signal[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;b&#39;</span>,
+</span></span><span style="display:flex;"><span>         time_samples[:<span style="color:#099">100</span>], upper[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;r--&#39;</span>,
+</span></span><span style="display:flex;"><span>	 time_samples[:<span style="color:#099">100</span>], lower[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;g--&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">122</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[<span style="color:#099">900</span>:], signal[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;b&#39;</span>,
+</span></span><span style="display:flex;"><span>         time_samples[<span style="color:#099">900</span>:], upper[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;r--&#39;</span>,
+</span></span><span style="display:flex;"><span>	 time_samples[<span style="color:#099">900</span>:], lower[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;g--&#39;</span>)</span></span></code></pre></div>
 <img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_13_1.png" alt=""></p>
 <p>It turns out that the envelopes constructed here are not <em>true</em> envelopes, in that the signal is leaking out of their bounds. This is because the naive interpolation method assumes the endpoints of the signal to be knots in the interpolation. Consequently, the splines cannot numerically &ldquo;compensate&rdquo; for the slope of the signal near the endpoints.</p>
 <p>But if we don&rsquo;t consider the endpoints of the signals as the endpoints of the splines, what is the alternative? It&rsquo;s not like we have any more data, so we just make some. The solution, simply put, consists of:</p>
@@ -334,75 +333,75 @@ plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[<span sty
 <li>slicing off these envelopes with the indices of the original signal</li>
 </ol>
 <p>This is how it looks when $k = 2$:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pyhht.utils</span> <span style="color:#000;font-weight:bold">import</span> boundary_conditions
-tmin, tmax, xmin, xmax <span style="color:#000;font-weight:bold">=</span> boundary_conditions(signal, time_samples, nbsym<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>)
-
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal, <span style="color:#d14">&#39;b&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>plot(tmin, xmin, <span style="color:#d14">&#39;go&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;minima&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>plot(tmax, xmax, <span style="color:#d14">&#39;ro&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;maxima&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>vlines(tmax[<span style="color:#099">2</span>], <span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">3</span>, <span style="color:#d14">&#39;r&#39;</span>,<span style="color:#d14">&#39;dashdot&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;axis of symmetry&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>vlines(tmin[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">3</span>], <span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">3</span>, <span style="color:#d14">&#39;g&#39;</span>, <span style="color:#d14">&#39;dashdot&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;axis of symmetry&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>legend(loc<span style="color:#000;font-weight:bold">=</span><span style="color:#099">4</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pyhht.utils</span> <span style="color:#000;font-weight:bold">import</span> boundary_conditions
+</span></span><span style="display:flex;"><span>tmin, tmax, xmin, xmax <span style="color:#000;font-weight:bold">=</span> boundary_conditions(signal, time_samples, nbsym<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal, <span style="color:#d14">&#39;b&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(tmin, xmin, <span style="color:#d14">&#39;go&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;minima&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(tmax, xmax, <span style="color:#d14">&#39;ro&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;maxima&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>vlines(tmax[<span style="color:#099">2</span>], <span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">3</span>, <span style="color:#d14">&#39;r&#39;</span>,<span style="color:#d14">&#39;dashdot&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;axis of symmetry&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>vlines(tmin[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">3</span>], <span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">3</span>, <span style="color:#d14">&#39;g&#39;</span>, <span style="color:#d14">&#39;dashdot&#39;</span>, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;axis of symmetry&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>legend(loc<span style="color:#000;font-weight:bold">=</span><span style="color:#099">4</span>)</span></span></code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_16_1.png" alt=""></p>
 <p>The dotted lines represent the axes about which the extrapolated extrema are symmetric. Now we can use these new data points to reconstruct our envelopes, as follows.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tck <span style="color:#000;font-weight:bold">=</span> splrep(tmin, xmin)
-lower_env <span style="color:#000;font-weight:bold">=</span> splev(time_samples, tck)
-tck <span style="color:#000;font-weight:bold">=</span> splrep(tmax, xmax)
-upper_env <span style="color:#000;font-weight:bold">=</span> splev(time_samples, tck)
-
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal, <span style="color:#d14">&#39;b&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, upper_env, <span style="color:#d14">&#39;r-.&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, lower_env, <span style="color:#d14">&#39;g-.&#39;</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tck <span style="color:#000;font-weight:bold">=</span> splrep(tmin, xmin)
+</span></span><span style="display:flex;"><span>lower_env <span style="color:#000;font-weight:bold">=</span> splev(time_samples, tck)
+</span></span><span style="display:flex;"><span>tck <span style="color:#000;font-weight:bold">=</span> splrep(tmax, xmax)
+</span></span><span style="display:flex;"><span>upper_env <span style="color:#000;font-weight:bold">=</span> splev(time_samples, tck)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, signal, <span style="color:#d14">&#39;b&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, upper_env, <span style="color:#d14">&#39;r-.&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, lower_env, <span style="color:#d14">&#39;g-.&#39;</span>)</span></span></code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_18_1.png" alt=""></p>
 <p>It can be seen that the splines don&rsquo;t terminate at the endpoints of the signal itself. As before, here are the plots of the edges of this interpolation.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">121</span>)
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[:<span style="color:#099">100</span>], signal[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;b&#39;</span>,
-         time_samples[:<span style="color:#099">100</span>], upper_env[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;r--&#39;</span>,
-	 time_samples[:<span style="color:#099">100</span>], lower_env[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;g--&#39;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">122</span>)
-plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[<span style="color:#099">900</span>:], signal[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;b&#39;</span>,
-         time_samples[<span style="color:#099">900</span>:], upper_env[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;r--&#39;</span>,
-	 time_samples[<span style="color:#099">900</span>:], lower_env[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;g--&#39;</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">121</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[:<span style="color:#099">100</span>], signal[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;b&#39;</span>,
+</span></span><span style="display:flex;"><span>         time_samples[:<span style="color:#099">100</span>], upper_env[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;r--&#39;</span>,
+</span></span><span style="display:flex;"><span>	 time_samples[:<span style="color:#099">100</span>], lower_env[:<span style="color:#099">100</span>], <span style="color:#d14">&#39;g--&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>subplot(<span style="color:#099">122</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples[<span style="color:#099">900</span>:], signal[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;b&#39;</span>,
+</span></span><span style="display:flex;"><span>         time_samples[<span style="color:#099">900</span>:], upper_env[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;r--&#39;</span>,
+</span></span><span style="display:flex;"><span>	 time_samples[<span style="color:#099">900</span>:], lower_env[<span style="color:#099">900</span>:], <span style="color:#d14">&#39;g--&#39;</span>)</span></span></code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_20_1.png" alt=""></p>
 <p>The &ldquo;leakage&rdquo; of the signal beyond the envelopes is far less drastic, and we&rsquo;re much closer to a <em>true</em> envelope now. It&rsquo;s still not a perfect envelope, but I&rsquo;m not entirely sure on whether that is a function of the sampling rate (I doubt it) or the order of symmetry, or anything else. I suspect it might have to do with the the degree of the interpolating polynomial. Perhaps a higher order polynomial might eliminate this little leakage, but I&rsquo;m sure it won&rsquo;t work well for the rest of the signal, the bulk of which is far more critical to the decomposition. Anyhow, let&rsquo;s see how EMD fares with this added heuristic. For this we will have to redefine the <code>sift</code> and <code>emd</code> functions from before.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pyhht.utils</span> <span style="color:#000;font-weight:bold">import</span> extr
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">sift</span>(x, ts):
-    <span style="color:#d14">&#34;&#34;&#34;One sifting iteration.&#34;&#34;&#34;</span>
-    tmin, tmax, xmin, xmax <span style="color:#000;font-weight:bold">=</span> boundary_conditions(x, ts)
-    tck <span style="color:#000;font-weight:bold">=</span> splrep(tmin, xmin)
-    lower_envelop <span style="color:#000;font-weight:bold">=</span> splev(ts, tck)
-    tck <span style="color:#000;font-weight:bold">=</span> splrep(tmax, xmax)
-    upper_envelop <span style="color:#000;font-weight:bold">=</span> splev(ts, tck)
-    mean_amplitude <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(upper_envelop <span style="color:#000;font-weight:bold">-</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
-    local_mean <span style="color:#000;font-weight:bold">=</span> (upper_envelop <span style="color:#000;font-weight:bold">+</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
-    amplitude_error <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(local_mean) <span style="color:#000;font-weight:bold">/</span> mean_amplitude
-    <span style="color:#000;font-weight:bold">return</span> x <span style="color:#000;font-weight:bold">-</span> local_mean, amplitude_error<span style="color:#000;font-weight:bold">.</span>sum()
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">emd</span>(x, ts, n_imfs):
-    imfs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
-    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> xrange(n_imfs):
-        ix <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
-        mode <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
-        nmin, nmax, nzero <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">map</span>(<span style="color:#0086b3">len</span>, extr(mode))
-        <span style="color:#000;font-weight:bold">while</span> <span style="color:#0086b3">abs</span>((nmin <span style="color:#000;font-weight:bold">+</span> nmax) <span style="color:#000;font-weight:bold">-</span> nzero) <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">1</span>:
-            mode, amplitude_error <span style="color:#000;font-weight:bold">=</span> sift(mode, ts)
-            <span style="color:#000;font-weight:bold">if</span> amplitude_error <span style="color:#000;font-weight:bold">&lt;=</span> tol:
-                <span style="color:#000;font-weight:bold">break</span>
-        imfs[i, :] <span style="color:#000;font-weight:bold">=</span> mode
-    imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :] <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
-    <span style="color:#000;font-weight:bold">return</span> imfs
-
-
-n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>
-imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, time_samples, n_imfs<span style="color:#000;font-weight:bold">=</span>n_imfs)
-plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
-plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
-<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
-    plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
-    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf </span><span style="color:#d14">{}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pyhht.utils</span> <span style="color:#000;font-weight:bold">import</span> extr
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">sift</span>(x, ts):
+</span></span><span style="display:flex;"><span>    <span style="color:#d14">&#34;&#34;&#34;One sifting iteration.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    tmin, tmax, xmin, xmax <span style="color:#000;font-weight:bold">=</span> boundary_conditions(x, ts)
+</span></span><span style="display:flex;"><span>    tck <span style="color:#000;font-weight:bold">=</span> splrep(tmin, xmin)
+</span></span><span style="display:flex;"><span>    lower_envelop <span style="color:#000;font-weight:bold">=</span> splev(ts, tck)
+</span></span><span style="display:flex;"><span>    tck <span style="color:#000;font-weight:bold">=</span> splrep(tmax, xmax)
+</span></span><span style="display:flex;"><span>    upper_envelop <span style="color:#000;font-weight:bold">=</span> splev(ts, tck)
+</span></span><span style="display:flex;"><span>    mean_amplitude <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(upper_envelop <span style="color:#000;font-weight:bold">-</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>    local_mean <span style="color:#000;font-weight:bold">=</span> (upper_envelop <span style="color:#000;font-weight:bold">+</span> lower_envelop) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>    amplitude_error <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>abs(local_mean) <span style="color:#000;font-weight:bold">/</span> mean_amplitude
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> x <span style="color:#000;font-weight:bold">-</span> local_mean, amplitude_error<span style="color:#000;font-weight:bold">.</span>sum()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">emd</span>(x, ts, n_imfs):
+</span></span><span style="display:flex;"><span>    imfs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> xrange(n_imfs):
+</span></span><span style="display:flex;"><span>        ix <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>        mode <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>        nmin, nmax, nzero <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">map</span>(<span style="color:#0086b3">len</span>, extr(mode))
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">while</span> <span style="color:#0086b3">abs</span>((nmin <span style="color:#000;font-weight:bold">+</span> nmax) <span style="color:#000;font-weight:bold">-</span> nzero) <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">1</span>:
+</span></span><span style="display:flex;"><span>            mode, amplitude_error <span style="color:#000;font-weight:bold">=</span> sift(mode, ts)
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">if</span> amplitude_error <span style="color:#000;font-weight:bold">&lt;=</span> tol:
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>        imfs[i, :] <span style="color:#000;font-weight:bold">=</span> mode
+</span></span><span style="display:flex;"><span>    imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :] <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> imfs<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> imfs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>n_imfs <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>imfs <span style="color:#000;font-weight:bold">=</span> emd(signal, time_samples, n_imfs<span style="color:#000;font-weight:bold">=</span>n_imfs)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, :])
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;residue&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_imfs):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>subplot(n_imfs <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>, <span style="color:#099">1</span>, i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>), plt<span style="color:#000;font-weight:bold">.</span>plot(time_samples, imfs[i, :])
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#d14">&#39;imf </span><span style="color:#d14">{}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>))</span></span></code></pre></div>
 <p><img src="/img/understanding-edge-effects-in-empirical-mode-decomposition_22_0.png" alt=""></p>
 <p>This decomposition is a clearly better approximation of the original components. You can easily tell the two unimodal components from earlier, and even the residue is much closer to the linear trend that we had included in the signal.</p>
 <p>The interesting thing to note here is that this signal was very straightforward, and even then the edge effects of sifting were severe. There&rsquo;s no telling how these might affect the decomposition of real world data.</p>
@@ -411,8 +410,8 @@ plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#
         </p>
     </div>
     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -568,7 +567,7 @@ plt<span style="color:#000;font-weight:bold">.</span>ylabel(<span style="color:#
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

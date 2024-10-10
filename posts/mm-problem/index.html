@@ -40,8 +40,7 @@ if (!doNotTrack) {
 }
 </script>
 </head>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Understanding Allen Downey&#39;s Solution to the M&amp;M Problem"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Understanding Allen Downey&#39;s Solution to the M&amp;M Problem"/>
 <meta name="twitter:description" content="Allen Downey makes a very good case for learning advanced mathematics through programming (Check the first section of the preface of Think Bayes, titled &ldquo;My theory, which is mine&rdquo;). But before the reader can hit paydirt with using the Bayes theorem in programming, Downey makes you go through some elementary problems in probability, which have to be solved by hand first, if you expect to have a clear enough understanding of the concept."/>
 
 
@@ -150,7 +149,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -190,7 +189,7 @@ continuous functions, not discrete structures. And that has been the downfall
 of many a programmer.</p>
 <p>What follows is just narcissistic note-taking, which I hope won&rsquo;t let me forget
 what I&rsquo;ve already learnt.</p>
-<h2 id="bayes-theorem">Bayes' Theorem</h2>
+<h2 id="bayes-theorem">Bayes&rsquo; Theorem</h2>
 <p>Simply put, it says that given data $D$ and a hypothesis $H$</p>
 <p>$$ \begin{equation} P(H|D) = \frac{P(H)P(D|H)}{P(D)} \end{equation} $$</p>
 <p>where
@@ -292,13 +291,13 @@ One is yellow and one is green. The problem is:</p>
     </tr>
   </tbody>
 </table>
-<p>As we proceed with this problem, we&rsquo;ll also see how it serves as a good example of the diachronic interpretation of the Bayes' theorem - i.e., how it helps us update our belief about a given hypothesis once we&rsquo;ve seen more data.</p>
+<p>As we proceed with this problem, we&rsquo;ll also see how it serves as a good example of the diachronic interpretation of the Bayes&rsquo; theorem - i.e., how it helps us update our belief about a given hypothesis once we&rsquo;ve seen more data.</p>
 <ol>
 <li>Our <em>priors</em> about the two hypotheses would be naive, in that we would expect both hypotheses to be equiprobable, since we haven&rsquo;t considered the color distribution yet. Thus, $ P(H_{a}) = P(H_{b}) = \frac{1}{2}$</li>
 <li>The likelihoods for the respective hypotheses can be readily obtained from the color distribution. Recall that $P(D|H_{a})$ is simply the probability that the observed data (one green, one yellow) is true for hypothesis $H_{a}$. Thus, $P(D|H_{a})$ equals the probability that the yellow M&amp;M is from 1994 <em>and</em> the green one is from 1996. From the table, these values are both $\frac{1}{5}$. Thus, $P(D|H_{a}) = \frac{1}{25}$. Similarly, $P(D|H_{b}) = \frac{14}{100} \times \frac{10}{100} = \frac{7}{500}$.</li>
-<li>Note that for each hypothesis, the product of the first two columns makes up the numerator of the right hand side of Bayes' equation.</li>
+<li>Note that for each hypothesis, the product of the first two columns makes up the numerator of the right hand side of Bayes&rsquo; equation.</li>
 </ol>
-<p>So far so good, but I was stuck for a while before I could understand Downey&rsquo;s explanation of how he calculated the normalizing constant for the two cases. He writes that the third column is just the sum of the products of the first two columns. This means, that the normalizing constant is just the sum of the numerators for the respective Bayes' equations for the two scenarios. So,</p>
+<p>So far so good, but I was stuck for a while before I could understand Downey&rsquo;s explanation of how he calculated the normalizing constant for the two cases. He writes that the third column is just the sum of the products of the first two columns. This means, that the normalizing constant is just the sum of the numerators for the respective Bayes&rsquo; equations for the two scenarios. So,</p>
 <p>$$ P(D) = P(H_{a})P(D|H_{a}) + P(H_{b})P(D|H_{b})$$</p>
 <p>Thus,</p>
 <p>$$ P(D) = \frac{1}{2} \times \frac{1}{25} + \frac{1}{2} \times \frac{7}{500} = \frac{27}{1000} $$</p>
@@ -309,8 +308,8 @@ One is yellow and one is green. The problem is:</p>
         </p>
     </div>
     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -462,7 +461,7 @@ One is yellow and one is green. The problem is:</p>
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

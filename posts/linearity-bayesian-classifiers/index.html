@@ -40,8 +40,7 @@ if (!doNotTrack) {
 }
 </script>
 </head>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="On the Linearity of Bayesian Classifiers"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="On the Linearity of Bayesian Classifiers"/>
 <meta name="twitter:description" content="In his book, Neural Networks - A Comprehensive Foundation, Simon Haykin has an entire section (3.10) dedicated to how perceptrons and Bayesian classifiers are closely related when operating in a Gaussian environment. However, it is not until the end of the section that Haykin mentions that the relation is only limited to linearity. What is interesting about this is that a Perceptron can produce the same classification &ldquo;model&rdquo; as a Bayesian classifier, provided that the underlying data is drawn from a Gaussian distribution."/>
 
 
@@ -150,7 +149,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -175,64 +174,64 @@ if (!doNotTrack) {
 <p>where $\mathbf{C}$ is the covariance matrix of the dataset $X = [\mathbf{x_{1}}, \mathbf{x_{2}}, &hellip; \mathbf{x_{n}}]$, and $\mathbf{\mu_{i}}$ is the mean of the input vectors belonging to the $i$th class, for $i \in [1, 2]$, then the decision function can be rewritten as</p>
 <p>$$ y = \mathbf{w^{T}x} + b $$</p>
 <p>To verify this, let&rsquo;s make up a classification problem and train a Gaussian Bayes classifier on it.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.preprocessing</span> <span style="color:#000;font-weight:bold">import</span> StandardScaler
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.naive_bayes</span> <span style="color:#000;font-weight:bold">import</span> GaussianNB
-
-
-<span style="color:#998;font-style:italic"># make some data</span>
-x1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#000;font-weight:bold">.</span>multivariate_normal([<span style="color:#099">0</span>, <span style="color:#099">0</span>], [[<span style="color:#099">0.05</span>, <span style="color:#099">0</span>], [<span style="color:#099">0</span>, <span style="color:#099">0.05</span>]], size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">1000</span>,))
-x2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#000;font-weight:bold">.</span>multivariate_normal([<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], [[<span style="color:#099">0.05</span>, <span style="color:#099">0</span>], [<span style="color:#099">0</span>, <span style="color:#099">0.05</span>]], size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">1000</span>,))
-plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">8</span>, <span style="color:#099">6</span>))
-plt<span style="color:#000;font-weight:bold">.</span>scatter(x1[:, <span style="color:#099">0</span>], x1[:, <span style="color:#099">1</span>], marker<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;o&#34;</span>, c<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;g&#34;</span>)
-plt<span style="color:#000;font-weight:bold">.</span>scatter(x2[:, <span style="color:#099">0</span>], x2[:, <span style="color:#099">1</span>], marker<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;x&#34;</span>, c<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;r&#34;</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.preprocessing</span> <span style="color:#000;font-weight:bold">import</span> StandardScaler
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.naive_bayes</span> <span style="color:#000;font-weight:bold">import</span> GaussianNB
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># make some data</span>
+</span></span><span style="display:flex;"><span>x1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#000;font-weight:bold">.</span>multivariate_normal([<span style="color:#099">0</span>, <span style="color:#099">0</span>], [[<span style="color:#099">0.05</span>, <span style="color:#099">0</span>], [<span style="color:#099">0</span>, <span style="color:#099">0.05</span>]], size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">1000</span>,))
+</span></span><span style="display:flex;"><span>x2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#000;font-weight:bold">.</span>multivariate_normal([<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], [[<span style="color:#099">0.05</span>, <span style="color:#099">0</span>], [<span style="color:#099">0</span>, <span style="color:#099">0.05</span>]], size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">1000</span>,))
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">8</span>, <span style="color:#099">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>scatter(x1[:, <span style="color:#099">0</span>], x1[:, <span style="color:#099">1</span>], marker<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;o&#34;</span>, c<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;g&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>scatter(x2[:, <span style="color:#099">0</span>], x2[:, <span style="color:#099">1</span>], marker<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;x&#34;</span>, c<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;r&#34;</span>)</span></span></code></pre></div>
 <p><img src="/img/linear-bayes-1.png" alt=""></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># adding labels and normalizing data</span>
-x1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[x1, np<span style="color:#000;font-weight:bold">.</span>ones((<span style="color:#099">1000</span>, <span style="color:#099">1</span>))]
-x2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[x2, np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">1000</span>, <span style="color:#099">1</span>))]
-X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>r_[x1, x2]
-X <span style="color:#000;font-weight:bold">=</span> StandardScaler()<span style="color:#000;font-weight:bold">.</span>fit_transform(X)
-np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#000;font-weight:bold">.</span>shuffle(X)
-y <span style="color:#000;font-weight:bold">=</span> X[:, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
-X <span style="color:#000;font-weight:bold">=</span> X[:, :<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
-y[y <span style="color:#000;font-weight:bold">!=</span> <span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span></code></pre></div>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># define a function to help us draw a decision boundary</span>
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">draw_decision_boundary</span>(clf, X, y):
-    x_min, x_max <span style="color:#000;font-weight:bold">=</span> X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>min() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>max() <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
-    y_min, y_max <span style="color:#000;font-weight:bold">=</span> X[:, <span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>min() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, X[:, <span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>max() <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
-    xx, yy <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>meshgrid(np<span style="color:#000;font-weight:bold">.</span>arange(x_min, x_max, <span style="color:#099">0.1</span>),
-                         np<span style="color:#000;font-weight:bold">.</span>arange(y_min, y_max, <span style="color:#099">0.1</span>))
-    Z <span style="color:#000;font-weight:bold">=</span> clf<span style="color:#000;font-weight:bold">.</span>predict(np<span style="color:#000;font-weight:bold">.</span>c_[xx<span style="color:#000;font-weight:bold">.</span>ravel(), yy<span style="color:#000;font-weight:bold">.</span>ravel()])
-    Z <span style="color:#000;font-weight:bold">=</span> Z<span style="color:#000;font-weight:bold">.</span>reshape(xx<span style="color:#000;font-weight:bold">.</span>shape)
-    plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">8</span>, <span style="color:#099">6</span>))
-    plt<span style="color:#000;font-weight:bold">.</span>contourf(xx, yy, Z, alpha<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.4</span>)
-    plt<span style="color:#000;font-weight:bold">.</span>scatter(X[:, <span style="color:#099">0</span>], X[:, <span style="color:#099">1</span>], c<span style="color:#000;font-weight:bold">=</span>y, alpha<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.8</span>)
-
-<span style="color:#998;font-style:italic"># train a Gaussian Naive Bayes classifier on the dataset</span>
-clf <span style="color:#000;font-weight:bold">=</span> GaussianNB()
-clf<span style="color:#000;font-weight:bold">.</span>fit(X, y)
-draw_decision_boundary(clf, X, y)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># adding labels and normalizing data</span>
+</span></span><span style="display:flex;"><span>x1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[x1, np<span style="color:#000;font-weight:bold">.</span>ones((<span style="color:#099">1000</span>, <span style="color:#099">1</span>))]
+</span></span><span style="display:flex;"><span>x2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[x2, np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">1000</span>, <span style="color:#099">1</span>))]
+</span></span><span style="display:flex;"><span>X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>r_[x1, x2]
+</span></span><span style="display:flex;"><span>X <span style="color:#000;font-weight:bold">=</span> StandardScaler()<span style="color:#000;font-weight:bold">.</span>fit_transform(X)
+</span></span><span style="display:flex;"><span>np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#000;font-weight:bold">.</span>shuffle(X)
+</span></span><span style="display:flex;"><span>y <span style="color:#000;font-weight:bold">=</span> X[:, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
+</span></span><span style="display:flex;"><span>X <span style="color:#000;font-weight:bold">=</span> X[:, :<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
+</span></span><span style="display:flex;"><span>y[y <span style="color:#000;font-weight:bold">!=</span> <span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># define a function to help us draw a decision boundary</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">draw_decision_boundary</span>(clf, X, y):
+</span></span><span style="display:flex;"><span>    x_min, x_max <span style="color:#000;font-weight:bold">=</span> X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>min() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>max() <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>    y_min, y_max <span style="color:#000;font-weight:bold">=</span> X[:, <span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>min() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, X[:, <span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>max() <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>    xx, yy <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>meshgrid(np<span style="color:#000;font-weight:bold">.</span>arange(x_min, x_max, <span style="color:#099">0.1</span>),
+</span></span><span style="display:flex;"><span>                         np<span style="color:#000;font-weight:bold">.</span>arange(y_min, y_max, <span style="color:#099">0.1</span>))
+</span></span><span style="display:flex;"><span>    Z <span style="color:#000;font-weight:bold">=</span> clf<span style="color:#000;font-weight:bold">.</span>predict(np<span style="color:#000;font-weight:bold">.</span>c_[xx<span style="color:#000;font-weight:bold">.</span>ravel(), yy<span style="color:#000;font-weight:bold">.</span>ravel()])
+</span></span><span style="display:flex;"><span>    Z <span style="color:#000;font-weight:bold">=</span> Z<span style="color:#000;font-weight:bold">.</span>reshape(xx<span style="color:#000;font-weight:bold">.</span>shape)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">8</span>, <span style="color:#099">6</span>))
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>contourf(xx, yy, Z, alpha<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.4</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>scatter(X[:, <span style="color:#099">0</span>], X[:, <span style="color:#099">1</span>], c<span style="color:#000;font-weight:bold">=</span>y, alpha<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.8</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># train a Gaussian Naive Bayes classifier on the dataset</span>
+</span></span><span style="display:flex;"><span>clf <span style="color:#000;font-weight:bold">=</span> GaussianNB()
+</span></span><span style="display:flex;"><span>clf<span style="color:#000;font-weight:bold">.</span>fit(X, y)
+</span></span><span style="display:flex;"><span>draw_decision_boundary(clf, X, y)</span></span></code></pre></div>
 <p><img src="/img/linear-bayes-2.png" alt=""></p>
 <h3 id="estimation-of-the-weights-and-the-bias">Estimation of the weights and the bias</h3>
 <p>With a little bit of <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> hacking, we can produce $\mathbf{w}$ and $b$ in the equations above from the covariance matrix of $\mathbf{X}$ and its classwise means.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">C <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>cov(X<span style="color:#000;font-weight:bold">.</span>T)
-mu1 <span style="color:#000;font-weight:bold">=</span> X[y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>, :]<span style="color:#000;font-weight:bold">.</span>mean(<span style="color:#099">0</span>)
-mu2 <span style="color:#000;font-weight:bold">=</span> X[y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>, :]<span style="color:#000;font-weight:bold">.</span>mean(<span style="color:#099">0</span>)
-
-c_inverse <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linalg<span style="color:#000;font-weight:bold">.</span>inv(C)
-weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(c_inverse, mu1 <span style="color:#000;font-weight:bold">-</span> mu2)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>)
-intercept <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(np<span style="color:#000;font-weight:bold">.</span>dot(mu2<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>), c_inverse)<span style="color:#000;font-weight:bold">.</span>ravel(), mu2) <span style="color:#000;font-weight:bold">-</span> \
-            np<span style="color:#000;font-weight:bold">.</span>dot(np<span style="color:#000;font-weight:bold">.</span>dot(mu1<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>), c_inverse)<span style="color:#000;font-weight:bold">.</span>ravel(), mu1)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>C <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>cov(X<span style="color:#000;font-weight:bold">.</span>T)
+</span></span><span style="display:flex;"><span>mu1 <span style="color:#000;font-weight:bold">=</span> X[y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>, :]<span style="color:#000;font-weight:bold">.</span>mean(<span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>mu2 <span style="color:#000;font-weight:bold">=</span> X[y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>, :]<span style="color:#000;font-weight:bold">.</span>mean(<span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>c_inverse <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linalg<span style="color:#000;font-weight:bold">.</span>inv(C)
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(c_inverse, mu1 <span style="color:#000;font-weight:bold">-</span> mu2)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>intercept <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(np<span style="color:#000;font-weight:bold">.</span>dot(mu2<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>), c_inverse)<span style="color:#000;font-weight:bold">.</span>ravel(), mu2) <span style="color:#000;font-weight:bold">-</span> \
+</span></span><span style="display:flex;"><span>            np<span style="color:#000;font-weight:bold">.</span>dot(np<span style="color:#000;font-weight:bold">.</span>dot(mu1<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>), c_inverse)<span style="color:#000;font-weight:bold">.</span>ravel(), mu1)</span></span></code></pre></div>
 <p>Now that we have the estimated weights and the intercept, let&rsquo;s create a Perceptron classifier from these and see its performance.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.linear_model</span> <span style="color:#000;font-weight:bold">import</span> Perceptron
-
-clf <span style="color:#000;font-weight:bold">=</span> Perceptron()
-clf<span style="color:#000;font-weight:bold">.</span>fit(X, y) <span style="color:#998;font-style:italic"># Note that this is only necessary to fool sklearn</span>
-              <span style="color:#998;font-style:italic"># - it won&#39;t draw the decision surface otherwise</span>
-clf<span style="color:#000;font-weight:bold">.</span>coef_ <span style="color:#000;font-weight:bold">=</span> weights<span style="color:#000;font-weight:bold">.</span>T
-clf<span style="color:#000;font-weight:bold">.</span>intercept_ <span style="color:#000;font-weight:bold">=</span> intercept
-draw_decision_boundary(clf, X, y)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.linear_model</span> <span style="color:#000;font-weight:bold">import</span> Perceptron
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>clf <span style="color:#000;font-weight:bold">=</span> Perceptron()
+</span></span><span style="display:flex;"><span>clf<span style="color:#000;font-weight:bold">.</span>fit(X, y) <span style="color:#998;font-style:italic"># Note that this is only necessary to fool sklearn</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#998;font-style:italic"># - it won&#39;t draw the decision surface otherwise</span>
+</span></span><span style="display:flex;"><span>clf<span style="color:#000;font-weight:bold">.</span>coef_ <span style="color:#000;font-weight:bold">=</span> weights<span style="color:#000;font-weight:bold">.</span>T
+</span></span><span style="display:flex;"><span>clf<span style="color:#000;font-weight:bold">.</span>intercept_ <span style="color:#000;font-weight:bold">=</span> intercept
+</span></span><span style="display:flex;"><span>draw_decision_boundary(clf, X, y)</span></span></code></pre></div>
 <p><img src="/img/linear-bayes-3.png" alt=""></p>
 <p>Observe that both the classifiers draw almost the same decision line.</p>
 <p>I think it needs to be emphasized that the relationship between a Bayesian classifier and a perceptron ends at linearity. They are not equivalent or even complementary beyond the assumption of linearity and a normal distribution. A Bayesian classifier is parametric, a perceptron is not. A Bayesian classifier is generative, a perceptron is discriminative. So nothing practical may come of this excercise of deriving one from the other - it just goes to show that a Bayesian classifier can be expressed as a dot product.</p>
@@ -240,8 +239,8 @@ draw_decision_boundary(clf, X, y)</code></pre></div>
         </p>
     </div>
     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -395,7 +394,7 @@ draw_decision_boundary(clf, X, y)</code></pre></div>
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

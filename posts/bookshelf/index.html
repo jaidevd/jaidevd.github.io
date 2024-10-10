@@ -40,8 +40,7 @@ if (!doNotTrack) {
 }
 </script>
 </head>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Organizing a Bookshelf with Multivariate Analysis"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Organizing a Bookshelf with Multivariate Analysis"/>
 <meta name="twitter:description" content="I have recently moved from Pune to Delhi. I had spent only a year in Pune, having moved there from Mumbai, where I lived for three years. Whenever I move, the bulk of my luggage consists of books and clothes. My stay in Pune was just a transition, so I never bothered to unpack and store all my stuff too carefully. Thus, a corner of my bedroom in my Pune apartment always looked like this: The actual volume of books that I carried from Pune to Delhi is about twice of what is seen in the picture."/>
 
 
@@ -150,7 +149,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -183,10 +182,10 @@ if (!doNotTrack) {
 <p>Since I had six bookshelves, it seemed natural that I should partition titles into six clusters in an unsupervised manner.</p>
 <h2 id="getting-and-preprocessing-the-data">Getting and Preprocessing the Data</h2>
 <p>To perform clustering on the book titles, I started annotating books by the names of their author, their height in millimeters and there genres and subgenres. The resulting dataset is available <a href="https://gist.githubusercontent.com/jaidevd/23aef12e9bf56c618c41/raw/c05e98672b8d52fa0cb94aad80f75eb78342e5d4/books_new.csv">here</a>, and looks somewhat like this:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">pandas</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">pd</span>
-url <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;https://gist.githubusercontent.com/jaidevd/23aef12e9bf56c618c41/raw/c05e98672b8d52fa0cb94aad80f75eb78342e5d4/books_new.csv&#34;</span>
-df <span style="color:#000;font-weight:bold">=</span> pd<span style="color:#000;font-weight:bold">.</span>read_csv(url, index_col<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Title&#39;</span>)
-df<span style="color:#000;font-weight:bold">.</span>head()</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">pandas</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">pd</span>
+</span></span><span style="display:flex;"><span>url <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;https://gist.githubusercontent.com/jaidevd/23aef12e9bf56c618c41/raw/c05e98672b8d52fa0cb94aad80f75eb78342e5d4/books_new.csv&#34;</span>
+</span></span><span style="display:flex;"><span>df <span style="color:#000;font-weight:bold">=</span> pd<span style="color:#000;font-weight:bold">.</span>read_csv(url, index_col<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Title&#39;</span>)
+</span></span><span style="display:flex;"><span>df<span style="color:#000;font-weight:bold">.</span>head()</span></span></code></pre></div>
 <div>
 <table border="1" class="dataframe">
   <thead>
@@ -252,86 +251,86 @@ df<span style="color:#000;font-weight:bold">.</span>head()</code></pre></div>
 </table>
 </div>
 <p>For convenience, I ignored the first names of the authors. I also only considered the last names of the first author of those books that have multiple authors.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df[<span style="color:#d14">&#39;Author&#39;</span>] <span style="color:#000;font-weight:bold">=</span> df[<span style="color:#d14">&#39;Author&#39;</span>]<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">str</span>)<span style="color:#000;font-weight:bold">.</span>apply(<span style="color:#000;font-weight:bold">lambda</span> x: x<span style="color:#000;font-weight:bold">.</span>split(<span style="color:#d14">&#39;,&#39;</span>)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>lower())</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df[<span style="color:#d14">&#39;Author&#39;</span>] <span style="color:#000;font-weight:bold">=</span> df[<span style="color:#d14">&#39;Author&#39;</span>]<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">str</span>)<span style="color:#000;font-weight:bold">.</span>apply(<span style="color:#000;font-weight:bold">lambda</span> x: x<span style="color:#000;font-weight:bold">.</span>split(<span style="color:#d14">&#39;,&#39;</span>)[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>lower())</span></span></code></pre></div>
 <p>The author, genre and subgenre of the books are categorical variables, so they have to be converted into dummy numerical variables first, and then the height attribute has to be added to the resulting dataset.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.feature_extraction</span> <span style="color:#000;font-weight:bold">import</span> DictVectorizer
-
-<span style="color:#998;font-style:italic"># Get dummy vectors for categorical data</span>
-authorVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>)
-dummyAuthors <span style="color:#000;font-weight:bold">=</span> authorVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(author<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;Author&#39;</span>]])
-genreVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>)
-dummyGenres <span style="color:#000;font-weight:bold">=</span> genreVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(genre<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;Genre&#39;</span>]])
-subgenVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>)
-dummySubGenres <span style="color:#000;font-weight:bold">=</span> subgenVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(subgen<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;SubGenre&#39;</span>]])
-
-X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[dummyAuthors, dummyGenres, dummySubGenres]
-
-<span style="color:#998;font-style:italic"># Add height to the dataset</span>
-X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[X, df[<span style="color:#d14">&#39;Height&#39;</span>]<span style="color:#000;font-weight:bold">.</span>values]</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.feature_extraction</span> <span style="color:#000;font-weight:bold">import</span> DictVectorizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Get dummy vectors for categorical data</span>
+</span></span><span style="display:flex;"><span>authorVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>)
+</span></span><span style="display:flex;"><span>dummyAuthors <span style="color:#000;font-weight:bold">=</span> authorVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(author<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;Author&#39;</span>]])
+</span></span><span style="display:flex;"><span>genreVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>)
+</span></span><span style="display:flex;"><span>dummyGenres <span style="color:#000;font-weight:bold">=</span> genreVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(genre<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;Genre&#39;</span>]])
+</span></span><span style="display:flex;"><span>subgenVect <span style="color:#000;font-weight:bold">=</span> DictVectorizer(sparse<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>)
+</span></span><span style="display:flex;"><span>dummySubGenres <span style="color:#000;font-weight:bold">=</span> subgenVect<span style="color:#000;font-weight:bold">.</span>fit_transform([<span style="color:#0086b3">dict</span>(subgen<span style="color:#000;font-weight:bold">=</span>f) <span style="color:#000;font-weight:bold">for</span> f <span style="color:#000;font-weight:bold">in</span> df[<span style="color:#d14">&#39;SubGenre&#39;</span>]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[dummyAuthors, dummyGenres, dummySubGenres]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Add height to the dataset</span>
+</span></span><span style="display:flex;"><span>X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[X, df[<span style="color:#d14">&#39;Height&#39;</span>]<span style="color:#000;font-weight:bold">.</span>values]</span></span></code></pre></div>
 <h2 id="analysis-and-visualization">Analysis and Visualization</h2>
 <p>Before the clustering, let&rsquo;s run a basic PCA reduction on the dataset and take a look at the scatterplot. Let&rsquo;s also create a convex hull around the scatter plot and take a look at which book titles make up the vertices of the hull.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
-plt<span style="color:#000;font-weight:bold">.</span>style<span style="color:#000;font-weight:bold">.</span>use(<span style="color:#d14">&#39;ggplot&#39;</span>)
-
-
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.preprocessing</span> <span style="color:#000;font-weight:bold">import</span> StandardScaler
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.decomposition</span> <span style="color:#000;font-weight:bold">import</span> PCA
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.spatial</span> <span style="color:#000;font-weight:bold">import</span> ConvexHull
-
-
-<span style="color:#998;font-style:italic"># Standard normalization</span>
-scaler <span style="color:#000;font-weight:bold">=</span> StandardScaler()
-X <span style="color:#000;font-weight:bold">=</span> scaler<span style="color:#000;font-weight:bold">.</span>fit_transform(X)
-
-<span style="color:#998;font-style:italic"># Dimensionality reduction</span>
-pca <span style="color:#000;font-weight:bold">=</span> PCA(n_components<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>)
-x_red <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>fit_transform(X)
-
-
-hull <span style="color:#000;font-weight:bold">=</span> ConvexHull(x_red)
-plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">15</span>, <span style="color:#099">15</span>))
-plt<span style="color:#000;font-weight:bold">.</span>scatter(x_red[:, <span style="color:#099">0</span>], x_red[:, <span style="color:#099">1</span>], s<span style="color:#000;font-weight:bold">=</span><span style="color:#099">50</span>)
-<span style="color:#000;font-weight:bold">for</span> vertex <span style="color:#000;font-weight:bold">in</span> hull<span style="color:#000;font-weight:bold">.</span>vertices:
-    plt<span style="color:#000;font-weight:bold">.</span>annotate(df<span style="color:#000;font-weight:bold">.</span>index[vertex], xy<span style="color:#000;font-weight:bold">=</span>x_red[vertex, :])</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>style<span style="color:#000;font-weight:bold">.</span>use(<span style="color:#d14">&#39;ggplot&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.preprocessing</span> <span style="color:#000;font-weight:bold">import</span> StandardScaler
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.decomposition</span> <span style="color:#000;font-weight:bold">import</span> PCA
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">scipy.spatial</span> <span style="color:#000;font-weight:bold">import</span> ConvexHull
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Standard normalization</span>
+</span></span><span style="display:flex;"><span>scaler <span style="color:#000;font-weight:bold">=</span> StandardScaler()
+</span></span><span style="display:flex;"><span>X <span style="color:#000;font-weight:bold">=</span> scaler<span style="color:#000;font-weight:bold">.</span>fit_transform(X)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Dimensionality reduction</span>
+</span></span><span style="display:flex;"><span>pca <span style="color:#000;font-weight:bold">=</span> PCA(n_components<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>)
+</span></span><span style="display:flex;"><span>x_red <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>fit_transform(X)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>hull <span style="color:#000;font-weight:bold">=</span> ConvexHull(x_red)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">15</span>, <span style="color:#099">15</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>scatter(x_red[:, <span style="color:#099">0</span>], x_red[:, <span style="color:#099">1</span>], s<span style="color:#000;font-weight:bold">=</span><span style="color:#099">50</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> vertex <span style="color:#000;font-weight:bold">in</span> hull<span style="color:#000;font-weight:bold">.</span>vertices:
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>annotate(df<span style="color:#000;font-weight:bold">.</span>index[vertex], xy<span style="color:#000;font-weight:bold">=</span>x_red[vertex, :])</span></span></code></pre></div>
 <p><img src="/img/bookshelf-2.png" alt=""></p>
 <p>At this stage the scatter plot looks like it is making sense. The cluster at the top right seems like the fiction cluster, the one at the top center might be graphic novels and the one at the bottom might be history. There is still some ambiguity, as the plot says nothing about which attributes are varying as we move away from the origin towards the vertices of the hull.</p>
 <p>To examine the variation among the attributes in detail, let&rsquo;s use a biplot superimposed on the scatterplot. Let&rsquo;s also perform the clustering with KMeans, with six centroids, each denoting a shelf.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.cluster</span> <span style="color:#000;font-weight:bold">import</span> KMeans
-
-
-km <span style="color:#000;font-weight:bold">=</span> KMeans(n_clusters<span style="color:#000;font-weight:bold">=</span><span style="color:#099">6</span>, n_jobs<span style="color:#000;font-weight:bold">=-</span><span style="color:#099">1</span>)
-clusters <span style="color:#000;font-weight:bold">=</span> km<span style="color:#000;font-weight:bold">.</span>fit_predict(x_red)
-
-xvector <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>components_[<span style="color:#099">0</span>]
-yvector <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>components_[<span style="color:#099">1</span>]
-
-xs <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>transform(X)[:,<span style="color:#099">0</span>]
-ys <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>transform(X)[:,<span style="color:#099">1</span>]
-
-
-
-columns <span style="color:#000;font-weight:bold">=</span> df<span style="color:#000;font-weight:bold">.</span>Author<span style="color:#000;font-weight:bold">.</span>unique()<span style="color:#000;font-weight:bold">.</span>tolist() <span style="color:#000;font-weight:bold">+</span> \
-          df<span style="color:#000;font-weight:bold">.</span>Genre<span style="color:#000;font-weight:bold">.</span>unique()<span style="color:#000;font-weight:bold">.</span>tolist() <span style="color:#000;font-weight:bold">+</span> \
-          df<span style="color:#000;font-weight:bold">.</span>SubGenre<span style="color:#000;font-weight:bold">.</span>unique()<span style="color:#000;font-weight:bold">.</span>tolist() <span style="color:#000;font-weight:bold">+</span> [<span style="color:#d14">&#39;Height&#39;</span>]
-
-plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">15</span>, <span style="color:#099">15</span>))
-
-<span style="color:#998;font-style:italic"># Creating the biplot</span>
-mXS, mYS <span style="color:#000;font-weight:bold">=</span> xs<span style="color:#000;font-weight:bold">.</span>max(), ys<span style="color:#000;font-weight:bold">.</span>max()
-xVec, yVec <span style="color:#000;font-weight:bold">=</span> xvector <span style="color:#000;font-weight:bold">*</span> mXS, yvector <span style="color:#000;font-weight:bold">*</span> mYS
-largeAttrs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sqrt(xVec <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">+</span> yVec <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>)
-maxAttrs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>argsort(largeAttrs)[::<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][:<span style="color:#099">10</span>]
-<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">5</span>):
-    plt<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span>xvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(xs), yvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(ys),
-              color<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;r&#39;</span>, width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.0005</span>, head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.0025</span>)
-    plt<span style="color:#000;font-weight:bold">.</span>text(<span style="color:#000;font-weight:bold">-</span>xvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(xs)<span style="color:#000;font-weight:bold">*</span><span style="color:#099">1.2</span>, yvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(ys)<span style="color:#000;font-weight:bold">*</span><span style="color:#099">1.2</span>,
-             columns[maxAttrs[i]], color<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;r&#39;</span>)
-
-plt<span style="color:#000;font-weight:bold">.</span>scatter(xs, ys, c<span style="color:#000;font-weight:bold">=</span>clusters, s<span style="color:#000;font-weight:bold">=</span><span style="color:#099">50</span>)
-
-<span style="color:#000;font-weight:bold">for</span> vertex <span style="color:#000;font-weight:bold">in</span> hull<span style="color:#000;font-weight:bold">.</span>vertices:
-    plt<span style="color:#000;font-weight:bold">.</span>annotate(df<span style="color:#000;font-weight:bold">.</span>index[vertex], xy<span style="color:#000;font-weight:bold">=</span>x_red[vertex, :])</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.cluster</span> <span style="color:#000;font-weight:bold">import</span> KMeans
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>km <span style="color:#000;font-weight:bold">=</span> KMeans(n_clusters<span style="color:#000;font-weight:bold">=</span><span style="color:#099">6</span>, n_jobs<span style="color:#000;font-weight:bold">=-</span><span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>clusters <span style="color:#000;font-weight:bold">=</span> km<span style="color:#000;font-weight:bold">.</span>fit_predict(x_red)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>xvector <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>components_[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>yvector <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>components_[<span style="color:#099">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>xs <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>transform(X)[:,<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>ys <span style="color:#000;font-weight:bold">=</span> pca<span style="color:#000;font-weight:bold">.</span>transform(X)[:,<span style="color:#099">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>columns <span style="color:#000;font-weight:bold">=</span> df<span style="color:#000;font-weight:bold">.</span>Author<span style="color:#000;font-weight:bold">.</span>unique()<span style="color:#000;font-weight:bold">.</span>tolist() <span style="color:#000;font-weight:bold">+</span> \
+</span></span><span style="display:flex;"><span>          df<span style="color:#000;font-weight:bold">.</span>Genre<span style="color:#000;font-weight:bold">.</span>unique()<span style="color:#000;font-weight:bold">.</span>tolist() <span style="color:#000;font-weight:bold">+</span> \
+</span></span><span style="display:flex;"><span>          df<span style="color:#000;font-weight:bold">.</span>SubGenre<span style="color:#000;font-weight:bold">.</span>unique()<span style="color:#000;font-weight:bold">.</span>tolist() <span style="color:#000;font-weight:bold">+</span> [<span style="color:#d14">&#39;Height&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">15</span>, <span style="color:#099">15</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Creating the biplot</span>
+</span></span><span style="display:flex;"><span>mXS, mYS <span style="color:#000;font-weight:bold">=</span> xs<span style="color:#000;font-weight:bold">.</span>max(), ys<span style="color:#000;font-weight:bold">.</span>max()
+</span></span><span style="display:flex;"><span>xVec, yVec <span style="color:#000;font-weight:bold">=</span> xvector <span style="color:#000;font-weight:bold">*</span> mXS, yvector <span style="color:#000;font-weight:bold">*</span> mYS
+</span></span><span style="display:flex;"><span>largeAttrs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sqrt(xVec <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">+</span> yVec <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>)
+</span></span><span style="display:flex;"><span>maxAttrs <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>argsort(largeAttrs)[::<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][:<span style="color:#099">10</span>]
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">5</span>):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span>xvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(xs), yvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(ys),
+</span></span><span style="display:flex;"><span>              color<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;r&#39;</span>, width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.0005</span>, head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.0025</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>text(<span style="color:#000;font-weight:bold">-</span>xvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(xs)<span style="color:#000;font-weight:bold">*</span><span style="color:#099">1.2</span>, yvector[maxAttrs[i]]<span style="color:#000;font-weight:bold">*</span><span style="color:#0086b3">max</span>(ys)<span style="color:#000;font-weight:bold">*</span><span style="color:#099">1.2</span>,
+</span></span><span style="display:flex;"><span>             columns[maxAttrs[i]], color<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;r&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>scatter(xs, ys, c<span style="color:#000;font-weight:bold">=</span>clusters, s<span style="color:#000;font-weight:bold">=</span><span style="color:#099">50</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> vertex <span style="color:#000;font-weight:bold">in</span> hull<span style="color:#000;font-weight:bold">.</span>vertices:
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>annotate(df<span style="color:#000;font-weight:bold">.</span>index[vertex], xy<span style="color:#000;font-weight:bold">=</span>x_red[vertex, :])</span></span></code></pre></div>
 <p><img src="/img/bookshelf-3.png" alt=""></p>
 <p>The lines denote how the different attributes of the book vary among the titles, and the six colored clusters are how I arranged my books among the six shelves. After the arragement dictated by the clustering output, they looked a bit better:</p>
 <p>
@@ -353,8 +352,8 @@ plt<span style="color:#000;font-weight:bold">.</span>scatter(xs, ys, c<span styl
         </p>
     </div>
     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -510,7 +509,7 @@ plt<span style="color:#000;font-weight:bold">.</span>scatter(xs, ys, c<span styl
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

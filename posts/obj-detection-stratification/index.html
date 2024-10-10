@@ -40,11 +40,10 @@ if (!doNotTrack) {
 }
 </script>
 </head>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://jaidevd.com/posts/obj-detection-stratification/thumbnail-pedestrian-bad.png"/>
-<meta name="twitter:title" content="Effective Train/Test Stratification for Object Detection"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jaidevd.com/posts/obj-detection-stratification/thumbnail-pedestrian-bad.png" /><meta name="twitter:title" content="Effective Train/Test Stratification for Object Detection"/>
 <meta name="twitter:description" content="TL;DR: Here&rsquo;s a talk based on this post:
-   There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks for specific tasks, which primarily stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous."/>
+There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks for specific tasks, which primarily stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous."/>
 
 
     <body>
@@ -152,7 +151,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -299,28 +298,28 @@ first answer is: stratify the data by <em>what</em>?</p>
 <h2 id="attributes-of-target-variables">Attributes of Target Variables</h2>
 <p>The target vectors for binary and multiclass problems look like
 this:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">y_bin   <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#099">1</span>, <span style="color:#099">0</span>, <span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">...</span>]
-y_multi <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>, <span style="color:#099">2</span>, <span style="color:#099">0</span>, <span style="color:#099">2</span>, <span style="color:#099">2</span>, <span style="color:#099">1</span>, <span style="color:#099">2</span>, <span style="color:#099">2</span>, <span style="color:#000;font-weight:bold">...</span>]</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>y_bin   <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#099">1</span>, <span style="color:#099">0</span>, <span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">...</span>]
+</span></span><span style="display:flex;"><span>y_multi <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>, <span style="color:#099">2</span>, <span style="color:#099">0</span>, <span style="color:#099">2</span>, <span style="color:#099">2</span>, <span style="color:#099">1</span>, <span style="color:#099">2</span>, <span style="color:#099">2</span>, <span style="color:#000;font-weight:bold">...</span>]</span></span></code></pre></div>
 <p>Both of these are easy to interpret, and can be straightaway used for
 stratification. But here&rsquo;s what the target (or annotation) of a detection dataset
 looks like:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
-  {
-    <span style="color:#000080">&#34;boxes&#34;</span>: [
-    	[<span style="color:#099">506.97</span>, <span style="color:#099">352.39</span>, <span style="color:#099">609.44</span>, <span style="color:#099">419.26</span>],
-    	[<span style="color:#099">446.55</span>, <span style="color:#099">298.58</span>, <span style="color:#099">537.16</span>, <span style="color:#099">363.30</span>],
-    	[<span style="color:#099">314.60</span>, <span style="color:#099">147.72</span>, <span style="color:#099">640.00</span>, <span style="color:#099">480.00</span>]
-    ],
-    <span style="color:#000080">&#34;labels&#34;</span>: [<span style="color:#d14">&#34;bowl&#34;</span>, <span style="color:#d14">&#34;bowl&#34;</span>, <span style="color:#d14">&#34;dining table&#34;</span>]
-  },
-  {
-    <span style="color:#000080">&#34;boxes&#34;</span>: [
-    	[<span style="color:#099">36.8300</span>, <span style="color:#099">113.6800</span>, <span style="color:#099">601.2200</span>, <span style="color:#099">396.9000</span>],
-    	[<span style="color:#099">105.0400</span>, <span style="color:#099">167.1500</span>, <span style="color:#099">271.0600</span>, <span style="color:#099">293.6500</span>]
-    ],
-    <span style="color:#000080">&#34;labels&#34;</span>: [<span style="color:#d14">&#34;banana&#34;</span>, <span style="color:#d14">&#34;apple&#34;</span>]
-  }
-]</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&#34;boxes&#34;</span>: [
+</span></span><span style="display:flex;"><span>    	[<span style="color:#099">506.97</span>, <span style="color:#099">352.39</span>, <span style="color:#099">609.44</span>, <span style="color:#099">419.26</span>],
+</span></span><span style="display:flex;"><span>    	[<span style="color:#099">446.55</span>, <span style="color:#099">298.58</span>, <span style="color:#099">537.16</span>, <span style="color:#099">363.30</span>],
+</span></span><span style="display:flex;"><span>    	[<span style="color:#099">314.60</span>, <span style="color:#099">147.72</span>, <span style="color:#099">640.00</span>, <span style="color:#099">480.00</span>]
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&#34;labels&#34;</span>: [<span style="color:#d14">&#34;bowl&#34;</span>, <span style="color:#d14">&#34;bowl&#34;</span>, <span style="color:#d14">&#34;dining table&#34;</span>]
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&#34;boxes&#34;</span>: [
+</span></span><span style="display:flex;"><span>    	[<span style="color:#099">36.8300</span>, <span style="color:#099">113.6800</span>, <span style="color:#099">601.2200</span>, <span style="color:#099">396.9000</span>],
+</span></span><span style="display:flex;"><span>    	[<span style="color:#099">105.0400</span>, <span style="color:#099">167.1500</span>, <span style="color:#099">271.0600</span>, <span style="color:#099">293.6500</span>]
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&#34;labels&#34;</span>: [<span style="color:#d14">&#34;banana&#34;</span>, <span style="color:#d14">&#34;apple&#34;</span>]
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>]</span></span></code></pre></div>
 <p>(These are the annotations for a couple of samples from the <a href="https://cocodataset.org/#home">MS COCO dataset</a>. They
 tell us that the first image contains two bowls and a dining table, and the
 second one contains a banana and an apple. It also contains information on <em>where</em> they are in the
@@ -687,8 +686,8 @@ any way, please leave a comment below and I&rsquo;ll get them ready to use.</p>
         </p>
     </div>
     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -846,7 +845,7 @@ any way, please leave a comment below and I&rsquo;ll get them ready to use.</p>
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

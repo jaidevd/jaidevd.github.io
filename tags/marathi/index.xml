@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>marathi on Jaidev&#39;s Blog</title>
+    <title>Marathi on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/marathi/</link>
-    <description>Recent content in marathi on Jaidev&#39;s Blog</description>
+    <description>Recent content in Marathi on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jul 2020 00:00:00 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/marathi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Jul 2020 00:00:00 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/marathi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Book Review: Baluta - Daya Pawar</title>
       <link>https://jaidevd.com/posts/baluta-review/</link>
       <pubDate>Fri, 10 Jul 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/baluta-review/</guid>
       <description>The original Marathi edition of Baluta has captivating cover art. It shows a sketch of a crow perched on the rim of an earthen pot, dropping pebbles in the pot, but completely oblivious to the glaring crack running down the pot. I remember that image from a copy lying in one corner of a bookshelf, but I was too young then to be interested. To me, this was just a sign of the artist trying to convey a sense of irony.</description>
     </item>
-    
   </channel>
 </rss>

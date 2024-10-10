@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ocr on Jaidev&#39;s Blog</title>
+    <title>Ocr on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/ocr/</link>
-    <description>Recent content in ocr on Jaidev&#39;s Blog</description>
+    <description>Recent content in Ocr on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Jun 2024 22:04:01 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/ocr/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 21 Jun 2024 22:04:01 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/ocr/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Misconceptions about OCR Bounding Boxes</title>
       <link>https://jaidevd.com/posts/ocr-misconceptions/</link>
       <pubDate>Fri, 21 Jun 2024 22:04:01 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/ocr-misconceptions/</guid>
-      <description>Over the last year, I have been working on an application that auto-translates documents while maintaining the layout and formatting. It has many bells and whistles, from simple geometric tricks to sophisticated gen-AI algorithms and microservices. But basically, the app performs the simple task of identifying text in documents, machine-translating them, and reinserting them such that the output document “looks” like the input.
-Most documents that my app has to process are PDFs.</description>
+      <description>Over the last year, I have been working on an application that auto-translates documents while maintaining the layout and formatting. It has many bells and whistles, from simple geometric tricks to sophisticated gen-AI algorithms and microservices. But basically, the app performs the simple task of identifying text in documents, machine-translating them, and reinserting them such that the output document “looks” like the input.&#xA;Most documents that my app has to process are PDFs.</description>
     </item>
-    
   </channel>
 </rss>

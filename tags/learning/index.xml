@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>learning on Jaidev&#39;s Blog</title>
+    <title>Learning on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/learning/</link>
-    <description>Recent content in learning on Jaidev&#39;s Blog</description>
+    <description>Recent content in Learning on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jun 2022 05:00:00 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Jun 2022 05:00:00 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Process for Readable Code</title>
       <link>https://jaidevd.com/posts/code-readability-process/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/code-readability-process/</guid>
-      <description>I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&#39; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time.</description>
+      <description>I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&amp;rsquo; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time.</description>
     </item>
-    
     <item>
       <title>How Not to Ask Questions After a Talk</title>
       <link>https://jaidevd.com/posts/how-not-to-ask-questions/</link>
       <pubDate>Wed, 22 Nov 2017 10:04:06 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/how-not-to-ask-questions/</guid>
-      <description>Dedicated to the memory of Mrutyunjay Mishra (M2). He was a torrent of ideas. He encouraged me to write this post because as much as he talked endlessly without pausing to breathe, he hated wasteful discourse.
-New Delhi, January 2024
- PyCon India 2017 ended last weekend in Delhi. The conference escaped the infamous winter smog-storm by a whisker. In the last few years, PyCon India has grown to become the largest PyCon outside of North America, with over a thousand participants attending from all over the country.</description>
+      <description>Dedicated to the memory of Mrutyunjay Mishra (M2). He was a torrent of ideas. He encouraged me to write this post because as much as he talked endlessly without pausing to breathe, he hated wasteful discourse.&#xA;New Delhi, January 2024&#xA;PyCon India 2017 ended last weekend in Delhi. The conference escaped the infamous winter smog-storm by a whisker. In the last few years, PyCon India has grown to become the largest PyCon outside of North America, with over a thousand participants attending from all over the country.</description>
     </item>
-    
   </channel>
 </rss>

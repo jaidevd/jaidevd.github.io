@@ -40,8 +40,7 @@ if (!doNotTrack) {
 }
 </script>
 </head>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Misconceptions about OCR Bounding Boxes"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Misconceptions about OCR Bounding Boxes"/>
 <meta name="twitter:description" content="Over the last year, I have been working on an application that auto-translates documents while maintaining the layout and formatting. It has many bells and whistles, from simple geometric tricks to sophisticated gen-AI algorithms and microservices. But basically, the app performs the simple task of identifying text in documents, machine-translating them, and reinserting them such that the output document “looks” like the input.
 Most documents that my app has to process are PDFs."/>
 
@@ -151,7 +150,7 @@ Most documents that my app has to process are PDFs."/>
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -340,14 +339,14 @@ that any fixed side makes with the X-axis.</li>
 tools like Azure FormRecognizer, drop a comment below.</p>
 <p><em>Acknowledgements:</em> Many thanks to <a href="https://in.linkedin.com/in/harshadss">Harshad Saykhedkar</a> and <a href="https://www.linkedin.com/in/dhrvg">Dhruv Gupta</a> for
 reviewing  drafts of this post.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>It took me three days to rid my codebase of them, which, considering the
 scale of my project, wasn&rsquo;t a lot.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>In fact, the more I think about it, the more I realize that I&rsquo;d have to be
 really lucky to get a perfect rectangle. The dimensions of a PDF are
 typically measured in inches, while those of an HTML canvas and other
@@ -358,22 +357,22 @@ ultimately, the smallest rounding error can result in a deviation worth many
 pixels. Given all that, bboxes not being perfect rectangles isn&rsquo;t all that
 surprising. Thank heavens, at least convexity of the polygons is guaranteed.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>Suppose the predicted quadrilateral is defined as the set
 $ \{(x_i, y_i) | i \in [1, 4]\} $, then the estimated rectangle should be
-$ \{(x'_i, y'_i) | i \in [1, 4]\} $ such that the following error is minimized:</p>
-<p>$$ \frac{1}{4} \sum_{i=1}^{4} (x'_i - x_i)^2 + (y'_i - y_i)^2 $$
+$ \{(x&rsquo;_i, y&rsquo;_i) | i \in [1, 4]\} $ such that the following error is minimized:</p>
+<p>$$ \frac{1}{4} \sum_{i=1}^{4} (x&rsquo;_i - x_i)^2 + (y&rsquo;_i - y_i)^2 $$
 In other words, the average Euclidean distance between the original vertices
 and the estimated vertices ought to be as low as possible.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
         </p>
     </div>
     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -529,7 +528,7 @@ and the estimated vertices ought to be as low as possible.&#160;<a href="#fnref:
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

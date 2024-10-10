@@ -40,8 +40,7 @@ if (!doNotTrack) {
 }
 </script>
 </head>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="A Geometric Proof of the Perceptron Convergence Theorem"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="A Geometric Proof of the Perceptron Convergence Theorem"/>
 <meta name="twitter:description" content="The last time I studied neural networks in detail was five years ago in college. I did touch upon backpropagation when Andrew Ng&rsquo;s machine learning MOOC was offered on Coursera for the first time, but beyond that I&rsquo;ve only dabbled with them through keras. Then recently, when I read about Coursera&rsquo;s imminent decision to pull down much of their freely available material (you can read a rant about it here), I went on a downloading spree (many thanks to the wonderful coursera-dl)."/>
 
 
@@ -150,7 +149,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -174,94 +173,94 @@ if (!doNotTrack) {
 <!-- TEASER_END -->
 <h2 id="a-demo-perceptron">A Demo Perceptron</h2>
 <p>Let&rsquo;s make some sample data which is linearly separable. Let&rsquo;s also initialize the weights for a perceptron. For simplicity, we shall do away with the bias, and make sure that the data is centered at the origin</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.datasets</span> <span style="color:#000;font-weight:bold">import</span> make_blobs
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
-
-X, y <span style="color:#000;font-weight:bold">=</span> make_blobs(centers<span style="color:#000;font-weight:bold">=</span>[[<span style="color:#099">1</span>, <span style="color:#099">1</span>], [<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]], cluster_std<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.5</span>)
-np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#000;font-weight:bold">.</span>seed(<span style="color:#099">3</span>)
-weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], [<span style="color:#099">1</span>]], dtype<span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">float</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.datasets</span> <span style="color:#000;font-weight:bold">import</span> make_blobs
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">plt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X, y <span style="color:#000;font-weight:bold">=</span> make_blobs(centers<span style="color:#000;font-weight:bold">=</span>[[<span style="color:#099">1</span>, <span style="color:#099">1</span>], [<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]], cluster_std<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.5</span>)
+</span></span><span style="display:flex;"><span>np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#000;font-weight:bold">.</span>seed(<span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], [<span style="color:#099">1</span>]], dtype<span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">float</span>)</span></span></code></pre></div>
 <p>Let&rsquo;s also define a function that makes a scatterplot of the data and draws the decision boundary through it, based on the weights. The decision function we use is as follows</p>
 <p>$$z = \sum_{i=1}^{N}w_{i}x_{i}$$</p>
 <p>Where $N$ is the dimensionality, $x_{i}$ is the $i$th dimension of the input sample, and $w_{i}$ is the corresponding weight.</p>
 <p>The prediction $y$ is 1 if $z \geq 0$ and 0 otherwise. Thus, the decision line in the feature space (consisting in this case of $x_{1}$ and $x_{2}$) is defined as follows:</p>
 <p>$$ w_{1}x_{1} + w_{2}x_{2} = 0 $$</p>
-<p><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">plot_decision</span>(X, y, weights):
-    <span style="color:#d14">&#34;&#34;&#34;Show the scatterplot of the data colored by the classes,
-</span><span style="color:#d14">    draw the decision line based on the weights.&#34;&#34;&#34;</span>
-    xx <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linspace(X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>min(), X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>max())
-    yy <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span> weights[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> xx <span style="color:#000;font-weight:bold">/</span> weights[<span style="color:#099">1</span>]
-    plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">8</span>, <span style="color:#099">6</span>))
-    plt<span style="color:#000;font-weight:bold">.</span>scatter(X[:, <span style="color:#099">0</span>], X[:, <span style="color:#099">1</span>], c<span style="color:#000;font-weight:bold">=</span>y)
-    plt<span style="color:#000;font-weight:bold">.</span>plot(xx, yy)
-
-plot_decision(X, y, weights)</code></pre></div>
+<p><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">plot_decision</span>(X, y, weights):
+</span></span><span style="display:flex;"><span>    <span style="color:#d14">&#34;&#34;&#34;Show the scatterplot of the data colored by the classes,
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    draw the decision line based on the weights.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    xx <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linspace(X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>min(), X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>max())
+</span></span><span style="display:flex;"><span>    yy <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span> weights[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> xx <span style="color:#000;font-weight:bold">/</span> weights[<span style="color:#099">1</span>]
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">8</span>, <span style="color:#099">6</span>))
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>scatter(X[:, <span style="color:#099">0</span>], X[:, <span style="color:#099">1</span>], c<span style="color:#000;font-weight:bold">=</span>y)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>plot(xx, yy)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plot_decision(X, y, weights)</span></span></code></pre></div>
 <img src="/img/perc-1.png" alt=""></p>
 <p>Note that I&rsquo;ve specifically chosen the weights such that the decision boundary ends up in the worst possible position. Now let&rsquo;s train the perceptron in batch mode on one epoch of the training set.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">prediction <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(X, weights)<span style="color:#000;font-weight:bold">.</span>ravel()<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)
-<span style="color:#998;font-style:italic"># indentify the misclassifications</span>
-false_pos <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>logical_and(y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>, prediction <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>)
-false_neg <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>logical_and(y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>, prediction <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)
-<span style="color:#998;font-style:italic"># add the false negatives</span>
-weights <span style="color:#000;font-weight:bold">+=</span> X[false_neg, :]<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>)
-<span style="color:#998;font-style:italic"># subtract the false positives</span>
-weights <span style="color:#000;font-weight:bold">-=</span> X[false_pos, :]<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>)
-
-<span style="color:#998;font-style:italic"># plot the data again</span>
-plot_decision(X, y, weights)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prediction <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(X, weights)<span style="color:#000;font-weight:bold">.</span>ravel()<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># indentify the misclassifications</span>
+</span></span><span style="display:flex;"><span>false_pos <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>logical_and(y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>, prediction <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>false_neg <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>logical_and(y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>, prediction <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># add the false negatives</span>
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">+=</span> X[false_neg, :]<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># subtract the false positives</span>
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">-=</span> X[false_pos, :]<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># plot the data again</span>
+</span></span><span style="display:flex;"><span>plot_decision(X, y, weights)</span></span></code></pre></div>
 <p><img src="/img/perc-2.png" alt=""></p>
 <p>It can be seen that one epoch or a hundred iterations (maybe less) are enough to train the perceptron. Now let&rsquo;s do the same in online mode. This time, we will store the weights updated at each iteration so we can have a look at them later.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># reset the weights</span>
-weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], [<span style="color:#099">1</span>]], dtype<span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">float</span>)
-updated_weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">100</span>, <span style="color:#099">2</span>))
-<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(X<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]):
-    updated_weights[i, :] <span style="color:#000;font-weight:bold">=</span> weights<span style="color:#000;font-weight:bold">.</span>ravel()  <span style="color:#998;font-style:italic"># store the weights</span>
-    training_sample <span style="color:#000;font-weight:bold">=</span> X[i, :]
-    target <span style="color:#000;font-weight:bold">=</span> y[i]
-    prediction <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(training_sample, weights)<span style="color:#000;font-weight:bold">.</span>ravel()<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)
-    <span style="color:#000;font-weight:bold">if</span> target <span style="color:#000;font-weight:bold">!=</span> prediction:
-        <span style="color:#000;font-weight:bold">if</span> target <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">and</span> prediction <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>:  <span style="color:#998;font-style:italic"># false positive</span>
-            weights <span style="color:#000;font-weight:bold">-=</span> training_sample<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>)
-        <span style="color:#000;font-weight:bold">elif</span> target <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">and</span> prediction <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:  <span style="color:#998;font-style:italic"># false negative</span>
-            weights <span style="color:#000;font-weight:bold">+=</span> training_sample<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># reset the weights</span>
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], [<span style="color:#099">1</span>]], dtype<span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">float</span>)
+</span></span><span style="display:flex;"><span>updated_weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">100</span>, <span style="color:#099">2</span>))
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(X<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]):
+</span></span><span style="display:flex;"><span>    updated_weights[i, :] <span style="color:#000;font-weight:bold">=</span> weights<span style="color:#000;font-weight:bold">.</span>ravel()  <span style="color:#998;font-style:italic"># store the weights</span>
+</span></span><span style="display:flex;"><span>    training_sample <span style="color:#000;font-weight:bold">=</span> X[i, :]
+</span></span><span style="display:flex;"><span>    target <span style="color:#000;font-weight:bold">=</span> y[i]
+</span></span><span style="display:flex;"><span>    prediction <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(training_sample, weights)<span style="color:#000;font-weight:bold">.</span>ravel()<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> target <span style="color:#000;font-weight:bold">!=</span> prediction:
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> target <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">and</span> prediction <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>:  <span style="color:#998;font-style:italic"># false positive</span>
+</span></span><span style="display:flex;"><span>            weights <span style="color:#000;font-weight:bold">-=</span> training_sample<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">elif</span> target <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">and</span> prediction <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:  <span style="color:#998;font-style:italic"># false negative</span>
+</span></span><span style="display:flex;"><span>            weights <span style="color:#000;font-weight:bold">+=</span> training_sample<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>)</span></span></code></pre></div>
 <p>The two snippets above achieve exactly the same effect, except that the first is faster since it is vectorized. Now that we have the weight updates for every training sample, let&rsquo;s plot the decision boundary for a few of them.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sample_ix <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">20</span>, <span style="color:#099">30</span>]
-xx <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linspace(X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>min(), X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>max(), <span style="color:#099">100</span>)
-plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">8</span>, <span style="color:#099">6</span>))
-plt<span style="color:#000;font-weight:bold">.</span>scatter(X[:, <span style="color:#099">0</span>], X[:, <span style="color:#099">1</span>], c<span style="color:#000;font-weight:bold">=</span>y)
-
-<span style="color:#000;font-weight:bold">for</span> ix <span style="color:#000;font-weight:bold">in</span> sample_ix:
-    wghts <span style="color:#000;font-weight:bold">=</span> updated_weights[ix, :]
-    yy <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span> wghts[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> xx <span style="color:#000;font-weight:bold">/</span> wghts[<span style="color:#099">1</span>]
-    plt<span style="color:#000;font-weight:bold">.</span>plot(xx, yy, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;</span><span style="color:#d14">{}</span><span style="color:#d14">th sample&#34;</span><span style="color:#000;font-weight:bold">.</span>format(ix))
-plt<span style="color:#000;font-weight:bold">.</span>legend()</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sample_ix <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">20</span>, <span style="color:#099">30</span>]
+</span></span><span style="display:flex;"><span>xx <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linspace(X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>min(), X[:, <span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>max(), <span style="color:#099">100</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">8</span>, <span style="color:#099">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>scatter(X[:, <span style="color:#099">0</span>], X[:, <span style="color:#099">1</span>], c<span style="color:#000;font-weight:bold">=</span>y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> ix <span style="color:#000;font-weight:bold">in</span> sample_ix:
+</span></span><span style="display:flex;"><span>    wghts <span style="color:#000;font-weight:bold">=</span> updated_weights[ix, :]
+</span></span><span style="display:flex;"><span>    yy <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span> wghts[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> xx <span style="color:#000;font-weight:bold">/</span> wghts[<span style="color:#099">1</span>]
+</span></span><span style="display:flex;"><span>    plt<span style="color:#000;font-weight:bold">.</span>plot(xx, yy, label<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;</span><span style="color:#d14">{}</span><span style="color:#d14">th sample&#34;</span><span style="color:#000;font-weight:bold">.</span>format(ix))
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>legend()</span></span></code></pre></div>
 <p><img src="/img/perc-3.png" alt=""></p>
 <p>As we move from the first to the twentieth and then to the thirtieth sample, we can see that the decision boundary is rotating counter clockwise. By the thirtieth sample, it has found the gap that separates the two blobs, so it stops making mistakes, and therefore stops learning. Now let&rsquo;s try and see why this will <em>always</em> happen, as long as there is such a gap to be found, irrespective of the topology of the data or the number of points in the dataset.</p>
 <h2 id="the-proof">The Proof</h2>
 <p>We shall continue, for the sake of simplicity, our assumption of the data being centered at the origin and therefore not needing a bias term in the learning. For better visualization, we will also impose a restriction on the weight vector - that it needs to have a unit norm. Note that the magnitude of the weight vector does not matter, since it is only its gradient that actually affects the predictions, and therefore we can comfortably impose this restriction. Moreover, I&rsquo;m insisting on this restriction only to make the plots look pretty.</p>
 <p>Consider the following dataset:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.5</span>, <span style="color:#099">1</span>],
-              [<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.2</span>],
-              [<span style="color:#099">0.5</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>],
-              [<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.2</span>]])
-y <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([<span style="color:#099">1</span>, <span style="color:#099">1</span>, <span style="color:#099">0</span>, <span style="color:#099">0</span>])
-weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([<span style="color:#099">0.707</span>, <span style="color:#099">0.707</span>])</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>X <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.5</span>, <span style="color:#099">1</span>],
+</span></span><span style="display:flex;"><span>              [<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.2</span>],
+</span></span><span style="display:flex;"><span>              [<span style="color:#099">0.5</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>],
+</span></span><span style="display:flex;"><span>              [<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.2</span>]])
+</span></span><span style="display:flex;"><span>y <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([<span style="color:#099">1</span>, <span style="color:#099">1</span>, <span style="color:#099">0</span>, <span style="color:#099">0</span>])
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([<span style="color:#099">0.707</span>, <span style="color:#099">0.707</span>])</span></span></code></pre></div>
 <p>Now, we arrange the training samples and the weights in a cartesian plane, by their position vectors.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">cls_color <span style="color:#000;font-weight:bold">=</span> [<span style="color:#d14">&#34;r&#34;</span>, <span style="color:#d14">&#34;g&#34;</span>]
-plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">6</span>, <span style="color:#099">6</span>))
-ax <span style="color:#000;font-weight:bold">=</span> plt<span style="color:#000;font-weight:bold">.</span>axes()
-ax<span style="color:#000;font-weight:bold">.</span>set_xlim(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">2</span>)
-ax<span style="color:#000;font-weight:bold">.</span>set_ylim(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">2</span>)
-<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">4</span>):
-    ax<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, X[i, <span style="color:#099">0</span>], X[i, <span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]], ec<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]],
-    	     head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
-ax<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, weights[<span style="color:#099">0</span>], weights[<span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>, ec<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>, head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>,
-         head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
-
-<span style="color:#998;font-style:italic"># decision boundary:</span>
-xx <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linspace(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">2</span>, <span style="color:#099">100</span>)
-yy <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span>weights[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> xx <span style="color:#000;font-weight:bold">/</span> weights[<span style="color:#099">1</span>]
-ax<span style="color:#000;font-weight:bold">.</span>plot(xx, yy, <span style="color:#d14">&#34;k--&#34;</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>cls_color <span style="color:#000;font-weight:bold">=</span> [<span style="color:#d14">&#34;r&#34;</span>, <span style="color:#d14">&#34;g&#34;</span>]
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">6</span>, <span style="color:#099">6</span>))
+</span></span><span style="display:flex;"><span>ax <span style="color:#000;font-weight:bold">=</span> plt<span style="color:#000;font-weight:bold">.</span>axes()
+</span></span><span style="display:flex;"><span>ax<span style="color:#000;font-weight:bold">.</span>set_xlim(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">2</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#000;font-weight:bold">.</span>set_ylim(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">4</span>):
+</span></span><span style="display:flex;"><span>    ax<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, X[i, <span style="color:#099">0</span>], X[i, <span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]], ec<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]],
+</span></span><span style="display:flex;"><span>    	     head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, weights[<span style="color:#099">0</span>], weights[<span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>, ec<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>, head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>,
+</span></span><span style="display:flex;"><span>         head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># decision boundary:</span>
+</span></span><span style="display:flex;"><span>xx <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linspace(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#099">2</span>, <span style="color:#099">100</span>)
+</span></span><span style="display:flex;"><span>yy <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span>weights[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> xx <span style="color:#000;font-weight:bold">/</span> weights[<span style="color:#099">1</span>]
+</span></span><span style="display:flex;"><span>ax<span style="color:#000;font-weight:bold">.</span>plot(xx, yy, <span style="color:#d14">&#34;k--&#34;</span>)</span></span></code></pre></div>
 <p><img src="/img/perc-4.png" alt=""></p>
 <p>The green arrows denote the true positives, the red ones denote the true negatives, the black arrow is the weight vector and the black dashed line denotes the decision boundary. Our hypothesis based on this decision boundary is equivalent to saying that any point in the upper right triangle would be assigned a positive prediction, and any point in the lower left triangle would be assigned a negative prediction. In the given dataset, this hypothesis clearly makes two mistakes - one false positive and one false negative.</p>
 <p>Analogous to the previous example, we know that the perceptron will converge if the weight vector (and hence the decision boundary) keeps rotating. Let&rsquo;s assume that it rotates counter-clockwise. Proving the convergence, then, can be reduced into proving the following parts:</p>
@@ -270,34 +269,34 @@ ax<span style="color:#000;font-weight:bold">.</span>plot(xx, yy, <span style="co
 <li><strong>Part B</strong>: The weight vector will not rotate enough to make the decision boundary jump <em>across</em> the gap between the two classes.</li>
 </ul>
 <p>Let us apply the learning rule to this perceptron, and see how we can prove both Part A and Part B. Since there is one false positive and one false negative, the training simply consists of adding the false negative to the weight vector and subtracting the false positive from it.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig, (ax1, ax2) <span style="color:#000;font-weight:bold">=</span> plt<span style="color:#000;font-weight:bold">.</span>subplots(nrows<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, ncols<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">16</span>, <span style="color:#099">8</span>))
-
-ax1<span style="color:#000;font-weight:bold">.</span>axis([<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1.5</span>, <span style="color:#099">1.5</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1.5</span>, <span style="color:#099">1.5</span>])
-ax2<span style="color:#000;font-weight:bold">.</span>axis([<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1.5</span>, <span style="color:#099">1.5</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1.5</span>, <span style="color:#099">1.5</span>])
-<span style="color:#998;font-style:italic"># original weights</span>
-weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([<span style="color:#099">0.707</span>, <span style="color:#099">0.707</span>])
-
-<span style="color:#998;font-style:italic"># adding the false negative and normalizing</span>
-weights <span style="color:#000;font-weight:bold">+=</span> [<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.2</span>]
-weights <span style="color:#000;font-weight:bold">=</span> weights <span style="color:#000;font-weight:bold">/</span> np<span style="color:#000;font-weight:bold">.</span>linalg<span style="color:#000;font-weight:bold">.</span>norm(weights)
-<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">4</span>):
-    ax1<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, X[i, <span style="color:#099">0</span>], X[i, <span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]],
-    	      ec<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]], head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>,
-              head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
-ax1<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, weights[<span style="color:#099">0</span>], weights[<span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>, ec<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>,
- 	  head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
-ax1<span style="color:#000;font-weight:bold">.</span>set_title(<span style="color:#d14">&#34;After adding false -ve&#34;</span>)
-
-<span style="color:#998;font-style:italic"># subtracting the false positive and normalizing</span>
-weights <span style="color:#000;font-weight:bold">-=</span> [<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.2</span>]
-weights <span style="color:#000;font-weight:bold">=</span> weights <span style="color:#000;font-weight:bold">/</span> np<span style="color:#000;font-weight:bold">.</span>linalg<span style="color:#000;font-weight:bold">.</span>norm(weights)
-<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">4</span>):
-    ax2<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, X[i, <span style="color:#099">0</span>], X[i, <span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]], ec<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]],
-              head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>,
-              head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
-ax2<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, weights[<span style="color:#099">0</span>], weights[<span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>, ec<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>,
-	  head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
-ax2<span style="color:#000;font-weight:bold">.</span>set_title(<span style="color:#d14">&#34;After adding false -ve and subtracting false +ve&#34;</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fig, (ax1, ax2) <span style="color:#000;font-weight:bold">=</span> plt<span style="color:#000;font-weight:bold">.</span>subplots(nrows<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, ncols<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">16</span>, <span style="color:#099">8</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ax1<span style="color:#000;font-weight:bold">.</span>axis([<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1.5</span>, <span style="color:#099">1.5</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1.5</span>, <span style="color:#099">1.5</span>])
+</span></span><span style="display:flex;"><span>ax2<span style="color:#000;font-weight:bold">.</span>axis([<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1.5</span>, <span style="color:#099">1.5</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1.5</span>, <span style="color:#099">1.5</span>])
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># original weights</span>
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([<span style="color:#099">0.707</span>, <span style="color:#099">0.707</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># adding the false negative and normalizing</span>
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">+=</span> [<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.2</span>]
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">=</span> weights <span style="color:#000;font-weight:bold">/</span> np<span style="color:#000;font-weight:bold">.</span>linalg<span style="color:#000;font-weight:bold">.</span>norm(weights)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">4</span>):
+</span></span><span style="display:flex;"><span>    ax1<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, X[i, <span style="color:#099">0</span>], X[i, <span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]],
+</span></span><span style="display:flex;"><span>    	      ec<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]], head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>,
+</span></span><span style="display:flex;"><span>              head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
+</span></span><span style="display:flex;"><span>ax1<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, weights[<span style="color:#099">0</span>], weights[<span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>, ec<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>,
+</span></span><span style="display:flex;"><span> 	  head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
+</span></span><span style="display:flex;"><span>ax1<span style="color:#000;font-weight:bold">.</span>set_title(<span style="color:#d14">&#34;After adding false -ve&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># subtracting the false positive and normalizing</span>
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">-=</span> [<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">0.2</span>]
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">=</span> weights <span style="color:#000;font-weight:bold">/</span> np<span style="color:#000;font-weight:bold">.</span>linalg<span style="color:#000;font-weight:bold">.</span>norm(weights)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">4</span>):
+</span></span><span style="display:flex;"><span>    ax2<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, X[i, <span style="color:#099">0</span>], X[i, <span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]], ec<span style="color:#000;font-weight:bold">=</span>cls_color[y[i]],
+</span></span><span style="display:flex;"><span>              head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>,
+</span></span><span style="display:flex;"><span>              head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
+</span></span><span style="display:flex;"><span>ax2<span style="color:#000;font-weight:bold">.</span>arrow(<span style="color:#099">0</span>, <span style="color:#099">0</span>, weights[<span style="color:#099">0</span>], weights[<span style="color:#099">1</span>], fc<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>, ec<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;k&#34;</span>,
+</span></span><span style="display:flex;"><span>	  head_width<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, head_length<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>)
+</span></span><span style="display:flex;"><span>ax2<span style="color:#000;font-weight:bold">.</span>set_title(<span style="color:#d14">&#34;After adding false -ve and subtracting false +ve&#34;</span>)</span></span></code></pre></div>
 <p><img src="/img/perc-5.png" alt=""></p>
 <h2 id="part-a">Part A</h2>
 <p>Suppose a false negative makes and angle $\theta_{n}$ with the weight vector. Since the decision boundary is orothogonal to the weight vector, no matter which iteration of learning the perceptron is, every possible $\theta_{n}$ will be such that $\frac{\pi}{2} \leq \theta_{n} \leq \frac{3\pi}{2}$. In order to make the weight vector rotate clockwise, a vector which makes an angle of $\leq \frac{\pi}{2}$ must be added to it. But because of the orthogonality between the weight vector and the decision boundary, no false negative can have this property! Thus, there will never exist a false negative that makes the weight vector rotate clockwise.</p>
@@ -311,8 +310,8 @@ ax2<span style="color:#000;font-weight:bold">.</span>set_title(<span style="colo
         </p>
     </div>
     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -466,7 +465,7 @@ ax2<span style="color:#000;font-weight:bold">.</span>set_title(<span style="colo
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

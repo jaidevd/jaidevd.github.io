@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>signalprocessing on Jaidev&#39;s Blog</title>
+    <title>Signalprocessing on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/signalprocessing/</link>
-    <description>Recent content in signalprocessing on Jaidev&#39;s Blog</description>
+    <description>Recent content in Signalprocessing on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jun 2015 16:46:54 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/signalprocessing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Jun 2015 16:46:54 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/signalprocessing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Limitations of the Fourier Transform</title>
       <link>https://jaidevd.com/posts/fourier-limitations/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/fourier-limitations/</guid>
       <description>My implementation of the Hilbert Huang transform (PyHHT) is quite close to a beta release. After nearly three years of inactivity, I&amp;rsquo;ve found some time to develop the PyHHT library in the last few weeks. In all this time many people have written to me about a lot of things - from the inability to use the module because of the lack of documentation, to comparison between the results of HHT and conventional time series analysis techniques.</description>
     </item>
-    
     <item>
       <title>Edge Effects in Empirical Mode Decomposition</title>
       <link>https://jaidevd.com/posts/emd-edge-effects/</link>
       <pubDate>Fri, 18 Apr 2014 12:10:15 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/emd-edge-effects/</guid>
       <description>It has been a little over three years since I started working on a Python implementation of the Hilbert Huang Transform. When I first presented it at SciPy India 2011 (video) it was just a collection of small scripts, without packaging, testing or even docstrings. Over time PyHHT has garnered some interest, and I have, since the last few weeks, found the time to regularly work on it. I have been able to come up with a decent implementation of empirical mode decomposition, pretty much in line with everything described in the original paper by Huang et al.</description>
     </item>
-    
   </channel>
 </rss>

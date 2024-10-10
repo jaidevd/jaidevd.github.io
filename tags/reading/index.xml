@@ -1,127 +1,96 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>reading on Jaidev&#39;s Blog</title>
+    <title>Reading on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/reading/</link>
-    <description>Recent content in reading on Jaidev&#39;s Blog</description>
+    <description>Recent content in Reading on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 May 2024 00:00:00 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/reading/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 May 2024 00:00:00 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/reading/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Essays of Revolt - Jack London</title>
       <link>https://jaidevd.com/posts/essays-of-revolt-review/</link>
       <pubDate>Tue, 21 May 2024 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/essays-of-revolt-review/</guid>
       <description>My company uses an e-HRM system. The system is why my colleagues and I never forget to wish each other on birthdays and anniversaries. Systems like these save us from the embarrassment of appearing indifferent. Other systems like smartphones ensure that the most halfhearted birthday greeting appears sincere and colourful. All you have to do is type “Happy” and the autocomplete does the rest - it composes the shortest message needed to show how much you care.</description>
     </item>
-    
     <item>
       <title>Book Review: The Great Arc - John Keay</title>
       <link>https://jaidevd.com/posts/the-great-arc-review/</link>
       <pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/the-great-arc-review/</guid>
-      <description>This book invokes two very different reactions in me. The primary reaction is jubilant, almost romantic. The second is gloomy. Imagine you’re watching Oppenheimer: spirits rising until the point the bombs actually drop, after which you feel guilty about having felt good in the first place.
-The Great Trigonometric Survey was completed over the duration of a better part of a century, across three generations of mathematicians, physicists and surveyors (they were called compasswallahs - I finally see where Rohit Gupta gets his pseudonym), and at the cost of thousands of lives.</description>
+      <description>This book invokes two very different reactions in me. The primary reaction is jubilant, almost romantic. The second is gloomy. Imagine you’re watching Oppenheimer: spirits rising until the point the bombs actually drop, after which you feel guilty about having felt good in the first place.&#xA;The Great Trigonometric Survey was completed over the duration of a better part of a century, across three generations of mathematicians, physicists and surveyors (they were called compasswallahs - I finally see where Rohit Gupta gets his pseudonym), and at the cost of thousands of lives.</description>
     </item>
-    
     <item>
       <title>Book Review: A Room of One&#39;s Own - Virginia Woolf</title>
       <link>https://jaidevd.com/posts/room-of-ones-own-review/</link>
       <pubDate>Mon, 12 Feb 2024 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/room-of-ones-own-review/</guid>
-      <description>I went into this essay expecting Virginia Woolf had written about what the eponymous room is like - its design and contents. But she deals with a more fundamental issue - that one needs a room of one&amp;rsquo;s own.
-The essays are a fine piece of scholarship. I&amp;rsquo;d never have thought that Woolf&amp;rsquo;s characteristic device, the &amp;ldquo;stream of consciousness&amp;rdquo; could be used to not only as a writing technique, but also as a powerful pedagogical technique.</description>
+      <description>I went into this essay expecting Virginia Woolf had written about what the eponymous room is like - its design and contents. But she deals with a more fundamental issue - that one needs a room of one&amp;rsquo;s own.&#xA;The essays are a fine piece of scholarship. I&amp;rsquo;d never have thought that Woolf&amp;rsquo;s characteristic device, the &amp;ldquo;stream of consciousness&amp;rdquo; could be used to not only as a writing technique, but also as a powerful pedagogical technique.</description>
     </item>
-    
     <item>
       <title>Open World Games and the Myth of Sisyphus</title>
       <link>https://jaidevd.com/posts/myth-of-sisyphus/</link>
       <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/myth-of-sisyphus/</guid>
-      <description>To the memory of Kevin Conroy. There was only ever one true Batman.
- You have been playing for months. Slowly and steadily, you have harvested every collectable - making yourself stronger and stronger until you can kill the toughest enemies. Every enemy defeated, every monster slain. No side quest worth doing remains. Those not worth doing are also done because you are a completionist (which is a dignified way of saying that you have no life).</description>
+      <description>To the memory of Kevin Conroy. There was only ever one true Batman.&#xA;You have been playing for months. Slowly and steadily, you have harvested every collectable - making yourself stronger and stronger until you can kill the toughest enemies. Every enemy defeated, every monster slain. No side quest worth doing remains. Those not worth doing are also done because you are a completionist (which is a dignified way of saying that you have no life).</description>
     </item>
-    
     <item>
       <title>Book Review: A World Without Email - Cal Newport</title>
       <link>https://jaidevd.com/posts/world-without-emai-review/</link>
       <pubDate>Sat, 08 May 2021 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/world-without-emai-review/</guid>
-      <description>This book is a good refresher on Cal Newport&amp;rsquo;s central thesis which shows up in both Deep Work and Digital Minimalism, but with email as the central device. The same essential theorem, but a lot of new stories to go with it as corollaries. Of course, it&amp;rsquo;s not email technology that the book contests, but the hyperactive hive-mind that are enabled by people&amp;rsquo;s email habits.
-But here&amp;rsquo;s the only thing I want to leave a note of: I was mildly annoyed by Newport&amp;rsquo;s invocation (or perhaps, misappropriation) of Claude Shannon&amp;rsquo;s information theory.</description>
+      <description>This book is a good refresher on Cal Newport&amp;rsquo;s central thesis which shows up in both Deep Work and Digital Minimalism, but with email as the central device. The same essential theorem, but a lot of new stories to go with it as corollaries. Of course, it&amp;rsquo;s not email technology that the book contests, but the hyperactive hive-mind that are enabled by people&amp;rsquo;s email habits.&#xA;But here&amp;rsquo;s the only thing I want to leave a note of: I was mildly annoyed by Newport&amp;rsquo;s invocation (or perhaps, misappropriation) of Claude Shannon&amp;rsquo;s information theory.</description>
     </item>
-    
     <item>
       <title>Book Review: Travels with Charley - John Steinbeck</title>
       <link>https://jaidevd.com/posts/travels-with-charley-review/</link>
       <pubDate>Tue, 29 Dec 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/travels-with-charley-review/</guid>
-      <description>It&amp;rsquo;s the end of 2020, and when you&amp;rsquo;ve been stuck at home for a year, with only your dog as your constant companion, Travels with Charley is a good book to read.
-But this book is a lot more about Steinbeck&amp;rsquo;s road trip than about the dog.
-Steinbeck romanticises everything. If so much as a tree sheds a leaf in front of him, he bursts forth with pages of ideas, thoughts and memories.</description>
+      <description>It&amp;rsquo;s the end of 2020, and when you&amp;rsquo;ve been stuck at home for a year, with only your dog as your constant companion, Travels with Charley is a good book to read.&#xA;But this book is a lot more about Steinbeck&amp;rsquo;s road trip than about the dog.&#xA;Steinbeck romanticises everything. If so much as a tree sheds a leaf in front of him, he bursts forth with pages of ideas, thoughts and memories.</description>
     </item>
-    
     <item>
       <title>Book Review: Baluta - Daya Pawar</title>
       <link>https://jaidevd.com/posts/baluta-review/</link>
       <pubDate>Fri, 10 Jul 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/baluta-review/</guid>
       <description>The original Marathi edition of Baluta has captivating cover art. It shows a sketch of a crow perched on the rim of an earthen pot, dropping pebbles in the pot, but completely oblivious to the glaring crack running down the pot. I remember that image from a copy lying in one corner of a bookshelf, but I was too young then to be interested. To me, this was just a sign of the artist trying to convey a sense of irony.</description>
     </item>
-    
     <item>
       <title>Book Review: City of Djinns - William Dalrymple</title>
       <link>https://jaidevd.com/posts/city-of-djinns-review/</link>
       <pubDate>Fri, 15 May 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/city-of-djinns-review/</guid>
       <description>I was first introduced to William Dalrymple in Michael Wood&amp;rsquo;s documentary, The Story of India. I watched it nearly eight years ago. The scene was shot in a Kali temple where devotees had gathered on the eve of Holi. Dalrymple is explaining what Holi means to Hindus, looking at a spot slightly off-camera. The timing of his narration is such that as soon as he finishes talking, the nearly hundred devotees in the temple throw up their hands and started dancing to chants of &amp;ldquo;Jai Mata Di&amp;rdquo; and &amp;ldquo;Holi hai&amp;rdquo;.</description>
     </item>
-    
     <item>
       <title>Book Review: To a God Unknown - John Steinbeck</title>
       <link>https://jaidevd.com/posts/to-a-god-unknown-review/</link>
       <pubDate>Wed, 27 Nov 2019 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/to-a-god-unknown-review/</guid>
       <description>In Journal of a Novel: The East of Eden Letters, Steinbeck wrote that reading books is like driving a wedge in your life. The larger the wedge, the harder it is for parts to come together once the wedge is removed. The longer the book, the harder it is to close the mental gap around it. Steinbeck wrote this for East of Eden - his magnum opus. Surprisingly, this happens even with Steinbeck&amp;rsquo;s much shorter books.</description>
     </item>
-    
     <item>
       <title>Book Review: Treasure Island - R L Stevenson</title>
       <link>https://jaidevd.com/posts/treasure-island-review/</link>
       <pubDate>Tue, 19 Feb 2019 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/treasure-island-review/</guid>
       <description>There are stories you know well but you never really read well. Captain Flint (the man and the parrot), Jim Hawkins, Long John Silver and Billy Bones, the Old Sea Dog are immortal characters, without a touch of age upon them or their story. Treasure Island was perhaps the first classic I actually skimmed through many times in my childhood. I didn&amp;rsquo;t read it in earnest until now, and I did that because the final season of Black Sails is about to end.</description>
     </item>
-    
     <item>
       <title>Book Review: In Dubious Battle - John Steinbeck</title>
       <link>https://jaidevd.com/posts/in-dubious-battle-review/</link>
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/in-dubious-battle-review/</guid>
-      <description>I have a pretty good Steinbeck collection, but this wasn&amp;rsquo;t a book I was going to read anytime soon. But I recently came across the movie adaptation and decided that other Steinbeck titles could wait. James Franco and John Steinbeck is a very attractive combination.
-First of all, this book is not about communism. The eponymous battle is not a battle of the classes. It&amp;rsquo;s more of a battle men fight with themselves.</description>
+      <description>I have a pretty good Steinbeck collection, but this wasn&amp;rsquo;t a book I was going to read anytime soon. But I recently came across the movie adaptation and decided that other Steinbeck titles could wait. James Franco and John Steinbeck is a very attractive combination.&#xA;First of all, this book is not about communism. The eponymous battle is not a battle of the classes. It&amp;rsquo;s more of a battle men fight with themselves.</description>
     </item>
-    
     <item>
       <title>Book Review: The View from the Cheap Seats - Neil Gaiman</title>
       <link>https://jaidevd.com/posts/view-from-cheap-seats-review/</link>
       <pubDate>Fri, 24 Mar 2017 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/view-from-cheap-seats-review/</guid>
-      <description>I can&amp;rsquo;t think of a single fantasy character that would be Neil Gaiman. I&amp;rsquo;m tempted to think that he&amp;rsquo;s like Santa Claus, but he&amp;rsquo;s not the sort who&amp;rsquo;d care if someone was being naughty. He&amp;rsquo;s not Dumbledore or Gandalf either - he&amp;rsquo;d rather be your friend than your mentor. He&amp;rsquo;s not even the Dream of the Endless, since he&amp;rsquo;s not aware of how powerful he is.
-Reading Gaiman&amp;rsquo;s nonfiction is like meditation that clears and even expands your mind.</description>
+      <description>I can&amp;rsquo;t think of a single fantasy character that would be Neil Gaiman. I&amp;rsquo;m tempted to think that he&amp;rsquo;s like Santa Claus, but he&amp;rsquo;s not the sort who&amp;rsquo;d care if someone was being naughty. He&amp;rsquo;s not Dumbledore or Gandalf either - he&amp;rsquo;d rather be your friend than your mentor. He&amp;rsquo;s not even the Dream of the Endless, since he&amp;rsquo;s not aware of how powerful he is.&#xA;Reading Gaiman&amp;rsquo;s nonfiction is like meditation that clears and even expands your mind.</description>
     </item>
-    
   </channel>
 </rss>

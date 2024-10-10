@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>india on Jaidev&#39;s Blog</title>
+    <title>India on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/india/</link>
-    <description>Recent content in india on Jaidev&#39;s Blog</description>
+    <description>Recent content in India on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Apr 2024 00:00:00 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/india/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Apr 2024 00:00:00 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/india/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Book Review: The Great Arc - John Keay</title>
       <link>https://jaidevd.com/posts/the-great-arc-review/</link>
       <pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/the-great-arc-review/</guid>
-      <description>This book invokes two very different reactions in me. The primary reaction is jubilant, almost romantic. The second is gloomy. Imagine you’re watching Oppenheimer: spirits rising until the point the bombs actually drop, after which you feel guilty about having felt good in the first place.
-The Great Trigonometric Survey was completed over the duration of a better part of a century, across three generations of mathematicians, physicists and surveyors (they were called compasswallahs - I finally see where Rohit Gupta gets his pseudonym), and at the cost of thousands of lives.</description>
+      <description>This book invokes two very different reactions in me. The primary reaction is jubilant, almost romantic. The second is gloomy. Imagine you’re watching Oppenheimer: spirits rising until the point the bombs actually drop, after which you feel guilty about having felt good in the first place.&#xA;The Great Trigonometric Survey was completed over the duration of a better part of a century, across three generations of mathematicians, physicists and surveyors (they were called compasswallahs - I finally see where Rohit Gupta gets his pseudonym), and at the cost of thousands of lives.</description>
     </item>
-    
     <item>
       <title>Book Review: City of Djinns - William Dalrymple</title>
       <link>https://jaidevd.com/posts/city-of-djinns-review/</link>
       <pubDate>Fri, 15 May 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/city-of-djinns-review/</guid>
       <description>I was first introduced to William Dalrymple in Michael Wood&amp;rsquo;s documentary, The Story of India. I watched it nearly eight years ago. The scene was shot in a Kali temple where devotees had gathered on the eve of Holi. Dalrymple is explaining what Holi means to Hindus, looking at a spot slightly off-camera. The timing of his narration is such that as soon as he finishes talking, the nearly hundred devotees in the temple throw up their hands and started dancing to chants of &amp;ldquo;Jai Mata Di&amp;rdquo; and &amp;ldquo;Holi hai&amp;rdquo;.</description>
     </item>
-    
   </channel>
 </rss>

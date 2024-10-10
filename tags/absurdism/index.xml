@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>absurdism on Jaidev&#39;s Blog</title>
+    <title>Absurdism on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/absurdism/</link>
-    <description>Recent content in absurdism on Jaidev&#39;s Blog</description>
+    <description>Recent content in Absurdism on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Dec 2022 10:04:06 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/absurdism/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Dec 2022 10:04:06 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/absurdism/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Open World Games and the Myth of Sisyphus</title>
       <link>https://jaidevd.com/posts/myth-of-sisyphus/</link>
       <pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/myth-of-sisyphus/</guid>
-      <description>To the memory of Kevin Conroy. There was only ever one true Batman.
- You have been playing for months. Slowly and steadily, you have harvested every collectable - making yourself stronger and stronger until you can kill the toughest enemies. Every enemy defeated, every monster slain. No side quest worth doing remains. Those not worth doing are also done because you are a completionist (which is a dignified way of saying that you have no life).</description>
+      <description>To the memory of Kevin Conroy. There was only ever one true Batman.&#xA;You have been playing for months. Slowly and steadily, you have harvested every collectable - making yourself stronger and stronger until you can kill the toughest enemies. Every enemy defeated, every monster slain. No side quest worth doing remains. Those not worth doing are also done because you are a completionist (which is a dignified way of saying that you have no life).</description>
     </item>
-    
   </channel>
 </rss>

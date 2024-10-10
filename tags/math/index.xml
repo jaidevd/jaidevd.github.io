@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>math on Jaidev&#39;s Blog</title>
+    <title>Math on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/math/</link>
-    <description>Recent content in math on Jaidev&#39;s Blog</description>
+    <description>Recent content in Math on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Jul 2016 14:45:55 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Jul 2016 14:45:55 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/math/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Geometric Proof of the Perceptron Convergence Theorem</title>
       <link>https://jaidevd.com/posts/perceptron-convergence/</link>
       <pubDate>Wed, 06 Jul 2016 14:45:55 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/perceptron-convergence/</guid>
       <description>The last time I studied neural networks in detail was five years ago in college. I did touch upon backpropagation when Andrew Ng&amp;rsquo;s machine learning MOOC was offered on Coursera for the first time, but beyond that I&amp;rsquo;ve only dabbled with them through keras. Then recently, when I read about Coursera&amp;rsquo;s imminent decision to pull down much of their freely available material (you can read a rant about it here), I went on a downloading spree (many thanks to the wonderful coursera-dl).</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>writing on Jaidev&#39;s Blog</title>
+    <title>Writing on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/writing/</link>
-    <description>Recent content in writing on Jaidev&#39;s Blog</description>
+    <description>Recent content in Writing on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 12 Feb 2024 00:00:00 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/writing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Feb 2024 00:00:00 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/writing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Book Review: A Room of One&#39;s Own - Virginia Woolf</title>
       <link>https://jaidevd.com/posts/room-of-ones-own-review/</link>
       <pubDate>Mon, 12 Feb 2024 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/room-of-ones-own-review/</guid>
-      <description>I went into this essay expecting Virginia Woolf had written about what the eponymous room is like - its design and contents. But she deals with a more fundamental issue - that one needs a room of one&amp;rsquo;s own.
-The essays are a fine piece of scholarship. I&amp;rsquo;d never have thought that Woolf&amp;rsquo;s characteristic device, the &amp;ldquo;stream of consciousness&amp;rdquo; could be used to not only as a writing technique, but also as a powerful pedagogical technique.</description>
+      <description>I went into this essay expecting Virginia Woolf had written about what the eponymous room is like - its design and contents. But she deals with a more fundamental issue - that one needs a room of one&amp;rsquo;s own.&#xA;The essays are a fine piece of scholarship. I&amp;rsquo;d never have thought that Woolf&amp;rsquo;s characteristic device, the &amp;ldquo;stream of consciousness&amp;rdquo; could be used to not only as a writing technique, but also as a powerful pedagogical technique.</description>
     </item>
-    
     <item>
       <title>Book Review: The View from the Cheap Seats - Neil Gaiman</title>
       <link>https://jaidevd.com/posts/view-from-cheap-seats-review/</link>
       <pubDate>Fri, 24 Mar 2017 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/view-from-cheap-seats-review/</guid>
-      <description>I can&amp;rsquo;t think of a single fantasy character that would be Neil Gaiman. I&amp;rsquo;m tempted to think that he&amp;rsquo;s like Santa Claus, but he&amp;rsquo;s not the sort who&amp;rsquo;d care if someone was being naughty. He&amp;rsquo;s not Dumbledore or Gandalf either - he&amp;rsquo;d rather be your friend than your mentor. He&amp;rsquo;s not even the Dream of the Endless, since he&amp;rsquo;s not aware of how powerful he is.
-Reading Gaiman&amp;rsquo;s nonfiction is like meditation that clears and even expands your mind.</description>
+      <description>I can&amp;rsquo;t think of a single fantasy character that would be Neil Gaiman. I&amp;rsquo;m tempted to think that he&amp;rsquo;s like Santa Claus, but he&amp;rsquo;s not the sort who&amp;rsquo;d care if someone was being naughty. He&amp;rsquo;s not Dumbledore or Gandalf either - he&amp;rsquo;d rather be your friend than your mentor. He&amp;rsquo;s not even the Dream of the Endless, since he&amp;rsquo;s not aware of how powerful he is.&#xA;Reading Gaiman&amp;rsquo;s nonfiction is like meditation that clears and even expands your mind.</description>
     </item>
-    
   </channel>
 </rss>

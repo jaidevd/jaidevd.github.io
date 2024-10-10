@@ -40,9 +40,8 @@ if (!doNotTrack) {
 }
 </script>
 </head>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="A Process for Readable Code"/>
-<meta name="twitter:description" content="I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&#39; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time."/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="A Process for Readable Code"/>
+<meta name="twitter:description" content="I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&rsquo; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time."/>
 
 
     <body>
@@ -150,7 +149,7 @@ if (!doNotTrack) {
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -165,7 +164,7 @@ if (!doNotTrack) {
         <p>
         <p>I took a <a href="https://onlinedegree.iitm.ac.in/course_pages/BSCCS2002.html">course</a>
 on data structures and algorithms over the last few months. It is being offered
-as a part of IIT Madras' <a href="https://onlinedegree.iitm.ac.in">Online Degree Program</a>
+as a part of IIT Madras&rsquo; <a href="https://onlinedegree.iitm.ac.in">Online Degree Program</a>
 in Data Science and Programming, taught by <a href="https://www.cmi.ac.in/~madhavan/">Prof Madhavan Mukund</a>.
 The program is a MOOC in a true sense, with tens of thousands of students
 enrolling each year. The DSA course itself is offered every trimester,
@@ -302,7 +301,7 @@ of them found the &ldquo;after&rdquo; version of the code more readable.</p>
 <p>(Interestingly, some of my friends also attributed the readability of the code
 to factors external to the code itself - like font sizes, colors and how an IDE
 might render whitespaces. Sure, these external factors are largely based on
-peoples' taste and preferences, but it is still worthwhile optimizing one&rsquo;s
+peoples&rsquo; taste and preferences, but it is still worthwhile optimizing one&rsquo;s
 developer environment for better optical readability.)</p>
 <h3 id="2-breadth-first-search">2. Breadth-first Search</h3>
 
@@ -404,12 +403,12 @@ avoided. Instead, there will almost always be a method that returns a view of
 the object that you really need. Consider, for example, two dictionaries, <code>X</code>
 and <code>Y</code>. Suppose you have to do something with the keys present in
 exactly one of them. Typically, to find such keys, I would simply iterate.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ind_keys <span style="color:#000;font-weight:bold">=</span> [key <span style="color:#000;font-weight:bold">for</span> key <span style="color:#000;font-weight:bold">in</span> X <span style="color:#000;font-weight:bold">if</span> key <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> Y]</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ind_keys <span style="color:#000;font-weight:bold">=</span> [key <span style="color:#000;font-weight:bold">for</span> key <span style="color:#000;font-weight:bold">in</span> X <span style="color:#000;font-weight:bold">if</span> key <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> Y]</span></span></code></pre></div>
 <p>But I did not know until recently, that a collection of dictionary keys in
 Python behaves a lot like a set! So the symmetric difference operator (<code>^</code>) that
 we generally use on a pair sets can also be used on a pair of <code>dict_keys</code>
 objects:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ind_keys <span style="color:#000;font-weight:bold">=</span> X<span style="color:#000;font-weight:bold">.</span>keys() <span style="color:#000;font-weight:bold">^</span> Y<span style="color:#000;font-weight:bold">.</span>keys()</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ind_keys <span style="color:#000;font-weight:bold">=</span> X<span style="color:#000;font-weight:bold">.</span>keys() <span style="color:#000;font-weight:bold">^</span> Y<span style="color:#000;font-weight:bold">.</span>keys()</span></span></code></pre></div>
 <p>Keeping up with this knowledge is tough for even the most experienced
 developers - especially as newer versions of libraries and languages come up.
 Here, too, regular code reviews (preferably from multiple reviewers with varying
@@ -426,8 +425,8 @@ feel like they are solving a Holmesian mystery, you&rsquo;re good.</p>
         </p>
     </div>
     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -589,7 +588,7 @@ feel like they are solving a Holmesian mystery, you&rsquo;re good.</p>
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>

@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>productivity on Jaidev&#39;s Blog</title>
+    <title>Productivity on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/productivity/</link>
-    <description>Recent content in productivity on Jaidev&#39;s Blog</description>
+    <description>Recent content in Productivity on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 May 2021 00:00:00 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/productivity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 May 2021 00:00:00 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/productivity/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Book Review: A World Without Email - Cal Newport</title>
       <link>https://jaidevd.com/posts/world-without-emai-review/</link>
       <pubDate>Sat, 08 May 2021 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/world-without-emai-review/</guid>
-      <description>This book is a good refresher on Cal Newport&amp;rsquo;s central thesis which shows up in both Deep Work and Digital Minimalism, but with email as the central device. The same essential theorem, but a lot of new stories to go with it as corollaries. Of course, it&amp;rsquo;s not email technology that the book contests, but the hyperactive hive-mind that are enabled by people&amp;rsquo;s email habits.
-But here&amp;rsquo;s the only thing I want to leave a note of: I was mildly annoyed by Newport&amp;rsquo;s invocation (or perhaps, misappropriation) of Claude Shannon&amp;rsquo;s information theory.</description>
+      <description>This book is a good refresher on Cal Newport&amp;rsquo;s central thesis which shows up in both Deep Work and Digital Minimalism, but with email as the central device. The same essential theorem, but a lot of new stories to go with it as corollaries. Of course, it&amp;rsquo;s not email technology that the book contests, but the hyperactive hive-mind that are enabled by people&amp;rsquo;s email habits.&#xA;But here&amp;rsquo;s the only thing I want to leave a note of: I was mildly annoyed by Newport&amp;rsquo;s invocation (or perhaps, misappropriation) of Claude Shannon&amp;rsquo;s information theory.</description>
     </item>
-    
     <item>
       <title>Playing With the Konmari Method</title>
       <link>https://jaidevd.com/posts/playing-with-the-konmari-method/</link>
       <pubDate>Wed, 03 Aug 2016 13:42:55 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/playing-with-the-konmari-method/</guid>
-      <description>I heard about the bestseller The Life-Changing Magic of Tidying Up at a SciPy talk about deculttering your data science project. The speakers admitted they hadn&amp;rsquo;t read it - they were simply trying to point out that tidying up your space and tidying up your software project are both similar.
-  I&amp;rsquo;ve been married and living with my wife for about a year now. After we moved into &amp;ldquo;our own home&amp;rdquo; last year, we have both undergone major role reversals when it comes to tidying up.</description>
+      <description>I heard about the bestseller The Life-Changing Magic of Tidying Up at a SciPy talk about deculttering your data science project. The speakers admitted they hadn&amp;rsquo;t read it - they were simply trying to point out that tidying up your space and tidying up your software project are both similar.&#xA;I&amp;rsquo;ve been married and living with my wife for about a year now. After we moved into &amp;ldquo;our own home&amp;rdquo; last year, we have both undergone major role reversals when it comes to tidying up.</description>
     </item>
-    
   </channel>
 </rss>

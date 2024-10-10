@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>travel on Jaidev&#39;s Blog</title>
+    <title>Travel on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/travel/</link>
-    <description>Recent content in travel on Jaidev&#39;s Blog</description>
+    <description>Recent content in Travel on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Dec 2020 00:00:00 +0530</lastBuildDate><atom:link href="https://jaidevd.com/tags/travel/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Dec 2020 00:00:00 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/travel/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Book Review: Travels with Charley - John Steinbeck</title>
       <link>https://jaidevd.com/posts/travels-with-charley-review/</link>
       <pubDate>Tue, 29 Dec 2020 00:00:00 +0530</pubDate>
-      
       <guid>https://jaidevd.com/posts/travels-with-charley-review/</guid>
-      <description>It&amp;rsquo;s the end of 2020, and when you&amp;rsquo;ve been stuck at home for a year, with only your dog as your constant companion, Travels with Charley is a good book to read.
-But this book is a lot more about Steinbeck&amp;rsquo;s road trip than about the dog.
-Steinbeck romanticises everything. If so much as a tree sheds a leaf in front of him, he bursts forth with pages of ideas, thoughts and memories.</description>
+      <description>It&amp;rsquo;s the end of 2020, and when you&amp;rsquo;ve been stuck at home for a year, with only your dog as your constant companion, Travels with Charley is a good book to read.&#xA;But this book is a lot more about Steinbeck&amp;rsquo;s road trip than about the dog.&#xA;Steinbeck romanticises everything. If so much as a tree sheds a leaf in front of him, he bursts forth with pages of ideas, thoughts and memories.</description>
     </item>
-    
   </channel>
 </rss>

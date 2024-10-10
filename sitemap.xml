@@ -2,13 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jaidevd.com/posts/feed-the-trolls/</loc>
+    <lastmod>2024-10-10T15:47:35+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/</loc>
+    <lastmod>2024-10-10T15:47:35+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/personal/</loc>
+    <lastmod>2024-10-10T15:47:35+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/posts/</loc>
+    <lastmod>2024-10-10T15:47:35+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/socialmedia/</loc>
+    <lastmod>2024-10-10T15:47:35+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/</loc>
+    <lastmod>2024-10-10T15:47:35+05:30</lastmod>
+  </url><url>
     <loc>https://jaidevd.com/tags/documentprocessing/</loc>
     <lastmod>2024-06-21T22:04:01+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/geometry/</loc>
-    <lastmod>2024-06-21T22:04:01+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/</loc>
     <lastmod>2024-06-21T22:04:01+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/layoutanalysis/</loc>
@@ -18,12 +33,6 @@
     <lastmod>2024-06-21T22:04:01+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/ocr/</loc>
-    <lastmod>2024-06-21T22:04:01+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/posts/</loc>
-    <lastmod>2024-06-21T22:04:01+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/</loc>
     <lastmod>2024-06-21T22:04:01+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/bookreview/</loc>
@@ -75,9 +84,6 @@
     <lastmod>2022-12-24T10:04:06+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/myth-of-sisyphus/</loc>
-    <lastmod>2022-12-24T10:04:06+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/personal/</loc>
     <lastmod>2022-12-24T10:04:06+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/ai/</loc>
@@ -273,6 +279,5 @@
     <lastmod>2014-04-18T12:10:15+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/about/</loc>
-    <priority>0</priority>
   </url>
 </urlset>

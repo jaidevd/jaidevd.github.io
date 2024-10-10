@@ -40,9 +40,8 @@ if (!doNotTrack) {
 }
 </script>
 </head>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Weighted Loss Functions for Instance Segmentation"/>
-<meta name="twitter:description" content="This post is a follow up to my talk, Practical Image Classification &amp; Object Detection at PyData Delhi 2018. You can watch the talk here:   and see the slides here.
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Weighted Loss Functions for Instance Segmentation"/>
+<meta name="twitter:description" content="This post is a follow up to my talk, Practical Image Classification &amp; Object Detection at PyData Delhi 2018. You can watch the talk here: and see the slides here.
 I spoke at length about the different kinds of problems in computer vision and how they are interpreted in deep learning architectures. I spent a fair bit of time on instance and semantic segmentation (for an introduction to these problems, watch Justin Johnson&rsquo;s lecture from the Stanford CS231 course here)."/>
 
 
@@ -151,7 +150,7 @@ I spoke at length about the different kinds of problems in computer vision and h
 	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
 	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
 </nav>
 
@@ -179,116 +178,116 @@ I spoke at length about the different kinds of problems in computer vision and h
 <p>Now imagine that we have a model that is good at semantic segmentation, but not so much at instance segmentation. So it (somewhat) wrongly predicts a labeled output that is <em>almost</em> identical to the ground truth, except it fills the gap that separates the two circles. After all, the circles are <em>almost</em> touching anyway.</p>
 <p><img src="/img/weighted-loss-functions-for-instance-segmentation_4_0.png" alt=""></p>
 <p>Since this a binary classification problem, and we can tell that there is clear class imbalance, let&rsquo;s use the <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html">F1 score</a> to evaluate our prediction.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.metrics</span> <span style="color:#000;font-weight:bold">import</span> f1_score
-<span style="color:#0086b3">print</span>(f1_score(x<span style="color:#000;font-weight:bold">.</span>ravel(), prediction<span style="color:#000;font-weight:bold">.</span>ravel()))
-
-<span style="color:#998;font-style:italic"># 0.9860563110515227</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sklearn.metrics</span> <span style="color:#000;font-weight:bold">import</span> f1_score
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">print</span>(f1_score(x<span style="color:#000;font-weight:bold">.</span>ravel(), prediction<span style="color:#000;font-weight:bold">.</span>ravel()))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 0.9860563110515227</span></span></span></code></pre></div>
 <p>That&rsquo;s not bad at all. There are a very small number of pixels where the model is mistaken - the ones in the area where the circles are not supposed to be touching. Let&rsquo;s take a look at how well the other metric - mAP of IoU - does with this prediction. Here are a couple of functions that implement the mAP of IoU computation. Followed by a detailed explanation of the metric.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">iou</span>(masks_true, masks_pred):
-    <span style="color:#d14">&#34;&#34;&#34;
-</span><span style="color:#d14">    Get the IOU between each predicted mask and each true mask.
-</span><span style="color:#d14">
-</span><span style="color:#d14">    Parameters
-</span><span style="color:#d14">    ----------
-</span><span style="color:#d14">
-</span><span style="color:#d14">    masks_true : array-like
-</span><span style="color:#d14">        A 3D array of shape (n_true_masks, image_height, image_width)
-</span><span style="color:#d14">    masks_pred : array-like
-</span><span style="color:#d14">        A 3D array of shape (n_predicted_masks, image_height, image_width)
-</span><span style="color:#d14">
-</span><span style="color:#d14">    Returns
-</span><span style="color:#d14">    -------
-</span><span style="color:#d14">    array-like
-</span><span style="color:#d14">        A 2D array of shape (n_true_masks, n_predicted_masks), where
-</span><span style="color:#d14">        the element at position (i, j) denotes the IoU between the `i`th true
-</span><span style="color:#d14">        mask and the `j`th predicted mask.
-</span><span style="color:#d14">
-</span><span style="color:#d14">    &#34;&#34;&#34;</span>
-    <span style="color:#000;font-weight:bold">if</span> masks_true<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>:] <span style="color:#000;font-weight:bold">!=</span> masks_pred<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>:]:
-        <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#39;Predicted masks have wrong shape!&#39;</span>)
-    n_true_masks, height, width <span style="color:#000;font-weight:bold">=</span> masks_true<span style="color:#000;font-weight:bold">.</span>shape
-    n_pred_masks <span style="color:#000;font-weight:bold">=</span> masks_pred<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]
-    m_true <span style="color:#000;font-weight:bold">=</span> masks_true<span style="color:#000;font-weight:bold">.</span>copy()<span style="color:#000;font-weight:bold">.</span>reshape(n_true_masks, height <span style="color:#000;font-weight:bold">*</span> width)<span style="color:#000;font-weight:bold">.</span>T
-    m_pred <span style="color:#000;font-weight:bold">=</span> masks_pred<span style="color:#000;font-weight:bold">.</span>copy()<span style="color:#000;font-weight:bold">.</span>reshape(n_pred_masks, height <span style="color:#000;font-weight:bold">*</span> width)
-    numerator <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(m_pred, m_true)
-    denominator <span style="color:#000;font-weight:bold">=</span> m_pred<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">+</span> m_true<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)
-    <span style="color:#000;font-weight:bold">return</span> numerator <span style="color:#000;font-weight:bold">/</span> (denominator <span style="color:#000;font-weight:bold">-</span> numerator)
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">evaluate_image</span>(masks_true, masks_pred, thresholds):
-    <span style="color:#d14">&#34;&#34;&#34;
-</span><span style="color:#d14">    Get the average precision for the true and predicted masks of a single image,
-</span><span style="color:#d14">    averaged over a set of thresholds
-</span><span style="color:#d14">
-</span><span style="color:#d14">    Parameters
-</span><span style="color:#d14">    ----------
-</span><span style="color:#d14">    masks_true : array-like
-</span><span style="color:#d14">        A 3D array of shape (n_true_masks, image_height, image_width)
-</span><span style="color:#d14">    masks_pred : array-like
-</span><span style="color:#d14">        A 3D array of shape (n_predicted_masks, image_height, image_width)
-</span><span style="color:#d14">
-</span><span style="color:#d14">    Returns
-</span><span style="color:#d14">    -------
-</span><span style="color:#d14">    float
-</span><span style="color:#d14">        The mean average precision of intersection over union between
-</span><span style="color:#d14">        all pairs of true and predicted region masks.
-</span><span style="color:#d14">
-</span><span style="color:#d14">    &#34;&#34;&#34;</span>
-    int_o_un <span style="color:#000;font-weight:bold">=</span> iou(masks_true, masks_pred)
-    benched <span style="color:#000;font-weight:bold">=</span> int_o_un <span style="color:#000;font-weight:bold">&gt;</span> thresholds
-    tp <span style="color:#000;font-weight:bold">=</span> benched<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)  <span style="color:#998;font-style:italic"># noqa</span>
-    fp <span style="color:#000;font-weight:bold">=</span> (benched<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>)
-    fn <span style="color:#000;font-weight:bold">=</span> (benched<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>)
-    <span style="color:#000;font-weight:bold">return</span> np<span style="color:#000;font-weight:bold">.</span>mean(tp <span style="color:#000;font-weight:bold">/</span> (tp <span style="color:#000;font-weight:bold">+</span> fp <span style="color:#000;font-weight:bold">+</span> fn))</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">iou</span>(masks_true, masks_pred):
+</span></span><span style="display:flex;"><span>    <span style="color:#d14">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    Get the IOU between each predicted mask and each true mask.
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    Parameters
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    ----------
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    masks_true : array-like
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        A 3D array of shape (n_true_masks, image_height, image_width)
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    masks_pred : array-like
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        A 3D array of shape (n_predicted_masks, image_height, image_width)
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    Returns
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    -------
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    array-like
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        A 2D array of shape (n_true_masks, n_predicted_masks), where
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        the element at position (i, j) denotes the IoU between the `i`th true
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        mask and the `j`th predicted mask.
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> masks_true<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>:] <span style="color:#000;font-weight:bold">!=</span> masks_pred<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>:]:
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#39;Predicted masks have wrong shape!&#39;</span>)
+</span></span><span style="display:flex;"><span>    n_true_masks, height, width <span style="color:#000;font-weight:bold">=</span> masks_true<span style="color:#000;font-weight:bold">.</span>shape
+</span></span><span style="display:flex;"><span>    n_pred_masks <span style="color:#000;font-weight:bold">=</span> masks_pred<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>    m_true <span style="color:#000;font-weight:bold">=</span> masks_true<span style="color:#000;font-weight:bold">.</span>copy()<span style="color:#000;font-weight:bold">.</span>reshape(n_true_masks, height <span style="color:#000;font-weight:bold">*</span> width)<span style="color:#000;font-weight:bold">.</span>T
+</span></span><span style="display:flex;"><span>    m_pred <span style="color:#000;font-weight:bold">=</span> masks_pred<span style="color:#000;font-weight:bold">.</span>copy()<span style="color:#000;font-weight:bold">.</span>reshape(n_pred_masks, height <span style="color:#000;font-weight:bold">*</span> width)
+</span></span><span style="display:flex;"><span>    numerator <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>dot(m_pred, m_true)
+</span></span><span style="display:flex;"><span>    denominator <span style="color:#000;font-weight:bold">=</span> m_pred<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">+</span> m_true<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> numerator <span style="color:#000;font-weight:bold">/</span> (denominator <span style="color:#000;font-weight:bold">-</span> numerator)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">evaluate_image</span>(masks_true, masks_pred, thresholds):
+</span></span><span style="display:flex;"><span>    <span style="color:#d14">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    Get the average precision for the true and predicted masks of a single image,
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    averaged over a set of thresholds
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    Parameters
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    ----------
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    masks_true : array-like
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        A 3D array of shape (n_true_masks, image_height, image_width)
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    masks_pred : array-like
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        A 3D array of shape (n_predicted_masks, image_height, image_width)
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    Returns
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    -------
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    float
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        The mean average precision of intersection over union between
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        all pairs of true and predicted region masks.
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    int_o_un <span style="color:#000;font-weight:bold">=</span> iou(masks_true, masks_pred)
+</span></span><span style="display:flex;"><span>    benched <span style="color:#000;font-weight:bold">=</span> int_o_un <span style="color:#000;font-weight:bold">&gt;</span> thresholds
+</span></span><span style="display:flex;"><span>    tp <span style="color:#000;font-weight:bold">=</span> benched<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)  <span style="color:#998;font-style:italic"># noqa</span>
+</span></span><span style="display:flex;"><span>    fp <span style="color:#000;font-weight:bold">=</span> (benched<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    fn <span style="color:#000;font-weight:bold">=</span> (benched<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> np<span style="color:#000;font-weight:bold">.</span>mean(tp <span style="color:#000;font-weight:bold">/</span> (tp <span style="color:#000;font-weight:bold">+</span> fp <span style="color:#000;font-weight:bold">+</span> fn))</span></span></code></pre></div>
 <p>Note that the IoU between any pair of binary masks can be any real number in $ [0, 1] $.
 Therefore, it is necessary to apply a threshold the IoUs between all pairs of predicted and true masks, to get a meaningful evaluation. The convention used by many Kaggle competitions is to have a set of thresholds from 0.5 to 0.95 in steps of 0.05. In the following cell, we create this set of thresholds and use them to evaluate the metric.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># make the thresholds</span>
-THRESHOLDS <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>arange(<span style="color:#099">0.5</span>, <span style="color:#099">1</span>, <span style="color:#099">0.05</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">10</span>, <span style="color:#099">1</span>, <span style="color:#099">1</span>)
-
-<span style="color:#998;font-style:italic"># segment the ground truth image into constituent masks</span>
-bg <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros(x<span style="color:#000;font-weight:bold">.</span>shape)
-true_mask_1 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
-true_mask_1[o1r, o1c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
-true_mask_2 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
-true_mask_2[o2r, o2c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
-y_true <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([true_mask_1, true_mask_2])
-
-<span style="color:#998;font-style:italic"># reshape the prediction matrix to fit the format required by</span>
-<span style="color:#998;font-style:italic"># the `evaluate_image` function</span>
-y_pred <span style="color:#000;font-weight:bold">=</span> prediction<span style="color:#000;font-weight:bold">.</span>reshape((<span style="color:#099">1</span>,) <span style="color:#000;font-weight:bold">+</span> prediction<span style="color:#000;font-weight:bold">.</span>shape)
-
-map_iou <span style="color:#000;font-weight:bold">=</span> evaluate_image(y_true, y_pred, THRESHOLDS)
-<span style="color:#0086b3">print</span>(map_iou)  <span style="color:#998;font-style:italic"># 0.0</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># make the thresholds</span>
+</span></span><span style="display:flex;"><span>THRESHOLDS <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>arange(<span style="color:#099">0.5</span>, <span style="color:#099">1</span>, <span style="color:#099">0.05</span>)<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">10</span>, <span style="color:#099">1</span>, <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># segment the ground truth image into constituent masks</span>
+</span></span><span style="display:flex;"><span>bg <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros(x<span style="color:#000;font-weight:bold">.</span>shape)
+</span></span><span style="display:flex;"><span>true_mask_1 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
+</span></span><span style="display:flex;"><span>true_mask_1[o1r, o1c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>true_mask_2 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
+</span></span><span style="display:flex;"><span>true_mask_2[o2r, o2c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>y_true <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([true_mask_1, true_mask_2])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># reshape the prediction matrix to fit the format required by</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># the `evaluate_image` function</span>
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#000;font-weight:bold">=</span> prediction<span style="color:#000;font-weight:bold">.</span>reshape((<span style="color:#099">1</span>,) <span style="color:#000;font-weight:bold">+</span> prediction<span style="color:#000;font-weight:bold">.</span>shape)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>map_iou <span style="color:#000;font-weight:bold">=</span> evaluate_image(y_true, y_pred, THRESHOLDS)
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">print</span>(map_iou)  <span style="color:#998;font-style:italic"># 0.0</span></span></span></code></pre></div>
 <p><img src="/img/frustrated_jackie_chan.png" alt=""></p>
 <p>That was by design. On careful inspection, it is apparent that both of the <em>true</em> masks account for less than half the area occupied by the <em>predicted</em> mask. Thus, the <em>predicted</em> mask has in IoU of less than 0.5 with each <em>true</em> mask. Since we start thresholding the IoU values at 0.5, the prediction did not register a true positive with either of the true masks - ultimately leading to a score of zero.</p>
 <p>Let&rsquo;s try another hacked prediction, where we create two circular objects again, but this time they share the same centers as their ground truth counterparts, and have a radius that is less than the true radius by six units. Then, let&rsquo;s evaluate both the metrics again on these new predictions.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xnew <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">256</span>, <span style="color:#099">256</span>))
-cy, cx <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">80</span>, <span style="color:#099">80</span>
-radius_new <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">58</span>
-cy2 <span style="color:#000;font-weight:bold">=</span> cx2 <span style="color:#000;font-weight:bold">=</span> (np<span style="color:#000;font-weight:bold">.</span>sqrt(cy <span style="color:#000;font-weight:bold">**</span><span style="color:#099">2</span> <span style="color:#000;font-weight:bold">+</span> cx <span style="color:#000;font-weight:bold">**</span><span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#099">64</span>) <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>cos(np<span style="color:#000;font-weight:bold">.</span>pi <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">4</span>) <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
-o1r, o1c <span style="color:#000;font-weight:bold">=</span> draw<span style="color:#000;font-weight:bold">.</span>circle(cy, cx, radius_new)
-o2r, o2c <span style="color:#000;font-weight:bold">=</span> draw<span style="color:#000;font-weight:bold">.</span>circle(cy2, cx2, radius_new)
-xnew[o1r, o1c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
-xnew[o2r, o2c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
-plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">5</span>, <span style="color:#099">5</span>))
-plt<span style="color:#000;font-weight:bold">.</span>imshow(xnew, cmap<span style="color:#000;font-weight:bold">=</span>plt<span style="color:#000;font-weight:bold">.</span>cm<span style="color:#000;font-weight:bold">.</span>gray)
-plt<span style="color:#000;font-weight:bold">.</span>axis(<span style="color:#d14">&#39;off&#39;</span>)
-_ <span style="color:#000;font-weight:bold">=</span> plt<span style="color:#000;font-weight:bold">.</span>title(<span style="color:#d14">&#39;Another Prediction&#39;</span>, fontsize<span style="color:#000;font-weight:bold">=</span><span style="color:#099">20</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>xnew <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">256</span>, <span style="color:#099">256</span>))
+</span></span><span style="display:flex;"><span>cy, cx <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">80</span>, <span style="color:#099">80</span>
+</span></span><span style="display:flex;"><span>radius_new <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">58</span>
+</span></span><span style="display:flex;"><span>cy2 <span style="color:#000;font-weight:bold">=</span> cx2 <span style="color:#000;font-weight:bold">=</span> (np<span style="color:#000;font-weight:bold">.</span>sqrt(cy <span style="color:#000;font-weight:bold">**</span><span style="color:#099">2</span> <span style="color:#000;font-weight:bold">+</span> cx <span style="color:#000;font-weight:bold">**</span><span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#099">64</span>) <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>cos(np<span style="color:#000;font-weight:bold">.</span>pi <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">4</span>) <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>o1r, o1c <span style="color:#000;font-weight:bold">=</span> draw<span style="color:#000;font-weight:bold">.</span>circle(cy, cx, radius_new)
+</span></span><span style="display:flex;"><span>o2r, o2c <span style="color:#000;font-weight:bold">=</span> draw<span style="color:#000;font-weight:bold">.</span>circle(cy2, cx2, radius_new)
+</span></span><span style="display:flex;"><span>xnew[o1r, o1c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>xnew[o2r, o2c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>figure(figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">5</span>, <span style="color:#099">5</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>imshow(xnew, cmap<span style="color:#000;font-weight:bold">=</span>plt<span style="color:#000;font-weight:bold">.</span>cm<span style="color:#000;font-weight:bold">.</span>gray)
+</span></span><span style="display:flex;"><span>plt<span style="color:#000;font-weight:bold">.</span>axis(<span style="color:#d14">&#39;off&#39;</span>)
+</span></span><span style="display:flex;"><span>_ <span style="color:#000;font-weight:bold">=</span> plt<span style="color:#000;font-weight:bold">.</span>title(<span style="color:#d14">&#39;Another Prediction&#39;</span>, fontsize<span style="color:#000;font-weight:bold">=</span><span style="color:#099">20</span>)</span></span></code></pre></div>
 <p><img src="/img/weighted-loss-functions-for-instance-segmentation_12_0.png" alt=""></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># segment the predicted image into constituent masks</span>
-bg <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros(xnew<span style="color:#000;font-weight:bold">.</span>shape)
-predicted_mask_1 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
-predicted_mask_1[o1r, o1c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
-predicted_mask_2 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
-predicted_mask_2[o2r, o2c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
-y_pred <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([predicted_mask_1, predicted_mask_2])
-
-fscore <span style="color:#000;font-weight:bold">=</span> f1_score(y_true<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>ravel(), y_pred<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>ravel())
-<span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;F1 Score: </span><span style="color:#d14">{}</span><span style="color:#d14">&#34;</span><span style="color:#000;font-weight:bold">.</span>format(fscore))
-<span style="color:#998;font-style:italic"># F1 Score: 0.9014126584439418</span>
-
-map_iou <span style="color:#000;font-weight:bold">=</span> evaluate_image(y_true, y_pred, THRESHOLDS)
-<span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;MAP of IoU: </span><span style="color:#d14">{}</span><span style="color:#d14">&#34;</span><span style="color:#000;font-weight:bold">.</span>format(map_iou))
-<span style="color:#998;font-style:italic"># MAP of IoU: 0.7</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># segment the predicted image into constituent masks</span>
+</span></span><span style="display:flex;"><span>bg <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros(xnew<span style="color:#000;font-weight:bold">.</span>shape)
+</span></span><span style="display:flex;"><span>predicted_mask_1 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
+</span></span><span style="display:flex;"><span>predicted_mask_1[o1r, o1c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>predicted_mask_2 <span style="color:#000;font-weight:bold">=</span> bg<span style="color:#000;font-weight:bold">.</span>copy()
+</span></span><span style="display:flex;"><span>predicted_mask_2[o2r, o2c] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array([predicted_mask_1, predicted_mask_2])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fscore <span style="color:#000;font-weight:bold">=</span> f1_score(y_true<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>ravel(), y_pred<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>ravel())
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;F1 Score: </span><span style="color:#d14">{}</span><span style="color:#d14">&#34;</span><span style="color:#000;font-weight:bold">.</span>format(fscore))
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># F1 Score: 0.9014126584439418</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>map_iou <span style="color:#000;font-weight:bold">=</span> evaluate_image(y_true, y_pred, THRESHOLDS)
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;MAP of IoU: </span><span style="color:#d14">{}</span><span style="color:#d14">&#34;</span><span style="color:#000;font-weight:bold">.</span>format(map_iou))
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># MAP of IoU: 0.7</span></span></span></code></pre></div>
 <p>The pixelwise accuracy (the F1 score) has taken a hit, since the prediction has lost two circular rings surrounding the true masks, but is still not bad. However, the IoU has shot up disproportionately! This shows that the MAP of IoU penalizes incorrect region separation a lot more than it rewards pixelwise correctness.</p>
 <p>As a more general example, suppose we have $K$ true masks, and $L$ predicted masks. Then, in order to calculate the MAP of IoU, we construct a matrix $I \in \mathbb R^{K \times L}$ as follows:</p>
 <table>
@@ -371,83 +370,83 @@ map_iou <span style="color:#000;font-weight:bold">=</span> evaluate_image(y_true
 <li>$d_{2}: \mathbb R^{m\times n} \rightarrow \mathbb R^{m\times n}$ is the distance to the border of the second nearest cell.</li>
 </ul>
 <p>A vectorized implementation of $w$ is provided below in the <code>make_weight_map</code> function.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">skimage.segmentation</span> <span style="color:#000;font-weight:bold">import</span> find_boundaries
-
-w0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">10</span>
-sigma <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">5</span>
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">make_weight_map</span>(masks):
-    <span style="color:#d14">&#34;&#34;&#34;
-</span><span style="color:#d14">    Generate the weight maps as specified in the UNet paper
-</span><span style="color:#d14">    for a set of binary masks.
-</span><span style="color:#d14">    
-</span><span style="color:#d14">    Parameters
-</span><span style="color:#d14">    ----------
-</span><span style="color:#d14">    masks: array-like
-</span><span style="color:#d14">        A 3D array of shape (n_masks, image_height, image_width),
-</span><span style="color:#d14">        where each slice of the matrix along the 0th axis represents
-</span><span style="color:#d14">	one binary mask.
-</span><span style="color:#d14">
-</span><span style="color:#d14">    Returns
-</span><span style="color:#d14">    -------
-</span><span style="color:#d14">    array-like
-</span><span style="color:#d14">        A 2D array of shape (image_height, image_width)
-</span><span style="color:#d14">    
-</span><span style="color:#d14">    &#34;&#34;&#34;</span>
-    nrows, ncols <span style="color:#000;font-weight:bold">=</span> masks<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>:]
-    masks <span style="color:#000;font-weight:bold">=</span> (masks <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)
-    distMap <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((nrows <span style="color:#000;font-weight:bold">*</span> ncols, masks<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
-    X1, Y1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>meshgrid(np<span style="color:#000;font-weight:bold">.</span>arange(nrows), np<span style="color:#000;font-weight:bold">.</span>arange(ncols))
-    X1, Y1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[X1<span style="color:#000;font-weight:bold">.</span>ravel(), Y1<span style="color:#000;font-weight:bold">.</span>ravel()]<span style="color:#000;font-weight:bold">.</span>T
-    <span style="color:#000;font-weight:bold">for</span> i, mask <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(masks):
-        <span style="color:#998;font-style:italic"># find the boundary of each mask,</span>
-        <span style="color:#998;font-style:italic"># compute the distance of each pixel from this boundary</span>
-        bounds <span style="color:#000;font-weight:bold">=</span> find_boundaries(mask, mode<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;inner&#39;</span>)
-        X2, Y2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>nonzero(bounds)
-        xSum <span style="color:#000;font-weight:bold">=</span> (X2<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">-</span> X1<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>
-        ySum <span style="color:#000;font-weight:bold">=</span> (Y2<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">-</span> Y1<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>
-        distMap[:, i] <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sqrt(xSum <span style="color:#000;font-weight:bold">+</span> ySum)<span style="color:#000;font-weight:bold">.</span>min(axis<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>)
-    ix <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>arange(distMap<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>])
-    <span style="color:#000;font-weight:bold">if</span> distMap<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>:
-        d1 <span style="color:#000;font-weight:bold">=</span> distMap<span style="color:#000;font-weight:bold">.</span>ravel()
-        border_loss_map <span style="color:#000;font-weight:bold">=</span> w0 <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>exp((<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">*</span> (d1) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">/</span> (<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> (sigma <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>)))
-    <span style="color:#000;font-weight:bold">else</span>:
-        <span style="color:#000;font-weight:bold">if</span> distMap<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>:
-            d1_ix, d2_ix <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>argpartition(distMap, <span style="color:#099">1</span>, axis<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>)[:, :<span style="color:#099">2</span>]<span style="color:#000;font-weight:bold">.</span>T
-        <span style="color:#000;font-weight:bold">else</span>:
-            d1_ix, d2_ix <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>argpartition(distMap, <span style="color:#099">2</span>, axis<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>)[:, :<span style="color:#099">2</span>]<span style="color:#000;font-weight:bold">.</span>T
-        d1 <span style="color:#000;font-weight:bold">=</span> distMap[ix, d1_ix]
-        d2 <span style="color:#000;font-weight:bold">=</span> distMap[ix, d2_ix]
-        border_loss_map <span style="color:#000;font-weight:bold">=</span> w0 <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>exp((<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">*</span> (d1 <span style="color:#000;font-weight:bold">+</span> d2) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">/</span> (<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> (sigma <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>)))
-    xBLoss <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((nrows, ncols))
-    xBLoss[X1, Y1] <span style="color:#000;font-weight:bold">=</span> border_loss_map
-    <span style="color:#998;font-style:italic"># class weight map</span>
-    loss <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((nrows, ncols))
-    w_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">-</span> masks<span style="color:#000;font-weight:bold">.</span>sum() <span style="color:#000;font-weight:bold">/</span> loss<span style="color:#000;font-weight:bold">.</span>size
-    w_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">-</span> w_1
-    loss[masks<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> w_1
-    loss[masks<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> w_0
-    ZZ <span style="color:#000;font-weight:bold">=</span> xBLoss <span style="color:#000;font-weight:bold">+</span> loss
-    <span style="color:#000;font-weight:bold">return</span> ZZ</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">skimage.segmentation</span> <span style="color:#000;font-weight:bold">import</span> find_boundaries
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>w0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">10</span>
+</span></span><span style="display:flex;"><span>sigma <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">make_weight_map</span>(masks):
+</span></span><span style="display:flex;"><span>    <span style="color:#d14">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    Generate the weight maps as specified in the UNet paper
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    for a set of binary masks.
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    Parameters
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    ----------
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    masks: array-like
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        A 3D array of shape (n_masks, image_height, image_width),
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        where each slice of the matrix along the 0th axis represents
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">	one binary mask.
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    Returns
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    -------
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    array-like
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        A 2D array of shape (image_height, image_width)
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    nrows, ncols <span style="color:#000;font-weight:bold">=</span> masks<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>:]
+</span></span><span style="display:flex;"><span>    masks <span style="color:#000;font-weight:bold">=</span> (masks <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">0</span>)<span style="color:#000;font-weight:bold">.</span>astype(<span style="color:#0086b3">int</span>)
+</span></span><span style="display:flex;"><span>    distMap <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((nrows <span style="color:#000;font-weight:bold">*</span> ncols, masks<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>]))
+</span></span><span style="display:flex;"><span>    X1, Y1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>meshgrid(np<span style="color:#000;font-weight:bold">.</span>arange(nrows), np<span style="color:#000;font-weight:bold">.</span>arange(ncols))
+</span></span><span style="display:flex;"><span>    X1, Y1 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>c_[X1<span style="color:#000;font-weight:bold">.</span>ravel(), Y1<span style="color:#000;font-weight:bold">.</span>ravel()]<span style="color:#000;font-weight:bold">.</span>T
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> i, mask <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(masks):
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic"># find the boundary of each mask,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic"># compute the distance of each pixel from this boundary</span>
+</span></span><span style="display:flex;"><span>        bounds <span style="color:#000;font-weight:bold">=</span> find_boundaries(mask, mode<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;inner&#39;</span>)
+</span></span><span style="display:flex;"><span>        X2, Y2 <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>nonzero(bounds)
+</span></span><span style="display:flex;"><span>        xSum <span style="color:#000;font-weight:bold">=</span> (X2<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">-</span> X1<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>        ySum <span style="color:#000;font-weight:bold">=</span> (Y2<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">-</span> Y1<span style="color:#000;font-weight:bold">.</span>reshape(<span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>        distMap[:, i] <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>sqrt(xSum <span style="color:#000;font-weight:bold">+</span> ySum)<span style="color:#000;font-weight:bold">.</span>min(axis<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>    ix <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>arange(distMap<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> distMap<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>:
+</span></span><span style="display:flex;"><span>        d1 <span style="color:#000;font-weight:bold">=</span> distMap<span style="color:#000;font-weight:bold">.</span>ravel()
+</span></span><span style="display:flex;"><span>        border_loss_map <span style="color:#000;font-weight:bold">=</span> w0 <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>exp((<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">*</span> (d1) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">/</span> (<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> (sigma <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>)))
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> distMap<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>:
+</span></span><span style="display:flex;"><span>            d1_ix, d2_ix <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>argpartition(distMap, <span style="color:#099">1</span>, axis<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>)[:, :<span style="color:#099">2</span>]<span style="color:#000;font-weight:bold">.</span>T
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            d1_ix, d2_ix <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>argpartition(distMap, <span style="color:#099">2</span>, axis<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>)[:, :<span style="color:#099">2</span>]<span style="color:#000;font-weight:bold">.</span>T
+</span></span><span style="display:flex;"><span>        d1 <span style="color:#000;font-weight:bold">=</span> distMap[ix, d1_ix]
+</span></span><span style="display:flex;"><span>        d2 <span style="color:#000;font-weight:bold">=</span> distMap[ix, d2_ix]
+</span></span><span style="display:flex;"><span>        border_loss_map <span style="color:#000;font-weight:bold">=</span> w0 <span style="color:#000;font-weight:bold">*</span> np<span style="color:#000;font-weight:bold">.</span>exp((<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">*</span> (d1 <span style="color:#000;font-weight:bold">+</span> d2) <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">/</span> (<span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> (sigma <span style="color:#000;font-weight:bold">**</span> <span style="color:#099">2</span>)))
+</span></span><span style="display:flex;"><span>    xBLoss <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((nrows, ncols))
+</span></span><span style="display:flex;"><span>    xBLoss[X1, Y1] <span style="color:#000;font-weight:bold">=</span> border_loss_map
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># class weight map</span>
+</span></span><span style="display:flex;"><span>    loss <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((nrows, ncols))
+</span></span><span style="display:flex;"><span>    w_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">-</span> masks<span style="color:#000;font-weight:bold">.</span>sum() <span style="color:#000;font-weight:bold">/</span> loss<span style="color:#000;font-weight:bold">.</span>size
+</span></span><span style="display:flex;"><span>    w_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">-</span> w_1
+</span></span><span style="display:flex;"><span>    loss[masks<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> w_1
+</span></span><span style="display:flex;"><span>    loss[masks<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> w_0
+</span></span><span style="display:flex;"><span>    ZZ <span style="color:#000;font-weight:bold">=</span> xBLoss <span style="color:#000;font-weight:bold">+</span> loss
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> ZZ</span></span></code></pre></div>
 <p>Here is an example of how the weight map affects a set of masks. We generate three circular regions such that two of them are much closer to each other than the third one. The weight map functions magnifies the values in the region that is close to boundaries more than other values.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">params <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#099">20</span>, <span style="color:#099">16</span>, <span style="color:#099">10</span>), (<span style="color:#099">44</span>, <span style="color:#099">16</span>, <span style="color:#099">10</span>), (<span style="color:#099">47</span>, <span style="color:#099">47</span>, <span style="color:#099">10</span>)]
-masks <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">3</span>, <span style="color:#099">64</span>, <span style="color:#099">64</span>))
-<span style="color:#000;font-weight:bold">for</span> i, (cx, cy, radius) <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(params):
-    rr, cc <span style="color:#000;font-weight:bold">=</span> draw<span style="color:#000;font-weight:bold">.</span>circle(cx, cy, radius)
-    masks[i, rr, cc] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
-fig, (ax1, ax2) <span style="color:#000;font-weight:bold">=</span> plt<span style="color:#000;font-weight:bold">.</span>subplots(ncols<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">12</span>, <span style="color:#099">5</span>))
-ax1<span style="color:#000;font-weight:bold">.</span>imshow(masks<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>))
-ax1<span style="color:#000;font-weight:bold">.</span>set_axis_off()
-ax1<span style="color:#000;font-weight:bold">.</span>set_title(<span style="color:#d14">&#39;True Masks&#39;</span>, fontsize<span style="color:#000;font-weight:bold">=</span><span style="color:#099">15</span>)
-
-weights <span style="color:#000;font-weight:bold">=</span> make_weight_map(masks)
-pos <span style="color:#000;font-weight:bold">=</span> ax2<span style="color:#000;font-weight:bold">.</span>imshow(weights)
-ax2<span style="color:#000;font-weight:bold">.</span>set_axis_off()
-ax2<span style="color:#000;font-weight:bold">.</span>set_title(<span style="color:#d14">&#39;Weights&#39;</span>, fontsize<span style="color:#000;font-weight:bold">=</span><span style="color:#099">15</span>)
-_ <span style="color:#000;font-weight:bold">=</span> fig<span style="color:#000;font-weight:bold">.</span>colorbar(pos, ax<span style="color:#000;font-weight:bold">=</span>ax2)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>params <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#099">20</span>, <span style="color:#099">16</span>, <span style="color:#099">10</span>), (<span style="color:#099">44</span>, <span style="color:#099">16</span>, <span style="color:#099">10</span>), (<span style="color:#099">47</span>, <span style="color:#099">47</span>, <span style="color:#099">10</span>)]
+</span></span><span style="display:flex;"><span>masks <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>zeros((<span style="color:#099">3</span>, <span style="color:#099">64</span>, <span style="color:#099">64</span>))
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> i, (cx, cy, radius) <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(params):
+</span></span><span style="display:flex;"><span>    rr, cc <span style="color:#000;font-weight:bold">=</span> draw<span style="color:#000;font-weight:bold">.</span>circle(cx, cy, radius)
+</span></span><span style="display:flex;"><span>    masks[i, rr, cc] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>fig, (ax1, ax2) <span style="color:#000;font-weight:bold">=</span> plt<span style="color:#000;font-weight:bold">.</span>subplots(ncols<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, figsize<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">12</span>, <span style="color:#099">5</span>))
+</span></span><span style="display:flex;"><span>ax1<span style="color:#000;font-weight:bold">.</span>imshow(masks<span style="color:#000;font-weight:bold">.</span>sum(<span style="color:#099">0</span>))
+</span></span><span style="display:flex;"><span>ax1<span style="color:#000;font-weight:bold">.</span>set_axis_off()
+</span></span><span style="display:flex;"><span>ax1<span style="color:#000;font-weight:bold">.</span>set_title(<span style="color:#d14">&#39;True Masks&#39;</span>, fontsize<span style="color:#000;font-weight:bold">=</span><span style="color:#099">15</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>weights <span style="color:#000;font-weight:bold">=</span> make_weight_map(masks)
+</span></span><span style="display:flex;"><span>pos <span style="color:#000;font-weight:bold">=</span> ax2<span style="color:#000;font-weight:bold">.</span>imshow(weights)
+</span></span><span style="display:flex;"><span>ax2<span style="color:#000;font-weight:bold">.</span>set_axis_off()
+</span></span><span style="display:flex;"><span>ax2<span style="color:#000;font-weight:bold">.</span>set_title(<span style="color:#d14">&#39;Weights&#39;</span>, fontsize<span style="color:#000;font-weight:bold">=</span><span style="color:#099">15</span>)
+</span></span><span style="display:flex;"><span>_ <span style="color:#000;font-weight:bold">=</span> fig<span style="color:#000;font-weight:bold">.</span>colorbar(pos, ax<span style="color:#000;font-weight:bold">=</span>ax2)</span></span></code></pre></div>
 <p><img src="/img/weighted-loss-functions-for-instance-segmentation_18_0.png" alt=""></p>
 <p>Application of these weight maps to the output of neural network and then finally computing the compunded loss is somewhat involved. A fully convolutional network like the UNet - since it has no dense layers at the end - needs 1 x 1 convolutions at the end to convert the convolutions from the previous layer to produce something on which categorical softmax can work. The output layer produces a volumne of size $h \times w \times K$, where $h$ and $w$ are the image height and width respectively and $K$ is the number of classes. Denoting the <em>unactivated</em> output of the channel correspoding to the $k$th class as $a_{k}(\mathbf{x})$, the softmax activation is computed as</p>
-<p>$$ p_{k}(\mathbf{x}) = \cfrac{exp(a_{k}(\mathbf{x}))}{\sum_{k'=1}^{K}exp(a_{k'}(\mathbf{x}))} $$</p>
+<p>$$ p_{k}(\mathbf{x}) = \cfrac{exp(a_{k}(\mathbf{x}))}{\sum_{k&rsquo;=1}^{K}exp(a_{k&rsquo;}(\mathbf{x}))} $$</p>
 <p>Then, a modified cross entropy loss is calculated as</p>
 <p>$$E = \sum w(\mathbf{x})log(p_{l(\mathbf{x)}}(\mathbf{x}))$$</p>
 <p>where $w(\mathbf{x})$ is the weight map function and $l(\mathbf{x})$ denotes the true label of each pixel, Thus, computing $E$ amounts to:</p>
@@ -459,45 +458,45 @@ _ <span style="color:#000;font-weight:bold">=</span> fig<span style="color:#000;
 </ol>
 <p>When using Keras with a Tensorflow backend, the crossentropy loss, by default, is a <a href="https://github.com/keras-team/keras/blob/2.2.2/keras/backend/tensorflow_backend.py#L3181">manual computation of cross entropy</a>, which doesn&rsquo;t allow for weighing the loss explicitly. The manual computation is necessary because the corresponding Tensorflow <a href="https://www.tensorflow.org/api_docs/python/tf/losses/softmax_cross_entropy">loss</a> expects logits, whereas Keras losses expect probabilities.</p>
 <p>Besides, it is clear that the loss we need isn&rsquo;t the usual categorical crossentropy. Notice that the weights have to be applied to the log of the activation <em>before</em> the pixelwise sum is evaluated. My solution to this was to incorporate the weighing of the log of the activation into the Keras model itself, and leave only the aggregation to the loss function. Thus, the model ends up doing more than just generating the final set of softmax activations. It also takes the log of the activations and applies the weights to it. Therefore, the weight maps too become a part of the computational graph of the model - unlike in the case of conventional class weights, where it can be supplied at the time of loss calculation. So now the model takes three inputs - the images, their labels and their weight maps.</p>
-<p>Thanks to Keras' beautiful functional API, all of this amounts to adding a few non-trainable layers to the model and writing a custom loss function to mimic only the aggregation of the categorical crossentropy function.</p>
+<p>Thanks to Keras&rsquo; beautiful functional API, all of this amounts to adding a few non-trainable layers to the model and writing a custom loss function to mimic only the aggregation of the categorical crossentropy function.</p>
 <p>The entire script for the model is available <a href="https://gist.github.com/jaidevd/29bc49a410e38f32a2ee8d374c73823c">here</a>, but the essence of it is as follows:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">keras.layers</span> <span style="color:#000;font-weight:bold">import</span> Input, Conv2D, Lambda, multiply <span style="color:#998;font-style:italic"># etc</span>
-<span style="color:#998;font-style:italic"># Start making the UNET model as usual</span>
-
-image_input <span style="color:#000;font-weight:bold">=</span> Input(shape<span style="color:#000;font-weight:bold">=</span>(image_height, image_width, n_channels))
-conv1 <span style="color:#000;font-weight:bold">=</span> Conv2D(<span style="color:#099">64</span>, <span style="color:#099">3</span>)(image_input)
-
-<span style="color:#998;font-style:italic"># add other layers</span>
-
-<span style="color:#998;font-style:italic"># Final 1 x 1 trainable conv layer that does the softmax.</span>
-softmax_op <span style="color:#000;font-weight:bold">=</span> Conv2D(n_classes, <span style="color:#099">1</span>, activation<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;softmax&#39;</span>)(previous_layer)
-
-<span style="color:#998;font-style:italic"># Add a few non trainable layers to mimic the computation of the crossentropy</span>
-<span style="color:#998;font-style:italic"># loss, so that the actual loss function just has to peform the</span>
-<span style="color:#998;font-style:italic"># aggregation.</span>
-normalize_activation <span style="color:#000;font-weight:bold">=</span> Lambda(
-    <span style="color:#000;font-weight:bold">lambda</span> x: x <span style="color:#000;font-weight:bold">/</span> tf<span style="color:#000;font-weight:bold">.</span>reduce_sum(x, <span style="color:#0086b3">len</span>(x<span style="color:#000;font-weight:bold">.</span>get_shape()) <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">True</span>)
-)(softmax_op)
-clip_activation <span style="color:#000;font-weight:bold">=</span> Lambda(
-    <span style="color:#000;font-weight:bold">lambda</span> x: tf<span style="color:#000;font-weight:bold">.</span>clip_by_value(x, _epsilon, <span style="color:#099">1.</span> <span style="color:#000;font-weight:bold">-</span> _epsilon)
-)(normalize_activation)
-log_activation <span style="color:#000;font-weight:bold">=</span> Lambda(<span style="color:#000;font-weight:bold">lambda</span> x: K<span style="color:#000;font-weight:bold">.</span>log(x))(clip_activation)
-
-<span style="color:#998;font-style:italic"># Add a new input to serve as the source for the weight maps</span>
-weight_map_ip <span style="color:#000;font-weight:bold">=</span> Input(shape<span style="color:#000;font-weight:bold">=</span>(image_height, image_width))
-weighted_softmax <span style="color:#000;font-weight:bold">=</span> multiply([log_activation, weight_map_ip])
-
-model <span style="color:#000;font-weight:bold">=</span> Model(inputs<span style="color:#000;font-weight:bold">=</span>[image_input, weight_map_ip], outputs<span style="color:#000;font-weight:bold">=</span>[weighted_softmax])</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">keras.layers</span> <span style="color:#000;font-weight:bold">import</span> Input, Conv2D, Lambda, multiply <span style="color:#998;font-style:italic"># etc</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Start making the UNET model as usual</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>image_input <span style="color:#000;font-weight:bold">=</span> Input(shape<span style="color:#000;font-weight:bold">=</span>(image_height, image_width, n_channels))
+</span></span><span style="display:flex;"><span>conv1 <span style="color:#000;font-weight:bold">=</span> Conv2D(<span style="color:#099">64</span>, <span style="color:#099">3</span>)(image_input)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># add other layers</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Final 1 x 1 trainable conv layer that does the softmax.</span>
+</span></span><span style="display:flex;"><span>softmax_op <span style="color:#000;font-weight:bold">=</span> Conv2D(n_classes, <span style="color:#099">1</span>, activation<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;softmax&#39;</span>)(previous_layer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Add a few non trainable layers to mimic the computation of the crossentropy</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># loss, so that the actual loss function just has to peform the</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># aggregation.</span>
+</span></span><span style="display:flex;"><span>normalize_activation <span style="color:#000;font-weight:bold">=</span> Lambda(
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">lambda</span> x: x <span style="color:#000;font-weight:bold">/</span> tf<span style="color:#000;font-weight:bold">.</span>reduce_sum(x, <span style="color:#0086b3">len</span>(x<span style="color:#000;font-weight:bold">.</span>get_shape()) <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>)(softmax_op)
+</span></span><span style="display:flex;"><span>clip_activation <span style="color:#000;font-weight:bold">=</span> Lambda(
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">lambda</span> x: tf<span style="color:#000;font-weight:bold">.</span>clip_by_value(x, _epsilon, <span style="color:#099">1.</span> <span style="color:#000;font-weight:bold">-</span> _epsilon)
+</span></span><span style="display:flex;"><span>)(normalize_activation)
+</span></span><span style="display:flex;"><span>log_activation <span style="color:#000;font-weight:bold">=</span> Lambda(<span style="color:#000;font-weight:bold">lambda</span> x: K<span style="color:#000;font-weight:bold">.</span>log(x))(clip_activation)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Add a new input to serve as the source for the weight maps</span>
+</span></span><span style="display:flex;"><span>weight_map_ip <span style="color:#000;font-weight:bold">=</span> Input(shape<span style="color:#000;font-weight:bold">=</span>(image_height, image_width))
+</span></span><span style="display:flex;"><span>weighted_softmax <span style="color:#000;font-weight:bold">=</span> multiply([log_activation, weight_map_ip])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#000;font-weight:bold">=</span> Model(inputs<span style="color:#000;font-weight:bold">=</span>[image_input, weight_map_ip], outputs<span style="color:#000;font-weight:bold">=</span>[weighted_softmax])</span></span></code></pre></div>
 <p>This model can now be compiled and trained as usual. Note that the three <code>Lambda</code> layers are identical to the operations in the <a href="https://github.com/keras-team/keras/blob/2.2.2/keras/backend/tensorflow_backend.py#L3181"><code>keras.backend.tensorflow_backend.catgorical_crossentropy</code></a>. So essentially we have swallowed most of the functionality of the cross entropy loss into the model itself. I should re-emphasize that this had to be done because the weighted loss we wanted could not have been possible with the default loss function, since the scaling of the log of the activations (with the precomputed weights) has to be done <em>before</em> the loss is aggregated.</p>
-<p>I discovered the UNet paper a few months ago during the <a href="https://www.kaggle.com/c/data-science-bowl-2018">Data Science Bowl 2018</a> competition on Kaggle. I spent a better part of three weeks on implementing the weight maps and incorporating them into my UNet. And it paid off fairly well - I jumped 504 places on the public leaderboard. In hindsight, data augmentation would have had the same (or perhaps a better) effect, but that fact that I was able to all of this shows how beautifully Keras' (and indeed, Tensorflow&rsquo;s) functional API has been designed.</p>
+<p>I discovered the UNet paper a few months ago during the <a href="https://www.kaggle.com/c/data-science-bowl-2018">Data Science Bowl 2018</a> competition on Kaggle. I spent a better part of three weeks on implementing the weight maps and incorporating them into my UNet. And it paid off fairly well - I jumped 504 places on the public leaderboard. In hindsight, data augmentation would have had the same (or perhaps a better) effect, but that fact that I was able to all of this shows how beautifully Keras&rsquo; (and indeed, Tensorflow&rsquo;s) functional API has been designed.</p>
 <h3 id="references">References</h3>
 <p>Olaf Ronneberger, Philipp Fischer: “U-Net: Convolutional Networks for Biomedical Image Segmentation”, 2015; <a href='http://arxiv.org/abs/1505.04597'>arXiv:1505.04597</a>.</p>
 
         </p>
     </div>
     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -657,7 +656,7 @@ model <span style="color:#000;font-weight:bold">=</span> Model(inputs<span style
 		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
 	</div>
 
-	<script src="https://jaidevd.com/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
 </footer>
     </body>
 </html>
