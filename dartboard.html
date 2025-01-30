@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mote-Carlo 𝝅 Estimator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container d-flex justify-content-center">
+        <a class="navbar-brand" href="#">Estimate 𝝅 with a Monte Carlo Simulation</a>
+      </div>
+    </nav>
+
+    <div class="container-fluid py-3">
+      <div class="row justify-content-center text-center py-2">
+        <div class="col-auto">
+          <div class="d-flex align-items-center gap-2">
+            <span>Throw</span>
+            <input type="number" class="form-control form-control-sm w-auto" min="1" value="50" name="samples">
+            <span>darts every</span>
+            <input type="number" class="form-control form-control-sm w-auto" min="1" value="50" name="freq">
+            <span>milliseconds.</span>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center text-center py-2">
+        <div class="col-auto">
+          <h1>𝝅 = <span id="pi">???</span></h1>
+        </div>
+      </div>
+      <div class="row justify-content-center text-center py-2">
+        <div class="col-auto">
+          <div class="d-inline-flex gap-2">
+            <button class="btn btn-muted" title="Play">▶️</button>
+            <button class="btn btn-muted" title="Pause">⏸️</button>
+            <button class="btn btn-muted" title="Reset">🔄</button>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div id="canvas" class="col-auto"></div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.2.4/svg.min.js"></script>
+  <script>
+    const RADIUS = 300;
+    let svg = SVG().addTo('#canvas').size(RADIUS, RADIUS);
+    let rect = svg.rect(RADIUS, RADIUS).fill('none').stroke({ width: 1, color: '#000'});
+
+    let nblues = 0
+    let ngreens = 0
+
+    let sampler;
+
+    function sample(nSamples = 50) {
+      let x = [...Array(nSamples).keys()].map(() => Math.min(Math.random() * RADIUS, RADIUS));
+      let y = [...Array(nSamples).keys()].map(() => Math.min(Math.random() * RADIUS, RADIUS));
+      let yr = y.map(k => RADIUS - k)
+      let r = x.map((el, i) => Math.sqrt(el * el + yr[i] * yr[i]))
+      r.forEach((sample, ix) => {
+        if (sample < RADIUS) {
+          svg.circle(1).fill("blue").x(x[ix]).y(y[ix]);
+          nblues += 1;
+        } else {
+          svg.circle(1).fill("green").x(x[ix]).y(y[ix]);
+          ngreens += 1;
+        }
+      })
+      let estimate = 4 * nblues / (nblues + ngreens);
+      document.querySelector('#pi').textContent = estimate.toPrecision(6);
+    }
+    // Event listeners
+    document.querySelector('button[title="Play"]').addEventListener('click', () => {
+      let nSamples = parseInt(document.querySelector('input[name="samples"]').value)
+      let freq = parseInt(document.querySelector('input[name="freq"]').value)
+      sampler = setInterval(() => sample(nSamples), freq)
+    });
+
+    document.querySelector('button[title="Pause"]').addEventListener('click', () => {
+      clearInterval(sampler);
+    });
+
+    document.querySelector('button[title="Reset"]').addEventListener('click', () => {
+      clearInterval(sampler);
+      svg.clear();
+      rect = svg.rect(RADIUS, RADIUS).fill('none').stroke({ width: 1, color: '#000'});
+      nblues = 0;
+      ngreens = 0;
+      document.querySelector('#pi').textContent = '???';
+    });
+    document.querySelector('input').addEventListener('change', () => {
+      document.querySelector('button[title="Reset"]').click()
+      document.querySelector('button[title="Play"]').click()
+    })
+  </script>
+</html>
