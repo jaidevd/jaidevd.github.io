@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Culture on Jaidev&#39;s Blog</title>
+    <link>https://jaidevd.com/tags/culture/</link>
+    <description>Recent content in Culture on Jaidev&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 31 Jan 2025 23:23:45 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/culture/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>More Pixels</title>
+      <link>https://jaidevd.com/posts/more-pixels/</link>
+      <pubDate>Fri, 31 Jan 2025 23:23:45 +0530</pubDate>
+      <guid>https://jaidevd.com/posts/more-pixels/</guid>
+      <description>Someone must have thought, likely with good reason, that more pixels on larger screens is a good idea. Then, someone else must have thought that if it’s a good idea somewhere, it must be a good idea everywhere.&#xA;It’s probably for the same reason that I can’t find a new car with tactile switches anymore. Everything’s got touch buttons. In my car, nothing other than the steering wheel has any physical feedback.</description>
+    </item>
+  </channel>
+</rss>
