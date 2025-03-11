@@ -2,13 +2,12 @@
 
 <html lang="en-us">
     <head>
-	<meta name="generator" content="Hugo 0.123.7">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no"/>
 
-    <title>Jaidev&#39;s Blog</title>
+    <title>Bayesian Storytelling | Jaidev&#39;s Blog</title>
     
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,8 +29,6 @@
     
 
     
-    <link rel="alternate" type="application/rss+xml" href="https://jaidevd.com/index.xml" title="Jaidev's Blog" />
-    
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
 <script>
 var doNotTrack = false;
@@ -43,8 +40,9 @@ if (!doNotTrack) {
 }
 </script>
 </head>
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Jaidev&#39;s Blog"/>
-<meta name="twitter:description" content="Thoughts on data science, statistics and machine learning."/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Bayesian Storytelling"/>
+<meta name="twitter:description" content="I launched a newsletter yesterday. So far, the feedback has been good. A few readers said that they felt drawn in by the writing. In any case, the purpose of the first few posts is simply to get myself warmed up. Any extra flutter the posts generate is a bonus. Amit Varma recommends not looking at the stats for a couple of years.
+It taught me quite a few things. Particularly that I need to be smart about the data analysis."/>
 
 
     <body>
@@ -158,170 +156,161 @@ if (!doNotTrack) {
 
         <div id="content" class="content-container">
         
-<div class = "article-content">
-        
-        <div class="description">
-            <p>Thoughts on data science, statistics and machine learning.</p>
-        </div>
-        
-        
-        
-        
-        <article>
-            <h2>
-                <a href="https://jaidevd.com/posts/treasure-island-review/">
-                    Book Review: Treasure Island - R L Stevenson
-                </a>
-            </h2>
-            <div>
-                <p>There are stories you know well but you never really read well. Captain Flint (the man and the parrot), Jim Hawkins, Long John Silver and Billy Bones, the Old Sea Dog are immortal characters, without a touch of age upon them or their story. Treasure Island was perhaps the first classic I actually skimmed through many times in my childhood. I didn&rsquo;t read it in earnest until now, and I did that because the final season of Black Sails is about to end.</p>
-                
-                <p><a href="/posts/treasure-island-review/">Read more...</a></p>
-                
-            </div>
-            <div class="post-footer">
-            <time>February 19, 2019</time>
 
-            
-            
-                
-                    <a class="tag" href="/tags/bookreview">#bookreview</a>
-                
-                    <a class="tag" href="/tags/classics">#classics</a>
-                
-                    <a class="tag" href="/tags/reading">#reading</a>
-                
-            
-            </div> 
-           
-        </article>
-        
-        <article>
-            <h2>
-                <a href="https://jaidevd.com/posts/rabies-laziness-privilege/">
-                    Rabies, Laziness &amp; Privilege
-                </a>
-            </h2>
-            <div>
-                <p>It was the night of the recent 5-state assembly elections. One of my company&rsquo;s clients is a major news channel, and I was at the studio late into the night, until the election commission announced that they had cancelled their press conference which was supposed to make an announcement about the final vote counts in Madhya Pradesh. A colleague offered to drop me home, and I got off at the gate of my colony, not wanting to subject my colleague to navigating the labyrinth that is any gated colony in South Delhi.</p>
-                
-                <p><a href="/posts/rabies-laziness-privilege/">Read more...</a></p>
-                
-            </div>
-            <div class="post-footer">
-            <time>December 13, 2018</time>
+<h1 class="post-title">Bayesian Storytelling</h1>
+    
+    <time>March 11, 2025</time>
+    
+    <div>
+        <p>
+        <p>I launched <a href="https://beingbayesian.in">a newsletter</a> yesterday. So far, the
+feedback has been good. A few readers said that they felt drawn in by the
+writing. In any case, the purpose of the first few posts is simply to get myself
+warmed up. Any extra flutter the posts generate is a bonus. <a href="https://amitvarma.com/">Amit Varma</a>
+recommends not looking at the stats for a couple of years.</p>
+<p>It taught me quite a few things. Particularly that I need to be smart about
+the data analysis. It&rsquo;s important to remember that this isn&rsquo;t a work project.
+It&rsquo;s meant for a general audience, so there is such a thing as too much detail.
+For example, detailed handwritten notes on every single table in the <a href="https://pib.gov.in/PressReleasePage.aspx?PRID=2088390">HCES</a> isn&rsquo;t
+important. You could have dealt with each table independently. Only focusing on
+the tables needed for the problem in question should have sufficed. On the other
+hand, cleaning and denormalizing the data and releasing it on GitHub was a good
+idea; and the tweet announcing this has 10 reposts, 69 likes, 52 bookmarks, and
+has gained me 12 new followers. This is what <a href="https://austinkleon.com/">Austin Kleon</a> calls &ldquo;showing your
+work&rdquo; (<a href="https://womaning.substack.com/">Mahima Vashist</a> says &ldquo;your journal is your art&rdquo;). Perhaps one needs to
+think carefully about what shareable and useful assets can be created in the service of a
+larger, transcending work.</p>
+<p>In the same spirit, I think I&rsquo;m close to discovering a storytelling framework
+for <em>Being Bayesian</em>. When I wrote the first few drafts, it was pretty
+exhausting. I&rsquo;m lucky enough that writing has flown out naturally quite a few
+times, but this wasn&rsquo;t one of those times. Several aspects of the post seemed to
+take on a life of their own, and I found it hard to weave them together. It was
+easier to break down the steps independently, and given them a name and a
+purpose.</p>
+<p>The first step is the <strong>Prior</strong>, the default: the deepest assumptions and
+beliefs of the writer. Surround the reader with them, make it claustrophobic. Be
+like Charles Dickens writing about the carriage in London. The purpose of this
+is to draw the reader in. Embed them into your experience. Make them share the
+precise frame of reference that you have. Ensure that they have the same
+probabilistic &ldquo;priors&rdquo;.</p>
+<p>The next component is the <strong>Trigger</strong>. This is what the story actually reacts
+to. This is what makes you write the post. This is what you ridicule or debunk.
+This is typically the first chronological step of the story, but don&rsquo;t write
+about it first. The first step is to always establish the prior, and <em>then</em>
+throw in the trigger. The trigger will either be an outlier to the prior, in
+which case it gets branded &ldquo;ridiculous&rdquo; or &ldquo;outrageous&rdquo; to begin with; or it
+will sit well within the prior, in which case something else - the <strong>smell</strong> -
+will have given it away. Either way, slip it into the prior in a way which isn&rsquo;t
+explicit or tactless, but the audience nevertheless sees it as a fly in the
+ointment. Satire, sarcasm and absurdity are useful tools here.</p>
+<p>Then comes the <strong>Skepticism</strong>: a simple, surface-level, common sense-based
+examination of the trigger. It&rsquo;s a back of the envelope calculation. No data or
+stats yet, just logic. This is why the trigger felt off, or why you smelled the
+smell. At this stage the OP still has the benefit of doubt. At this point,
+Hanlon&rsquo;s razor still applies. Maybe they didn&rsquo;t fact-check. Maybe they didn&rsquo;t do
+a quick Google search. They might have made an honest mistake, it happens to the
+best of us, after all. Your role right now is simply that of a helpful
+assistant - one who&rsquo;s interested in correcting the trigger, not
+demolishing it just yet.</p>
+<p>But if you&rsquo;re any good at finding BS, you&rsquo;ll soon realize that the trigger is
+beyond redemption. Even after allowing for Hanlon&rsquo;s razor and reasonable doubt,
+it turns out that the trigger was so horrendously off that you have to pull out
+the big guns. The guns are high quality data and solid analysis <em>beyond
+reproach</em>. Don&rsquo;t forget that this will be <em>exhausting</em>. Do it first, before
+writing anything, if it helps. This stage is <strong>the Investigation</strong>. Once you&rsquo;re
+in this phase, show no mercy and give no quarter. Demolish every single
+erroneous aspect of the trigger. But be extremely vigilant. The more brutal your
+attacks become, the more vulnerable you leave yourself to a counter-attack.
+Exceptional claims need exceptional evidence. This applies to you too. Again,
+the investigation must be <em>beyond reproach</em>. If you&rsquo;re not confident enough
+about something, don&rsquo;t say it. Even if the smallest, most irrelevant bit is
+found incorrect, you will lose credibility. Ask for as much help and feedback as
+possible, and rely only on high quality data. Double-check all the analysis.
+When that&rsquo;s done, write it down in as cold and bland a manner as possible.
+Remember that you&rsquo;re reporting facts, and facts don&rsquo;t have feelings. Those come
+next.</p>
+<p>The last step is the <strong>Posterior</strong>. By now it should be clear to the reader what
+this is - it&rsquo;s the takeaway, the insight. It&rsquo;s the opposite of the prior. It&rsquo;s
+the negation of your beliefs. It&rsquo;s something that shakes your world-view. But
+even to the most rational of your readers, this alone may not be enough. You
+still have to make the journey from insight to impression. For the insight to
+leave an indelible mark, for it to truly stick, you have to use more than a
+p-value. So now, tell one more story. A story which is the opposite of the one
+told in the prior. Everyone knows and believes Daniel LaRusso&rsquo;s story. Now tell
+the story of Johnny Lawrence. But remember that the prior was quintessentially
+yours. And so too must the posterior. It&rsquo;s a story that establishes that your
+change of heart wasn&rsquo;t purely mathematical. It was personal, too. The trouble,
+of course, is that you may never have deeply experienced an opposite of your
+prior. So then, do it vicariously. Write about a movie scene which moved you.
+Write about a piece of fiction you might have read; which, while fictional,
+still reinforces the posterior. Or go find someone to talk to. Tell <em>their</em>
+story. Pathos is a powerful tool, but it means nothing without sincerity. This,
+then becomes the <em>coup de grâce</em> of the entire story<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>None of this is going to be easy. Sometimes satisfactory writing just flows out
+in a smooth, coherent stream - which is usually the result of having mulled
+something over and over in your head <em>ad nauseam</em>. Sometimes, even after having
+written for days, you still struggle to connect the pieces. Sometimes the
+story comes full circles, and sometimes it ends abruptly, anticlimactically.</p>
+<p>All of this makes the whole process really draining. Be prepared for the mental
+toll well in advance. Then, write each stage as a separate, standalone essay.
+Worry about the flourishes, the segues and the centrality at the very end.
+Till then, be okay with imperfection. No amount of time is enough to craft a
+perfect sentence, or to draw the perfect chart which everyone will love. Time-box
+all stages.</p>
+<p>Finally, remember that this is a template, a framework. It&rsquo;s purpose is to make
+things easy for you. If it makes things harder instead, drop it like a hot
+potato.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Matthew Dicks recommends that you should begin at the end, i.e. the
+starting of a narrated story must be the opposite of the ending. We&rsquo;re doing
+exactly this, except we reverse the order - in our stories, the ending is
+the opposite of the beginning. Dicks&rsquo; recommendations are for oral
+narratives, and it&rsquo;s well worth the effort to adapt them to writing.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
 
-            
-            
-                
-                    <a class="tag" href="/tags/personal">#personal</a>
-                
-                    <a class="tag" href="/tags/story">#story</a>
-                
-            
-            </div> 
-           
-        </article>
-        
-        <article>
-            <h2>
-                <a href="https://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/">
-                    Weighted Loss Functions for Instance Segmentation
-                </a>
-            </h2>
-            <div>
-                <p>This post is a follow up to my talk, Practical Image Classification &amp; Object Detection at PyData Delhi 2018. You can watch the talk here: and see the slides here.
-I spoke at length about the different kinds of problems in computer vision and how they are interpreted in deep learning architectures. I spent a fair bit of time on instance and semantic segmentation (for an introduction to these problems, watch Justin Johnson&rsquo;s lecture from the Stanford CS231 course here).</p>
-                
-                <p><a href="/posts/weighted-loss-functions-for-instance-segmentation/">Read more...</a></p>
-                
-            </div>
-            <div class="post-footer">
-            <time>August 17, 2018</time>
-
-            
-            
-                
-                    <a class="tag" href="/tags/computervision">#computervision</a>
-                
-                    <a class="tag" href="/tags/imagesegmentation">#imagesegmentation</a>
-                
-                    <a class="tag" href="/tags/python">#python</a>
-                
-                    <a class="tag" href="/tags/keras">#keras</a>
-                
-                    <a class="tag" href="/tags/tensorflow">#tensorflow</a>
-                
-                    <a class="tag" href="/tags/deeplearning">#deeplearning</a>
-                
-            
-            </div> 
-           
-        </article>
-        
-        <article>
-            <h2>
-                <a href="https://jaidevd.com/posts/in-dubious-battle-review/">
-                    Book Review: In Dubious Battle - John Steinbeck
-                </a>
-            </h2>
-            <div>
-                <p>I have a pretty good Steinbeck collection, but this wasn&rsquo;t a book I was going to read anytime soon. But I recently came across the movie adaptation and decided that other Steinbeck titles could wait. James Franco and John Steinbeck is a very attractive combination.
-First of all, this book is not about communism. The eponymous battle is not a battle of the classes. It&rsquo;s more of a battle men fight with themselves.</p>
-                
-                <p><a href="/posts/in-dubious-battle-review/">Read more...</a></p>
-                
-            </div>
-            <div class="post-footer">
-            <time>February 25, 2018</time>
-
-            
-            
-                
-                    <a class="tag" href="/tags/bookreview">#bookreview</a>
-                
-                    <a class="tag" href="/tags/steinbeck">#steinbeck</a>
-                
-                    <a class="tag" href="/tags/reading">#reading</a>
-                
-            
-            </div> 
-           
-        </article>
-        
+        </p>
     </div>
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "brocasbrain" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    <div class="page-footer">
         
-        <div class="paginator">
+        <hr class="footer-divider">
         
+            <a class="tag" href="/tags/personal">#personal</a>
         
-        <p>Page 5 of 8</p>
-        <div class="paginator-group">
-            
-            <a class="color-link" href="/page/4/">
-                    <svg width="13px" height="9px" viewBox="0 0 13 9" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
-                        <g class="color-arrow" fill="#63BDA2" fill-rule="nonzero">
-                            <polygon id="Path" points="1.75929935 4.50000282 5.3292523 7.62371165 4.6707477 8.37628835 0.240700645 4.49999718 4.67081049 0.623709205 5.32930951 1.37629079"></polygon>
-                            <polygon id="Path" points="13 4 13 5 1 5 1 4"></polygon>
-                        </g>
-                </svg>  
-                Newer          
-            </a>
-            
-            
-                <a class="color-link older" href="/page/6/">
-                    Older
-                    <svg width="13px" height="9px" viewBox="0 0 13 9" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
-                            <g class="color-arrow" fill="#63BDA2" fill-rule="nonzero">
-                                <polygon points="7.6707477 1.37628835 8.3292523 0.623711653 12.7592994 4.50000282 8.32918951 8.37629079 7.67069049 7.62370921 11.2407006 4.49999718"></polygon>
-                                <polygon id="Path" points="0 5 0 4 12 4 12 5"></polygon>
-                            </g>
-                    </svg>
-                        
-                </a>
-            
-        </div>
+            <a class="tag" href="/tags/journal">#journal</a>
         
+            <a class="tag" href="/tags/writing">#writing</a>
+        
+      
     </div>
+
 
 	
 

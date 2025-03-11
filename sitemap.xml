@@ -2,22 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jaidevd.com/posts/bayesian-storytelling/</loc>
+    <lastmod>2025-03-11T12:12:14+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/</loc>
+    <lastmod>2025-03-11T12:12:14+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/journal/</loc>
+    <lastmod>2025-03-11T12:12:14+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/personal/</loc>
+    <lastmod>2025-03-11T12:12:14+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/posts/</loc>
+    <lastmod>2025-03-11T12:12:14+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/</loc>
+    <lastmod>2025-03-11T12:12:14+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/writing/</loc>
+    <lastmod>2025-03-11T12:12:14+05:30</lastmod>
+  </url><url>
     <loc>https://jaidevd.com/tags/culture/</loc>
     <lastmod>2025-01-31T23:23:45+05:30</lastmod>
   </url><url>
-    <loc>https://jaidevd.com/</loc>
-    <lastmod>2025-01-31T23:23:45+05:30</lastmod>
-  </url><url>
     <loc>https://jaidevd.com/posts/more-pixels/</loc>
-    <lastmod>2025-01-31T23:23:45+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/personal/</loc>
-    <lastmod>2025-01-31T23:23:45+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/posts/</loc>
-    <lastmod>2025-01-31T23:23:45+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/</loc>
     <lastmod>2025-01-31T23:23:45+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/technology/</loc>
@@ -78,9 +87,6 @@
     <lastmod>2024-04-07T00:00:00+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/room-of-ones-own-review/</loc>
-    <lastmod>2024-02-12T00:00:00+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/writing/</loc>
     <lastmod>2024-02-12T00:00:00+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/absurdism/</loc>
