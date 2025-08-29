@@ -6,8 +6,15 @@
     <description>Recent content on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Mar 2025 20:05:20 +0530</lastBuildDate>
+    <lastBuildDate>Wed, 27 Aug 2025 12:47:10 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Bridge of Asses: Learning Coding with Novices</title>
+      <link>https://jaidevd.com/posts/bridge-of-asses/</link>
+      <pubDate>Wed, 27 Aug 2025 12:47:10 +0530</pubDate>
+      <guid>https://jaidevd.com/posts/bridge-of-asses/</guid>
+      <description>Over the last few years, I have been deeply involved with the IIT-M Programme in Data Science &amp;amp; Applications - as a student, a mentor and an analytics consultant. The programme provides diplomas and bachelor’s degrees in data science and applications. I’m often asked why I’m so invested in the programme - especially since I’m already an experienced data scientist.&#xA;At least three people are mad at me for being in the programme.</description>
+    </item>
     <item>
       <title>Book Review: Invisible Women by Caroline Criado Perez</title>
       <link>https://jaidevd.com/posts/invisible-women-review/</link>
@@ -83,7 +90,7 @@
       <link>https://jaidevd.com/posts/obj-detection-stratification/</link>
       <pubDate>Fri, 30 Sep 2022 19:47:39 +0530</pubDate>
       <guid>https://jaidevd.com/posts/obj-detection-stratification/</guid>
-      <description>TL;DR: Here&amp;rsquo;s a talk based on this post:&#xA;There&amp;rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks for specific tasks, which primarily stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous.</description>
+      <description>TL;DR: Here&amp;rsquo;s a talk based on this post:&#xA;There&amp;rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks, which stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general to the specific, than the reverse.</description>
     </item>
     <item>
       <title>A Process for Readable Code</title>

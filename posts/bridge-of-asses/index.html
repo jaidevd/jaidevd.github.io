@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>The Bridge of Asses: Learning Coding with Novices | Jaidev&#39;s Blog</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.df3b4a06ee5608772c5e173b1121b9a0db5c48478c6cae559ba43989a9612b33.css"/>
+
+    
+    
+    
+
+    
+    
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="The Bridge of Asses: Learning Coding with Novices"/>
+<meta name="twitter:description" content="Over the last few years, I have been deeply involved with the IIT-M Programme in Data Science &amp; Applications - as a student, a mentor and an analytics consultant. The programme provides diplomas and bachelor’s degrees in data science and applications. I’m often asked why I’m so invested in the programme - especially since I’m already an experienced data scientist.
+At least three people are mad at me for being in the programme."/>
+
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Jaidev&#39;s Blog</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/about/">About Me</a>
+  
+    <a class="color-link nav-link" href="/archive/">Archive</a>
+  
+  <a class="color-link nav-link" href="https://jaidevd.com/index.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">The Bridge of Asses: Learning Coding with Novices</h1>
+    
+    <time>August 27, 2025</time>
+    
+    <div>
+        <p>
+        <p>Over the last few years, I have been deeply involved with the <a href="https://study.iitm.ac.in/ds/">IIT-M Programme in
+Data Science &amp; Applications</a> - as a student, a mentor and an analytics
+consultant. The programme provides diplomas and bachelor’s degrees in data
+science and applications. I’m often asked why I’m so invested in the programme -
+especially since I’m already an experienced data scientist.</p>
+<p>At least three people are mad at me for being in the programme. One of them
+thinks that I’ve unfairly claimed a higher education seat I don’t need - which
+would be true if this was a conventional program with limited seats. But it&rsquo;s a
+MOOC.</p>
+<p>Another person thinks that professionals like myself (especially those who’ve
+spent a fair time in data science and software development) are pulling the
+grading curves to the right. I promise you - we’re not. First of all, kids these
+days are a lot smarter than I. Secondly, practising data science is one thing,
+but getting good grades and writing exams is a different game. Third, the
+program doesn&rsquo;t grade us on a curve anyway. A CGPA of 9.0<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> means that I
+consistently demonstrated mastery of 90% of the material. It does not mean that
+I am 90% as smart as the smartest student.</p>
+<p>The third person who thinks I have no business being here is my wife. She
+insists that the right time for studies was ten years ago (when I actually went
+to college but never studied, not for exams anyway), and the time I spend
+studying <em>now</em> is time stolen from her. She’s right on both counts. Me not
+studying hard enough back then, and studying too hard now, have both taken
+something from her.</p>
+<p>It&rsquo;s true that I have no business being in this programme. But I&rsquo;ve rarely been
+motivated by reasonable things.</p>
+<p>I didn&rsquo;t come for the degree. I came because I teach machine learning courses
+myself, and I wanted to see what IIT Madras was really up to. I was shocked that
+IIT Madras was offering <em>degrees</em> without a JEE score. I went in only to audit
+some of the courses, and see if they really knew what they were doing. In fact,
+I once asked <a href="https://www.ee.iitm.ac.in/andrew/">Prof Andrew Thangaraj</a>, the coordinator of the programme, what he
+and his team were thinking when they decided to open the floodgates. He laughed
+and said, &ldquo;We weren&rsquo;t thinking.&rdquo;</p>
+<p>So I came in as a spectator, but then I started seeing this programme as a
+massive social experiment. Since I&rsquo;d been teaching this stuff myself, I was
+curious about what happens when you take high-quality educational content and
+make it available <em>en masse</em>: anyone can apply as long as they’ve finished high
+school, from anywhere, no age limits either. What you get is the largest, most
+diverse MOOC in the world.</p>
+<p>I&rsquo;m sorry that I can&rsquo;t furnish the exact numbers here, but suffice it to say
+that we&rsquo;ve got people from their late teens to their early 80s, from various
+socio-economic backgrounds. The programme also boasts a better sex ratio than
+most other engineering or science curricula anywhere else in the country. People
+can come from any or no professional background. There are people like myself,
+experienced programmers and data scientists who are here just for fun - without
+the pressure of having to worry about getting jobs. On the other hand there are
+people who’ve never seen a computer. There are seniors and retired professionals
+who are familiar with computers and
+programming, but not quite in the same way that would be suitable for data
+science. There are also people who are here primarily to upskill and get jobs.</p>
+<p>The difficulty of the content too, spans the whole spectrum - courses range from trivial to backbreaking. There are courses in
+English, mathematics, statistics, databases, programming languages, shallow and
+deep ML, and specialized topics like reinforcement learning too. There were
+courses where I scored a top grade without lifting a finger. There were also
+courses where the entire class got slaughtered.</p>
+<p>What we have here are two singularities - the varying complexity of the content
+and the varying backgrounds, skills, hopes and aspirations of the people
+consuming that content.</p>
+<p>The exchanges and discussions which emerge from the collision of these two
+singularities are nothing short of mind-boggling. These discussions, at the very
+least, are useful to those involved. And they can be truly enlightening if
+they’re summarized, critiqued and documented properly.</p>
+<p>What you are reading is a small attempt at doing just that.</p>
+<hr>
+<p>We use a <a href="https://discourse.org">Discourse</a> instance as our discussion forum.
+It’s open to all who enrol in the programme to discuss everything from homework
+to operations and logistics. For as long as I was in the programme, I was
+addicted to the forum - it was the first tab I opened every morning, and the
+last I closed before I left my desk. In the beginning, when we onboarded some of
+the first batches onto Discourse, most of us were gradually being exposed to
+programming and data science for the first time. This meant that we had
+newcomers exposed to many different technologies. For instance, stuff like
+numpy, pandas, sklearn and bash form the center of some of the courses offered
+in the diploma year. Many of these tools are my very livelihood. I’ve been using
+them for a decade - I’ve done my 10000 hours. So I was able to go through these
+courses with relatively little effort. The time that I saved went into writing
+long post and replies on Discourse.</p>
+<p>It turns out that I’ve written about a thousand posts on Discourse, nearly one
+for every day that I was enrolled in the program. They span lots of topics, but
+three overarching themes emerged from them - code, tools and libraries, and
+pedagogy<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<p>This post focuses on the first item - <em>code</em>. I’ve learnt a lot about how people
+code - not about coding itself, not even about just the <em>act</em> of coding, but how
+people (novices and experts alike) <em>react</em> to code, interpret it, and develop
+habits around it.</p>
+<h2 id="the-bridge-of-asses">The Bridge of Asses</h2>
+<blockquote>
+<p>Medieval students called the moment at which casual learners fail the <em>pons
+asinorum</em>, or “bridge of asses.” The term was inspired by Proposition 5 of
+Euclid’s Elements I, the first truly difficult idea in the book. Those who
+crossed the bridge would go on to master geometry; those who didn’t would
+remain dabblers. Section 4.3 of “Beginning Visual C++,” on “Dynamic Memory
+Allocation,” was my bridge of asses. I did not cross.</p>
+<p>- James Somers, <a href="https://www.newyorker.com/magazine/2023/11/20/a-coder-considers-the-waning-days-of-the-craft"><em>A Coder Considers the Waning Days of the
+Craft</em></a></p>
+</blockquote>
+<p>Anyone who doesn’t want to remain a ‘dabbler’ must cross their own <em>pons
+asinorum</em>. I crossed mine a bit late, in the last year of my bachelor’s course
+in electronics engineering. I realized that if I were to do machine learning
+instead of electronics, I’d have to write MATLAB instead of HDL and embedded C.
+And if I were to do it really well, I’d have to use a <em>real</em> programming
+language, like Python<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. That was my bridge of asses. Crossing it consisted of
+understanding that there exists a whole world outside the paradigm of
+array-oriented computing.</p>
+<p>The <em>Pons Asinorum</em> of the foundation level of the BS Degree Programme is also a
+course on Python programming. Rude as it may sound, there’s no hope in data
+science and applications for those who can’t write Python code. The Python
+course occurs within the first year of the programme, and acts as a ruthless
+filter. It’s one of the most difficult courses in the entire programme. At any
+given time there are a few thousand students enrolled in that course, and many
+of them take five or six attempts to pass it. For comparison, the second most
+difficult course is Maths 2 (linear algebra and multivariate calculus), where
+the slowest students take up to four attempts. At some level, this appears very
+strange - why would Python - one of the simplest programming languages - be
+<em>more</em> difficult to master than advanced mathematics? And isn’t mathematics a
+language in itself, too?</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/PQKKMjuUqbU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>But it is what it is. You can’t hope to get much done in data science and
+applications without some aptitude in Python. So it’s safe to say that despite
+its ruthlessness, the bridge of asses is placed correctly. As to why it is so
+narrow, I think the answer lies in how novices react to computer code.</p>
+<h2 id="scalpels-not-sledgehammers">Scalpels, not Sledgehammers</h2>
+<p>The one thing that characterized my own first struggle with general purpose
+programming - 15 years ago - was frequent rage-quitting. Code looked horribly
+obscure to me. Reading pages and pages of it gave me a frightful nausea. If the
+sight of Borland C++ GUI makes you nostalgic, I envy you. In me it still invokes
+fear. But I did have grades riding on it, so I had no choice but to keep reading
+and trying to comprehend it in vain.</p>
+<p>Code looked like a dark, viscous, looming mass of tar, hovering ominously above
+my desk. It felt large enough to swallow you whole. You&rsquo;re backed up against a
+wall. It slowly closes in on you. It will eventually drown you. It also seems to
+have magical powers - when you swing a bat at it, it hardens like stone. The bat
+breaks against it. But when you step back and stop exerting force, it starts
+dripping once again with tar, giving you the fleeting impression that it may
+perhaps be pliable after all, giving you hope that you may yet conquer this
+monstrosity.</p>
+<p>So you lash out again, and once again the mass hardens and you break yet another
+weapon. You realize that the amorphous, intangible mass is impenetrable to blunt
+force. But maybe, just maybe, it&rsquo;ll disintegrate if you poke it at just the
+right spot. You realize that what you needed, really, was a scalpel, not a
+sledgehammer. But now it’s too late. You’ve been badly tarred and feathered. And
+when, weeks later, you face another inscrutable block of code-tar, you might not
+even remember what worked or failed the last time. You are condemned to
+eternally swing bats at something that is invulnerable to force.</p>
+<p>&hellip; at least that&rsquo;s what I wrote in my journal back then. But there are others
+who have had similar experiences. No wonder Fred Brooks wrote about the <em>Tar</em>
+Pit - there’s something black and viscous and dirty about incomprehensible code.
+<a href="https://anuvrat.in/">Anuvrat Parashar</a> compares incomprehensible code to an almost-finished sweater -
+one that can be unravelled if only you&rsquo;d find the right thread to pull.</p>
+<p>Now, after fifteen years, code certainly doesn’t scare me. And only sometimes
+nauseates me.</p>
+<p>I suspect that most people - whether experts or novices - have similar reactions
+when they start reading code. At first glance, a block of code looks as
+indecipherable and as arcane to an expert as it looks to a novice. The
+difference is that the expert does not feel intimated. The expert’s furrowed
+brows reflects an attempt at comprehension (and sometimes, it reflects disgust).
+Nobody, no matter how experienced, are fully comfortable with code at first
+glance.</p>
+<p>To make matters worse for novices, the hieroglyphs of variables, functions and
+loops scare them further away from <em>reading</em> the code. It becomes even more
+magical, even more forbidding. Not to mention the pressing assignment deadlines,
+if you&rsquo;re in the middle of a programming course. Ultimately, the novice’s
+reaction to code becomes haphazard instead of comprehensive. As a result, most
+questions on Discourse come in the form of a screenshot of code followed by a
+short question like “why isn’t this working?” or “what’s wrong with this code?”.</p>
+<p>If you’re reading code on GitHub or in your IDE, the environment has already
+primed you for reading code. But when code appears interspersed with natural
+language, as in textbooks, blogs, or API documentation, it takes a few seconds
+for the brain to switch from comprehending natural language to comprehending
+code. If you’re reading English, your eyes are confidently moving from left to
+right, and then from top to bottom. But if you’re reading code, is this
+left-right-top-bottom movement of the eyes always the most efficient? Maybe
+sometimes, if you are presented with a simple function or a short script. But if
+you’re presented with a whole Python module or a Java class, your eyes might
+jump around all over the screen until you find the entry point - which could be
+a class constructor, a command line argument parser, a function, etc.</p>
+<p>The point is that the most important part of code could appear anywhere in it.
+On the other hand, in a paragraph of English text (assuming it’s not written by
+James Joyce or William Faulkner), we know where the most important
+bits are likely to be. Moreover, natural language doesn’t keep you guessing. You
+can keep following the left-right-top-bottom movement of your eyes until you
+find what you’re looking for. In code, there’s no such sure-shot method for
+finding things.</p>
+<p>That’s why I suspect that the visceral reaction of most people - whether experts
+or novices - to code is some form of <em>discomfort.</em> It is certainly not
+comprehension. I ran a <a href="https://www.linkedin.com/posts/jaidevd_activity-7149649672888868864-7uMZ?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAL90eEB7pk3c9z5LwAvQOvgXITcnw1sOFg">few</a> <a href="https://x.com/jaidevd/status/1743883427534049335">polls</a> to see how many people agree with me. It
+turns out that hell is indeed other people’s code. Some of us are optimistic
+about foreign code - their instant reaction is excitement or curiosity - Nerds!
+I tell you&hellip;</p>
+<p>But those who said that their reaction is comprehension are straight up lying.</p>
+<p>Everyone takes a second or two to get accustomed to reading code. It is during
+this short time that the differences between the thoughts of experts and novices
+is most stark.</p>
+<p>After the initial glance at a snippet, the expert starts behaving like a trained
+bloodhound. They shut off all external noise and focus rapidly. They then
+proceed to look for the entry point, scrolling up and down through the code,
+until they find their quarry. Only when the entry point is isolated (by making a
+note of which function, statement, or line of code holds the solution) do they
+allow themselves the fleeting pleasure of comprehension. But their work isn’t
+done yet. The entry point is but the root of the tree. They have yet to parse
+the whole tree to figure out how stuff works. After a brief pause, the
+bloodhound is at work again.</p>
+<p>All this is incredibly difficult for a novice - not least because it cannot be
+taught. That is why, novices react with discomfort and stay in that same state,
+until the discomfort compounds into panic and they (at least temporarily) give
+up.</p>
+<p>This effect of code-induced-disorientation is further amplified when students
+are chasing deadlines and when they’re appearing for exams. Most of us are
+chronic procrastinators (including myself - I’m saying this without judgement,
+no shame in it). When we read code that <em>really</em> needs to be understood quickly,
+it’s almost always too late. If you’ve got only a few hours left to finish a
+daunting assignment, even a relatively small block of code can look <em>very</em>
+scary. Fear gets the best of even the best of us.</p>
+<p>So, ultimately, it’s not surprising that an overwhelming amount of Discourse
+threads are about what some piece of code does, and why it may not work. The
+antidote to obscure code is what I’d call human-centric code.</p>
+<h2 id="human-centric-code">Human-Centric Code</h2>
+<p><em>The Internship (2013)</em> is a movie about what happens when a couple of men with
+<em>zero</em> technical skills end up in an internship at Google. Much of it is a
+caricature of how hard it is for a couple of out-of-work, middle-aged,
+technologically-impaired and somewhat obnoxious salesmen to find good jobs, and
+how they save their careers with little more than their street-smarts and life
+experience.</p>
+<p>At one point in the movie, teams of interns have been tasked with debugging an
+app which has 2 million lines of code (perhaps a cinematic exaggeration - who
+knows?). As soon as the problem is stated, the experts in the team - young
+students, coders and a Google PM - launch into a variety of strategies to solve
+the problem. You can hear them say various plausible phrases like “scan the
+logs”, “see what exceptions were thrown”, “read the user reports”, etc. The
+protagonists, however, are left mumbling nonsense to themselves. They are so
+clueless, they don’t know how clueless they are.</p>
+<p>But even though it is ignored by the rest of their team, they do make one very
+good point. They keep insisting that “Someone wrote that code. All we have to do
+is find them.” They end up being hilariously pranked, but recognising that there
+is a human behind a given piece of code can be a very useful insight.</p>
+<p>I’m not even talking about knowing exactly <em>who</em> wrote a particular piece of
+code. The first step is to simply acknowledge <em>that</em> a piece of code was written
+by one or more humans. In the post-genAI world, recognizing the touch of a human
+is going to be all the more insightful. The next step, then, is to start
+arranging a <em>persona</em> around the authors. The people who design coding problems
+in exams do not have the same <em>persona</em> as the people who write jupyter
+notebooks on Kaggle. Knowing the persona even vaguely can help us find the
+motivations behind code. A programming exam is <em>designed</em> to be tricky to read
+and debug. A pandas tutorial is not.</p>
+<p>The realization that humans are behind code is the cornerstone of the entire
+edifice of <a href="https://www-cs-faculty.stanford.edu/~knuth/lp.html">literate programming</a>. It is also why communities of programmers who
+maintain software projects have <em>coding standards</em>. Recognizing these standards
+in new, unseen code can very often lead to an easy bugfix, even if one doesn’t
+understand every single expression. In fact, complete and total comprehension of
+code (that is to say, a deep understanding of every line, expression and
+statement) is not only <em>not necessary</em> when debugging, but it can actually be
+distracting. When you’re asked to fix a piece of code or predict its output, the
+solution is rarely found in the lowest level of abstraction. Developer
+communities use coding standards precisely to help themselves maintain
+consistency throughout the codebase, to debug programs faster, and, most
+crucially, make the code easier for newcomers.</p>
+<p>This is why libraries in the scientific Python stack (like scikit-learn) are
+<em>beautiful</em>. Let me tell you how.</p>
+<p>In a previous life, I used to work in <a href="https://enthought.com">Enthought’s</a> buildsystem team. Python
+package management back then wasn&rsquo;t nearly as mature as it is. Tools like pip
+were a distant dream, and people used to joke that we ought to have a package
+manager named &ldquo;maybe&rdquo; - &ldquo;maybe install&rdquo;, &ldquo;maybe upgrade&rdquo; or &ldquo;maybe remove&rdquo; a
+package. Our job in the Enthought buildsystem was to build and package various
+Python libraries so they could be sold to customers. These packages were usually
+built from source. Python packaging being what it was, almost everything we
+built would break once in a while, on some OS or platform.</p>
+<p>So we internalized a rule - <em>upstream is always broken</em>. Since we couldn’t sell
+broken packages, we had to patch them ourselves. We had patches for almost
+<em>every</em> Python package that existed. In the two years that I spent in the
+buildsystem team, I remember only 3 Python packages that <em>never</em> had to be
+patched - <a href="https://docs.python-requests.org/en/latest/index.html">requests</a>, <a href="https://ipython.org/">ipython</a> and <a href="https://scikit-learn.org/">scikit-learn</a>.</p>
+<p>Like the developers of many popular open-source libraries, the developers of
+sklearn have been highly dedicated to coding standards. In 2011, at the <a href="https://scipy.in/scipyin/2011/">SciPy
+India</a> conference, I had the good fortune of showing some of my badly written
+code to <a href="https://gael-varoquaux.info/">Gael Varoquaux</a>. He said a lot of things about my code, most of them
+good. But he also emphatically kept pointing out that my code had no docstrings.
+I said “Really? You think that’s the biggest problem with this code?” And sure
+enough, scikit-learn&rsquo;s <a href="https://scikit-learn.org/stable/developers/contributing.html">contribution guide</a> emphasizes coding standards.</p>
+<p>The effects of this dedication are obvious to anyone who has spent a reasonable
+time using the sklearn API. This is why I can recognize sklearn code from a mile
+away. I know how sklearn developers divide their API neatly into only a few
+types of classes and functions (their use of abstractions and interfaces would
+make Java programmers jealous), and that piece of knowledge makes it easy for me
+to identify when a transformer is being confused for an estimator.</p>
+<p>Similar praise is due to the other no-patch libraries too - requests is an
+example of how good Python code is supposed to be written, and IPython
+represents an entire ecosystem built out of Python&rsquo;s metaprogramming
+capabilities. Any Pythonista&rsquo;s (and especially, any data scientist&rsquo;s) very life
+is shaped by these libraries.</p>
+<p>And none of that is possible without code that is, as Abelson and Sussman wrote,
+&ldquo;written for people to read, and only incidentally for machines to execute.&rdquo;</p>
+<h2 id="good-code--good-communication">Good Code = Good Communication</h2>
+<p>Until now, I thought that the quote above was from Donald Knuth. But since I
+needed to paraphrase it here, I went around looking for its origin. All along, I
+had it right here in my room, albeit in one of the least read books in one of
+the dustier corners of my bookshelf. The quote is from the preface to the first
+edition of SICP.</p>
+<p>Reading the preface again after all these years is a revelation. For ages, I
+have thought that SICP was a very&hellip; serious and hardcore programming textbook,
+and the authors would not have bothered with something peripheral like
+communication. That particular outlook was perhaps one of my own first mistakes
+as a novice programmer - the very mistake that I&rsquo;m now cribbing about. That
+incorrect outlook towards programming - that it&rsquo;s all about clever algorithms,
+efficiency and managing complexity - must be why I rushed to acquire a copy of
+SICP, barely touched it later, and then, years later, come around to the idea of
+code as communication.</p>
+<p>The authors of SICP mention that most of their students &quot; have had little or no
+prior formal training in computation, although many have played with computers a
+bit and a few have had extensive programming or hardware-design experience.&quot;
+This is very similar to the situation I described earlier about my classmates at
+IIT-M. The authors further write,</p>
+<blockquote>
+<p><em>Our goal is that students who complete this subject should have a good feel</em>
+<em>for the elements of style and the aesthetics of programming. They should have</em>
+<em>command of the major techniques for controlling complexity in a large system.</em>
+<em>They should be capable of reading a 50-page-long program, if it is written in</em>
+<em>an exemplary style. They should know what not to read, and what they need not</em>
+<em>understand at any moment. They should feel secure about modifying a program,</em>
+<em>retaining the spirit and style of the original author.</em></p>
+</blockquote>
+<p>So here&rsquo;s one of the greatest programming textbooks of all time, emphasizing
+style, aesthetics and abstraction. I don&rsquo;t know of any other programming 101
+content that takes this stand.</p>
+<p>Now, I&rsquo;ve had my share of being in software development and data science teams which
+thought that clean code was a luxury they couldn&rsquo;t afford. My experience has
+taught me that clean code helps even novices, and the lack of it hurts even
+experts. What makes clean code hard to sell is that clean code is more about
+the long-term health and stability of a project than about the short-term skill
+of an individual programmer. So, as vindicated as I feel about this idea, it&rsquo;s
+not exactly something I can preach to a bunch of exasperated kids who are
+chasing homework deadlines.</p>
+<p>Perhaps, we all need to take our time. Let&rsquo;s just hope that it&rsquo;s not so long
+that our textbooks turn to dust.</p>
+<h3 id="further-reading--bibliography">Further Reading &amp; Bibliography</h3>
+<ol>
+<li>
+<p>Abelson, H., Sussman, G. J., &amp; Sussman, J. (2002). <em>Structure and Interpretation of Computer Programs</em> (2nd ed.). Universities Press.</p>
+</li>
+<li>
+<p>Guzdial, M. (2010). Why is it so hard to learn to program? In A. Oram &amp; G. Wilson (Eds.), <em>Making Software: What Really Works, and Why We Believe It</em> (pp. 111–124). O’Reilly Media.</p>
+</li>
+<li>
+<p>Dawkins, R. (2021). Tutorial-driven Teaching. In <em>Books Do Furnish a Life</em> (pp. 405–412). Penguin Books.</p>
+</li>
+<li>
+<p>Martin, R. C. (2011). <em>The Clean Coder: A Code of Conduct for Professional Programmers</em>. Pearson Education.</p>
+</li>
+<li>
+<p>Brooks Jr., F. P. (1995). <em>The Mythical Man-Month: Essays on Software Engineering</em> (Anniversary ed.). Pearson Education.</p>
+</li>
+</ol>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Well, 8.99, to be exact. Yes, you read that right. I missed a merit award
+by a hundredth of a point.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Discourse has a fairly extensive API - writing scripts to extract stuff is
+quite doable. The rest of the analysis is thanks to a topic modelling recipe I
+learned from <a href="https://s-anand.net">S Anand</a>: get embeddings from an LLM for
+pieces of text, and cluster them until the clusters represent meaningful,
+hopefully non-overlapping topics.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Stephen Boyd of Stanford, in his lectures on Convex Optimization,
+encouraged his students to try out assignments in Python. That was the first
+time I heard of the language.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+        </p>
+    </div>
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "brocasbrain" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    <div class="page-footer">
+        
+    </div>
+
+
+	
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

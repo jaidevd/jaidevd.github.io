@@ -43,7 +43,7 @@ if (!doNotTrack) {
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://jaidevd.com/posts/obj-detection-stratification/thumbnail-pedestrian-bad.png" /><meta name="twitter:title" content="Effective Train/Test Stratification for Object Detection"/>
 <meta name="twitter:description" content="TL;DR: Here&rsquo;s a talk based on this post:
-There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks for specific tasks, which primarily stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous."/>
+There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks, which stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general to the specific, than the reverse."/>
 
 
     <body>
@@ -172,7 +172,7 @@ There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural net
 
 <hr>
 <p>There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural
-networks for specific tasks, which primarily stems from the lack of training data. It would seem ridiculous to a
+networks, which stems from the lack of training data. It would seem ridiculous to a
 layperson that a pretrained vision model (containing millions of
 parameters, trained on millions of images) could learn to solve highly specific
 problems. Therefore, when fine-tuned models <em>do</em> perform well, they seem all the more <a href="https://www.pnas.org/doi/10.1073/pnas.1907373117">miraculous</a>.
@@ -189,11 +189,11 @@ Coefficients of linear models, kernel functions and splits of trees have very we
 geometrical interpretations, as do the multivariate statistics of the data
 itself. In deep networks, however, an equivalent geometrical or statistical
 <em>reasoning</em> is not for the faint of heart, even if it is possible at all.
-Not to mention that cross validating deep networks is prohibitively expensive,
-and regularizing a deep network beyond what its architecture already supports is
-practically unfeasible (you wouldn&rsquo;t want to change regularization rates of
+Not to mention that cross validating deep networks is expensive,
+and regularizing beyond what a deep architecture already supports is
+impractoca. You wouldn&rsquo;t want to change regularization rates of
 arbitrary layers in a deep network in the process of fine-tuning, if you can
-help it).</p>
+help it.</p>
 <p>Ultimately, avoiding overfitting boils down to presenting samples to the model
 that are  <em>most representative</em> of the data which the model is expected to encounter.
 This is where the disparity between unstructured data like images and text on
@@ -207,7 +207,7 @@ examples</a>.)</p>
 <h2 id="stratification-in-object-detection">Stratification in Object Detection</h2>
 <p>Let us first note that overfitting has many signs - divergence in training
 and validation loss curves, bad values in class-imbalance metrics, high sensitivity
-to noise, etc. None of which are solely indicative. Alleviating these
+to noise, etc, none of which are solely indicative. Alleviating these
 <em>individual</em> symptoms may be necessary, but not sufficient to avoid overfitting.
 For example, simply ensuring that validation error reduces with training error
 may not be enough. First of all, the divergence between train and validation errors
@@ -276,7 +276,7 @@ There&rsquo;s no way to know whether it will help unless it is accompanied
 by rigorous experimentation (and if you have the time to do that much
 work, then fine-tuning an object detection model on a small dataset is perhaps the least of
 your problems). So our only real choice at this point, is to analyze bad samples
-in a fully empirical manner, and see how we could have done better. Typically, in
+in a fully empirical manner, and see how you could have done better. Typically, in
 object detection, identifying where the model is making the most mistakes
 translates into identifying classes and sizes of objects that the model usually
 gets wrong. Most such errors result from some combination of the following effects:</p>
@@ -324,7 +324,7 @@ looks like:</p>
 tell us that the first image contains two bowls and a dining table, and the
 second one contains a banana and an apple. It also contains information on <em>where</em> they are in the
 image.)</p>
-<p>If the label $y$ is a simple enough (or univariate) object - like the <code>y_bin</code> and <code>y_multi</code> above - it&rsquo;s easy to use $y$ for stratification.
+<p>If the label $y$ is a simple (or univariate) object - like the <code>y_bin</code> and <code>y_multi</code> above - it&rsquo;s easy to use $y$ for stratification.
 But how do you stratify a dataset based on a $y$ that has a fairly complex
 structure, like the one in the second example?</p>
 <p>The key idea is,</p>
