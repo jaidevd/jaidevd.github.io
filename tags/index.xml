@@ -6,8 +6,22 @@
     <description>Recent content in Tags on Jaidev&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Mar 2025 20:05:20 +0530</lastBuildDate>
+    <lastBuildDate>Wed, 27 Aug 2025 12:47:10 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Code</title>
+      <link>https://jaidevd.com/tags/code/</link>
+      <pubDate>Wed, 27 Aug 2025 12:47:10 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://jaidevd.com/tags/python/</link>
+      <pubDate>Wed, 27 Aug 2025 12:47:10 +0530</pubDate>
+      <guid>https://jaidevd.com/tags/python/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Bookreview</title>
       <link>https://jaidevd.com/tags/bookreview/</link>
@@ -205,13 +219,6 @@
       <description></description>
     </item>
     <item>
-      <title>Code</title>
-      <link>https://jaidevd.com/tags/code/</link>
-      <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-      <guid>https://jaidevd.com/tags/code/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Data Structures</title>
       <link>https://jaidevd.com/tags/data-structures/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
@@ -230,13 +237,6 @@
       <link>https://jaidevd.com/tags/mooc/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
       <guid>https://jaidevd.com/tags/mooc/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Python</title>
-      <link>https://jaidevd.com/tags/python/</link>
-      <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-      <guid>https://jaidevd.com/tags/python/</guid>
       <description></description>
     </item>
     <item>

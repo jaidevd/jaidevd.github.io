@@ -2,10 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jaidevd.com/tags/code/</loc>
+    <lastmod>2025-08-27T12:47:10+05:30</lastmod>
+  </url><url>
     <loc>https://jaidevd.com/</loc>
     <lastmod>2025-08-27T12:47:10+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/</loc>
+    <lastmod>2025-08-27T12:47:10+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/python/</loc>
+    <lastmod>2025-08-27T12:47:10+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/</loc>
     <lastmod>2025-08-27T12:47:10+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/bridge-of-asses/</loc>
@@ -18,9 +27,6 @@
     <lastmod>2025-03-14T20:05:20+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/reading/</loc>
-    <lastmod>2025-03-14T20:05:20+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/</loc>
     <lastmod>2025-03-14T20:05:20+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/bayesian-storytelling/</loc>
@@ -134,9 +140,6 @@
     <loc>https://jaidevd.com/tags/algorithms/</loc>
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
-    <loc>https://jaidevd.com/tags/code/</loc>
-    <lastmod>2022-06-17T05:00:00+05:30</lastmod>
-  </url><url>
     <loc>https://jaidevd.com/tags/data-structures/</loc>
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
@@ -144,9 +147,6 @@
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/mooc/</loc>
-    <lastmod>2022-06-17T05:00:00+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/python/</loc>
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/readability/</loc>
