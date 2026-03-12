@@ -4,7 +4,7 @@
     <title>Journal on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/journal/</link>
     <description>Recent content in Journal on Jaidev&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Mar 2025 12:12:14 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/journal/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://jaidevd.com/posts/bayesian-storytelling/</link>
       <pubDate>Tue, 11 Mar 2025 12:12:14 +0530</pubDate>
       <guid>https://jaidevd.com/posts/bayesian-storytelling/</guid>
-      <description>I launched a newsletter yesterday. So far, the feedback has been good. A few readers said that they felt drawn in by the writing. In any case, the purpose of the first few posts is simply to get myself warmed up. Any extra flutter the posts generate is a bonus. Amit Varma recommends not looking at the stats for a couple of years.&#xA;It taught me quite a few things. Particularly that I need to be smart about the data analysis.</description>
+      <description>&lt;p&gt;I launched &lt;a href=&#34;https://beingbayesian.in&#34;&gt;a newsletter&lt;/a&gt; yesterday. So far, the&#xA;feedback has been good. A few readers said that they felt drawn in by the&#xA;writing. In any case, the purpose of the first few posts is simply to get myself&#xA;warmed up. Any extra flutter the posts generate is a bonus. &lt;a href=&#34;https://amitvarma.com/&#34;&gt;Amit Varma&lt;/a&gt;&#xA;recommends not looking at the stats for a couple of years.&lt;/p&gt;&#xA;&lt;p&gt;It taught me quite a few things. Particularly that I need to be smart about&#xA;the data analysis. It&amp;rsquo;s important to remember that this isn&amp;rsquo;t a work project.&#xA;It&amp;rsquo;s meant for a general audience, so there is such a thing as too much detail.&#xA;For example, detailed handwritten notes on every single table in the &lt;a href=&#34;https://pib.gov.in/PressReleasePage.aspx?PRID=2088390&#34;&gt;HCES&lt;/a&gt; isn&amp;rsquo;t&#xA;important. You could have dealt with each table independently. Only focusing on&#xA;the tables needed for the problem in question should have sufficed. On the other&#xA;hand, cleaning and denormalizing the data and releasing it on GitHub was a good&#xA;idea; and the tweet announcing this has 10 reposts, 69 likes, 52 bookmarks, and&#xA;has gained me 12 new followers. This is what &lt;a href=&#34;https://austinkleon.com/&#34;&gt;Austin Kleon&lt;/a&gt; calls &amp;ldquo;showing your&#xA;work&amp;rdquo; (&lt;a href=&#34;https://womaning.substack.com/&#34;&gt;Mahima Vashist&lt;/a&gt; says &amp;ldquo;your journal is your art&amp;rdquo;). Perhaps one needs to&#xA;think carefully about what shareable and useful assets can be created in the service of a&#xA;larger, transcending work.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

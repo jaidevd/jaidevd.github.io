@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning on Jaidev&#39;s Blog</title>
+    <link>https://jaidevd.com/tags/machine-learning/</link>
+    <description>Recent content in Machine Learning on Jaidev&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 12 Mar 2026 13:00:00 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notes on Optimizing Torch Models</title>
+      <link>https://jaidevd.com/posts/optimizing-torch-models/</link>
+      <pubDate>Thu, 12 Mar 2026 13:00:00 +0530</pubDate>
+      <guid>https://jaidevd.com/posts/optimizing-torch-models/</guid>
+      <description>&lt;p&gt;ML researchers are from Mars and the ML engineers responsible for deploying&#xA;models are from Venus. The two have vastly different motivations. The ML&#xA;researcher&amp;rsquo;s job, given a dataset and some compute, is to find the&#xA;lowest possible loss on a task. In this pursuit, no engineering cost is too&#xA;high. No tech debt is too large. Worse still, if they get published, they must&#xA;include their code in their paper. Reproducible research only means that&#xA;everyone be able to reproduce benchmarks and charts from the original paper. It&#xA;usually has very little to do with production.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

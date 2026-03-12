@@ -4,7 +4,7 @@
     <title>Nonstationary on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/nonstationary/</link>
     <description>Recent content in Nonstationary on Jaidev&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 20 Jun 2015 16:46:54 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/nonstationary/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://jaidevd.com/posts/fourier-limitations/</link>
       <pubDate>Sat, 20 Jun 2015 16:46:54 +0530</pubDate>
       <guid>https://jaidevd.com/posts/fourier-limitations/</guid>
-      <description>My implementation of the Hilbert Huang transform (PyHHT) is quite close to a beta release. After nearly three years of inactivity, I&amp;rsquo;ve found some time to develop the PyHHT library in the last few weeks. In all this time many people have written to me about a lot of things - from the inability to use the module because of the lack of documentation, to comparison between the results of HHT and conventional time series analysis techniques.</description>
+      <description>&lt;p&gt;My implementation of the Hilbert Huang transform (&lt;a href=&#34;https://github.com/jaidevd/pyhht&#34;&gt;PyHHT&lt;/a&gt;) is quite close to a beta release. After nearly three years of inactivity, I&amp;rsquo;ve found some time to develop the PyHHT library in the last few weeks. In all this time many people have written to me about a lot of things - from the inability to use the module because of the lack of documentation, to comparison between the results of HHT and conventional time series analysis techniques. And now the time has come when I can no longer avoid writing the documentation. But as I write the documentation, I&amp;rsquo;ve found that I need to re-learn the concepts which I learned back when I started writing this module. It is out of this learning cycle that came my last &lt;a href=&#34;http://jaidevd.github.io/blog/understanding-edge-effects-in-emd/&#34;&gt;blog post&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

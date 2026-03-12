@@ -4,7 +4,7 @@
     <title>Evangelism on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/evangelism/</link>
     <description>Recent content in Evangelism on Jaidev&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 14 Jun 2016 19:54:09 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/evangelism/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://jaidevd.com/posts/evangelism-in-foss/</link>
       <pubDate>Tue, 14 Jun 2016 19:54:09 +0530</pubDate>
       <guid>https://jaidevd.com/posts/evangelism-in-foss/</guid>
-      <description>One of the most dangerous things that can affect any FOSS community is the tendency of evangelism for the sake of evangelism. Promoting the Python stack, expanding the userbase, etc, should come only as a consequence of the content we produce as developers. If evangelism even remotely becomes one of your goals, your quality is sure to suffer. And it&amp;rsquo;s not just the empirical evidence that prompts me to say this.</description>
+      <description>&lt;p&gt;One of the most dangerous things that can affect any FOSS community is the tendency of evangelism for the sake of evangelism. Promoting the Python stack, expanding the userbase, etc, should come &lt;em&gt;only&lt;/em&gt; as a consequence of the content we produce as developers. If evangelism even remotely becomes one of your goals, your quality is sure to suffer. And it&amp;rsquo;s not just the empirical evidence that prompts me to say this. It even makes logical sense. If we want to &amp;ldquo;promote&amp;rdquo; Python and related tech, our best market would be the young and unexperienced (and therefore non-opinionated) minds. But note that such audiences are also very fickle. They may not return for the next conference. And since they don&amp;rsquo;t, we have to count on more fresh entries each year. And in the conference itself, since we&amp;rsquo;re all acutely aware of the demographic, we spend too many talks pandering to this part of the audience.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

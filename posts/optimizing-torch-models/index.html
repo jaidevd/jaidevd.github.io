@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Notes on Optimizing Torch Models | Jaidev&#39;s Blog</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
+
+    
+    
+    
+
+    
+    
+
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-R6EBGCKHP1');
+        }
+      </script></head>
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Notes on Optimizing Torch Models">
+  <meta name="twitter:description" content="ML researchers are from Mars and the ML engineers responsible for deploying models are from Venus. The two have vastly different motivations. The ML researcher’s job, given a dataset and some compute, is to find the lowest possible loss on a task. In this pursuit, no engineering cost is too high. No tech debt is too large. Worse still, if they get published, they must include their code in their paper. Reproducible research only means that everyone be able to reproduce benchmarks and charts from the original paper. It usually has very little to do with production.">
+
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Jaidev&#39;s Blog</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/about/">About Me</a>
+  
+    <a class="color-link nav-link" href="/archive/">Archive</a>
+  
+  <a class="color-link nav-link" href="" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Notes on Optimizing Torch Models</h1>
+    
+    <time>March 12, 2026</time>
+    
+    <div>
+        <p>
+        <p>ML researchers are from Mars and the ML engineers responsible for deploying
+models are from Venus. The two have vastly different motivations. The ML
+researcher&rsquo;s job, given a dataset and some compute, is to find the
+lowest possible loss on a task. In this pursuit, no engineering cost is too
+high. No tech debt is too large. Worse still, if they get published, they must
+include their code in their paper. Reproducible research only means that
+everyone be able to reproduce benchmarks and charts from the original paper. It
+usually has very little to do with production.</p>
+<p>On the other hand, the world isn&rsquo;t too kind to backend engineers whose job is to
+productionize models. If a paper claims to have developed a multimodal
+architecture that can identify a particular dog based on no more than its bark
+and a picture of its snout, then nobody would think twice before expecting an ML
+engineer to turn the paper into a mobile app. So now the engineer looks up the
+repository, hoping to find some structure in the code. But they&rsquo;re first met
+with a convoluted shell script and an argument parser that only seems to show
+how to train the model alone. If they look harder, they may find the URLs to the
+checkpoints. If they&rsquo;re particularly unfortunate, they may find modules upon
+modules of hacked up code which serves only to introduce custom layers in the
+architecture, necessitated only by the original authors not having read torch&rsquo;s
+documentation. The whole repository gives off a patronizing vibe, as if it&rsquo;s
+written exclusively for people who are novice programmers. In all likelihood,
+it&rsquo;s written by them as well. For instance, the overuse of argparsers indicates
+that people are not comfortable with writing well-documented functions.</p>
+<hr>
+<p>There&rsquo;s a host of optimization options available within torch, referred to
+variously as compiling, tracing, scripting and so on. But it all comes down to
+tracing, in that if a torch graph can be successfully traced, then it&rsquo;s already
+likely to be optimized for computation. The process of tracing the graph of a
+neural network is like extracting a deterministic function from it. And it is
+actually a function in the strict mathematical sense - different inputs may map
+to the same output, but the same input never maps to different outputs.
+The <a href="https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html"><code>torch.compile</code></a> documentation even says that a graph breaking is a lost
+optimization opportunity.</p>
+<p>I&rsquo;ve seen many such repositories over the years. I now have a recipe to deal
+with them. And now that I&rsquo;m actually writing it down, it feels like there&rsquo;s
+hardly any esoteric, domain-specific knowledge here. It&rsquo;s just good software
+development practices. These are broadly the three steps involved in optimizing
+a model for production. They&rsquo;re written for torch, but the ideas are
+applicable elsewhere too. Everything that needs to be done to make a graph traceable
+falls into one of these three categories.</p>
+<h1 id="1-refactor-modules">1. Refactor Modules</h1>
+<p>All inference should be the result of a single instance
+of <code>torch.nn.Module</code> which accepts tensors and returns tensors. Move all pre-
+and post-processing outside this module. Often, a single entry-point module
+is hard to spot in a codebase because it&rsquo;s buried under layers of helper
+functions and argparsers. You can probably tell that I absolutely abhor
+argparsers (especially in code that&rsquo;s written for programmers by
+programmers). But I&rsquo;ll admit that it&rsquo;s quite fun to chip away at a
+codebase until a single <code>torch.nn.Module</code> is left standing in <code>main.py</code>, and
+the remaining modules are comfortably imported.</p>
+<p>Bulk of this step is digging out the entry point module from the original
+codebase, and then further looking up its submodules in the project tree.
+Thankfully, LLMs are great at this kind of work.</p>
+<h1 id="2-vectorize-loops">2. Vectorize Loops</h1>
+<p>This might sound like a no-brainer, but it needs to be said. I feel kids
+these days jump straight to torch tensors by overstepping NumPy arrays.
+To be fair, people don&rsquo;t write loops all that often, but they do unpack one
+tensor in order to vectors to manipulate individual rows and columns of a
+tensor. A common example is normalizing bounding boxes in object detection
+models. Let&rsquo;s say you have a 2-D tensor with four columns in the $(x_min, x_max,
+y_min, y_max)$ format. You might want to normalize the matrix so that the
+coordinates are fractions of the height and width of the image. An innocent way
+to do that is as follows:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>height<span style="color:#1f2328">,</span> width <span style="color:#0550ae">=</span> batch<span style="color:#0550ae">.</span>shape<span style="color:#1f2328">[</span><span style="color:#0550ae">-</span><span style="color:#0550ae">2</span><span style="color:#1f2328">:]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/=</span> width
+</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/=</span> width
+</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/=</span> height
+</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/=</span> height
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Or, better</span>
+</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#1f2328">:</span><span style="color:#0550ae">2</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/=</span> width
+</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">:]</span> <span style="color:#0550ae">/=</span> height</span></span></code></pre></div>
+<p>This isn&rsquo;t wrong at all, but the tracer will warn you at the very first line
+that because unpacking a vector counts as an iteration. Worse, it creates
+standalone Python integers in the middle of the graph. So the correct, but
+perhaps less readable way of doing this is,</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>hw <span style="color:#0550ae">=</span> torch<span style="color:#0550ae">.</span>tensor<span style="color:#1f2328">(</span>batch<span style="color:#0550ae">.</span>shape<span style="color:#1f2328">[</span><span style="color:#0550ae">-</span><span style="color:#0550ae">2</span><span style="color:#1f2328">:])</span><span style="color:#0550ae">.</span>flip<span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>  <span style="color:#57606a"># slicing is fine, unpacking is not!</span>
+</span></span><span style="display:flex;"><span>bbox <span style="color:#0550ae">/=</span> hw<span style="color:#0550ae">.</span>repeat_interleave<span style="color:#1f2328">(</span><span style="color:#0550ae">2</span><span style="color:#1f2328">)</span></span></span></code></pre></div>
+<p>Now, the slight problem here is that we&rsquo;re <em>creating</em> a tensor right in the
+middle of the forward pass, which the tracer doesn&rsquo;t like. Unfortunately there
+are tons of operations where we need to depend on not just the values but the
+dimensions of the tensor. Thankfully there&rsquo;s a private method
+<code>torch._shape_as_tensor</code> which does exactly what we need. And the tracer allows
+this. God only knows why this is a private method.</p>
+<h1 id="3-bypass-conditional-flows">3. Bypass Conditional Flows</h1>
+<p>The tracer needs a single, deterministic path through the graph. Any <code>if</code> whose
+condition depends on tensor values or shapes is a potential graph break. The
+warning reads: <em>&ldquo;Converting a tensor to a Python boolean might cause the
+trace to be incorrect.&rdquo;</em> In practice, most of these conditionals often fall into one
+of three categories, and all three have the same solution: remove the <code>if</code>.</p>
+<p><strong>Guards that are never false.</strong> Consider a padding operation:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pad_h <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>window_size <span style="color:#0550ae">-</span> H <span style="color:#0550ae">%</span> window_size<span style="color:#1f2328">)</span> <span style="color:#0550ae">%</span> window_size
+</span></span><span style="display:flex;"><span>pad_w <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>window_size <span style="color:#0550ae">-</span> W <span style="color:#0550ae">%</span> window_size<span style="color:#1f2328">)</span> <span style="color:#0550ae">%</span> window_size
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> pad_h <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">0</span> <span style="color:#0550ae">or</span> pad_w <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>    x <span style="color:#0550ae">=</span> F<span style="color:#0550ae">.</span>pad<span style="color:#1f2328">(</span>x<span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> pad_w<span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> pad_h<span style="color:#1f2328">))</span></span></span></code></pre></div>
+<p>The author was trying to be efficient by skipping the pad when it&rsquo;s unnecessary.
+But <code>F.pad</code> with zero padding is a no-op anyway, so the guard buys you nothing
+(except at training times) and costs you a graph break. The condition is
+redundant.</p>
+<p><strong>Dead booleans.</strong> These are runtime flags threaded through function signatures
+to control branches that are irrelevant during inference. In one model I worked
+on, a <code>repeat_image</code> boolean was passed through three levels of function calls
+to control this:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">if</span> repeat_image<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>    src <span style="color:#0550ae">=</span> torch<span style="color:#0550ae">.</span>repeat_interleave<span style="color:#1f2328">(</span>image_embeddings<span style="color:#1f2328">,</span> tokens<span style="color:#0550ae">.</span>shape<span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">],</span> dim<span style="color:#0550ae">=</span><span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">else</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>    src <span style="color:#0550ae">=</span> image_embeddings</span></span></code></pre></div>
+<p>The flag was always <code>False</code> during inference for a wide variety of test inputs. The fix was to delete the
+parameter, the branch, and every call site that passed it. This is also a good
+example of why step 1 matters — once you&rsquo;ve isolated the inference module, you
+can be aggressive about ripping out training-only code paths.</p>
+<p><strong>Assertions.</strong> Statements like <code>assert image_embeddings.shape[0] == tokens.shape[0]</code> also convert tensors to Python booleans. They&rsquo;re a Python-level
+concern, not a graph-level one. If they were actually failing, there&rsquo;s a much
+bigger problem at hand, and tracing would be the least of your concerns. Remove
+them.</p>
+<p><strong>Conditions that are trivially true for real inputs.</strong> In another model, a
+branch checked whether the pooling kernel was larger than the image itself:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>kernel_size <span style="color:#0550ae">&gt;=</span> hw<span style="color:#1f2328">)</span><span style="color:#0550ae">.</span>all<span style="color:#1f2328">():</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> F<span style="color:#0550ae">.</span>adaptive_avg_pool2d<span style="color:#1f2328">(</span>x<span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span></span></span></code></pre></div>
+<p>There&rsquo;s no way I&rsquo;m using an image that&rsquo;s smaller than a pooling kernel.
+The condition existed only to handle a degenerate edge case that
+doesn&rsquo;t occur in production. And if it does, you have bigger problems.</p>
+<p>The common thread is that these conditionals are almost always vestigial.
+They&rsquo;re left over from training loops, defensive coding habits, or edge cases
+that the original author encountered once during development. The tracer forces
+you to confront them, and in doing so, you usually find that the code is simpler
+without them.</p>
+<hr>
+<p>Let&rsquo;s not forget that ruthlessly optimizing a model has business implications.
+Ignoring edge-cases because they break the graph is a risky move, and should not
+be a unilateral decision. Unfortunately, the cost you have to pay for
+optimization is prioritizing the norms over the exceptions.</p>
+<p>If you&rsquo;re interested in more real examples, take a look at the git log in this
+<a href="https://github.com/jaidevd/torch-compile">repository</a>. It reads like a
+debugging diary, and contains many examples of this process of eliminating
+tracer warnings.</p>
+
+        </p>
+    </div>
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "brocasbrain" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/torch">#torch</a>
+        
+            <a class="tag" href="/tags/machine-learning">#machine learning</a>
+        
+      
+    </div>
+
+
+	
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://jaidevd.com/js/main.min.a7205ef73b078c8daed6fe1b0826e8ba229ffabbb69d299d9446cf41f2c7d8aa.js" integrity="sha256-pyBe9zsHjI2u1v4bCCbouiKf+ru2nSmdlEbPQfLH2Ko=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

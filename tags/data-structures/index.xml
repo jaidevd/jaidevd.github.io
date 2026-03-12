@@ -4,7 +4,7 @@
     <title>Data Structures on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/data-structures/</link>
     <description>Recent content in Data Structures on Jaidev&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 17 Jun 2022 05:00:00 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/data-structures/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://jaidevd.com/posts/code-readability-process/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
       <guid>https://jaidevd.com/posts/code-readability-process/</guid>
-      <description>I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&amp;rsquo; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time.</description>
+      <description>&lt;p&gt;I took a &lt;a href=&#34;https://onlinedegree.iitm.ac.in/course_pages/BSCCS2002.html&#34;&gt;course&lt;/a&gt;&#xA;on data structures and algorithms over the last few months. It is being offered&#xA;as a part of IIT Madras&amp;rsquo; &lt;a href=&#34;https://onlinedegree.iitm.ac.in&#34;&gt;Online Degree Program&lt;/a&gt;&#xA;in Data Science and Programming, taught by &lt;a href=&#34;https://www.cmi.ac.in/~madhavan/&#34;&gt;Prof Madhavan Mukund&lt;/a&gt;.&#xA;The program is a MOOC in a true sense, with tens of thousands of students&#xA;enrolling each year. The DSA course itself is offered every trimester,&#xA;and sees an average of ~700 enrollments every time. It is easy to see how&#xA;communication becomes critical in running a MOOC at this scale. There is, of&#xA;course, the operational and logistical communication that goes into the&#xA;smooth running of the course. But communicating the&#xA;&lt;em&gt;content&lt;/em&gt; of the course is more relevant (the course is also highly interactive - in addition&#xA;to weekly office hours, there are Discourse forums where students, TAs and&#xA;faculty are active).&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
