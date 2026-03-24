@@ -4,7 +4,7 @@
     <title>Interpolation on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/interpolation/</link>
     <description>Recent content in Interpolation on Jaidev&#39;s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 18 Apr 2014 12:10:15 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/interpolation/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://jaidevd.com/posts/emd-edge-effects/</link>
       <pubDate>Fri, 18 Apr 2014 12:10:15 +0530</pubDate>
       <guid>https://jaidevd.com/posts/emd-edge-effects/</guid>
-      <description>&lt;p&gt;It has been a little over three years since I started working on a &lt;a href=&#34;http://github.com/jaidevd/pyhht&#34;&gt;Python&#xA;implementation of the Hilbert Huang&#xA;Transform&lt;/a&gt;. When I first presented it at SciPy&#xA;India 2011&#xA;(&lt;a href=&#34;http://urtalk.kpoint.com/kapsule/gcc-57b6c86b-2f12-4244-950c-a34360a2cc1f/t/hilberthuang-transform&#34;&gt;video&lt;/a&gt;)&#xA;it was just a collection of small scripts, without packaging, testing or even&#xA;docstrings. Over time PyHHT has garnered some interest, and I have, since the&#xA;last few weeks, found the time to regularly work on it. I have been able to&#xA;come up with a decent implementation of &lt;a href=&#34;http://en.wikipedia.org/wiki/Hilbert%E2%80%93Huang_transform&#34;&gt;empirical mode&#xA;decomposition&lt;/a&gt;,&#xA;pretty much in line with everything described in the &lt;a href=&#34;http://tec.earth.sinica.edu.tw/research/report/paper/20070711HHT.pdf&#34;&gt;original&#xA;paper&lt;/a&gt; by Huang et&#xA;al. The other&#xA;parts of HHT, like the Hilbert spectrum and its time frequency representations&#xA;are right around the corner.&lt;/p&gt;</description>
+      <description>It has been a little over three years since I started working on a Python implementation of the Hilbert Huang Transform. When I first presented it at SciPy India 2011 (video) it was just a collection of small scripts, without packaging, testing or even docstrings. Over time PyHHT has garnered some interest, and I have, since the last few weeks, found the time to regularly work on it. I have been able to come up with a decent implementation of empirical mode decomposition, pretty much in line with everything described in the original paper by Huang et al.</description>
     </item>
   </channel>
 </rss>

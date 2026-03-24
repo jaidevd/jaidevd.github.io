@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.df3b4a06ee5608772c5e173b1121b9a0db5c48478c6cae559ba43989a9612b33.css"/>
 
     
     
@@ -31,24 +31,19 @@
     
     <link rel="alternate" type="application/rss+xml" href="https://jaidevd.com/tags/fourier/index.xml" title="Jaidev's Blog" />
     
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-R6EBGCKHP1');
-        }
-      </script></head>
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Fourier">
-  <meta name="twitter:description" content="Thoughts on data science, statistics and machine learning.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Fourier"/>
+<meta name="twitter:description" content="Thoughts on data science, statistics and machine learning."/>
 
 
     <body>
@@ -174,7 +169,7 @@
                 </a>
             </h2>
             <div>
-                <p><p>My implementation of the Hilbert Huang transform (<a href="https://github.com/jaidevd/pyhht">PyHHT</a>) is quite close to a beta release. After nearly three years of inactivity, I&rsquo;ve found some time to develop the PyHHT library in the last few weeks. In all this time many people have written to me about a lot of things - from the inability to use the module because of the lack of documentation, to comparison between the results of HHT and conventional time series analysis techniques. And now the time has come when I can no longer avoid writing the documentation. But as I write the documentation, I&rsquo;ve found that I need to re-learn the concepts which I learned back when I started writing this module. It is out of this learning cycle that came my last <a href="http://jaidevd.github.io/blog/understanding-edge-effects-in-emd/">blog post</a>.</p></p>
+                <p>My implementation of the Hilbert Huang transform (PyHHT) is quite close to a beta release. After nearly three years of inactivity, I&rsquo;ve found some time to develop the PyHHT library in the last few weeks. In all this time many people have written to me about a lot of things - from the inability to use the module because of the lack of documentation, to comparison between the results of HHT and conventional time series analysis techniques.</p>
                 
                 <p><a href="/posts/fourier-limitations/">Read more...</a></p>
                 

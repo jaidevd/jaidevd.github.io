@@ -4,7 +4,7 @@
     <title>Python on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/python/</link>
     <description>Recent content in Python on Jaidev&#39;s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 27 Aug 2025 12:47:10 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
@@ -13,21 +13,21 @@
       <link>https://jaidevd.com/posts/bridge-of-asses/</link>
       <pubDate>Wed, 27 Aug 2025 12:47:10 +0530</pubDate>
       <guid>https://jaidevd.com/posts/bridge-of-asses/</guid>
-      <description>&lt;p&gt;Over the last few years, I have been deeply involved with the &lt;a href=&#34;https://study.iitm.ac.in/ds/&#34;&gt;IIT-M Programme in&#xA;Data Science &amp;amp; Applications&lt;/a&gt; - as a student, a mentor and an analytics&#xA;consultant. The programme provides diplomas and bachelor’s degrees in data&#xA;science and applications. I’m often asked why I’m so invested in the programme -&#xA;especially since I’m already an experienced data scientist.&lt;/p&gt;&#xA;&lt;p&gt;At least three people are mad at me for being in the programme. One of them&#xA;thinks that I’ve unfairly claimed a higher education seat I don’t need - which&#xA;would be true if this was a conventional program with limited seats. But it&amp;rsquo;s a&#xA;MOOC.&lt;/p&gt;</description>
+      <description>Over the last few years, I have been deeply involved with the IIT-M Programme in Data Science &amp;amp; Applications - as a student, a mentor and an analytics consultant. The programme provides diplomas and bachelor’s degrees in data science and applications. I’m often asked why I’m so invested in the programme - especially since I’m already an experienced data scientist.&#xA;At least three people are mad at me for being in the programme.</description>
     </item>
     <item>
       <title>A Process for Readable Code</title>
       <link>https://jaidevd.com/posts/code-readability-process/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
       <guid>https://jaidevd.com/posts/code-readability-process/</guid>
-      <description>&lt;p&gt;I took a &lt;a href=&#34;https://onlinedegree.iitm.ac.in/course_pages/BSCCS2002.html&#34;&gt;course&lt;/a&gt;&#xA;on data structures and algorithms over the last few months. It is being offered&#xA;as a part of IIT Madras&amp;rsquo; &lt;a href=&#34;https://onlinedegree.iitm.ac.in&#34;&gt;Online Degree Program&lt;/a&gt;&#xA;in Data Science and Programming, taught by &lt;a href=&#34;https://www.cmi.ac.in/~madhavan/&#34;&gt;Prof Madhavan Mukund&lt;/a&gt;.&#xA;The program is a MOOC in a true sense, with tens of thousands of students&#xA;enrolling each year. The DSA course itself is offered every trimester,&#xA;and sees an average of ~700 enrollments every time. It is easy to see how&#xA;communication becomes critical in running a MOOC at this scale. There is, of&#xA;course, the operational and logistical communication that goes into the&#xA;smooth running of the course. But communicating the&#xA;&lt;em&gt;content&lt;/em&gt; of the course is more relevant (the course is also highly interactive - in addition&#xA;to weekly office hours, there are Discourse forums where students, TAs and&#xA;faculty are active).&lt;/p&gt;</description>
+      <description>I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&amp;rsquo; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time.</description>
     </item>
     <item>
       <title>Weighted Loss Functions for Instance Segmentation</title>
       <link>https://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/</link>
       <pubDate>Fri, 17 Aug 2018 14:52:19 +0530</pubDate>
       <guid>https://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/</guid>
-      <description>&lt;p&gt;This post is a follow up to my talk, &lt;em&gt;Practical Image Classification &amp;amp; Object Detection&lt;/em&gt; at PyData Delhi 2018. You can watch the talk here:&#xA;&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;&#xA;      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/mCQYXHJKZW8?start=5351?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;&#xA;    &lt;/div&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;and see the slides &lt;a href=&#34;https://speakerdeck.com/jaidevd/practical-image-classification-and-object-detection&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I spoke at length about the different kinds of problems in computer vision and how they are interpreted in deep learning architectures. I spent a fair bit of time on instance and semantic segmentation (for an introduction to these problems, watch &lt;a href=&#34;https://cs.stanford.edu/people/jcjohns/&#34;&gt;Justin Johnson&lt;/a&gt;&amp;rsquo;s lecture from the Stanford CS231 course &lt;a href=&#34;https://www.youtube.com/watch?v=nDPWywWRIRo&#34;&gt;here&lt;/a&gt;). In short, semantic segmentation deals with designating each pixel of an image as belonging to a class, and instance segmentation deals with identifying which instance of a class each pixel belongs to. The following images show an example of semantic versus instance segmentation.&lt;/p&gt;</description>
+      <description>This post is a follow up to my talk, Practical Image Classification &amp;amp; Object Detection at PyData Delhi 2018. You can watch the talk here: and see the slides here.&#xA;I spoke at length about the different kinds of problems in computer vision and how they are interpreted in deep learning architectures. I spent a fair bit of time on instance and semantic segmentation (for an introduction to these problems, watch Justin Johnson&amp;rsquo;s lecture from the Stanford CS231 course here).</description>
     </item>
   </channel>
 </rss>

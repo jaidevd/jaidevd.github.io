@@ -4,7 +4,7 @@
     <title>Code on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/code/</link>
     <description>Recent content in Code on Jaidev&#39;s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 27 Aug 2025 12:47:10 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/code/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,14 @@
       <link>https://jaidevd.com/posts/bridge-of-asses/</link>
       <pubDate>Wed, 27 Aug 2025 12:47:10 +0530</pubDate>
       <guid>https://jaidevd.com/posts/bridge-of-asses/</guid>
-      <description>&lt;p&gt;Over the last few years, I have been deeply involved with the &lt;a href=&#34;https://study.iitm.ac.in/ds/&#34;&gt;IIT-M Programme in&#xA;Data Science &amp;amp; Applications&lt;/a&gt; - as a student, a mentor and an analytics&#xA;consultant. The programme provides diplomas and bachelor’s degrees in data&#xA;science and applications. I’m often asked why I’m so invested in the programme -&#xA;especially since I’m already an experienced data scientist.&lt;/p&gt;&#xA;&lt;p&gt;At least three people are mad at me for being in the programme. One of them&#xA;thinks that I’ve unfairly claimed a higher education seat I don’t need - which&#xA;would be true if this was a conventional program with limited seats. But it&amp;rsquo;s a&#xA;MOOC.&lt;/p&gt;</description>
+      <description>Over the last few years, I have been deeply involved with the IIT-M Programme in Data Science &amp;amp; Applications - as a student, a mentor and an analytics consultant. The programme provides diplomas and bachelor’s degrees in data science and applications. I’m often asked why I’m so invested in the programme - especially since I’m already an experienced data scientist.&#xA;At least three people are mad at me for being in the programme.</description>
     </item>
     <item>
       <title>A Process for Readable Code</title>
       <link>https://jaidevd.com/posts/code-readability-process/</link>
       <pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
       <guid>https://jaidevd.com/posts/code-readability-process/</guid>
-      <description>&lt;p&gt;I took a &lt;a href=&#34;https://onlinedegree.iitm.ac.in/course_pages/BSCCS2002.html&#34;&gt;course&lt;/a&gt;&#xA;on data structures and algorithms over the last few months. It is being offered&#xA;as a part of IIT Madras&amp;rsquo; &lt;a href=&#34;https://onlinedegree.iitm.ac.in&#34;&gt;Online Degree Program&lt;/a&gt;&#xA;in Data Science and Programming, taught by &lt;a href=&#34;https://www.cmi.ac.in/~madhavan/&#34;&gt;Prof Madhavan Mukund&lt;/a&gt;.&#xA;The program is a MOOC in a true sense, with tens of thousands of students&#xA;enrolling each year. The DSA course itself is offered every trimester,&#xA;and sees an average of ~700 enrollments every time. It is easy to see how&#xA;communication becomes critical in running a MOOC at this scale. There is, of&#xA;course, the operational and logistical communication that goes into the&#xA;smooth running of the course. But communicating the&#xA;&lt;em&gt;content&lt;/em&gt; of the course is more relevant (the course is also highly interactive - in addition&#xA;to weekly office hours, there are Discourse forums where students, TAs and&#xA;faculty are active).&lt;/p&gt;</description>
+      <description>I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&amp;rsquo; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time.</description>
     </item>
   </channel>
 </rss>

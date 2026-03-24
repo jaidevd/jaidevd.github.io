@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Open-Source on Jaidev&#39;s Blog</title>
+    <link>https://jaidevd.com/tags/open-source/</link>
+    <description>Recent content in Open-Source on Jaidev&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Mar 2026 19:20:04 +0530</lastBuildDate>
+    <atom:link href="https://jaidevd.com/tags/open-source/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The PlotCaptions Dataset: Automating the Narration of Visual Analytics</title>
+      <link>https://jaidevd.com/posts/plotcaptions/</link>
+      <pubDate>Mon, 23 Mar 2026 19:20:04 +0530</pubDate>
+      <guid>https://jaidevd.com/posts/plotcaptions/</guid>
+      <description>I&amp;rsquo;ve always been interested in how we narrate visual analytics. The hardest task in dataviz is not analysis or visualization, but figuring out what to say about it. I used to believe that a well designed chart does not need a narration. That may be valid, but over the years I&amp;rsquo;ve realized that it is the narrative that turns something that is merely pretty and insightful into something that is viral.</description>
+    </item>
+  </channel>
+</rss>

@@ -4,16 +4,23 @@
     <title>Dataviz on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/dataviz/</link>
     <description>Recent content in Dataviz on Jaidev&#39;s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Aug 2015 00:00:00 +0530</lastBuildDate>
+    <lastBuildDate>Mon, 23 Mar 2026 19:20:04 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/dataviz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The PlotCaptions Dataset: Automating the Narration of Visual Analytics</title>
+      <link>https://jaidevd.com/posts/plotcaptions/</link>
+      <pubDate>Mon, 23 Mar 2026 19:20:04 +0530</pubDate>
+      <guid>https://jaidevd.com/posts/plotcaptions/</guid>
+      <description>I&amp;rsquo;ve always been interested in how we narrate visual analytics. The hardest task in dataviz is not analysis or visualization, but figuring out what to say about it. I used to believe that a well designed chart does not need a narration. That may be valid, but over the years I&amp;rsquo;ve realized that it is the narrative that turns something that is merely pretty and insightful into something that is viral.</description>
+    </item>
     <item>
       <title>Organizing a Bookshelf with Multivariate Analysis</title>
       <link>https://jaidevd.com/posts/bookshelf/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0530</pubDate>
       <guid>https://jaidevd.com/posts/bookshelf/</guid>
-      <description>&lt;p&gt;I have recently moved from Pune to Delhi. I had spent only a year in Pune, having moved there from Mumbai, where I lived for three years. Whenever I move, the bulk of my luggage consists of books and clothes. My stay in Pune was just a transition, so I never bothered to unpack and store all my stuff too carefully. Thus, a corner of my bedroom in my Pune apartment always looked like this:&#xA;&#xA;&#xA;&#xA;    &lt;img class=&#34;article-image&#34; src=&#34;https://jaidevd.com/posts/bookshelf/before.jpg&#34; alt=&#34;My first image&#34;&gt;&#xA;    &#xA;&#xA;&lt;/p&gt;</description>
+      <description>I have recently moved from Pune to Delhi. I had spent only a year in Pune, having moved there from Mumbai, where I lived for three years. Whenever I move, the bulk of my luggage consists of books and clothes. My stay in Pune was just a transition, so I never bothered to unpack and store all my stuff too carefully. Thus, a corner of my bedroom in my Pune apartment always looked like this: The actual volume of books that I carried from Pune to Delhi is about twice of what is seen in the picture.</description>
     </item>
   </channel>
 </rss>

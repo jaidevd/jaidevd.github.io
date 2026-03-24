@@ -4,7 +4,7 @@
     <title>Math on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/math/</link>
     <description>Recent content in Math on Jaidev&#39;s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 06 Jul 2016 14:45:55 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/math/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://jaidevd.com/posts/perceptron-convergence/</link>
       <pubDate>Wed, 06 Jul 2016 14:45:55 +0530</pubDate>
       <guid>https://jaidevd.com/posts/perceptron-convergence/</guid>
-      <description>&lt;p&gt;The last time I studied neural networks in detail was five years ago in college. I did touch upon backpropagation when Andrew Ng&amp;rsquo;s machine learning MOOC was offered on Coursera for the first time, but beyond that I&amp;rsquo;ve only dabbled with them through &lt;a href=&#34;http://keras.io&#34;&gt;keras&lt;/a&gt;. Then recently, when I read about Coursera&amp;rsquo;s imminent decision to pull down much of their freely available material (you can read a rant about it &lt;a href=&#34;http://reachtarunhere.github.io/2016/06/11/Golden-Age-of-MOOCs-is-over-and-why-I-hate-Coursera/&#34;&gt;here&lt;/a&gt;), I went on a downloading spree (many thanks to the wonderful &lt;a href=&#34;http://github.com/coursera-dl/coursera-dl&#34;&gt;coursera-dl&lt;/a&gt;). Of all the courses I downloaded, the one that caught my eye was Geoffrey Hinton&amp;rsquo;s course on &lt;em&gt;Neural Networks for Machine Learning&lt;/em&gt;. Because of that and the fact that there were some computer vision projects going on at work, I decided to dive right in.&lt;/p&gt;</description>
+      <description>The last time I studied neural networks in detail was five years ago in college. I did touch upon backpropagation when Andrew Ng&amp;rsquo;s machine learning MOOC was offered on Coursera for the first time, but beyond that I&amp;rsquo;ve only dabbled with them through keras. Then recently, when I read about Coursera&amp;rsquo;s imminent decision to pull down much of their freely available material (you can read a rant about it here), I went on a downloading spree (many thanks to the wonderful coursera-dl).</description>
     </item>
   </channel>
 </rss>
