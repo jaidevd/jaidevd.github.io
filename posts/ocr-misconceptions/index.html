@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.df3b4a06ee5608772c5e173b1121b9a0db5c48478c6cae559ba43989a9612b33.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
 
     
     
@@ -29,20 +29,25 @@
     
 
     
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
-}
-</script>
-</head>
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Misconceptions about OCR Bounding Boxes"/>
-<meta name="twitter:description" content="Over the last year, I have been working on an application that auto-translates documents while maintaining the layout and formatting. It has many bells and whistles, from simple geometric tricks to sophisticated gen-AI algorithms and microservices. But basically, the app performs the simple task of identifying text in documents, machine-translating them, and reinserting them such that the output document “looks” like the input.
-Most documents that my app has to process are PDFs."/>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-R6EBGCKHP1');
+        }
+      </script></head>
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Misconceptions about OCR Bounding Boxes">
+  <meta name="twitter:description" content="Over the last year, I have been working on an application that auto-translates documents while maintaining the layout and formatting. It has many bells and whistles, from simple geometric tricks to sophisticated gen-AI algorithms and microservices. But basically, the app performs the simple task of identifying text in documents, machine-translating them, and reinserting them such that the output document “looks” like the input.
+Most documents that my app has to process are PDFs. PDFs are ubiquitous but notoriously hard to analyze. Since pretty much every app is capable of producing a PDF file, its layout can get particularly nasty. Moreover there is no single semantic description of what comprises a document - e.g. an email is as much a document as a boarding pass. Who’s to say that a selfie is not a document? This means that my users can upload almost anything into the app, and as long as it has some text, it ought to be serviceable.">
 
 
     <body>
@@ -370,26 +375,7 @@ and the estimated vertices ought to be as low as possible.&#160;<a href="#fnref:
 
         </p>
     </div>
-    <div id="disqus_thread"></div>
-<script>
-    window.disqus_config = function () {
     
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "brocasbrain" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
     
 

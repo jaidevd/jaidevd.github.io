@@ -4,7 +4,7 @@
     <title>Perceptron on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/perceptron/</link>
     <description>Recent content in Perceptron on Jaidev&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 17 Jul 2016 14:19:40 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/perceptron/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,14 @@
       <link>https://jaidevd.com/posts/linearity-bayesian-classifiers/</link>
       <pubDate>Sun, 17 Jul 2016 14:19:40 +0530</pubDate>
       <guid>https://jaidevd.com/posts/linearity-bayesian-classifiers/</guid>
-      <description>In his book, Neural Networks - A Comprehensive Foundation, Simon Haykin has an entire section (3.10) dedicated to how perceptrons and Bayesian classifiers are closely related when operating in a Gaussian environment. However, it is not until the end of the section that Haykin mentions that the relation is only limited to linearity. What is interesting about this is that a Perceptron can produce the same classification &amp;ldquo;model&amp;rdquo; as a Bayesian classifier, provided that the underlying data is drawn from a Gaussian distribution.</description>
+      <description>&lt;p&gt;In his book, &lt;a href=&#34;https://www.amazon.com/Neural-Networks-Comprehensive-Simon-Haykin/dp/0023527617/ref=sr_1_1?ie=UTF8&amp;amp;qid=1468746091&amp;amp;sr=8-1&amp;amp;keywords=neural+networks+comprehensive+foundation&#34;&gt;&lt;em&gt;Neural Networks - A Comprehensive Foundation&lt;/em&gt;&lt;/a&gt;, Simon Haykin has an entire section (3.10) dedicated to how perceptrons and Bayesian classifiers are closely related when operating in a Gaussian environment. However, it is not until the end of the section that Haykin mentions that the relation is only limited to linearity. What is interesting about this is that a Perceptron can produce the same classification &amp;ldquo;model&amp;rdquo; as a Bayesian classifier, provided that the underlying data is drawn from a Gaussian distribution. This post is an experimental verification of that.&lt;/p&gt;</description>
     </item>
     <item>
       <title>A Geometric Proof of the Perceptron Convergence Theorem</title>
       <link>https://jaidevd.com/posts/perceptron-convergence/</link>
       <pubDate>Wed, 06 Jul 2016 14:45:55 +0530</pubDate>
       <guid>https://jaidevd.com/posts/perceptron-convergence/</guid>
-      <description>The last time I studied neural networks in detail was five years ago in college. I did touch upon backpropagation when Andrew Ng&amp;rsquo;s machine learning MOOC was offered on Coursera for the first time, but beyond that I&amp;rsquo;ve only dabbled with them through keras. Then recently, when I read about Coursera&amp;rsquo;s imminent decision to pull down much of their freely available material (you can read a rant about it here), I went on a downloading spree (many thanks to the wonderful coursera-dl).</description>
+      <description>&lt;p&gt;The last time I studied neural networks in detail was five years ago in college. I did touch upon backpropagation when Andrew Ng&amp;rsquo;s machine learning MOOC was offered on Coursera for the first time, but beyond that I&amp;rsquo;ve only dabbled with them through &lt;a href=&#34;http://keras.io&#34;&gt;keras&lt;/a&gt;. Then recently, when I read about Coursera&amp;rsquo;s imminent decision to pull down much of their freely available material (you can read a rant about it &lt;a href=&#34;http://reachtarunhere.github.io/2016/06/11/Golden-Age-of-MOOCs-is-over-and-why-I-hate-Coursera/&#34;&gt;here&lt;/a&gt;), I went on a downloading spree (many thanks to the wonderful &lt;a href=&#34;http://github.com/coursera-dl/coursera-dl&#34;&gt;coursera-dl&lt;/a&gt;). Of all the courses I downloaded, the one that caught my eye was Geoffrey Hinton&amp;rsquo;s course on &lt;em&gt;Neural Networks for Machine Learning&lt;/em&gt;. Because of that and the fact that there were some computer vision projects going on at work, I decided to dive right in.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
