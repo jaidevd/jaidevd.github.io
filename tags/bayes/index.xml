@@ -4,7 +4,7 @@
     <title>Bayes on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/bayes/</link>
     <description>Recent content in Bayes on Jaidev&#39;s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 17 Jul 2016 14:19:40 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/bayes/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,14 @@
       <link>https://jaidevd.com/posts/linearity-bayesian-classifiers/</link>
       <pubDate>Sun, 17 Jul 2016 14:19:40 +0530</pubDate>
       <guid>https://jaidevd.com/posts/linearity-bayesian-classifiers/</guid>
-      <description>&lt;p&gt;In his book, &lt;a href=&#34;https://www.amazon.com/Neural-Networks-Comprehensive-Simon-Haykin/dp/0023527617/ref=sr_1_1?ie=UTF8&amp;amp;qid=1468746091&amp;amp;sr=8-1&amp;amp;keywords=neural+networks+comprehensive+foundation&#34;&gt;&lt;em&gt;Neural Networks - A Comprehensive Foundation&lt;/em&gt;&lt;/a&gt;, Simon Haykin has an entire section (3.10) dedicated to how perceptrons and Bayesian classifiers are closely related when operating in a Gaussian environment. However, it is not until the end of the section that Haykin mentions that the relation is only limited to linearity. What is interesting about this is that a Perceptron can produce the same classification &amp;ldquo;model&amp;rdquo; as a Bayesian classifier, provided that the underlying data is drawn from a Gaussian distribution. This post is an experimental verification of that.&lt;/p&gt;</description>
+      <description>In his book, Neural Networks - A Comprehensive Foundation, Simon Haykin has an entire section (3.10) dedicated to how perceptrons and Bayesian classifiers are closely related when operating in a Gaussian environment. However, it is not until the end of the section that Haykin mentions that the relation is only limited to linearity. What is interesting about this is that a Perceptron can produce the same classification &amp;ldquo;model&amp;rdquo; as a Bayesian classifier, provided that the underlying data is drawn from a Gaussian distribution.</description>
     </item>
     <item>
       <title>Understanding Allen Downey&#39;s Solution to the M&amp;M Problem</title>
       <link>https://jaidevd.com/posts/mm-problem/</link>
       <pubDate>Thu, 30 Jun 2016 18:33:41 +0530</pubDate>
       <guid>https://jaidevd.com/posts/mm-problem/</guid>
-      <description>&lt;p&gt;Allen Downey makes a very good case for learning advanced mathematics through&#xA;programming (Check the first section of the preface of &lt;em&gt;Think Bayes&lt;/em&gt;, titled &amp;ldquo;My theory, which is mine&amp;rdquo;).&#xA;But before the reader can hit paydirt with using the Bayes theorem in programming,&#xA;Downey makes you go through some elementary problems in probability, which have&#xA;to be solved by hand first, if you expect to have a clear enough understanding&#xA;of the concept. I can vouch for this way of learning complex concepts. The way&#xA;I learnt the backpropagation algorithm (and its derivation), was with a pen,&#xA;paper and a calculator.&lt;/p&gt;</description>
+      <description>Allen Downey makes a very good case for learning advanced mathematics through programming (Check the first section of the preface of Think Bayes, titled &amp;ldquo;My theory, which is mine&amp;rdquo;). But before the reader can hit paydirt with using the Bayes theorem in programming, Downey makes you go through some elementary problems in probability, which have to be solved by hand first, if you expect to have a clear enough understanding of the concept.</description>
     </item>
   </channel>
 </rss>

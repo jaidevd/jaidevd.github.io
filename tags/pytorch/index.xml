@@ -4,7 +4,7 @@
     <title>Pytorch on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/pytorch/</link>
     <description>Recent content in Pytorch on Jaidev&#39;s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 30 Sep 2022 19:47:39 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://jaidevd.com/posts/obj-detection-stratification/</link>
       <pubDate>Fri, 30 Sep 2022 19:47:39 +0530</pubDate>
       <guid>https://jaidevd.com/posts/obj-detection-stratification/</guid>
-      <description>&lt;p&gt;TL;DR: Here&amp;rsquo;s a talk based on this post:&lt;/p&gt;&#xA;&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;&#xA;      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/mxc1IOYaZBE?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;&#xA;    &lt;/div&gt;&#xA;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;There&amp;rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural&#xA;networks, which stems from the lack of training data. It would seem ridiculous to a&#xA;layperson that a pretrained vision model (containing millions of&#xA;parameters, trained on millions of images) could learn to solve highly specific&#xA;problems. Therefore, when fine-tuned models &lt;em&gt;do&lt;/em&gt; perform well, they seem all the more &lt;a href=&#34;https://www.pnas.org/doi/10.1073/pnas.1907373117&#34;&gt;miraculous&lt;/a&gt;.&#xA;But on the other hand, we also know that it is easier to move from &lt;a href=&#34;https://davidepstein.com/the-range/&#34;&gt;the general&#xA;to the specific&lt;/a&gt;, than the reverse.&#xA;Specialization &lt;em&gt;after&lt;/em&gt; generalization is easier than the reverse.&lt;/p&gt;</description>
+      <description>TL;DR: Here&amp;rsquo;s a talk based on this post:&#xA;There&amp;rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks, which stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general to the specific, than the reverse.</description>
     </item>
   </channel>
 </rss>

@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.86903c779b0438a93dff572785fb85bcf3f7e1c55ea295d67c858fc8f07b6d2d.css"/>
 
     
     
@@ -31,24 +31,19 @@
     
     <link rel="alternate" type="application/rss+xml" href="https://jaidevd.com/tags/pytorch/index.xml" title="Jaidev's Blog" />
     
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-R6EBGCKHP1');
-        }
-      </script></head>
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Pytorch">
-  <meta name="twitter:description" content="Thoughts on data science, statistics and machine learning.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Pytorch"/>
+<meta name="twitter:description" content="Thoughts on data science, statistics and machine learning."/>
 
 
     <body>
@@ -174,20 +169,8 @@
                 </a>
             </h2>
             <div>
-                <p><p>TL;DR: Here&rsquo;s a talk based on this post:</p>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/mxc1IOYaZBE?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
-
-<hr>
-<p>There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural
-networks, which stems from the lack of training data. It would seem ridiculous to a
-layperson that a pretrained vision model (containing millions of
-parameters, trained on millions of images) could learn to solve highly specific
-problems. Therefore, when fine-tuned models <em>do</em> perform well, they seem all the more <a href="https://www.pnas.org/doi/10.1073/pnas.1907373117">miraculous</a>.
-But on the other hand, we also know that it is easier to move from <a href="https://davidepstein.com/the-range/">the general
-to the specific</a>, than the reverse.
-Specialization <em>after</em> generalization is easier than the reverse.</p></p>
+                <p>TL;DR: Here&rsquo;s a talk based on this post:
+There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks, which stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general to the specific, than the reverse.</p>
                 
                 <p><a href="/posts/obj-detection-stratification/">Read more...</a></p>
                 

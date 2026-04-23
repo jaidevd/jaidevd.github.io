@@ -4,7 +4,7 @@
     <title>Geometry on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/geometry/</link>
     <description>Recent content in Geometry on Jaidev&#39;s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 21 Jun 2024 22:04:01 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/geometry/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://jaidevd.com/posts/ocr-misconceptions/</link>
       <pubDate>Fri, 21 Jun 2024 22:04:01 +0530</pubDate>
       <guid>https://jaidevd.com/posts/ocr-misconceptions/</guid>
-      <description>&lt;p&gt;Over the last year, I have been working on an application that auto-translates documents while&#xA;maintaining the layout and formatting. It has many bells and whistles, from simple geometric tricks&#xA;to sophisticated gen-AI algorithms and microservices. But basically, the app performs the simple&#xA;task of identifying text in documents, machine-translating them, and reinserting them such that the&#xA;output document “looks” like the input.&lt;/p&gt;&#xA;&lt;!-- TEASER_END --&gt;&#xA;&lt;p&gt;Most documents that my app has to process are PDFs. PDFs are ubiquitous but&#xA;notoriously hard to analyze. Since pretty much every app is capable of producing&#xA;a PDF file, its layout can get particularly nasty. Moreover there is no single&#xA;&lt;em&gt;semantic&lt;/em&gt; description of what comprises a &lt;em&gt;document&lt;/em&gt; - e.g. an email is as much&#xA;a document as a boarding pass. Who’s to say that a selfie is not a document?&#xA;This means that my users can upload almost &lt;em&gt;anything&lt;/em&gt; into the app, and as long&#xA;as it has some text, it ought to be serviceable.&lt;/p&gt;</description>
+      <description>Over the last year, I have been working on an application that auto-translates documents while maintaining the layout and formatting. It has many bells and whistles, from simple geometric tricks to sophisticated gen-AI algorithms and microservices. But basically, the app performs the simple task of identifying text in documents, machine-translating them, and reinserting them such that the output document “looks” like the input.&#xA;Most documents that my app has to process are PDFs.</description>
     </item>
   </channel>
 </rss>

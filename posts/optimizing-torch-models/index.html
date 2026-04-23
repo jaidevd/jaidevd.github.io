@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.86903c779b0438a93dff572785fb85bcf3f7e1c55ea295d67c858fc8f07b6d2d.css"/>
 
     
     
@@ -29,24 +29,19 @@
     
 
     
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-R6EBGCKHP1');
-        }
-      </script></head>
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Notes on Optimizing Torch Models">
-  <meta name="twitter:description" content="ML researchers are from Mars and the ML engineers responsible for deploying models are from Venus. The two have vastly different motivations. The ML researcher’s job, given a dataset and some compute, is to find the lowest possible loss on a task. In this pursuit, no engineering cost is too high. No tech debt is too large. Worse still, if they get published, they must include their code in their paper. Reproducible research only means that everyone be able to reproduce benchmarks and charts from the original paper. It usually has very little to do with production.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Notes on Optimizing Torch Models"/>
+<meta name="twitter:description" content="ML researchers are from Mars and the ML engineers responsible for deploying models are from Venus. The two have vastly different motivations. The ML researcher&rsquo;s job, given a dataset and some compute, is to find the lowest possible loss on a task. In this pursuit, no engineering cost is too high. No tech debt is too large. Worse still, if they get published, they must include their code in their paper."/>
 
 
     <body>
@@ -230,22 +225,22 @@ models. Let&rsquo;s say you have a 2-D tensor with four columns in the $(x_min, 
 y_min, y_max)$ format. You might want to normalize the matrix so that the
 coordinates are fractions of the height and width of the image. An innocent way
 to do that is as follows:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>height<span style="color:#1f2328">,</span> width <span style="color:#0550ae">=</span> batch<span style="color:#0550ae">.</span>shape<span style="color:#1f2328">[</span><span style="color:#0550ae">-</span><span style="color:#0550ae">2</span><span style="color:#1f2328">:]</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>height, width <span style="color:#000;font-weight:bold">=</span> batch<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>:]
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/=</span> width
-</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/=</span> width
-</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/=</span> height
-</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/=</span> height
+</span></span><span style="display:flex;"><span>bbox[:, <span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">/=</span> width
+</span></span><span style="display:flex;"><span>bbox[:, <span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">/=</span> width
+</span></span><span style="display:flex;"><span>bbox[:, <span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">/=</span> height
+</span></span><span style="display:flex;"><span>bbox[:, <span style="color:#099">3</span>] <span style="color:#000;font-weight:bold">/=</span> height
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># Or, better</span>
-</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#1f2328">:</span><span style="color:#0550ae">2</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/=</span> width
-</span></span><span style="display:flex;"><span>bbox<span style="color:#1f2328">[:,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">:]</span> <span style="color:#0550ae">/=</span> height</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Or, better</span>
+</span></span><span style="display:flex;"><span>bbox[:, :<span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">/=</span> width
+</span></span><span style="display:flex;"><span>bbox[:, <span style="color:#099">2</span>:] <span style="color:#000;font-weight:bold">/=</span> height</span></span></code></pre></div>
 <p>This isn&rsquo;t wrong at all, but the tracer will warn you at the very first line
 that because unpacking a vector counts as an iteration. Worse, it creates
 standalone Python integers in the middle of the graph. So the correct, but
 perhaps less readable way of doing this is,</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>hw <span style="color:#0550ae">=</span> torch<span style="color:#0550ae">.</span>tensor<span style="color:#1f2328">(</span>batch<span style="color:#0550ae">.</span>shape<span style="color:#1f2328">[</span><span style="color:#0550ae">-</span><span style="color:#0550ae">2</span><span style="color:#1f2328">:])</span><span style="color:#0550ae">.</span>flip<span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>  <span style="color:#57606a"># slicing is fine, unpacking is not!</span>
-</span></span><span style="display:flex;"><span>bbox <span style="color:#0550ae">/=</span> hw<span style="color:#0550ae">.</span>repeat_interleave<span style="color:#1f2328">(</span><span style="color:#0550ae">2</span><span style="color:#1f2328">)</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>hw <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>tensor(batch<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>:])<span style="color:#000;font-weight:bold">.</span>flip(<span style="color:#099">0</span>)  <span style="color:#998;font-style:italic"># slicing is fine, unpacking is not!</span>
+</span></span><span style="display:flex;"><span>bbox <span style="color:#000;font-weight:bold">/=</span> hw<span style="color:#000;font-weight:bold">.</span>repeat_interleave(<span style="color:#099">2</span>)</span></span></code></pre></div>
 <p>Now, the slight problem here is that we&rsquo;re <em>creating</em> a tensor right in the
 middle of the forward pass, which the tracer doesn&rsquo;t like. Unfortunately there
 are tons of operations where we need to depend on not just the values but the
@@ -259,10 +254,10 @@ warning reads: <em>&ldquo;Converting a tensor to a Python boolean might cause th
 trace to be incorrect.&rdquo;</em> In practice, most of these conditionals often fall into one
 of three categories, and all three have the same solution: remove the <code>if</code>.</p>
 <p><strong>Guards that are never false.</strong> Consider a padding operation:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pad_h <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>window_size <span style="color:#0550ae">-</span> H <span style="color:#0550ae">%</span> window_size<span style="color:#1f2328">)</span> <span style="color:#0550ae">%</span> window_size
-</span></span><span style="display:flex;"><span>pad_w <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>window_size <span style="color:#0550ae">-</span> W <span style="color:#0550ae">%</span> window_size<span style="color:#1f2328">)</span> <span style="color:#0550ae">%</span> window_size
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> pad_h <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">0</span> <span style="color:#0550ae">or</span> pad_w <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>    x <span style="color:#0550ae">=</span> F<span style="color:#0550ae">.</span>pad<span style="color:#1f2328">(</span>x<span style="color:#1f2328">,</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> pad_w<span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> pad_h<span style="color:#1f2328">))</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pad_h <span style="color:#000;font-weight:bold">=</span> (window_size <span style="color:#000;font-weight:bold">-</span> H <span style="color:#000;font-weight:bold">%</span> window_size) <span style="color:#000;font-weight:bold">%</span> window_size
+</span></span><span style="display:flex;"><span>pad_w <span style="color:#000;font-weight:bold">=</span> (window_size <span style="color:#000;font-weight:bold">-</span> W <span style="color:#000;font-weight:bold">%</span> window_size) <span style="color:#000;font-weight:bold">%</span> window_size
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">if</span> pad_h <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">or</span> pad_w <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">0</span>:
+</span></span><span style="display:flex;"><span>    x <span style="color:#000;font-weight:bold">=</span> F<span style="color:#000;font-weight:bold">.</span>pad(x, (<span style="color:#099">0</span>, <span style="color:#099">0</span>, <span style="color:#099">0</span>, pad_w, <span style="color:#099">0</span>, pad_h))</span></span></code></pre></div>
 <p>The author was trying to be efficient by skipping the pad when it&rsquo;s unnecessary.
 But <code>F.pad</code> with zero padding is a no-op anyway, so the guard buys you nothing
 (except at training times) and costs you a graph break. The condition is
@@ -271,10 +266,10 @@ redundant.</p>
 to control branches that are irrelevant during inference. In one model I worked
 on, a <code>repeat_image</code> boolean was passed through three levels of function calls
 to control this:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">if</span> repeat_image<span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>    src <span style="color:#0550ae">=</span> torch<span style="color:#0550ae">.</span>repeat_interleave<span style="color:#1f2328">(</span>image_embeddings<span style="color:#1f2328">,</span> tokens<span style="color:#0550ae">.</span>shape<span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">],</span> dim<span style="color:#0550ae">=</span><span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">else</span><span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>    src <span style="color:#0550ae">=</span> image_embeddings</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">if</span> repeat_image:
+</span></span><span style="display:flex;"><span>    src <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>repeat_interleave(image_embeddings, tokens<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>], dim<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>    src <span style="color:#000;font-weight:bold">=</span> image_embeddings</span></span></code></pre></div>
 <p>The flag was always <code>False</code> during inference for a wide variety of test inputs. The fix was to delete the
 parameter, the branch, and every call site that passed it. This is also a good
 example of why step 1 matters — once you&rsquo;ve isolated the inference module, you
@@ -285,8 +280,8 @@ bigger problem at hand, and tracing would be the least of your concerns. Remove
 them.</p>
 <p><strong>Conditions that are trivially true for real inputs.</strong> In another model, a
 branch checked whether the pooling kernel was larger than the image itself:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>kernel_size <span style="color:#0550ae">&gt;=</span> hw<span style="color:#1f2328">)</span><span style="color:#0550ae">.</span>all<span style="color:#1f2328">():</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> F<span style="color:#0550ae">.</span>adaptive_avg_pool2d<span style="color:#1f2328">(</span>x<span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">if</span> (<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>kernel_size <span style="color:#000;font-weight:bold">&gt;=</span> hw)<span style="color:#000;font-weight:bold">.</span>all(): 
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> F<span style="color:#000;font-weight:bold">.</span>adaptive_avg_pool2d(x, <span style="color:#099">1</span>)</span></span></code></pre></div>
 <p>There&rsquo;s no way I&rsquo;m using an image that&rsquo;s smaller than a pooling kernel.
 The condition existed only to handle a degenerate edge case that
 doesn&rsquo;t occur in production. And if it does, you have bigger problems.</p>

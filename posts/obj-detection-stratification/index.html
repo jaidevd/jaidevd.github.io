@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.86903c779b0438a93dff572785fb85bcf3f7e1c55ea295d67c858fc8f07b6d2d.css"/>
 
     
     
@@ -29,26 +29,21 @@
     
 
     
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-R6EBGCKHP1');
-        }
-      </script></head>
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://jaidevd.com/posts/obj-detection-stratification/thumbnail-pedestrian-bad.png">
-  <meta name="twitter:title" content="Effective Train/Test Stratification for Object Detection">
-  <meta name="twitter:description" content="TL;DR: Here’s a talk based on this post:
-There’s an unavoidable, inherent difficulty in fine-tuning deep neural networks, which stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general to the specific, than the reverse. Specialization after generalization is easier than the reverse.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jaidevd.com/posts/obj-detection-stratification/thumbnail-pedestrian-bad.png" /><meta name="twitter:title" content="Effective Train/Test Stratification for Object Detection"/>
+<meta name="twitter:description" content="TL;DR: Here&rsquo;s a talk based on this post:
+There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural networks, which stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general to the specific, than the reverse."/>
 
 
     <body>
@@ -170,9 +165,10 @@ There’s an unavoidable, inherent difficulty in fine-tuning deep neural network
     <div>
         <p>
         <p>TL;DR: Here&rsquo;s a talk based on this post:</p>
+
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/mxc1IOYaZBE?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+  <iframe src="https://www.youtube.com/embed/mxc1IOYaZBE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
 
 <hr>
 <p>There&rsquo;s an unavoidable, inherent difficulty in fine-tuning deep neural
@@ -302,28 +298,28 @@ first answer is: stratify the data by <em>what</em>?</p>
 <h2 id="attributes-of-target-variables">Attributes of Target Variables</h2>
 <p>The target vectors for binary and multiclass problems look like
 this:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>y_bin   <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">...</span><span style="color:#1f2328">]</span>
-</span></span><span style="display:flex;"><span>y_multi <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">...</span><span style="color:#1f2328">]</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>y_bin   <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#099">1</span>, <span style="color:#099">0</span>, <span style="color:#099">0</span>, <span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">...</span>]
+</span></span><span style="display:flex;"><span>y_multi <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>, <span style="color:#099">2</span>, <span style="color:#099">0</span>, <span style="color:#099">2</span>, <span style="color:#099">2</span>, <span style="color:#099">1</span>, <span style="color:#099">2</span>, <span style="color:#099">2</span>, <span style="color:#000;font-weight:bold">...</span>]</span></span></code></pre></div>
 <p>Both of these are easy to interpret, and can be straightaway used for
 stratification. But here&rsquo;s what the target (or annotation) of a detection dataset
 looks like:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">[</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;boxes&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
-</span></span><span style="display:flex;"><span>    	<span style="color:#1f2328">[</span><span style="color:#0550ae">506.97</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">352.39</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">609.44</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">419.26</span><span style="color:#1f2328">],</span>
-</span></span><span style="display:flex;"><span>    	<span style="color:#1f2328">[</span><span style="color:#0550ae">446.55</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">298.58</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">537.16</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">363.30</span><span style="color:#1f2328">],</span>
-</span></span><span style="display:flex;"><span>    	<span style="color:#1f2328">[</span><span style="color:#0550ae">314.60</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">147.72</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">640.00</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">480.00</span><span style="color:#1f2328">]</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">],</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;labels&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;bowl&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;bowl&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;dining table&#34;</span><span style="color:#1f2328">]</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">},</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;boxes&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
-</span></span><span style="display:flex;"><span>    	<span style="color:#1f2328">[</span><span style="color:#0550ae">36.8300</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">113.6800</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">601.2200</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">396.9000</span><span style="color:#1f2328">],</span>
-</span></span><span style="display:flex;"><span>    	<span style="color:#1f2328">[</span><span style="color:#0550ae">105.0400</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">167.1500</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">271.0600</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">293.6500</span><span style="color:#1f2328">]</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">],</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;labels&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;banana&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;apple&#34;</span><span style="color:#1f2328">]</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">]</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&#34;boxes&#34;</span>: [
+</span></span><span style="display:flex;"><span>    	[<span style="color:#099">506.97</span>, <span style="color:#099">352.39</span>, <span style="color:#099">609.44</span>, <span style="color:#099">419.26</span>],
+</span></span><span style="display:flex;"><span>    	[<span style="color:#099">446.55</span>, <span style="color:#099">298.58</span>, <span style="color:#099">537.16</span>, <span style="color:#099">363.30</span>],
+</span></span><span style="display:flex;"><span>    	[<span style="color:#099">314.60</span>, <span style="color:#099">147.72</span>, <span style="color:#099">640.00</span>, <span style="color:#099">480.00</span>]
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&#34;labels&#34;</span>: [<span style="color:#d14">&#34;bowl&#34;</span>, <span style="color:#d14">&#34;bowl&#34;</span>, <span style="color:#d14">&#34;dining table&#34;</span>]
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&#34;boxes&#34;</span>: [
+</span></span><span style="display:flex;"><span>    	[<span style="color:#099">36.8300</span>, <span style="color:#099">113.6800</span>, <span style="color:#099">601.2200</span>, <span style="color:#099">396.9000</span>],
+</span></span><span style="display:flex;"><span>    	[<span style="color:#099">105.0400</span>, <span style="color:#099">167.1500</span>, <span style="color:#099">271.0600</span>, <span style="color:#099">293.6500</span>]
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&#34;labels&#34;</span>: [<span style="color:#d14">&#34;banana&#34;</span>, <span style="color:#d14">&#34;apple&#34;</span>]
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>]</span></span></code></pre></div>
 <p>(These are the annotations for a couple of samples from the <a href="https://cocodataset.org/#home">MS COCO dataset</a>. They
 tell us that the first image contains two bowls and a dining table, and the
 second one contains a banana and an apple. It also contains information on <em>where</em> they are in the

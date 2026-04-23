@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.86903c779b0438a93dff572785fb85bcf3f7e1c55ea295d67c858fc8f07b6d2d.css"/>
 
     
     
@@ -29,24 +29,19 @@
     
 
     
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-R6EBGCKHP1');
-        }
-      </script></head>
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="A Process for Readable Code">
-  <meta name="twitter:description" content="I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras’ Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time. It is easy to see how communication becomes critical in running a MOOC at this scale. There is, of course, the operational and logistical communication that goes into the smooth running of the course. But communicating the content of the course is more relevant (the course is also highly interactive - in addition to weekly office hours, there are Discourse forums where students, TAs and faculty are active).">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="A Process for Readable Code"/>
+<meta name="twitter:description" content="I took a course on data structures and algorithms over the last few months. It is being offered as a part of IIT Madras&rsquo; Online Degree Program in Data Science and Programming, taught by Prof Madhavan Mukund. The program is a MOOC in a true sense, with tens of thousands of students enrolling each year. The DSA course itself is offered every trimester, and sees an average of ~700 enrollments every time."/>
 
 
     <body>
@@ -296,9 +291,10 @@ thus ended up with the &ldquo;before&rdquo; and &ldquo;after&rdquo; versions for
 then asked a bunch of people which version they found more readable, and here
 are the results.</p>
 <h3 id="1-mergesort">1. Mergesort</h3>
+
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/VD-yDppwxl0?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+  <iframe src="https://www.youtube.com/embed/VD-yDppwxl0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
 
 <p>37 people saw the before and after versions of the code, and 27 of them (~73%)
 of them found the &ldquo;after&rdquo; version of the code more readable.</p>
@@ -308,18 +304,20 @@ might render whitespaces. Sure, these external factors are largely based on
 peoples&rsquo; taste and preferences, but it is still worthwhile optimizing one&rsquo;s
 developer environment for better optical readability.)</p>
 <h3 id="2-breadth-first-search">2. Breadth-first Search</h3>
+
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/TFcZQqQ2oe8?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+  <iframe src="https://www.youtube.com/embed/TFcZQqQ2oe8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
 
 <p>Again, 37 people saw this, and 28 of them (~75%) preferred the &ldquo;after&rdquo; version.
 (At lease one of the 9 who favoured the &ldquo;before&rdquo; version did so because they did not know
 what a Python <a href="https://docs.python.org/3/library/collections.html#collections.deque">deque</a>
 is - I wonder how many others were put off by that).</p>
 <h3 id="3-dijkstras-shortest-path-algorithm">3. Dijkstra&rsquo;s Shortest Path Algorithm</h3>
+
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/4MmdHO4MFnQ?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+  <iframe src="https://www.youtube.com/embed/4MmdHO4MFnQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
 
 <p>27 people saw this and 23 of them (~85%) agreed that the &ldquo;after&rdquo; version was
 more readable.</p>
@@ -405,12 +403,12 @@ avoided. Instead, there will almost always be a method that returns a view of
 the object that you really need. Consider, for example, two dictionaries, <code>X</code>
 and <code>Y</code>. Suppose you have to do something with the keys present in
 exactly one of them. Typically, to find such keys, I would simply iterate.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ind_keys <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>key <span style="color:#cf222e">for</span> key <span style="color:#0550ae">in</span> X <span style="color:#cf222e">if</span> key <span style="color:#0550ae">not</span> <span style="color:#0550ae">in</span> Y<span style="color:#1f2328">]</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ind_keys <span style="color:#000;font-weight:bold">=</span> [key <span style="color:#000;font-weight:bold">for</span> key <span style="color:#000;font-weight:bold">in</span> X <span style="color:#000;font-weight:bold">if</span> key <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> Y]</span></span></code></pre></div>
 <p>But I did not know until recently, that a collection of dictionary keys in
 Python behaves a lot like a set! So the symmetric difference operator (<code>^</code>) that
 we generally use on a pair sets can also be used on a pair of <code>dict_keys</code>
 objects:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ind_keys <span style="color:#0550ae">=</span> X<span style="color:#0550ae">.</span>keys<span style="color:#1f2328">()</span> <span style="color:#0550ae">^</span> Y<span style="color:#0550ae">.</span>keys<span style="color:#1f2328">()</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ind_keys <span style="color:#000;font-weight:bold">=</span> X<span style="color:#000;font-weight:bold">.</span>keys() <span style="color:#000;font-weight:bold">^</span> Y<span style="color:#000;font-weight:bold">.</span>keys()</span></span></code></pre></div>
 <p>Keeping up with this knowledge is tough for even the most experienced
 developers - especially as newer versions of libraries and languages come up.
 Here, too, regular code reviews (preferably from multiple reviewers with varying

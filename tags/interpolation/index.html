@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.86903c779b0438a93dff572785fb85bcf3f7e1c55ea295d67c858fc8f07b6d2d.css"/>
 
     
     
@@ -31,24 +31,19 @@
     
     <link rel="alternate" type="application/rss+xml" href="https://jaidevd.com/tags/interpolation/index.xml" title="Jaidev's Blog" />
     
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-R6EBGCKHP1');
-        }
-      </script></head>
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Interpolation">
-  <meta name="twitter:description" content="Thoughts on data science, statistics and machine learning.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Interpolation"/>
+<meta name="twitter:description" content="Thoughts on data science, statistics and machine learning."/>
 
 
     <body>
@@ -174,21 +169,7 @@
                 </a>
             </h2>
             <div>
-                <p><p>It has been a little over three years since I started working on a <a href="http://github.com/jaidevd/pyhht">Python
-implementation of the Hilbert Huang
-Transform</a>. When I first presented it at SciPy
-India 2011
-(<a href="http://urtalk.kpoint.com/kapsule/gcc-57b6c86b-2f12-4244-950c-a34360a2cc1f/t/hilberthuang-transform">video</a>)
-it was just a collection of small scripts, without packaging, testing or even
-docstrings. Over time PyHHT has garnered some interest, and I have, since the
-last few weeks, found the time to regularly work on it. I have been able to
-come up with a decent implementation of <a href="http://en.wikipedia.org/wiki/Hilbert%E2%80%93Huang_transform">empirical mode
-decomposition</a>,
-pretty much in line with everything described in the <a href="http://tec.earth.sinica.edu.tw/research/report/paper/20070711HHT.pdf">original
-paper</a> by Huang et
-al. The other
-parts of HHT, like the Hilbert spectrum and its time frequency representations
-are right around the corner.</p></p>
+                <p>It has been a little over three years since I started working on a Python implementation of the Hilbert Huang Transform. When I first presented it at SciPy India 2011 (video) it was just a collection of small scripts, without packaging, testing or even docstrings. Over time PyHHT has garnered some interest, and I have, since the last few weeks, found the time to regularly work on it. I have been able to come up with a decent implementation of empirical mode decomposition, pretty much in line with everything described in the original paper by Huang et al.</p>
                 
                 <p><a href="/posts/emd-edge-effects/">Read more...</a></p>
                 

@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.86903c779b0438a93dff572785fb85bcf3f7e1c55ea295d67c858fc8f07b6d2d.css"/>
 
     
     
@@ -29,25 +29,20 @@
     
 
     
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-R6EBGCKHP1');
-        }
-      </script></head>
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Misconceptions about OCR Bounding Boxes">
-  <meta name="twitter:description" content="Over the last year, I have been working on an application that auto-translates documents while maintaining the layout and formatting. It has many bells and whistles, from simple geometric tricks to sophisticated gen-AI algorithms and microservices. But basically, the app performs the simple task of identifying text in documents, machine-translating them, and reinserting them such that the output document “looks” like the input.
-Most documents that my app has to process are PDFs. PDFs are ubiquitous but notoriously hard to analyze. Since pretty much every app is capable of producing a PDF file, its layout can get particularly nasty. Moreover there is no single semantic description of what comprises a document - e.g. an email is as much a document as a boarding pass. Who’s to say that a selfie is not a document? This means that my users can upload almost anything into the app, and as long as it has some text, it ought to be serviceable.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Misconceptions about OCR Bounding Boxes"/>
+<meta name="twitter:description" content="Over the last year, I have been working on an application that auto-translates documents while maintaining the layout and formatting. It has many bells and whistles, from simple geometric tricks to sophisticated gen-AI algorithms and microservices. But basically, the app performs the simple task of identifying text in documents, machine-translating them, and reinserting them such that the output document “looks” like the input.
+Most documents that my app has to process are PDFs."/>
 
 
     <body>

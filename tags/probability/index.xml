@@ -4,7 +4,7 @@
     <title>Probability on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/probability/</link>
     <description>Recent content in Probability on Jaidev&#39;s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 30 Jun 2016 18:33:41 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/probability/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://jaidevd.com/posts/mm-problem/</link>
       <pubDate>Thu, 30 Jun 2016 18:33:41 +0530</pubDate>
       <guid>https://jaidevd.com/posts/mm-problem/</guid>
-      <description>&lt;p&gt;Allen Downey makes a very good case for learning advanced mathematics through&#xA;programming (Check the first section of the preface of &lt;em&gt;Think Bayes&lt;/em&gt;, titled &amp;ldquo;My theory, which is mine&amp;rdquo;).&#xA;But before the reader can hit paydirt with using the Bayes theorem in programming,&#xA;Downey makes you go through some elementary problems in probability, which have&#xA;to be solved by hand first, if you expect to have a clear enough understanding&#xA;of the concept. I can vouch for this way of learning complex concepts. The way&#xA;I learnt the backpropagation algorithm (and its derivation), was with a pen,&#xA;paper and a calculator.&lt;/p&gt;</description>
+      <description>Allen Downey makes a very good case for learning advanced mathematics through programming (Check the first section of the preface of Think Bayes, titled &amp;ldquo;My theory, which is mine&amp;rdquo;). But before the reader can hit paydirt with using the Bayes theorem in programming, Downey makes you go through some elementary problems in probability, which have to be solved by hand first, if you expect to have a clear enough understanding of the concept.</description>
     </item>
   </channel>
 </rss>

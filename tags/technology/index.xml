@@ -4,7 +4,7 @@
     <title>Technology on Jaidev&#39;s Blog</title>
     <link>https://jaidevd.com/tags/technology/</link>
     <description>Recent content in Technology on Jaidev&#39;s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 31 Jan 2025 23:23:45 +0530</lastBuildDate>
     <atom:link href="https://jaidevd.com/tags/technology/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://jaidevd.com/posts/more-pixels/</link>
       <pubDate>Fri, 31 Jan 2025 23:23:45 +0530</pubDate>
       <guid>https://jaidevd.com/posts/more-pixels/</guid>
-      <description>&lt;p&gt;Someone must have thought, likely with good reason, that more pixels on larger&#xA;screens is a good idea. Then, someone else must have thought that if it’s a good&#xA;idea somewhere, it must be a good idea everywhere.&lt;/p&gt;&#xA;&lt;p&gt;It’s probably for the same reason that I can’t find a new car with tactile&#xA;switches anymore. Everything’s got touch buttons. In my car, nothing other than&#xA;the steering wheel has any physical feedback. To check if I’ve successfully&#xA;changed the A/C mode, I either have to wait until I feel the temperature change&#xA;or I have to take my eyes off the road. And don’t even get me started on the&#xA;massive ‘infotainment systems’. I don’t understand how we came to a place where&#xA;more expensive cars meant fewer physical buttons and huge touchscreens.&lt;/p&gt;</description>
+      <description>Someone must have thought, likely with good reason, that more pixels on larger screens is a good idea. Then, someone else must have thought that if it’s a good idea somewhere, it must be a good idea everywhere.&#xA;It’s probably for the same reason that I can’t find a new car with tactile switches anymore. Everything’s got touch buttons. In my car, nothing other than the steering wheel has any physical feedback.</description>
     </item>
   </channel>
 </rss>

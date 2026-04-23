@@ -19,7 +19,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.86903c779b0438a93dff572785fb85bcf3f7e1c55ea295d67c858fc8f07b6d2d.css"/>
 
     
     
@@ -31,24 +31,19 @@
     
     <link rel="alternate" type="application/rss+xml" href="https://jaidevd.com/tags/machinelearning/index.xml" title="Jaidev's Blog" />
     
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-R6EBGCKHP1');
-        }
-      </script></head>
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Machinelearning">
-  <meta name="twitter:description" content="Thoughts on data science, statistics and machine learning.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-R6EBGCKHP1', { 'anonymize_ip': false });
+}
+</script>
+</head>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Machinelearning"/>
+<meta name="twitter:description" content="Thoughts on data science, statistics and machine learning."/>
 
 
     <body>
@@ -174,7 +169,7 @@
                 </a>
             </h2>
             <div>
-                <p><p>In his book, <a href="https://www.amazon.com/Neural-Networks-Comprehensive-Simon-Haykin/dp/0023527617/ref=sr_1_1?ie=UTF8&amp;qid=1468746091&amp;sr=8-1&amp;keywords=neural+networks+comprehensive+foundation"><em>Neural Networks - A Comprehensive Foundation</em></a>, Simon Haykin has an entire section (3.10) dedicated to how perceptrons and Bayesian classifiers are closely related when operating in a Gaussian environment. However, it is not until the end of the section that Haykin mentions that the relation is only limited to linearity. What is interesting about this is that a Perceptron can produce the same classification &ldquo;model&rdquo; as a Bayesian classifier, provided that the underlying data is drawn from a Gaussian distribution. This post is an experimental verification of that.</p></p>
+                <p>In his book, Neural Networks - A Comprehensive Foundation, Simon Haykin has an entire section (3.10) dedicated to how perceptrons and Bayesian classifiers are closely related when operating in a Gaussian environment. However, it is not until the end of the section that Haykin mentions that the relation is only limited to linearity. What is interesting about this is that a Perceptron can produce the same classification &ldquo;model&rdquo; as a Bayesian classifier, provided that the underlying data is drawn from a Gaussian distribution.</p>
                 
                 <p><a href="/posts/linearity-bayesian-classifiers/">Read more...</a></p>
                 
@@ -193,7 +188,7 @@
                 </a>
             </h2>
             <div>
-                <p><p>The last time I studied neural networks in detail was five years ago in college. I did touch upon backpropagation when Andrew Ng&rsquo;s machine learning MOOC was offered on Coursera for the first time, but beyond that I&rsquo;ve only dabbled with them through <a href="http://keras.io">keras</a>. Then recently, when I read about Coursera&rsquo;s imminent decision to pull down much of their freely available material (you can read a rant about it <a href="http://reachtarunhere.github.io/2016/06/11/Golden-Age-of-MOOCs-is-over-and-why-I-hate-Coursera/">here</a>), I went on a downloading spree (many thanks to the wonderful <a href="http://github.com/coursera-dl/coursera-dl">coursera-dl</a>). Of all the courses I downloaded, the one that caught my eye was Geoffrey Hinton&rsquo;s course on <em>Neural Networks for Machine Learning</em>. Because of that and the fact that there were some computer vision projects going on at work, I decided to dive right in.</p></p>
+                <p>The last time I studied neural networks in detail was five years ago in college. I did touch upon backpropagation when Andrew Ng&rsquo;s machine learning MOOC was offered on Coursera for the first time, but beyond that I&rsquo;ve only dabbled with them through keras. Then recently, when I read about Coursera&rsquo;s imminent decision to pull down much of their freely available material (you can read a rant about it here), I went on a downloading spree (many thanks to the wonderful coursera-dl).</p>
                 
                 <p><a href="/posts/perceptron-convergence/">Read more...</a></p>
                 
