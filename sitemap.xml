@@ -2,11 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jaidevd.com/tags/dogs/</loc>
+    <lastmod>2026-04-24T01:49:12+05:30</lastmod>
+  </url><url>
     <loc>https://jaidevd.com/</loc>
-    <lastmod>2026-04-23T17:18:42+05:30</lastmod>
+    <lastmod>2026-04-24T01:49:12+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/personal/</loc>
+    <lastmod>2026-04-24T01:49:12+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/</loc>
-    <lastmod>2026-04-23T17:18:42+05:30</lastmod>
+    <lastmod>2026-04-24T01:49:12+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/posts/remembering-peru/</loc>
+    <lastmod>2026-04-24T01:49:12+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/</loc>
+    <lastmod>2026-04-24T01:49:12+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/dataviz/</loc>
     <lastmod>2026-03-23T19:20:04+05:30</lastmod>
@@ -15,9 +27,6 @@
     <lastmod>2026-03-23T19:20:04+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/open-source/</loc>
-    <lastmod>2026-03-23T19:20:04+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/</loc>
     <lastmod>2026-03-23T19:20:04+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/plotcaptions/</loc>
@@ -51,9 +60,6 @@
     <lastmod>2025-03-11T12:12:14+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/journal/</loc>
-    <lastmod>2025-03-11T12:12:14+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/personal/</loc>
     <lastmod>2025-03-11T12:12:14+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/writing/</loc>
