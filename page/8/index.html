@@ -2,7 +2,7 @@
 
 <html lang="en-us">
     <head>
-	<meta name="generator" content="Hugo 0.152.2">
+	<meta name="generator" content="Hugo 0.163.0">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.83464db7b5b32690f5275788803d9059e02a5f94357f3e48595aec09fdd300a7.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.865405079ffa92c4d35d01bf150d5ac1d11a7a9f65d261889cb910d1d9534597.css"/>
 
     
     
@@ -47,9 +47,9 @@
         }
       </script></head>
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Jaidev&#39;s Blog">
-  <meta name="twitter:description" content="Thoughts on data science, statistics and machine learning.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Jaidev&#39;s Blog">
+	<meta name="twitter:description" content="Thoughts on data science, statistics and machine learning.">
 
 
     <body>
@@ -172,14 +172,110 @@
         
         
         
-        <article>
+        <article class="post-item">
+            
+            
+                
+            
+            
+            <h2>
+                <a href="https://jaidevd.com/posts/playing-with-the-konmari-method/">
+                    Playing With the Konmari Method
+                </a>
+            </h2>
+            <div>
+                
+                
+                
+                
+                
+                
+                
+                
+                <p>I heard about the bestseller <a href="https://www.amazon.com/Life-Changing-Magic-Tidying-Decluttering-Organizing/dp/1607747308">The Life-Changing Magic of Tidying Up</a> at a SciPy talk about <a href="https://www.youtube.com/watch?v=EKUy0TSLg04">deculttering your data science project</a>. The speakers admitted they hadn&rsquo;t read it - they were simply trying to point out that tidying up your space and tidying up your software project are both similar.</p>
+
+
+<p>I&rsquo;ve been married and living with my wife for about a year now. After we moved into &ldquo;our own home&rdquo; last year, we have both undergone major role reversals when it comes to tidying up. I was never accustomed to spaces larger than a single bedroom, so I never cared enough to sort or declutter my space as long as my desk and bed were clean. As for my wife, she never owned too much stuff (between the two of us, I&rsquo;m the hoarder) and therefore never had to make a chore out of tidying up. Now that I live in a fairly spacious apartment, even a little clutter looks very conspicuous to me. My wife generally agrees with me about tidying up, but she&rsquo;s not anal about it. I have been having arguments about the clutter in my house with her for a long time now. Since both of us jokingly say that I&rsquo;m the wife in this relationship (by the way, I would be proud to be one), tidying up and decluttering is often left up to me. I lost no time in buying Marie Kondo&rsquo;s book and diving right in.</p>
+                
+                <p><a href="/posts/playing-with-the-konmari-method/">Read more...</a></p>
+                
+            </div>
+            <div class="post-footer">
+            <time>August 3, 2016</time>
+
+            
+            
+                
+                    <a class="tag" href="/tags/personal">#personal</a>
+                
+                    <a class="tag" href="/tags/productivity">#productivity</a>
+                
+            
+            </div>
+        </article>
+        
+        <article class="post-item">
+            
+            
+                
+            
+            
+            <h2>
+                <a href="https://jaidevd.com/posts/linearity-bayesian-classifiers/">
+                    On the Linearity of Bayesian Classifiers
+                </a>
+            </h2>
+            <div>
+                
+                
+                
+                
+                
+                
+                
+                
+                <p>In his book, <a href="https://www.amazon.com/Neural-Networks-Comprehensive-Simon-Haykin/dp/0023527617/ref=sr_1_1?ie=UTF8&amp;qid=1468746091&amp;sr=8-1&amp;keywords=neural+networks+comprehensive+foundation"><em>Neural Networks - A Comprehensive Foundation</em></a>, Simon Haykin has an entire section (3.10) dedicated to how perceptrons and Bayesian classifiers are closely related when operating in a Gaussian environment. However, it is not until the end of the section that Haykin mentions that the relation is only limited to linearity. What is interesting about this is that a Perceptron can produce the same classification &ldquo;model&rdquo; as a Bayesian classifier, provided that the underlying data is drawn from a Gaussian distribution. This post is an experimental verification of that.</p>
+                
+                <p><a href="/posts/linearity-bayesian-classifiers/">Read more...</a></p>
+                
+            </div>
+            <div class="post-footer">
+            <time>July 17, 2016</time>
+
+            
+            
+                
+                    <a class="tag" href="/tags/bayes">#bayes</a>
+                
+                    <a class="tag" href="/tags/machinelearning">#machinelearning</a>
+                
+                    <a class="tag" href="/tags/perceptron">#perceptron</a>
+                
+            
+            </div>
+        </article>
+        
+        <article class="post-item">
+            
+            
+                
+            
+            
             <h2>
                 <a href="https://jaidevd.com/posts/perceptron-convergence/">
                     A Geometric Proof of the Perceptron Convergence Theorem
                 </a>
             </h2>
             <div>
-                <p><p>The last time I studied neural networks in detail was five years ago in college. I did touch upon backpropagation when Andrew Ng&rsquo;s machine learning MOOC was offered on Coursera for the first time, but beyond that I&rsquo;ve only dabbled with them through <a href="http://keras.io">keras</a>. Then recently, when I read about Coursera&rsquo;s imminent decision to pull down much of their freely available material (you can read a rant about it <a href="http://reachtarunhere.github.io/2016/06/11/Golden-Age-of-MOOCs-is-over-and-why-I-hate-Coursera/">here</a>), I went on a downloading spree (many thanks to the wonderful <a href="http://github.com/coursera-dl/coursera-dl">coursera-dl</a>). Of all the courses I downloaded, the one that caught my eye was Geoffrey Hinton&rsquo;s course on <em>Neural Networks for Machine Learning</em>. Because of that and the fact that there were some computer vision projects going on at work, I decided to dive right in.</p></p>
+                
+                
+                
+                
+                
+                
+                
+                
+                <p>The last time I studied neural networks in detail was five years ago in college. I did touch upon backpropagation when Andrew Ng&rsquo;s machine learning MOOC was offered on Coursera for the first time, but beyond that I&rsquo;ve only dabbled with them through <a href="http://keras.io">keras</a>. Then recently, when I read about Coursera&rsquo;s imminent decision to pull down much of their freely available material (you can read a rant about it <a href="http://reachtarunhere.github.io/2016/06/11/Golden-Age-of-MOOCs-is-over-and-why-I-hate-Coursera/">here</a>), I went on a downloading spree (many thanks to the wonderful <a href="http://github.com/coursera-dl/coursera-dl">coursera-dl</a>). Of all the courses I downloaded, the one that caught my eye was Geoffrey Hinton&rsquo;s course on <em>Neural Networks for Machine Learning</em>. Because of that and the fact that there were some computer vision projects going on at work, I decided to dive right in.</p>
                 
                 <p><a href="/posts/perceptron-convergence/">Read more...</a></p>
                 
@@ -197,25 +293,37 @@
                     <a class="tag" href="/tags/machinelearning">#machinelearning</a>
                 
             
-            </div> 
-           
+            </div>
         </article>
         
-        <article>
+        <article class="post-item">
+            
+            
+                
+            
+            
             <h2>
                 <a href="https://jaidevd.com/posts/mm-problem/">
                     Understanding Allen Downey&#39;s Solution to the M&amp;M Problem
                 </a>
             </h2>
             <div>
-                <p><p>Allen Downey makes a very good case for learning advanced mathematics through
+                
+                
+                
+                
+                
+                
+                
+                
+                <p>Allen Downey makes a very good case for learning advanced mathematics through
 programming (Check the first section of the preface of <em>Think Bayes</em>, titled &ldquo;My theory, which is mine&rdquo;).
 But before the reader can hit paydirt with using the Bayes theorem in programming,
 Downey makes you go through some elementary problems in probability, which have
 to be solved by hand first, if you expect to have a clear enough understanding
 of the concept. I can vouch for this way of learning complex concepts. The way
 I learnt the backpropagation algorithm (and its derivation), was with a pen,
-paper and a calculator.</p></p>
+paper and a calculator.</p>
                 
                 <p><a href="/posts/mm-problem/">Read more...</a></p>
                 
@@ -231,75 +339,7 @@ paper and a calculator.</p></p>
                     <a class="tag" href="/tags/probability">#probability</a>
                 
             
-            </div> 
-           
-        </article>
-        
-        <article>
-            <h2>
-                <a href="https://jaidevd.com/posts/evangelism-in-foss/">
-                    Evangelism in Foss
-                </a>
-            </h2>
-            <div>
-                <p><p>One of the most dangerous things that can affect any FOSS community is the tendency of evangelism for the sake of evangelism. Promoting the Python stack, expanding the userbase, etc, should come <em>only</em> as a consequence of the content we produce as developers. If evangelism even remotely becomes one of your goals, your quality is sure to suffer. And it&rsquo;s not just the empirical evidence that prompts me to say this. It even makes logical sense. If we want to &ldquo;promote&rdquo; Python and related tech, our best market would be the young and unexperienced (and therefore non-opinionated) minds. But note that such audiences are also very fickle. They may not return for the next conference. And since they don&rsquo;t, we have to count on more fresh entries each year. And in the conference itself, since we&rsquo;re all acutely aware of the demographic, we spend too many talks pandering to this part of the audience.</p></p>
-                
-                <p><a href="/posts/evangelism-in-foss/">Read more...</a></p>
-                
             </div>
-            <div class="post-footer">
-            <time>June 14, 2016</time>
-
-            
-            
-                
-                    <a class="tag" href="/tags/rant">#rant</a>
-                
-                    <a class="tag" href="/tags/personal">#personal</a>
-                
-                    <a class="tag" href="/tags/evangelism">#evangelism</a>
-                
-            
-            </div> 
-           
-        </article>
-        
-        <article>
-            <h2>
-                <a href="https://jaidevd.com/posts/bookshelf/">
-                    Organizing a Bookshelf with Multivariate Analysis
-                </a>
-            </h2>
-            <div>
-                <p><p>I have recently moved from Pune to Delhi. I had spent only a year in Pune, having moved there from Mumbai, where I lived for three years. Whenever I move, the bulk of my luggage consists of books and clothes. My stay in Pune was just a transition, so I never bothered to unpack and store all my stuff too carefully. Thus, a corner of my bedroom in my Pune apartment always looked like this:
-
-
-
-    <img class="article-image" src="/posts/bookshelf/before.jpg" alt="My first image">
-    
-
-</p></p>
-                
-                <p><a href="/posts/bookshelf/">Read more...</a></p>
-                
-            </div>
-            <div class="post-footer">
-            <time>August 27, 2015</time>
-
-            
-            
-                
-                    <a class="tag" href="/tags/personal">#personal</a>
-                
-                    <a class="tag" href="/tags/analytics">#analytics</a>
-                
-                    <a class="tag" href="/tags/pca">#PCA</a>
-                
-                    <a class="tag" href="/tags/dataviz">#dataviz</a>
-                
-            
-            </div> 
-           
         </article>
         
     </div>
@@ -358,7 +398,6 @@ paper and a calculator.</p></p>
     });
 
 </script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
