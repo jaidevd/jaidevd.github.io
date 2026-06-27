@@ -1,0 +1,150 @@
+/* Caption This — deck theme
+   Identity: continuous with the talk's charts (papayawhip ground, Lora serif),
+   with the typography enacting the thesis — Lora = the human/editorial caption
+   voice; IBM Plex Mono/Sans = the machine + its data. Teal-led, warm paper. */
+
+:root {
+  --ground:    #FBF1DD;   /* warm paper — matches the charts' papayawhip */
+  --paper:     #FFF8EC;   /* lifted card */
+  --text:      #2A2018;   /* warm espresso near-black */
+  --muted:     #8A7D6B;   /* warm grey-brown */
+  --hair:      #E4D6BC;   /* warm hairline */
+  --accent:    #11696E;   /* deep teal — the voice / the right reading */
+  --accent-2:  #A23E2A;   /* brick — the obvious / weaker take */
+  --accent-3:  #C77D2A;   /* ochre — emphasis / kicker */
+  --teal-tint: #E2EEEC;   /* teal wash for highlighted rows */
+
+  --font-display: "Lora", Georgia, "Times New Roman", serif;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --r-main-font-size: 27px;
+  --r-background-color: #FBF1DD;
+}
+
+html, body, .reveal-viewport { background: var(--ground); }
+
+.reveal {
+  font-family: var(--font-sans);
+  font-size: 27px;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings — the human/editorial voice */
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  text-transform: none;
+  color: var(--text);
+  margin-top: 0;
+  line-height: 1.12;
+}
+.reveal h1 { font-size: 2.3em; margin-bottom: 0.18em; }
+.reveal h2 { font-size: 1.4em; margin: 0 0 0.4em; }
+.reveal h3 { font-size: 1.05em; color: var(--muted); margin: 0 0 0.3em; font-weight: 500; }
+/* h4 — a machine/system label, set in the sans */
+.reveal h4 {
+  font-family: var(--font-sans);
+  font-size: 0.8em; font-weight: 600; margin: 0 0 0.3em;
+  color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+.reveal p { line-height: 1.4; margin: 0.35em 0; }
+.reveal ul, .reveal ol { margin: 0.3em 0; padding-left: 1.2em; }
+.reveal li { margin: 0.25em 0; line-height: 1.4; }
+.reveal li::marker { color: var(--accent); }
+.reveal .big { font-size: 1.1em; }
+.reveal .muted { color: var(--muted); font-size: 0.78em; }
+.reveal strong { color: var(--text); font-weight: 600; }
+.reveal em { font-style: italic; }
+.reveal a, .reveal a:hover { color: var(--accent); }
+
+/* Title + closing — the deck's two quiet, full-bleed moments */
+[data-state="title"], [data-state="closing"] { text-align: center; }
+[data-state="title"] h1 {
+  font-size: 3.1em; margin-bottom: 0.1em; letter-spacing: -0.02em;
+}
+[data-state="title"] h3 { margin-top: 0; font-style: italic; }
+[data-state="closing"] h1 { font-size: 2.4em; }
+
+/* The caption-cursor — the deck's recurring identity mark */
+.caret {
+  display: inline-block; width: 0.5ch; height: 0.92em; background: var(--accent);
+  margin-left: 0.12em; vertical-align: -0.06em;
+  animation: caret-blink 1.05s steps(1) infinite;
+}
+@keyframes caret-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
+
+/* Eyebrow / stage tag — a true sequence marker (turn 1/2/3, finding 1/2/3) */
+.stage-tag {
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 0.6em; letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 600; color: var(--accent);
+  padding: 0.15em 0 0.35em; border-bottom: 2px solid var(--accent);
+  margin-bottom: 0.6em;
+}
+
+/* Quote */
+.reveal blockquote.quote {
+  font-family: var(--font-display); font-style: italic; font-size: 1.05em;
+  background: transparent; border: none; border-left: 3px solid var(--accent);
+  padding: 0.2em 0 0.2em 0.9em; margin: 0.6em auto; max-width: 80%;
+  text-align: left; line-height: 1.45; box-shadow: none; color: var(--text);
+}
+.reveal blockquote.quote footer {
+  font-family: var(--font-sans); font-style: normal; font-size: 0.7em;
+  color: var(--muted); margin-top: 0.4em; display: block; letter-spacing: 0.02em;
+}
+
+/* Data tables — numbers in the machine's mono, teal header rule */
+.reveal table.metrics {
+  margin: 0.6em auto; border-collapse: collapse; font-size: 0.72em;
+  font-variant-numeric: tabular-nums;
+}
+.reveal table.metrics th, .reveal table.metrics td {
+  padding: 0.38em 0.85em; border-bottom: 1px solid var(--hair); text-align: right;
+}
+.reveal table.metrics td { font-family: var(--font-mono); }
+.reveal table.metrics th {
+  font-family: var(--font-sans); font-weight: 600; font-size: 0.82em;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--accent); border-bottom: 2px solid var(--accent); background: transparent;
+}
+.reveal table.metrics th:first-child, .reveal table.metrics td:first-child {
+  text-align: left; font-family: var(--font-sans);
+}
+.reveal table.metrics tr.hl td { background: var(--teal-tint); color: var(--text); }
+.reveal table.metrics.big { font-size: 0.82em; }
+.reveal table.metrics.small { font-size: 0.65em; }
+
+/* Finding card */
+.finding {
+  background: var(--paper); padding: 0.85em 1.2em; border-radius: 4px;
+  border-top: 3px solid var(--accent); border-left: 1px solid var(--hair);
+  border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair);
+  margin: 0.6em auto; max-width: 90%;
+}
+.finding p { margin: 0.3em 0; }
+
+/* Release / list blocks */
+.upcoming, .release {
+  text-align: left; max-width: 78%; margin: 0.5em auto;
+  font-size: 0.9em; line-height: 1.6; list-style: none; padding-left: 0;
+}
+.release li { padding-left: 1.1em; position: relative; }
+.release li::before {
+  content: "▏"; color: var(--accent); position: absolute; left: 0;
+}
+
+.hl-text, .kicker { color: var(--accent-3); font-weight: 600; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; text-align: left; }
+
+/* Progress bar + slide number in the accent */
+.reveal .progress { color: var(--accent); height: 4px; }
+.reveal .slide-number {
+  background: transparent; color: var(--muted); font-family: var(--font-mono);
+  font-size: 14px;
+}

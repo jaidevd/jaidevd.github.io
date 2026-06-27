@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Caption This — Teaching Machines to Narrate Charts</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/monokai.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ---- talk25 layout (theme tokens + base type live in style.css) ---- */
+    .reveal section { text-align: left; }
+    .reveal h2.q { text-align: center; margin-bottom: 0.2em; }
+
+    .epigraph {
+      font-family: var(--font-display); font-style: italic;
+      max-width: 80%; margin: 1.1em auto 0; color: var(--text);
+      line-height: 1.5; font-size: 1.05em;
+    }
+
+    /* caption-this slides — the chart sits as a lifted panel on the paper */
+    .reveal section:has(.chart-hero) { text-align: center; }
+    .chart-hero {
+      width: auto !important; height: auto !important;
+      max-width: 94%; max-height: 500px !important; object-fit: contain;
+      background: var(--ground); border: 1px solid var(--hair); border-radius: 5px;
+      box-shadow: 0 3px 18px rgba(42,32,24,0.10);
+      display: inline-block; margin: 0.1em auto;
+    }
+    .q + .caption-slot { margin-top: 0.1em; }
+    .ask { text-align: center; color: var(--accent); font-weight: 600; font-size: 0.95em; margin: 0.35em 0 0; }
+
+    /* reserved caption slot — set in the caption voice; the caret lives in style.css */
+    .caption-slot {
+      min-height: 1.5em; display: flex; align-items: center; justify-content: center;
+      margin: 0.05em auto 0.3em; font-family: var(--font-display); font-size: 1.6em;
+    }
+    .caption-slot .ph { color: var(--muted); font-style: italic; }
+
+    /* data -> chart -> caption pipeline figure */
+    .pipe { display: flex; align-items: center; justify-content: center; gap: 0.5em; margin: 0.9em auto 0.6em; }
+    .pipe .stage { display: flex; flex-direction: column; align-items: center; margin: 0; min-width: 0; }
+    .pipe .stage.data { flex: 1.05; }
+    .pipe .stage.chart { flex: 1.2; }
+    .pipe .stage.cap { flex: 1.0; }
+    .pipe .stage-label { font-family: var(--font-sans); font-size: 0.6em; letter-spacing: 0.12em;
+                         text-transform: uppercase; font-weight: 600; color: var(--accent); margin-bottom: 0.45em; }
+    .pipe figcaption { font-size: 0.72em; color: var(--muted); margin-top: 0.45em; font-style: italic; }
+    .mini-table { font-family: var(--font-mono); font-size: 0.46em; line-height: 1.5;
+                  background: var(--paper); border: 1px solid var(--hair); border-radius: 5px;
+                  padding: 0.6em 0.9em; text-align: left; white-space: pre; margin: 0; color: var(--text); }
+    .pipe .stage img { width: 100%; max-height: 190px; object-fit: contain; background: var(--ground);
+                       border: 1px solid var(--hair); border-radius: 5px; box-shadow: 0 2px 12px rgba(42,32,24,0.10); }
+    .pipe .cap { font-family: var(--font-display); font-style: italic; color: var(--text);
+                 background: var(--teal-tint); border-left: 3px solid var(--accent);
+                 border-radius: 0 5px 5px 0; padding: 0.7em 0.9em; font-size: 0.92em; line-height: 1.4; margin: 0; }
+    .pipe-arrow { color: var(--accent-3); font-size: 1.7em; flex: 0 0 auto; padding: 0 0.1em; }
+    .pipe-wrap { position: relative; margin: 0.9em auto 0.5em; }
+    .pipe-wrap .pipe { margin-bottom: 0; }
+    .bypass { display: block; width: 100%; height: 58px; margin-top: -0.2em; overflow: visible; }
+    .bypass-label { position: absolute; left: 50%; bottom: 0.4em; transform: translateX(-50%);
+                    font-family: var(--font-sans); font-size: 0.6em; font-weight: 600; font-style: italic;
+                    letter-spacing: 0.03em; color: var(--accent-2); background: var(--ground);
+                    padding: 0 0.5em; white-space: nowrap; }
+
+    /* horizontal pipeline flow */
+    .flow { display: flex; align-items: stretch; justify-content: center; gap: 0.5em; margin: 0.9em 0; flex-wrap: nowrap; }
+    .flow-box { flex: 1; background: var(--paper); border: 1.5px solid var(--text); border-radius: 6px;
+                padding: 0.6em 0.4em; text-align: center; min-width: 0; }
+    .flow-box .t { font-family: var(--font-display); font-weight: 600; font-size: 0.95em; display: block; }
+    .flow-box .m { font-size: 0.62em; color: var(--muted); display: block; margin-top: 0.2em; }
+    .flow-box.judge { border-color: var(--accent); }
+    .flow-box.open { border-style: dashed; border-color: var(--muted); background: transparent; color: var(--muted); }
+    .flow-arrow { display: flex; align-items: center; color: var(--accent-3); font-size: 1.4em; }
+    .flow-inputs { flex: 1; display: flex; flex-direction: column; gap: 0.5em; }
+    .flow-inputs .flow-box { flex: 1; }
+    .judge { display: grid; grid-template-columns: 1fr 1.25fr; gap: 1.1em; align-items: stretch;
+             max-width: 94%; margin: 0.7em auto 0; text-align: left; }
+    .judge-panel { background: var(--paper); border: 1px solid var(--hair); border-radius: 6px; padding: 0.75em 1em; }
+    .judge-panel.brief { border-top: 3px solid var(--accent); }
+    .judge-panel.shots { border-top: 3px solid var(--accent-3); }
+    .judge ul { margin: 0.3em 0 0.5em; padding-left: 1.05em; }
+    .judge li { font-size: 0.82em; line-height: 1.4; margin: 0.28em 0; }
+    .judge li b { color: var(--accent); font-weight: 600; }
+    .judge .out { font-size: 0.78em; margin-top: 0.4em; padding-top: 0.5em; border-top: 1px dashed var(--hair); }
+    .judge .out .bus { font-family: var(--font-mono); color: var(--accent); font-weight: 600; }
+    .shot { display: flex; align-items: baseline; gap: 0.5em; font-family: var(--font-display); font-style: italic;
+            font-size: 0.74em; line-height: 1.3; padding: 0.4em 0.2em; border-bottom: 1px solid var(--hair); }
+    .shot:last-child { border-bottom: none; }
+    .shot .mk { font-style: normal; font-weight: 700; flex: 0 0 auto; font-size: 1.05em; }
+    .shot.good .mk { color: var(--accent); }
+    .shot.bad .mk { color: var(--accent-2); }
+    .shot .sc { margin-left: auto; flex: 0 0 auto; font-family: var(--font-mono); font-style: normal;
+                font-size: 1.6em; font-weight: 600; padding: 0.02em 0.4em; border-radius: 3px; line-height: 1; }
+    .shot.good .sc { color: var(--accent); background: var(--teal-tint); }
+    .shot.bad .sc { color: var(--accent-2); background: #F3E0DA; }
+    .heat2 { display: flex; gap: 2.4em; justify-content: center; align-items: flex-start; margin: 0.7em auto 0; }
+    .heat2 figure { margin: 0; }
+    .heat2 figcaption { font-family: var(--font-sans); font-size: 0.6em; text-transform: uppercase;
+                        letter-spacing: 0.11em; color: var(--accent); font-weight: 600; text-align: center;
+                        margin-bottom: 0.55em; }
+    table.heat { border-collapse: separate; border-spacing: 5px; margin: 0 auto; }
+    table.heat th { font-family: var(--font-sans); font-size: 0.6em; font-weight: 600; color: var(--muted);
+                    text-transform: uppercase; letter-spacing: 0.05em; padding: 0.15em 0.45em; }
+    table.heat thead th { text-align: center; }
+    table.heat tbody th { text-align: right; white-space: nowrap; }
+    table.heat td { font-family: var(--font-mono); font-size: 0.92em; font-weight: 600; color: var(--text);
+                    width: 3.5em; height: 2.7em; text-align: center; border-radius: 6px; border: 1px solid var(--hair); }
+    table.heat td.hot { color: #FFF8EC; border-color: transparent; }
+    table.heatX { border-spacing: 4px; margin: 1em auto 0; }
+    table.heatX td { width: 4.4em; height: 2.8em; font-size: 0.92em; }
+    table.heatX thead th { font-family: var(--font-sans); font-size: 0.68em; font-weight: 700;
+                           color: var(--text); vertical-align: bottom; line-height: 1.2;
+                           text-transform: none; letter-spacing: 0; padding: 0.2em 0.35em; }
+    table.heatX th.grp { color: var(--accent); border-bottom: 2px solid var(--accent);
+                         padding-bottom: 0.3em; font-size: 0.7em; text-transform: uppercase;
+                         letter-spacing: 0.05em; text-align: center; }
+    table.heatX tbody th { font-family: var(--font-sans); font-size: 0.88em; font-weight: 700;
+                           color: var(--text); text-align: right; white-space: nowrap; padding-right: 0.55em;
+                           line-height: 1.15; }
+    table.heatX td:nth-child(4), table.heatX thead th:nth-child(4) { border-left: 2px solid var(--hair); }
+
+    /* columns */
+    .cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; }
+    .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4em; align-items: center; }
+
+    /* callback comparison cards */
+    .cb { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.1em; align-items: center; }
+    .cb img { width: 100%; max-height: 470px; object-fit: contain; background: var(--ground);
+              border: 1px solid var(--hair); border-radius: 5px; box-shadow: 0 3px 16px rgba(42,32,24,0.10); }
+    .attempts { display: flex; flex-direction: column; gap: 0.5em; font-size: 0.8em; }
+    .att { border-left: 4px solid var(--hair); padding: 0.35em 0.7em; background: var(--paper); border-radius: 0 5px 5px 0; }
+    .att .who { font-family: var(--font-sans); font-size: 0.72em; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; }
+    .att.audience { border-color: var(--muted); }
+    .att.pipeline { border-color: var(--accent-2); }
+    .att.llm { border-color: var(--accent); }
+    .att.right { border-color: var(--accent); background: var(--teal-tint); }
+    .att.right .who { color: var(--accent); }
+    .verdict { font-size: 0.7em; color: var(--muted); font-style: italic; }
+    /* Example slide — give the (now readable) chart far more room */
+    .ex-slide .cb { grid-template-columns: 1.55fr 1fr; gap: 1.4em; }
+    .ex-slide .cb img { max-height: 520px; }
+    .reveal .release.dont li::before { color: var(--accent-2); }
+    /* closing QR call-to-action */
+    .qr-cta { display: flex; flex-direction: column; align-items: center; gap: 0.5em; margin-top: 0.6em; }
+    .qr-cta img { height: 280px; width: 280px; background: #fff; padding: 12px; border-radius: 10px;
+                  box-shadow: 0 4px 20px rgba(42,32,24,0.18); }
+    .qr-cta .url { font-family: var(--font-mono); font-size: 0.7em; color: var(--accent); }
+
+    .lead { font-size: 1.25em; line-height: 1.4; max-width: 86%; }
+    .lead em { color: var(--accent-3); font-style: normal; }
+    .center { text-align: center; }
+    .bignum { font-family: var(--font-display); font-size: 1.9em; font-weight: 600; color: var(--accent-3); line-height: 1.1; }
+
+    /* new-triplet reframe */
+    .triad { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; margin: 0.7em 0; }
+    .node { background: var(--paper); border-radius: 8px; padding: 0.8em 0.9em; border: 1px solid var(--hair); border-top: 4px solid var(--accent); }
+    .node h4 { color: var(--text); margin: 0 0 0.3em; text-transform: none; letter-spacing: 0; font-size: 0.98em; font-family: var(--font-display); }
+    .node .brings { font-size: 0.82em; margin: 0.2em 0 0.6em; line-height: 1.35; }
+    .node.image { border-top-color: var(--accent-3); }
+    .node.spec { border-top-color: var(--accent); }
+    .node.writer { border-top-color: var(--muted); }
+    .badge { display: inline-block; font-family: var(--font-sans); font-size: 0.58em; text-transform: uppercase; letter-spacing: 0.06em;
+             font-weight: 600; border-radius: 999px; padding: 0.18em 0.7em; }
+    .badge.proved { background: var(--teal-tint); color: var(--accent); border: 1px solid #bcdedb; }
+    .badge.open { background: #F6E3C8; color: var(--accent-3); border: 1px solid #e7cba0; }
+    .badge.given { background: #EFE7D6; color: var(--muted); border: 1px solid var(--hair); }
+
+    /* "one chart, six captions" example cards */
+    .ex { background: var(--paper); border: 1px solid var(--hair); border-radius: 6px; padding: 0.55em 0.7em; text-align: left; }
+    .ex.one { border-top: 3px solid var(--muted); }
+    .ex.five { border-top: 3px solid var(--accent); }
+    .ex .exlab { font-family: var(--font-sans); font-size: 0.62em; letter-spacing: 0.06em;
+                 text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 0.3em; }
+    .ex.one .exlab { color: var(--muted); }
+    .ex.five .exlab { color: var(--accent); }
+    .ex p { font-family: var(--font-display); font-style: italic; margin: 0; line-height: 1.35; }
+
+    /* "can it even match charts to captions?" — two untidy heaps */
+    .heap-wrap { display: flex; align-items: center; justify-content: center; gap: 0.8em; margin: 0.6em auto 0; }
+    .heap { position: relative; flex: 1 1 0; max-width: 44%; height: 440px; }
+    .heap-label { position: absolute; top: -0.7em; left: 50%; transform: translateX(-50%);
+                  font-family: var(--font-sans); font-size: 0.58em; letter-spacing: 0.14em;
+                  text-transform: uppercase; color: var(--muted); font-weight: 600; z-index: 30; }
+    .heap .pile { position: absolute; box-shadow: 0 8px 24px rgba(42,32,24,0.22); }
+    .heap img.pile { border: 1px solid var(--hair); border-radius: 5px; background: var(--ground); }
+    .heap .scrap { background: var(--paper); border: 1px solid var(--hair); border-left: 4px solid var(--accent);
+                   border-radius: 0 5px 5px 0; padding: 0.7em 0.95em; font-family: var(--font-display);
+                   font-style: italic; font-size: 0.86em; line-height: 1.34; color: var(--text); }
+    .heap-q { flex: 0 0 auto; align-self: center; font-family: var(--font-display);
+              font-size: 2.6em; font-weight: 600; color: var(--accent-3); }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ===================== TITLE ===================== -->
+<section data-state="title">
+  <img src="sisyphus.svg" alt="Line drawing of Sisyphus pushing a boulder uphill"
+       style="position:absolute; right:1.25rem; top:0; transform:translateY(calc(-100% - 0.5rem)); height:175px; opacity:0.9; margin:0; pointer-events:none;">
+  <h1>Caption This<span class="caret"></span></h1>
+  <h3>Teaching Machines to Narrate Charts</h3>
+  <p class="epigraph">
+    A chart compresses data. A caption compresses the chart. This talk is about
+    whether machines can learn that second compression&nbsp;&mdash; and why
+    <em>generating</em> a caption turns out to be the easy part.
+  </p>
+  <p style="margin-top:1.3em; font-family:var(--font-sans); font-size:1.2em; font-weight:600; color:var(--text);">Jaidev Deshpande &nbsp;&middot;&nbsp; <a href="https://beingbayesian.in" style="color:var(--accent);">beingbayesian.in</a></p>
+  <p style="margin-top:0.7em; font-family:var(--font-sans); font-size:1.25em; font-weight:700; color:var(--accent-3);">VizChitra 2026, Bangalore</p>
+  <aside class="notes">Hi, I'm Jaidev. I write data essays — charts, numbers, the occasional rant — at a place called beingbayesian. Today I want to talk about the smallest part of any chart: the part we write last and think about least. The caption. Here's the one idea I'll keep coming back to. A chart compresses data. A caption compresses the chart. And it turns out that getting a machine to write that caption is the easy part. The hard part is everything around it — and that's what I want to show you.</aside>
+</section>
+
+<!-- ===================== ACT 1 — PROBLEM ===================== -->
+
+<section data-state="title">
+  <div style="display:flex; align-items:center; justify-content:center; gap:2.6rem; text-align:left;">
+    <div style="max-width:58%;">
+      <h1 style="margin:0;">How would you caption<br>the following charts?</h1>
+      <p class="epigraph" style="margin:1em 0 0; max-width:none;">
+        A caption isn&rsquo;t the title or the headline.<br>
+        It&rsquo;s the takeaway &mdash; the story, the insight &mdash; in one or two sentences.
+      </p>
+    </div>
+    <a href="https://google.com" target="_blank" rel="noopener" style="flex:0 0 auto; display:block;">
+      <img src="qr-google.png" alt="QR code — opens google.com"
+           style="height:360px; width:360px; background:#fff; padding:14px; border-radius:10px; box-shadow:0 4px 20px rgba(42,32,24,0.18); display:block;">
+    </a>
+  </div>
+  <aside class="notes">Before I tell you anything, I want you to do the work. I'm going to show you three charts, one at a time. For each one, think of a caption. Not the title, not the headline — the caption is the one or two sentences underneath that tell you what you're actually supposed to take away. The story. The point. So: how would you caption these? Let's start.</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Your turn &middot; 1 of 3</span>
+  <div class="caption-slot"><span class="ph">Caption this&hellip;</span><span class="caret"></span></div>
+  <img class="chart-hero" src="assets/03-kitchen-time-by-gender-slide.png"
+       alt="Grouped horizontal bar chart: weekly kitchen hours by activity, women vs men">
+  <aside class="notes">There's a Malayalam film called The Great Indian Kitchen. Its Hindi remake came out early last year, and the most common complaint about it online was, "This is unfair — men cook too." And then, almost on cue, a couple of months later, the microdata from the 2024 Time Use Survey came out. So here is how men and women actually split the work in the kitchen — this is for white-collar, salaried folks. Take a few seconds. If you had to put one sentence under this chart, what would it be?</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Your turn &middot; 2 of 3</span>
+  <div class="caption-slot"><span class="ph">Caption this&hellip;</span><span class="caret"></span></div>
+  <img class="chart-hero" src="assets/07-monthly-posts.png"
+       alt="Area + line chart: monthly Stack Overflow posts and genuinely good questions, with ChatGPT launch marker">
+  <aside class="notes">Here's one that was all over LinkedIn earlier this year. The claim was simple: ChatGPT killed Stack Overflow. But look closely — there are two lines. The teal one is what I'd call genuinely good questions: questions that were never closed or marked duplicate, that were highly upvoted, and that got a highly upvoted answer. And that dashed line is the day ChatGPT launched. So — same question. What's your caption?</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Your turn &middot; 3 of 3</span>
+  <div class="caption-slot"><span class="ph">Caption this&hellip;</span><span class="caret"></span></div>
+  <img class="chart-hero" src="assets/06-intoxicants-panels.png"
+       alt="Dumbbell chart: per-capita spend on intoxicants, insured vs not-insured, rural and urban">
+  <aside class="notes">Last one. Recently, two of the Prime Minister's economic advisors wrote an op-ed in the Indian Express. Their argument: the government is spending more on health insurance, and spending on intoxicants is also going up — so this must be moral hazard. People take more risks because they're insured. Now, you can see the hole in that immediately — two things going up at the same time doesn't mean one causes the other. So I thought, let's actually check: are the people who consume more intoxicants the same people who are insured? This is what I got — insured in one colour, not insured in the other. How would you caption it? Take your time.</aside>
+</section>
+
+<section>
+  <h2 class="center">Captions are subjective</h2>
+  <p class="center" style="margin-top:-0.1em; font-size:0.95em;">There&rsquo;s no <em>wrong</em> caption &mdash; but a good chart and a suitable caption make a good story.</p>
+  <div class="cols3" style="font-size:0.8em; margin-top:0.7em;">
+    <div>
+      <h4>Gender in the Kitchen</h4>
+      <p><span class="kicker">Obvious:</span> &ldquo;Women spend much more time in the kitchen.&rdquo;</p>
+      <p><span style="color:#11696E;font-weight:600;">Good:</span> &ldquo;Men cook a little bit, but they certainly don&rsquo;t clean up after.&rdquo;</p>
+    </div>
+    <div>
+      <h4>Questions on Stack Overflow</h4>
+      <p><span class="kicker">Obvious:</span> &ldquo;ChatGPT killed Stack Overflow.&rdquo;</p>
+      <p><span style="color:#11696E;font-weight:600;">Good:</span> &ldquo;Good, unique questions were anyway on the decline. ChatGPT, at best, was beating an already&#8209;dead horse.&rdquo;</p>
+    </div>
+    <div>
+      <h4>Health Insurance &amp; Addiction</h4>
+      <p><span class="kicker">Obvious:</span> &ldquo;Foreign liquor is the most expensive intoxicant.&rdquo;</p>
+      <p><span style="color:#11696E;font-weight:600;">Good:</span> &ldquo;Whether you&rsquo;re insured or not doesn&rsquo;t make more than Rs&nbsp;15 worth of difference.&rdquo;</p>
+    </div>
+  </div>
+  <p class="center muted" style="margin-top:0.9em;">Same data and the same charts. It&rsquo;s the caption &mdash; the few words that you write accompanying the chart &mdash; that is deeply contextual.</p>
+  <aside class="notes">Now — there's no single right answer here. That's the whole point. There's no wrong caption, exactly, but a good chart with the right caption is what turns numbers into a story. Look at the difference. For the kitchen one, the obvious caption is "women spend much more time in the kitchen." True, but flat. The better one: men do cook a little — but they certainly don't clean up after. For Stack Overflow, the obvious one is "ChatGPT killed it." The better one: the good questions were already dying; ChatGPT was beating an already-dead horse. And for the intoxicants chart: yes, foreign liquor is the priciest — but the honest reading is that whether you're insured or not barely changes anything, maybe fifteen rupees. Same data, same charts. The only thing that changed is the sentence — and that sentence is where all the judgment lives. Which raises the obvious question…</aside>
+</section>
+
+<section>
+  <p class="center" style="margin-bottom:0.3em;"><span class="stage-tag">The big question</span></p>
+  <h2 class="center" style="margin:0.2em auto 0.9em;">Can we get a machine to write <em>good</em> captions?</h2>
+  <p class="center" style="font-family:var(--font-display); font-size:1.3em; line-height:1.45; margin:0.7em auto; max-width:84%;">
+    From the <span class="kicker">information</span> (the data) and the <span class="kicker">intent</span> (the chart) &mdash; can an AI do it?</p>
+  <p class="center" style="font-family:var(--font-display); font-size:1.3em; line-height:1.45; margin:0.7em auto; max-width:84%;">
+    And how would it deal with <span class="kicker">subjectivity</span>?</p>
+  <aside class="notes">So here's the question for the next twenty minutes. Can we get a machine to write a *good* caption — not a correct one, a *good* one. It has two things to go on: the information, which is the data, and the intent, which is the chart someone chose to draw. And here's the part that actually kept me up: captions are subjective. There's no single right answer. So how would a machine ever deal with *that*? Let's build up to it.</aside>
+</section>
+
+<section>
+  <h2 class="center">Every insight is a chain of compressions</h2>
+  <div class="pipe">
+    <figure class="stage data">
+      <span class="stage-label">Data</span>
+<pre class="mini-table">Month      All posts    Good
+2008-09       73,365   2,961
+2014-03      525,947  31,884
+2017-06      423,082  43,204
+2022-11      249,340  16,715
+   &#8942;            &#8942;       &#8942;
+2025-12       10,321     662</pre>
+      <figcaption>210 months of numbers</figcaption>
+    </figure>
+    <div class="pipe-arrow">&rarr;</div>
+    <figure class="stage chart">
+      <span class="stage-label">Chart</span>
+      <img src="assets/07-monthly-posts.png" alt="Stack Overflow posts per month, log scale">
+      <figcaption>one picture</figcaption>
+    </figure>
+    <div class="pipe-arrow">&rarr;</div>
+    <figure class="stage cap">
+      <span class="stage-label">Insight</span>
+      <p class="cap">&ldquo;Good questions were already in decline. ChatGPT was beating an already&#8209;dead horse.&rdquo;</p>
+      <figcaption>one sentence</figcaption>
+    </figure>
+  </div>
+  <p class="center muted" style="margin-top:0.3em;">Together, these three are one <strong>triplet</strong> &mdash; data, chart, caption. The caption is the smallest, most contextual compression of all.</p>
+  <p class="center" style="margin-top:0.5em; font-size:1.12em;">The first conversion &mdash; <strong>data&nbsp;&rarr;&nbsp;chart</strong> &mdash; is free; machines already do it. The <span class="kicker">trick</span> is getting from <strong>chart&nbsp;&rarr;&nbsp;caption</strong>.</p>
+  <aside class="notes">Let me reframe what's really going on when you make a chart. You start with data — here, two hundred-odd months of Stack Overflow numbers. You compress that into a picture: one chart. Then you compress the chart into a sentence: the insight. There's a line I love from Gregory Chaitin — comprehension *is* compression. To understand something is just to find a shorter description of it. A good chart is shorter than its data; a good caption is shorter than its chart. And notice: the first step, data to chart, machines already do for free — every BI tool on earth does it. The interesting, unsolved step is the last one. Chart to caption.</aside>
+</section>
+
+<section>
+  <h2 class="center">Can models <em>match</em> a chart to a caption?</h2>
+  <div class="heap-wrap">
+    <div class="heap charts">
+      <span class="heap-label">charts</span>
+      <img class="pile" src="assets/93528.png" alt="line chart"
+           style="width:60%; top:52%; left:5%; transform:rotate(-4deg); z-index:1;">
+      <img class="pile" src="assets/144140.png" alt="bar chart"
+           style="width:48%; top:27%; left:37%; transform:rotate(7deg); z-index:2;">
+      <img class="pile" src="assets/60635.png" alt="horizontal bar chart"
+           style="width:52%; top:2%; left:3%; transform:rotate(-8deg); z-index:3;">
+    </div>
+    <div class="heap-q">?</div>
+    <div class="heap caps">
+      <span class="heap-label">captions</span>
+      <div class="pile scrap" style="width:60%; top:58%; left:22%; transform:rotate(4deg); z-index:1;">&ldquo;China&rsquo;s farm share of GDP jumped from 23% to 40% in three years.&rdquo;</div>
+      <div class="pile scrap" style="width:66%; top:31%; left:1%; transform:rotate(-6deg); z-index:2;">&ldquo;Lebanon led electricity from oil every year &mdash; peaking near 97% in 2008.&rdquo;</div>
+      <div class="pile scrap" style="width:62%; top:2%; left:17%; transform:rotate(5deg); z-index:3;">&ldquo;Male secondary enrolment in East Asia fell from 59% to 50% over 1990&ndash;1993.&rdquo;</div>
+    </div>
+  </div>
+  <p class="center muted" style="margin-top:0.4em;">Which caption belongs to which chart? Pairing them up is its own problem &mdash; for a person, and for a machine.</p>
+  <aside class="notes">Before a machine can write a caption, here's an even more basic question: can it even tell which caption *goes with* which chart? Picture it like this — a pile of charts, a pile of captions, all jumbled together. Match them up. For us it's almost insultingly easy; you read one, you read the other, you pair them. For a machine, it turns out, pairing them up is a genuine problem. So I tested it.</aside>
+</section>
+
+<section>
+  <h2 class="center">They don&rsquo;t line up</h2>
+  <p class="center" style="font-size:0.95em;">Match each chart to its caption by similarity, across a corpus of ~23,000 charts:</p>
+  <table class="metrics big" style="margin:0.5em auto;">
+    <thead><tr><th>find the right caption from its chart</th><th>got it 1st try</th></tr></thead>
+    <tbody>
+      <tr><td>from the chart&rsquo;s shape alone</td><td>~0.3% &mdash; basically chance</td></tr>
+      <tr><td>from the chart + its data</td><td>7%</td></tr>
+      <tr class="hl"><td>&hellip; once you add the title printed on the chart</td><td>38%</td></tr>
+    </tbody>
+  </table>
+  <p class="center muted">The <em>title</em> here is the heading drawn on the chart itself &mdash; not the caption we&rsquo;re trying to find.
+     A caption names the axis, not the topic, and to a generic vision model a chart is just shapes, not meaning &mdash; so chart
+     and caption don&rsquo;t land near each other until that title bridges them. The chart&rarr;caption compression doesn&rsquo;t
+     run backwards off the shelf.</p>
+  <p class="center" style="margin-top:0.3em; font-weight:600; color:#C77D2A;">Comprehending the <em>image</em> of a chart isn&rsquo;t enough &mdash; models need to be grounded in <em>data</em> and <em>semantics</em>.</p>
+  <aside class="notes">And they don't line up. I took about twenty-three thousand charts and asked a model to find the right caption for each one, by similarity. From the shape of the chart alone — just the pixels — it gets it right about a third of one percent of the time. That's chance. Add the underlying data, and it climbs to seven percent. The real jump comes when you add the title printed *on* the chart — then it's thirty-eight percent. And that's the tell: to a generic vision model, a chart is just shapes. A caption names the axis, not the topic. So the chart and its caption don't even land near each other until that title bridges them. Reading the *picture* isn't enough — the model has to be grounded in the data and the words.</aside>
+</section>
+
+<section>
+  <h2 class="center">The chart loses what the caption needs</h2>
+  <div class="pipe-wrap">
+    <div class="pipe">
+      <figure class="stage data">
+        <span class="stage-label">Data</span>
+<pre class="mini-table">Month      All posts    Good
+2008-09       73,365   2,961
+2014-03      525,947  31,884
+2017-06      423,082  43,204
+2022-11      249,340  16,715
+   &#8942;            &#8942;       &#8942;
+2025-12       10,321     662</pre>
+        <figcaption>210 months of numbers</figcaption>
+      </figure>
+      <div class="pipe-arrow">&rarr;</div>
+      <figure class="stage chart">
+        <span class="stage-label">Chart</span>
+        <img src="assets/07-monthly-posts.png" alt="Stack Overflow posts per month, log scale">
+        <figcaption>one picture</figcaption>
+      </figure>
+      <div class="pipe-arrow">&rarr;</div>
+      <figure class="stage cap">
+        <span class="stage-label">Insight</span>
+        <p class="cap">&ldquo;Good questions were already in decline. ChatGPT was beating an already&#8209;dead horse.&rdquo;</p>
+        <figcaption>one sentence</figcaption>
+      </figure>
+    </div>
+    <svg class="bypass" viewBox="0 0 1000 78" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <marker id="bp-head" markerWidth="9" markerHeight="9" refX="5" refY="6" orient="auto"
+                markerUnits="userSpaceOnUse">
+          <path d="M1,1 L5,6 L9,1" fill="none" stroke="#A23E2A" stroke-width="1.6"/>
+        </marker>
+      </defs>
+      <path d="M155,4 C 155,74 845,74 845,14" fill="none" stroke="#A23E2A" stroke-width="2"
+            stroke-dasharray="6 5" marker-end="url(#bp-head)"/>
+    </svg>
+    <span class="bypass-label">the caption still needs the data</span>
+  </div>
+  <p class="center" style="margin-top:0.2em; font-size:1.12em;">The chart is a <em>lossy</em> compression. To write a faithful caption, the model still has to reach back to the <strong>data</strong> &mdash; the picture alone isn&rsquo;t enough.</p>
+  <aside class="notes">Which brings us to the uncomfortable part. Same pipeline — data, chart, caption. The natural assumption is: to caption a chart, look at the chart. But the chart is a *lossy* compression — drawing the data already threw information away. So if you want a caption that's actually faithful, the model can't just read the picture. It has to reach back, past the chart, to the data itself. The picture alone isn't enough.</aside>
+</section>
+
+<section>
+  <h2 class="center">An Elementary Pipeline</h2>
+  <div class="flow">
+    <div class="flow-inputs">
+      <div class="flow-box"><span class="t">The chart</span><span class="m">the picture a reader sees</span></div>
+      <div class="flow-box"><span class="t">Its data</span><span class="m">the numbers behind it</span></div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box judge"><span class="t">The model</span><span class="m">an LLM, given both</span></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box"><span class="t">A caption</span><span class="m">one sentence of insight</span></div>
+  </div>
+  <p class="center muted" style="margin-top:0.6em;">Give the model the <strong>chart</strong> and its <strong>data</strong>, ask it to <strong>write the caption</strong>. Everything that follows is variations on this one move.</p>
+  <aside class="notes">So here's the simplest thing that could possibly work. Give the model both — the chart *and* the data behind it — and ask it to write the caption. That's the whole pipeline. No fine-tuning, nothing clever, not yet. Chart plus data in, caption out. Everything I show you from here is a variation on this one move.</aside>
+</section>
+
+<section>
+  <h2 class="center">PlotCaptions: the training data for that pipeline</h2>
+  <p class="center" style="font-size:0.95em;">A whole library of <strong>(data &middot; chart &middot; caption)</strong> triplets &mdash;
+     exactly the inputs and outputs the pipeline needs.</p>
+  <div class="cols3" style="text-align:center; margin:0.7em 0;">
+    <div><div class="bignum">~150,000</div><div class="muted">charts</div></div>
+    <div><div class="bignum">+&nbsp;data</div><div class="muted">the table behind every chart</div></div>
+    <div><div class="bignum">~18M</div><div class="muted">captions</div></div>
+  </div>
+  <p class="center muted" style="max-width:84%; margin:0.35em auto;">Built on <strong>PlotQA</strong> (Methani et&nbsp;al., 2020), a 200k&#8209;chart visual&#8209;Q&amp;A corpus.
+     I took its <em>reasoning</em> and <em>comparison</em> questions &mdash; each generated from a template &mdash; and turned every
+     Q&amp;A pair back into a caption, then grammar&#8209;checked the lot.</p>
+  <p class="center" style="margin-top:0.3em; font-weight:600; color:#C77D2A;">Each entry is one triplet: a chart, its data, and one valid caption.</p>
+  <aside class="notes">To do any of this seriously, you need data — a lot of charts, with their numbers *and* good captions. That didn't exist, so I built it. It's called PlotCaptions: about a hundred and fifty thousand charts, the table behind every one, and roughly eighteen million captions. It's built on top of PlotQA, a visual question-answering dataset from 2020. PlotQA has these templated reasoning and comparison questions for each chart — I turned every question-and-answer pair back into a caption, and then, because the grammar was frankly a mess, ran the whole lot through a grammar checker. Each entry is one triplet: a chart, its data, and a caption that's actually true of it.</aside>
+</section>
+
+<!-- ===================== DOES THE MACHINE WORK? ===================== -->
+
+<section class="ex-slide">
+  <h2>Example</h2>
+  <div class="cb">
+    <img src="assets/14-warehouse-example.png" alt="bar chart: days required to build a warehouse, by country">
+    <div class="attempts">
+      <div class="att" style="border-color:#11696E;"><span class="who">The data &mdash; days required to build a warehouse</span>
+<pre style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:0.66em;line-height:1.45;margin:0.25em 0 0;white-space:pre;">Barbados   442
+Belgium    212
+Benin      137
+Belarus    129
+Belize     109</pre></div>
+      <div class="att llm"><span class="who">The AI&rsquo;s caption</span> &ldquo;Barbados requires <strong>the most days</strong> to build a warehouse among the listed countries, at 442 days &mdash; <strong>more than four times</strong> the 109 days required in Belize, the lowest in the group.&rdquo;</div>
+      <div class="att right"><span class="who">Verdict &#10003;</span> Grounded, accurate, mildly dramatic.</div>
+    </div>
+  </div>
+  <p class="center muted" style="margin-top:0.5em;">This chart holds several true stories &mdash; who&rsquo;s slowest, who&rsquo;s fastest, how wide the spread runs. The AI wrote <em>one</em> of them, and it checks out.</p>
+</section>
+
+<!-- ===================== ACT 4 — LEARNING ===================== -->
+
+<section>
+  <h2 class="center">But what makes a caption <em>good</em>? Another LLM judges it</h2>
+  <div class="judge">
+    <div class="judge-panel brief">
+      <h4>Its brief</h4>
+      <ul>
+        <li><b>Parse</b> the chart&rsquo;s underlying data</li>
+        <li><b>Infer the intent</b> from the chart&rsquo;s elements &mdash; title, axes, series</li>
+        <li><b>Weigh its impact</b>, not just whether it&rsquo;s accurate</li>
+      </ul>
+    </div>
+    <div class="judge-panel shots">
+      <h4>Few-shotted with intense &amp; boring captions</h4>
+      <div class="shot good"><span class="mk">&#9733;</span><span>&ldquo;Georgia&rsquo;s farm output jumped ~61&times; in a single year, 1993&rarr;1994.&rdquo;</span><span class="sc">&#129327;</span></div>
+      <div class="shot good"><span class="mk">&#9733;</span><span>&ldquo;Uruguay&rsquo;s value more than doubled in one year &mdash; the largest jump of any country.&rdquo;</span><span class="sc">&#129327;</span></div>
+      <div class="shot bad"><span class="mk">&times;</span><span>&ldquo;Life expectancy rose every year, from 78.35 to 79.1.&rdquo;</span><span class="sc">&#128530;</span></div>
+      <div class="shot bad"><span class="mk">&times;</span><span>&ldquo;The legal&#8209;rights index stayed constant at 7 across all years.&rdquo;</span><span class="sc">&#128530;</span></div>
+    </div>
+  </div>
+  <p class="center muted" style="margin-top:0.55em;">A handful of labelled examples calibrate it &mdash; then it scores every caption the same way. This judge is the instrument behind every impact score that follows.</p>
+  <p class="center" style="margin-top:0.25em; font-family:var(--font-mono); font-size:0.66em; color:var(--muted);">Generator: <strong>Claude&nbsp;Sonnet&nbsp;4.6</strong> &nbsp;&middot;&nbsp; Judge: <strong>Claude&nbsp;Opus&nbsp;4.8</strong> &mdash; a separate, stronger model.</p>
+</section>
+
+<section>
+  <h2 class="center">Getting Greedy: Generate 5 Captions and Rank Them</h2>
+  <p class="center" style="font-size:0.95em;">Ask for <em>one</em> caption and the AI plays it safe &mdash; it reports the biggest number.
+     Ask for <em>five, ranked by impact</em>, and keep the top one:</p>
+  <table class="metrics big" style="margin:0.5em auto;">
+    <thead><tr><th>&nbsp;</th><th>grounded</th><th>impact (1&ndash;5)</th></tr></thead>
+    <tbody>
+      <tr><td>Ask for one</td><td><strong>92%</strong></td><td>2.56</td></tr>
+      <tr class="hl"><td>Ask for five, keep the best</td><td>73%</td><td><strong>3.86</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="center muted" style="margin-top:-0.1em; font-size:0.8em;">Data only, 200&#8209;chart pilot &mdash; same input both rows; the only change is one caption vs five ranked.</p>
+  <p class="center">When asked for five captions, <strong>up to one or two of them are made up</strong>.</p>
+  <p class="center" style="margin-top:0.4em;">But the remaining rate <strong>higher on impact</strong>.</p>
+  <aside class="notes">
+    The fix: don't ask the LLM for the caption &mdash; ask for five ranked by impact and keep the top one. Across 200 charts, holding the input constant (data only), Impact jumps from 2.56 to 3.86 on a 5-point scale, for a 19-point drop in grounding (92 to 73). The kind of insight shifts too: single-shot picks the maximum value; ranked captions counter the default narrative and notice distributional oddities.
+
+    Two judges &mdash; an impact judge and a separate Big/Useful/Surprising insight judge &mdash; independently agree on the ordering. One honest caveat: same-model judging (Sonnet generates and judges); an Opus rejudge would harden these numbers.
+
+    Selection, not generation. Treat the LLM as a candidate generator, not an oracle.
+  </aside>
+</section>
+
+<section>
+  <h2 class="center">Earlier Example</h2>
+  <p class="center muted" style="margin-top:-0.1em;">The same warehouse chart, fed through the pipeline. Bolder readings surface &mdash; but one of the five is quietly wrong.</p>
+  <div class="cb" style="margin-top:0.5em;">
+    <img src="assets/14-warehouse-example.png" alt="warehouse chart">
+    <div class="attempts">
+      <div class="att" style="border-color:#11696E;"><span class="who">Ask for one</span> &ldquo;Barbados takes more than 4&times; the days of Belize &mdash; 442 vs 109.&rdquo; <span class="verdict">Grounded &mdash; but it only reports the biggest gap.</span></div>
+      <div class="att pipeline"><span class="who">Ask for five &middot; ranked&nbsp;#1</span> &ldquo;Barbados (442) needs more days than the other four <em>combined</em> (587) &mdash; nearly double Belgium, a high&#8209;income EU state.&rdquo; <span class="verdict" style="color:#A23E2A;">&#10007; Made up: 442 &lt; 587. The model&rsquo;s own numbers refute it &mdash; fluent, confident, wrong.</span></div>
+      <div class="att right"><span class="who">Ask for five &middot; ranked&nbsp;#2</span> &ldquo;Belgium, a heavily&#8209;regulated EU economy, still takes less than half Barbados&rsquo;s time (212 vs 442) &mdash; upending the idea that European red tape is the worst.&rdquo; <span class="verdict">&#10003; Bolder <em>and</em> true &mdash; the counter&#8209;narrative.</span></div>
+    </div>
+  </div>
+  <p class="center" style="margin-top:0.5em;">Asking for impact surfaces sharper readings &mdash; and the occasional confident fabrication. Telling them apart is <span class="kicker">curation</span>.</p>
+</section>
+
+<section>
+  <h2 class="center" style="margin-bottom:0.1em;">Results on a Larger Sample of ~23k Charts</h2>
+  <p class="center muted" style="margin:0 auto 0.5em; max-width:90%;">Stratified w.r.t. type of chart (v/h bar, line, scatter, etc.) and type of caption (comparison, trend, retrieval, etc.) &middot; model fed data&nbsp;+&nbsp;image.</p>
+  <table class="heat heatX">
+    <thead>
+      <tr><th></th><th></th><th></th><th class="grp" colspan="5">Patterns of insight &mdash; % of captions</th></tr>
+      <tr><th></th><th>Grounded</th><th>Impact<br>(1&ndash;5)</th><th>Unknown<br>result</th><th>Surprising<br>comparison</th><th>Surprising<br>extreme</th><th>Significant<br>outlier</th><th>Abnormal<br>distribution</th></tr>
+    </thead>
+    <tbody>
+      <tr><th>Ask 1</th><td class="m hot" style="background:rgba(17,105,110,0.84)">96%</td><td class="m" style="background:rgba(17,105,110,0.17)">2.23</td><td class="m" style="background:rgba(17,105,110,0.11)">2%</td><td class="m" style="background:rgba(17,105,110,0.12)">30%</td><td class="m" style="background:rgba(17,105,110,0.10)">15%</td><td class="m hot" style="background:rgba(17,105,110,0.64)">40%</td><td class="m" style="background:rgba(17,105,110,0.14)">4%</td></tr>
+      <tr><th>Ask 5,<br>keep best</th><td class="m" style="background:rgba(17,105,110,0.52)">79%</td><td class="m hot" style="background:rgba(17,105,110,0.83)">3.84</td><td class="m hot" style="background:rgba(17,105,110,0.74)">48%</td><td class="m hot" style="background:rgba(17,105,110,0.83)">77%</td><td class="m hot" style="background:rgba(17,105,110,0.68)">26%</td><td class="m" style="background:rgba(17,105,110,0.17)">26%</td><td class="m hot" style="background:rgba(17,105,110,0.68)">34%</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== ACT 5 — INVITATION ===================== -->
+
+<section data-state="title">
+  <div style="display:flex; align-items:center; justify-content:center; gap:2.6rem; text-align:left;">
+    <div style="max-width:58%;">
+      <h2>Our three charts, revisited</h2>
+      <p class="lead" style="margin-top:0.6em;">The room&rsquo;s caption &mdash; the AI asked for <strong>one</strong> &mdash; the AI asked for <strong>five, ranked</strong> &mdash; and the reading that mattered.</p>
+    </div>
+    <a href="https://google.com" target="_blank" rel="noopener" style="flex:0 0 auto; display:block;">
+      <img src="qr-google.png" alt="QR code — opens google.com"
+           style="height:360px; width:360px; background:#fff; padding:14px; border-radius:10px; box-shadow:0 4px 20px rgba(42,32,24,0.18); display:block;">
+    </a>
+  </div>
+</section>
+
+<section>
+  <div class="cb">
+    <img src="assets/03-kitchen-time-by-gender-slide.png" alt="kitchen chart">
+    <div class="attempts">
+      <h4 style="margin:0;">Gender in the Kitchen</h4>
+      <div class="att audience"><span class="who">The room</span> &ldquo;see, men cook too.&rdquo;</div>
+      <div class="att pipeline"><span class="who">Ask for one</span> &ldquo;Women spend ~12.5&times; more time than men on meal prep &mdash; 10.2 vs 0.8 hours a week.&rdquo; <span class="verdict">Grounded &mdash; the headline number.</span></div>
+      <div class="att llm"><span class="who">Ask for five, ranked</span> &ldquo;Men log ~1 hour of kitchen work a week to women&rsquo;s ~15 &mdash; women do roughly 94% of all kitchen labour.&rdquo; <span class="verdict">Nails it &mdash; the fuller story.</span></div>
+      <div class="att right"><span class="who">The right reading</span> women do ~12&times; the cooking &mdash; and almost all the serving and cleaning around it.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="cb">
+    <img src="assets/07-monthly-posts.png" alt="stack overflow chart">
+    <div class="attempts">
+      <h4 style="margin:0;">Questions on Stack Overflow</h4>
+      <div class="att audience"><span class="who">LinkedIn</span> &ldquo;ChatGPT killed Stack Overflow.&rdquo;</div>
+      <div class="att pipeline"><span class="who">Ask for one</span> &ldquo;After ChatGPT, posts fell ~90% &mdash; 3.06M in 2022 to 315k in 2025.&rdquo; <span class="verdict">Grounded &mdash; but the exact LinkedIn story we opened by debunking.</span></div>
+      <div class="att llm"><span class="who">Ask for five, ranked</span> &ldquo;Already down 43% before ChatGPT &mdash; 5.34M posts in 2013 to 3.06M in 2022; it accelerated an existing decline, didn&rsquo;t start it.&rdquo; <span class="verdict">Right &mdash; the counter&#8209;narrative.</span></div>
+      <div class="att right"><span class="who">The right reading</span> both series peaked years <em>before</em> ChatGPT. It was beating an already&#8209;dead horse.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="cb">
+    <img src="assets/06-intoxicants-panels.png" alt="intoxicants chart">
+    <div class="attempts">
+      <h4 style="margin:0;">Health Insurance &amp; Addiction</h4>
+      <div class="att audience"><span class="who">The room / op&#8209;ed</span> insurance drives intoxicant spend &mdash; moral hazard.</div>
+      <div class="att pipeline"><span class="who">Ask for one</span> &ldquo;Foreign Liquor/Wine is the top intoxicant in both panels &mdash; Rs&nbsp;83 per adult among the urban uninsured, the largest value shown.&rdquo; <span class="verdict">Grounded &mdash; just the biggest number.</span></div>
+      <div class="att llm"><span class="who">Ask for five, ranked</span> &ldquo;It&rsquo;s the <em>uninsured</em>, not the insured, who spend more on the two priciest items &mdash; foreign liquor and beer &mdash; in both panels.&rdquo; <span class="verdict">A real directional pattern, arguably sharper &mdash; yet still not the honest &lsquo;barely matters.&rsquo;</span></div>
+      <div class="att right"><span class="who">The right reading</span> the gaps are small &mdash; insurance barely moves the needle, a <em>non&#8209;result</em> that &ldquo;rank by impact&rdquo; will never surface.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>A new chart triplet</h2>
+  <p class="center muted" style="margin-top:-0.2em;">The chart, its numbers, and the model &mdash; each brings something
+     different to a caption.</p>
+  <div class="triad">
+    <div class="node image">
+      <h4>Image</h4>
+      <p class="brings">carries the <strong>intent</strong> &mdash; the comparison, trend, or ranking the chart was built to show.</p>
+      <span class="badge proved">the intent</span>
+    </div>
+    <div class="node spec">
+      <h4>The numbers</h4>
+      <p class="brings">bring the <strong>numerical fidelity</strong> &mdash; the exact values, pinned down.</p>
+      <span class="badge proved">the fidelity</span>
+    </div>
+    <div class="node writer">
+      <h4>The LLM</h4>
+      <p class="brings">brings the <strong>discovery</strong> &mdash; it finds the insight worth telling.</p>
+      <span class="badge open">the discovery</span>
+    </div>
+  </div>
+  <p class="center" style="margin-top:0.4em;"><strong>The image shows the intent, the numbers keep it faithful, and the LLM does the discovering.</strong></p>
+</section>
+
+<section>
+  <h2 class="center">Sooner or later, you will use LLMs to evaluate DataViz</h2>
+  <div class="two-col" style="margin-top:0.7em; align-items:start; max-width:92%;">
+    <div>
+      <h4 style="color:#11696E;">Do</h4>
+      <ul class="release" style="max-width:100%; font-size:0.92em; line-height:1.55;">
+        <li>Ask for <strong>five, ranked by impact</strong>, and keep the best &mdash; not one shot. The prompt is the insight knob (+1.3).</li>
+        <li>Ground it in the <strong>numbers</strong> for fidelity, and <strong>judge with a separate, stronger model</strong>.</li>
+        <li>Treat the LLM as a <strong>candidate generator to curate</strong> &mdash; selection, not generation.</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:#A23E2A;">Don&rsquo;t</h4>
+      <ul class="release dont" style="max-width:100%; font-size:0.92em; line-height:1.55;">
+        <li>Don&rsquo;t mistake <strong>fluency for fidelity</strong> &mdash; a confident caption claimed 442 &gt; 587.</li>
+        <li>Don&rsquo;t trust the <strong>top-ranked caption</strong> on sight &mdash; check the arithmetic.</li>
+        <li>Don&rsquo;t expect <strong>ranking by impact</strong> to surface a genuine <em>non&#8209;result</em>.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="center muted" style="margin-top:0.8em;">Use it, and beat the benchmark: <strong>PlotCaptions</strong> &middot; jaidevd.com/posts/plotcaptions/</p>
+</section>
+
+<section data-state="closing">
+  <h1>Use the dataset. Discover your prompts.</h1>
+  <p class="lead" style="margin:0.5em auto; max-width:84%;">PlotCaptions is open &mdash; ~150k charts with their data and ~18M captions.</p>
+  <div class="qr-cta">
+    <img src="qr-plotcaptions.png" alt="QR code linking to the PlotCaptions repository">
+    <span class="url">github.com/jaidevd/plotqa-captions</span>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  // Speaker notes are authored as Markdown inside each <aside class="notes">.
+  // Render them to HTML before Reveal reads them (reveal's own markdown plugin skips notes).
+  document.querySelectorAll('aside.notes').forEach(function (el) {
+    var raw = el.textContent.replace(/^\n/, '').replace(/\s+$/, '');
+    if (!raw) return;
+    var lines = raw.split('\n');
+    var widths = lines.filter(function (l) { return l.trim(); })
+                      .map(function (l) { return l.match(/^ */)[0].length; });
+    var pad = widths.length ? Math.min.apply(null, widths) : 0;
+    el.innerHTML = marked.parse(lines.map(function (l) { return l.slice(pad); }).join('\n'));
+  });
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    width: 1280,
+    height: 760,
+    margin: 0.06,
+    minScale: 0.2,
+    maxScale: 2.0,
+    plugins: [RevealNotes, RevealHighlight],
+  });
+</script>
+</body>
+</html>
