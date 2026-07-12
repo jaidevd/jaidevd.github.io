@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Wed, 06 Jul 2016 14:45:55 +0530</lastBuildDate>
+			<lastBuildDate>Sun, 12 Jul 2026 10:45:26 +0530</lastBuildDate>
 		
 			<atom:link href="https://jaidevd.com/tags/math/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Finding Nash Equilibria in Jeopardy!</title>
+				<link>https://jaidevd.com/posts/nash-equilibria-jeopardy/</link>
+				<pubDate>Sun, 12 Jul 2026 10:45:26 +0530</pubDate>
+				<guid>https://jaidevd.com/posts/nash-equilibria-jeopardy/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;Spoiler Alert&lt;/strong&gt;: It&amp;rsquo;s unusual for post about a game show like &lt;em&gt;Jeopardy!&lt;/em&gt; to&#xA;have a spoiler, but if you are a die hard fan of the show and haven&amp;rsquo;t seen the&#xA;second semifinal game of season 2 of &lt;em&gt;Pop Culture Jeopardy!&lt;/em&gt; (it&amp;rsquo;s on Netflix),&#xA;then don&amp;rsquo;t read this just yet.&lt;/p&gt;&#xA;&lt;p&gt;(Here on I&amp;rsquo;m just going to write &lt;em&gt;Jeopardy&lt;/em&gt; without the exclamation mark, for&#xA;convenience.)&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;The last round in a game of &lt;em&gt;Jeopardy&lt;/em&gt; is called &amp;ldquo;Final Jeopardy&amp;rdquo;. When the round&#xA;begins, the three contestants (individually, usually, but in the case of Pop&#xA;Culture Jeopardy, teams of two) are shown the category of the final clue.&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>A Geometric Proof of the Perceptron Convergence Theorem</title>
 				<link>https://jaidevd.com/posts/perceptron-convergence/</link>
