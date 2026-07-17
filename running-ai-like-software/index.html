@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Coding Like It's Someone Else's Problem — Running AI like Software</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,500;1,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ---- warm paper ground, three-role accent system, dual-voice type ----
+     Lora (serif) = the editorial/human voice: headings, quotes.
+     IBM Plex Mono = the machine voice: labels, numbers, code.
+     teal = the right reading · brick = the weaker take (+ the strikethrough
+     motif) · ochre = kicker/index labels. Borrowed from the VizChitra deck. */
+  :root{
+    --bg:#FBF1DD; --panel:#FFF8EC;
+    --ink:#2A2018; --dim:#8A7D6B; --faint:#A9987D; --line:#E4D6BC;
+    --accent:#11696E; --accent2:#A23E2A; --accent3:#C77D2A;
+    --font-display:'Lora',Georgia,serif;
+    --font-sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+    --font-mono:'IBM Plex Mono',Menlo,'SF Mono',Consolas,monospace;
+  }
+  html,body{background:var(--bg);}
+  .reveal{font-family:var(--font-sans);color:var(--ink);font-weight:400;}
+  .reveal .slides{text-align:left;}
+  .reveal section{width:100%;height:100%;box-sizing:border-box;}
+  .slide{max-width:1080px;margin:0 auto;padding:34px 48px;box-sizing:border-box;
+         width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;position:relative;}
+
+  .reveal h1,.reveal h2,.reveal h3{font-family:var(--font-display);color:var(--ink);font-weight:700;
+    letter-spacing:-0.01em;margin:0 0 .4em;line-height:1.12;}
+  .reveal h1{font-size:3.5rem;}
+  .reveal h2{font-size:2.3rem;}
+  .reveal h3{font-size:1.3rem;color:var(--dim);font-weight:500;}
+  .reveal p{line-height:1.55;margin:0 0 .7em;}
+  .reveal em{color:var(--accent);font-style:normal;font-weight:600;}
+  .reveal strong{color:var(--ink);font-weight:700;}
+  .fix{color:var(--accent);font-weight:700;}
+  .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums;}
+
+  .eyebrow{font-family:var(--font-mono);color:var(--accent3);font-size:.92rem;font-weight:600;
+           text-transform:uppercase;letter-spacing:.12em;margin:0 0 1.4rem;padding-bottom:.45rem;
+           border-bottom:2px solid var(--accent3);display:inline-block;}
+  .meta{font-size:.82rem;color:var(--faint);letter-spacing:.02em;line-height:1.6;font-family:var(--font-mono);}
+  .lede{font-size:1.3rem;line-height:1.5;color:var(--ink);margin-bottom:.8rem;}
+  .sub{font-size:1.05rem;line-height:1.6;color:var(--dim);margin:0 0 .7em;max-width:94%;}
+  .caption{font-size:.82rem;color:var(--faint);margin-top:.8rem;}
+
+  /* title */
+  .title-sub{font-family:var(--font-display);font-style:italic;font-size:1.7rem;color:var(--dim);
+             font-weight:500;margin-top:1.2rem;}
+  .byline{font-family:var(--font-mono);font-size:1rem;color:var(--dim);margin-top:2.6rem;}
+  .byline a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);}
+
+  /* big number */
+  .huge{font-family:var(--font-mono);font-size:7.2rem;font-weight:700;line-height:.85;
+        letter-spacing:-.02em;color:var(--accent);margin:.1em 0;}
+  .row-baseline{display:flex;align-items:baseline;gap:1.8rem;flex-wrap:wrap;}
+
+  /* stat row — hairline dividers, no cards */
+  .stat-row{display:flex;margin-top:1.7rem;}
+  .stat-row .stat{flex:1;padding:0 1.8rem;border-left:1px solid var(--line);}
+  .stat-row .stat:first-child{border-left:none;padding-left:0;}
+  .stat-row .n{font-family:var(--font-mono);font-size:2.7rem;font-weight:700;color:var(--accent);line-height:1;}
+  .stat-row .l{font-size:.88rem;color:var(--dim);margin-top:.65rem;line-height:1.35;max-width:16ch;}
+
+  /* chart */
+  .chart{position:relative;height:380px;width:100%;margin-top:1.1rem;}
+  .slide-img{width:auto;height:auto;max-width:100%;max-height:380px;object-fit:contain;
+             margin-top:1.2rem;border:1px solid var(--line);border-radius:4px;display:block;}
+
+  /* nested sub-bullets inside a lead-list item */
+  ul.sub-bullets{list-style:disc;margin:.5rem 0 0;padding-left:1.2rem;color:var(--dim);font-size:.95rem;line-height:1.55;}
+  ul.sub-bullets li{margin:.3rem 0;padding:0;border:none;display:list-item;grid-template-columns:none;}
+
+  /* act / section divider */
+  .act{position:relative;}
+  .act .num{font-family:var(--font-mono);font-size:.95rem;color:var(--accent3);letter-spacing:.28em;
+            text-transform:uppercase;font-weight:600;margin-bottom:1.1rem;}
+  .act h2{font-size:2.9rem;}
+  .act .thesis{font-size:1.2rem;color:var(--dim);margin-top:1.1rem;max-width:82%;}
+  .rule{height:3px;width:56px;background:var(--accent3);margin:0 0 1.6rem;}
+  .epi{margin-top:1.7rem;font-size:1.2rem;color:var(--ink);font-style:italic;font-family:var(--font-display);
+       max-width:72%;border-left:3px solid var(--accent);padding-left:1.2rem;}
+  .epi cite{display:block;font-style:normal;font-size:.82rem;color:var(--faint);font-family:var(--font-mono);
+            margin-top:.5rem;letter-spacing:.02em;}
+  .ghost{position:absolute;right:0;top:50%;transform:translateY(-58%);font-family:var(--font-mono);
+         font-size:15rem;font-weight:700;color:var(--ink);opacity:.05;pointer-events:none;line-height:1;}
+
+  /* quote / blockquote */
+  .quote{border-left:3px solid var(--accent);padding:.15rem 0 .15rem 1.3rem;margin:1.2rem 0;
+         font-size:1.45rem;line-height:1.4;color:var(--ink);font-family:var(--font-display);font-style:italic;}
+  .attr{font-size:.9rem;color:var(--faint);margin-top:.65rem;font-family:var(--font-mono);}
+
+  /* two-column comparison — hairline divider, no cards */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:1.5rem;}
+  .two-col .col{padding-right:2.2rem;}
+  .two-col .col + .col{padding-left:2.2rem;border-left:1px solid var(--line);padding-right:0;}
+  .two-col h4{font-family:var(--font-mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;
+              font-weight:600;margin:0 0 1rem;}
+  .two-col .col:first-child h4{color:var(--accent2);}
+  .two-col .col:nth-child(2) h4{color:var(--accent);}
+  .two-col.neutral .col:first-child h4{color:var(--accent3);}
+  .two-col ul{list-style:none;margin:0;padding:0;}
+  .two-col li{padding:.5rem 0;font-size:1rem;line-height:1.45;color:var(--ink);}
+  .two-col li::before{content:"—  ";color:var(--dim);}
+
+  /* pipeline steps */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.8rem;margin-top:1.7rem;}
+  .steps .step h4{font-family:var(--font-mono);color:var(--accent);font-size:.92rem;font-weight:700;
+                  margin:0 0 .6rem;padding-bottom:.45rem;border-bottom:2px solid var(--accent);}
+  .steps .step p{font-size:.85rem;color:var(--dim);margin:0;line-height:1.45;}
+
+  /* code blocks */
+  .code-pair{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem;margin-top:1.5rem;}
+  .code-block{font-family:var(--font-mono);font-size:.82rem;line-height:1.75;color:var(--ink);
+              border-left:2px solid var(--line);padding-left:1.1rem;}
+  .code-block.accent{border-left-color:var(--accent);}
+  .code-block h5{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;
+                color:var(--dim);margin:0 0 .7rem;font-weight:600;}
+  .code-block.accent h5{color:var(--accent);}
+  .code-block .line{white-space:pre;display:block;}
+
+  /* gap rows (four culture gaps) */
+  .gap-list{margin-top:1.2rem;}
+  .gap-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:.6rem 0;
+           border-bottom:1px solid var(--line);align-items:center;}
+  .gap-row:last-child{border-bottom:none;}
+  .gap-row .a{color:var(--ink);font-weight:600;font-size:1rem;}
+  .gap-row .b{color:var(--accent);font-size:.98rem;}
+
+  /* two-pane (autokill) */
+  .two-pane{display:grid;grid-template-columns:1fr 1fr;gap:2.6rem;margin-top:1.2rem;align-items:start;}
+  .stat-line{display:grid;grid-template-columns:auto 1fr;gap:1.1rem;padding:.5rem 0;font-size:.98rem;color:var(--ink);align-items:baseline;}
+  .stat-line .n{font-family:var(--font-mono);font-weight:700;color:var(--accent);font-size:1.5rem;}
+  .stat-line.dim .n{color:var(--dim);font-family:var(--font-sans);font-size:1.02rem;font-weight:600;}
+  .quote-box{border-left:3px solid var(--accent);padding-left:1.3rem;}
+  .quote-box p{font-family:var(--font-mono);font-size:.95rem;margin:0 0 .8rem;}
+
+  /* behaviour rows */
+  .beh-row{padding:.95rem 0;border-bottom:1px solid var(--line);}
+  .beh-row:last-child{border-bottom:none;}
+  .beh-row b{display:block;color:var(--ink);font-size:1.08rem;margin-bottom:.28rem;font-family:var(--font-display);}
+  .beh-row span{color:var(--dim);font-size:.94rem;}
+
+  /* lead list */
+  .lead-list{list-style:none;margin:1.2rem 0 0;padding:0;}
+  .lead-list li{display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:start;
+                padding:.65rem 0;border-bottom:1px solid var(--line);font-size:1.05rem;line-height:1.45;}
+  .lead-list li:last-child{border-bottom:0;}
+  .lead-list .k{color:var(--accent3);font-weight:700;font-family:var(--font-mono);min-width:1.8em;}
+  .lead-list .k.cool{color:var(--dim);}
+  .lead-list b{color:var(--ink);}
+
+  /* big list — for slides carrying only 1-3 short lines; each line reads
+     as a standalone statement rather than a compact row */
+  .big-list{list-style:none;margin:1.6rem 0 0;padding:0;}
+  .big-list li{display:grid;grid-template-columns:2.2rem 1fr;gap:1.3rem;align-items:baseline;
+               padding:1rem 0;border-bottom:1px solid var(--line);font-size:1.7rem;line-height:1.4;
+               font-family:var(--font-display);}
+  .big-list li:last-child{border-bottom:0;}
+  .big-list .k{color:var(--accent3);font-weight:700;font-family:var(--font-mono);font-size:1.1rem;}
+  .big-list .k.cool{color:var(--dim);}
+  .big-list b{color:var(--ink);}
+
+  /* ledger */
+  .ledger{margin-top:1.1rem;font-size:1.02rem;}
+  .ledger .lr{display:grid;grid-template-columns:1fr auto;gap:1rem;padding:.65rem 0;
+              border-bottom:1px solid var(--line);align-items:center;}
+  .ledger .lr:last-child{border-bottom:0;}
+  .ledger .v{color:var(--accent);font-weight:700;font-family:var(--font-mono);}
+  .ledger .v.strike{color:var(--dim);}
+
+  /* the strikethrough motif — things that turned out to be theater */
+  .strike{position:relative;color:var(--dim);}
+  .strike::after{content:"";position:absolute;left:-2%;right:-2%;top:53%;height:2.5px;
+                 background:var(--accent2);transform:rotate(-1.2deg);}
+
+  .reveal .progress{color:var(--accent3);height:3px;}
+  .reveal .controls{color:var(--faint);}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- 01 TITLE -->
+  <section>
+    <div class="slide">
+      <h1>Coding Like It's<br>Someone Else's Problem</h1>
+      <p class="title-sub">Running AI like Software.</p>
+      <p class="byline">Jaidev Deshpande &nbsp;·&nbsp; <a href="https://jaidevd.com">jaidevd.com</a></p>
+    </div>
+  </section>
+
+  <!-- 02 PREMISE QUOTE -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">before we start</div>
+      <div class="quote">"What's obvious to you is amazing to others."</div>
+      <p class="attr">— Derek Sivers</p>
+    </div>
+  </section>
+
+  <!-- 03 IIT · PROGRAMMING -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">IIT Madras BS Degree Programme</div>
+      <h2>Two diploma tracks.<br>One recurring problem.</h2>
+      <div class="two-col neutral">
+        <div class="col">
+          <h4>Diploma in Programming</h4>
+          <ul>
+            <li>Databases</li>
+            <li>Data structures and algorithms</li>
+            <li>Modern application development (with capstone)</li>
+            <li>Programming concepts with Java</li>
+            <li>Linux / Bash / systems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 IIT · BOTH -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">IIT Madras BS Degree Programme</div>
+      <h2>Two diploma tracks.<br>One recurring problem.</h2>
+      <div class="two-col neutral">
+        <div class="col">
+          <h4>Diploma in Programming</h4>
+          <ul>
+            <li>Databases</li>
+            <li>Data structures and algorithms</li>
+            <li>Modern application development (with capstone)</li>
+            <li>Programming concepts with Java</li>
+            <li>Linux / Bash / systems</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Diploma in Data Science</h4>
+          <ul>
+            <li>Machine learning foundations</li>
+            <li>Business analytics (with capstone)</li>
+            <li>Machine learning algorithms (with capstone)</li>
+            <li>Tools for data science</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 DS BAD AT · 1/3 (from Why Your Code Is Someone Else's Problem, p.15) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">data scientists are bad at</div>
+      <ul class="big-list">
+        <li><span class="k cool">—</span><span><b>Uncertainty</b> — functions fail randomly</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 06 DS BAD AT · 2/3 (p.16) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">data scientists are bad at</div>
+      <ul class="big-list">
+        <li><span class="k cool">—</span><span><b>Uncertainty</b> — functions fail randomly</span></li>
+        <li><span class="k cool">—</span><span><b>Async</b> — functions are not called in the intended order</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 07 DS BAD AT · 3/3 + PUNCHLINE (p.17-18) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">data scientists are bad at</div>
+      <ul class="big-list">
+        <li><span class="k cool">—</span><span><b>Uncertainty</b> — functions fail randomly</span></li>
+        <li><span class="k cool">—</span><span><b>Async</b> — functions are not called in the intended order</span></li>
+        <li><span class="k cool">—</span><span><b>Remote / distributed resources</b> — causes of failure might disappear</span></li>
+      </ul>
+      <p class="lede" style="margin-top:1.4rem;color:var(--accent);font-size:1.5rem">Developers are good at this stuff!</p>
+    </div>
+  </section>
+
+  <!-- 08 DEVS GOOD AT · 1/3 (p.19) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">developers are good at</div>
+      <ul class="big-list">
+        <li><span class="k">—</span><span><b>Uncertainty</b> — good developers handle failures gracefully</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 09 DEVS GOOD AT · 2/3 (p.20) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">developers are good at</div>
+      <ul class="big-list">
+        <li><span class="k">—</span><span><b>Uncertainty</b> — good developers handle failures gracefully</span></li>
+        <li><span class="k">—</span><span><b>Async</b> — good developers know how to handle stateful systems</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10 DEVS GOOD AT · 3/3 (p.21) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">developers are good at</div>
+      <ul class="big-list">
+        <li><span class="k">—</span><span><b>Uncertainty</b> — good developers handle failures gracefully</span></li>
+        <li><span class="k">—</span><span><b>Async</b> — good developers know how to handle stateful systems</span></li>
+        <li><span class="k">—</span><span><b>Remote / distributed resources</b> — good developers are comfortable
+        working with filesystems and databases instead of flatfiles</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11 SLEEP PEACEFULLY (p.22) -->
+  <section>
+    <div class="slide">
+      <h1 style="font-size:3.4rem">How do developers<br>sleep peacefully?</h1>
+      <p class="lede" style="margin-top:.9rem;font-size:2rem;color:var(--accent)">They make their code someone else's problem.</p>
+    </div>
+  </section>
+
+  <!-- 12 GAP COMPARE · 1/3 -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">where the gap actually is</div>
+      <h2>Three things nobody warns you about.</h2>
+      <div class="two-col">
+        <div class="col">
+          <h4>What trips up a notebook</h4>
+          <ul>
+            <li>Uncertainty — a function fails randomly: a flaky API, a corrupt file, a network blip.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>What a good developer does instead</h4>
+          <ul>
+            <li>Handles failure gracefully — expects things to break, catches it, retries or logs it.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 GAP COMPARE · 2/3 -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">where the gap actually is</div>
+      <h2>Three things nobody warns you about.</h2>
+      <div class="two-col">
+        <div class="col">
+          <h4>What trips up a notebook</h4>
+          <ul>
+            <li>Uncertainty — a function fails randomly: a flaky API, a corrupt file, a network blip.</li>
+            <li>Async — things don't run in the order you assumed; a job finishes after you've already moved on.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>What a good developer does instead</h4>
+          <ul>
+            <li>Handles failure gracefully — expects things to break, catches it, retries or logs it.</li>
+            <li>Treats state deliberately — knows exactly what's saved, where, and when.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 GAP COMPARE · 3/3 -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">where the gap actually is</div>
+      <h2>Three things nobody warns you about.</h2>
+      <div class="two-col">
+        <div class="col">
+          <h4>What trips up a notebook</h4>
+          <ul>
+            <li>Uncertainty — a function fails randomly: a flaky API, a corrupt file, a network blip.</li>
+            <li>Async — things don't run in the order you assumed; a job finishes after you've already moved on.</li>
+            <li>Distributed resources — the machine, file or GPU that caused the bug may already be gone by the time you look.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>What a good developer does instead</h4>
+          <ul>
+            <li>Handles failure gracefully — expects things to break, catches it, retries or logs it.</li>
+            <li>Treats state deliberately — knows exactly what's saved, where, and when.</li>
+            <li>Reaches for real storage — a database or object store, not a folder of CSVs on someone's laptop.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="caption" style="margin-top:1.2rem">None of this is about talent. It's about which failures you've been burned by often enough to plan around.</p>
+    </div>
+  </section>
+
+  <!-- 15 INDIRECTION (from Why Your Code Is Someone Else's Problem, p.23) -->
+  <section>
+    <div class="slide">
+      <p class="sub" style="font-size:1.1rem">Indirection (also called dereferencing) is the ability to reference
+      something using a name, reference, or container instead of the value itself.</p>
+      <div class="quote">"We can solve any problem by introducing an extra level of indirection."</div>
+      <p class="attr">— Butler Lampson / David Wheeler</p>
+    </div>
+  </section>
+
+  <!-- 16 DOCUMENT & COMMUNICATE (from Why Your Code Is Someone Else's Problem, p.24) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">how? they document &amp; communicate</div>
+      <ul class="lead-list">
+        <li><span class="k cool">—</span><span>Document and communicate what? <b>Your intent.</b></span></li>
+        <li><span class="k cool">—</span><span>How to communicate intent?
+          <ul class="sub-bullets">
+            <li>Have an intent. Be opinionated. Make (logically) hard decisions. Stop catering to everything.</li>
+            <li>Cultivate the desire, the means and the will to communicate intent.</li>
+          </ul>
+        </span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 17 HOW TO COMMUNICATE INTENT (p.25) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">how to communicate intent</div>
+      <ul class="lead-list">
+        <li><span class="k cool">—</span><span>You <b>desire</b> it because it's good PR — people will use your code. You might forget why you wrote it.</span></li>
+        <li><span class="k cool">—</span><span>The <b>means</b> can be practiced, taught and learnt.</span></li>
+        <li><span class="k cool">—</span><span>The <b>will:</b> willpower depletes. Don't count on willpower. Instead, make it a process, which makes communicating a habit.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 18 ALWAYS BE BUILDING INTERFACES (p.26) -->
+  <section>
+    <div class="slide">
+      <h1 style="font-size:3rem">Always be building interfaces.<br>Everyone is a programmer.<br><span style="color:var(--accent)">Everything is someone's API.</span></h1>
+    </div>
+  </section>
+
+  <!-- 19 FRANCOIS CHOLLET (p.27) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">francois chollet in building interfaces</div>
+      <h2>"How to win developers' hearts<br>with highly productive tools."</h2>
+      <p class="attr" style="font-size:.95rem">— AnacondaCon 2019</p>
+      <p class="sub" style="margin-top:.8rem">A 3-step process:</p>
+      <ul class="lead-list">
+        <li><span class="k">1</span><span>Deliberately design end-to-end workflows focused on what users care about.</span></li>
+        <li><span class="k">2</span><span>Reduce cognitive load on users.</span></li>
+        <li><span class="k">3</span><span>Provide helpful feedback.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 20 MODULARITY = TESTABILITY = READABILITY (p.28) -->
+  <section>
+    <div class="slide">
+      <h2 style="font-size:2.6rem">Modularity = Testability = Readability.</h2>
+      <p class="sub">One giant function is a black box even to the person who wrote it. Small, named, single-purpose
+      functions are the unit developers can test, read, and safely hand off.</p>
+      <div class="code-pair">
+        <div class="code-block">
+          <h5>One function does everything</h5>
+          <span class="line">def run():</span>
+          <span class="line">    df = pd.read_csv(path)</span>
+          <span class="line">    df = df.dropna()</span>
+          <span class="line">    df = rescale(df)</span>
+          <span class="line">    X_tr, X_te = split(df)</span>
+          <span class="line">    model = fit(X_tr)</span>
+          <span class="line">    score = model.score(X_te)</span>
+          <span class="line">    pickle.dump(model, f)</span>
+          <span class="line">    # ...80 more lines...</span>
+        </div>
+        <div class="code-block accent">
+          <h5>Five small functions</h5>
+          <span class="line">def load_data(path): ...</span>
+          <span class="line">def clean(df): ...</span>
+          <span class="line">def split(df): ...</span>
+          <span class="line">def train(df): ...</span>
+          <span class="line">def evaluate(model, df): ...</span>
+          <span class="line">&nbsp;</span>
+          <span class="line"># each one testable,</span>
+          <span class="line"># readable, and disposable on its own</span>
+        </div>
+      </div>
+      <p class="lede" style="margin-top:1.2rem;font-size:1.05rem">A function you can't name in five words is a function doing too much.</p>
+    </div>
+  </section>
+
+  <!-- 21 A PROCESS FOR READABLE CODE · COMPLEXITY (p.29) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">a process for readable code</div>
+      <h2>Complexity.</h2>
+      <img class="slide-img" src="dijkstra-complexity.jpg" alt="Complexity analysis of Dijkstra's algorithm, from Madhavan Mukund's IIT Madras BSc Degree lecture on Single Source Shortest Paths">
+      <p class="caption">— Madhavan Mukund, IIT Madras BS Degree, "Single Source Shortest Paths"</p>
+    </div>
+  </section>
+
+  <!-- 22 CODE AS COMMUNICATION (p.30) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">code as communication</div>
+      <div class="quote">"Let us change our traditional attitude to the construction of programs: instead of
+      imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining
+      to human beings what we want a computer to do."</div>
+      <p class="attr">— Donald Knuth, on Literate Programming</p>
+    </div>
+  </section>
+
+  <!-- 23 A PROCESS FOR READABLE CODE (p.31) -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">a process for readable code</div>
+      <ul class="lead-list">
+        <li><span class="k">1</span><span>Have perfect information.</span></li>
+        <li><span class="k">2</span><span>Decide on the level of abstraction.</span></li>
+        <li><span class="k">3</span><span>Atomic functions, clear and meaningful variable names.</span></li>
+        <li><span class="k">4</span><span>Idiomatic programming
+          <ul class="sub-bullets">
+            <li>Know your language.</li>
+            <li>Know the Standard Library (keep the reference under your pillow).</li>
+          </ul>
+        </span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 24 DELETABLE -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">two honest tests for your own code</div>
+      <h2>A good commit is one<br>that can be rolled back.</h2>
+      <h2 style="color:var(--accent);margin-top:.7rem">A good piece of code is one<br>that can be deleted easily.</h2>
+      <p class="sub" style="margin-top:1rem;font-size:1.1rem">"Easily" meaning not without consequences, but predictably.</p>
+    </div>
+  </section>
+
+  <!-- 25 PART 03 DIVIDER · THE PROOF -->
+  <section>
+    <div class="slide">
+      <div class="act">
+        <div class="ghost">03</div>
+        <div class="num">03 / The Proof</div>
+        <div class="rule"></div>
+        <h2>What happens when<br>nobody practices this.</h2>
+        <p class="thesis">A real team, an anonymised number, and about 600 machines that answered the question for us — without meaning to.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 26 A THOUGHT EXPERIMENT -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">a thought experiment</div>
+      <h2>If a team had a million dollars in GPU credits —<br>what would happen to it?</h2>
+      <p class="sub">The real figure is redacted. So picture a clean, imaginary $1,000,000/year. Every number that
+      follows is relative to that imaginary million.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">$390k</div><div class="l">paid for GPUs below 5% use</div></div>
+        <div class="stat"><div class="n">50%</div><div class="l">of machine-days: 0% all day</div></div>
+        <div class="stat"><div class="n">≈$790k</div><div class="l">of GPU-hours on runs that got killed</div></div>
+      </div>
+      <p class="caption" style="margin-top:1.4rem">Glossary: one GPU-hour is one machine running for one hour.
+      "Utilisation" is the % of that hour spent doing useful work — the rest is idle, but billed the same.</p>
+    </div>
+  </section>
+
+  <!-- 27 THE HEADLINE -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">the headline</div>
+      <div class="row-baseline">
+        <div class="huge">39%</div>
+        <h2 style="max-width:460px">of GPU spend paid for a GPU that was <em>doing nothing.</em></h2>
+      </div>
+      <p class="sub" style="margin-top:.8rem">The bar for "doing nothing" is under 5% utilisation — but much of it
+      was literally 0%. On a typical day half the running machines sat at zero the entire day, and 293 of 510 GPU
+      machines never ran a single workload across the whole audit — provisioned, billed, untouched.</p>
+    </div>
+  </section>
+
+  <!-- 28 BIMODAL -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">the shape of the spend</div>
+      <h2>They knew exactly what they were doing.</h2>
+      <p class="sub">Bucket every machine by its average GPU utilisation and the curve is bimodal — a hump near 0%
+      (parked notebooks) and a hump near 100% (real training runs), almost nothing between. People wanted a
+      <em>pet</em> (tended by hand) or <span class="fix">cattle</span> (disposable) — and defaulted to pets.</p>
+      <div class="chart"><canvas id="cBimodal"></canvas></div>
+      <p class="caption">Per-machine averages across 146 days of hourly telemetry — 34,246 samples, 609 machines, 510 GPU-equipped.</p>
+    </div>
+  </section>
+
+  <!-- 29 DIGEST -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">now add time · the daily-digest bot</div>
+      <h2>We watched it happen, every morning,<br>for seven months.</h2>
+      <p class="sub">A bot posted GPU spend and utilisation to a shared channel every day for seven months. Spend
+      and fleet size climbed. Average utilisation never moved — it sat near 25% and slipped toward 17%.
+      Communicating the truth for seven months didn't build the habit.</p>
+      <div class="chart"><canvas id="cDigest"></canvas></div>
+      <p class="caption">Bars: tracked compute $/day. Line: fleet-average GPU utilisation.</p>
+    </div>
+  </section>
+
+  <!-- 30 FOUR GAPS -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">the culture gap, on full display</div>
+      <h2 style="font-size:2rem">Four gaps — each a thing a good developer already knows.</h2>
+      <div class="gap-list">
+        <div class="gap-row"><span class="a">Nobody version-controlled properly</span><span class="b">→ every run now pins to a commit</span></div>
+        <div class="gap-row"><span class="a">Notebooks were useless headless</span><span class="b">→ code became scripts, not cells</span></div>
+        <div class="gap-row"><span class="a">I/O wasn't modular or fault-tolerant</span><span class="b">→ inputs &amp; outputs moved to durable storage</span></div>
+        <div class="gap-row"><span class="a">No checkpoint-on-crash story</span><span class="b">→ state gets serialized as you train</span></div>
+      </div>
+      <p class="lede" style="margin-top:1rem;color:var(--accent);font-size:1.05rem">This is the uncertainty / async /
+      distributed-resources gap from Part 1 — with the invoice attached.</p>
+      <div class="quote" style="font-size:1.05rem;margin-top:.9rem">The twist: the teardown script was so annoying
+      to write that engineers started writing per-epoch checkpoint callbacks instead. Nobody taught them that —
+      the system did.</div>
+      <p class="lede" style="margin-top:.9rem;font-size:1.05rem">We never told anyone to become a better engineer.
+      We made the consequences surface quickly and unavoidably — and the habits fixed themselves.</p>
+    </div>
+  </section>
+
+  <!-- 31 PR LEDGER -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">278 pull requests across 21 repos</div>
+      <h2>We turned the pull request into a launch button.</h2>
+      <div class="ledger">
+        <div class="lr"><span>Substantive code reviews in the entire set</span><span class="v">~1</span></div>
+        <div class="lr"><span>PRs merged with zero review</span><span class="v">~44</span></div>
+        <div class="lr"><span>A bot flagged "8× cost increase, no guardrails." A human replied…</span><span class="v strike">"lgtm"</span></div>
+        <div class="lr"><span>GPU jobs fired from one PR titled <span class="mono">"add a line to requirements.txt"</span></span><span class="v">61</span></div>
+      </div>
+      <p class="sub" style="margin-top:1.1rem">A pull request is supposed to be a developer explaining their
+      reasoning to a teammate — Habit One from Part 2, out loud. Here, the PR was the experiment, the comment
+      thread was the lab notebook, and review — the one practice that pays — was skipped.</p>
+    </div>
+  </section>
+
+  <!-- 32 NO OWNER -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">the challenge · you can't optimise what you can't attribute</div>
+      <h2>Every job ran under<br>one shared service account.</h2>
+      <p class="sub">So the platform literally could not answer "who spent what?" No owner, so no control. The same
+      rot showed everywhere: a departed employee's GPU pod still running after access was revoked;
+      <span class="mono">"why are so many people admin?"</span>; any dev able to start or kill any machine.</p>
+      <p class="lede" style="color:var(--accent);margin-top:.9rem">"Someone else's problem" is supposed to mean
+      clearly owned, so anyone can safely pick it up. Here it meant no one owned it at all — which is the failure
+      mode, not the goal.</p>
+      <p class="sub" style="margin-top:.9rem">Review, reproducibility, ownership — the practices every tool quietly
+      assumes, and the ones this team hadn't built yet.</p>
+    </div>
+  </section>
+
+  <!-- 33 PART 04 DIVIDER · THE FIX -->
+  <section>
+    <div class="slide">
+      <div class="act">
+        <div class="ghost">04</div>
+        <div class="num">04 / The Fix</div>
+        <div class="rule"></div>
+        <h2>Some discipline is buyable.<br>The rest isn't.</h2>
+        <p class="thesis">The team imported one habit straight from software engineering: fail fast.</p>
+        <p class="epi">"Make each module fail-fast — either it does the right thing, or it stops."
+          <cite>— Jim Gray, "Why Do Computers Stop and What Can Be Done About It?", 1985</cite>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 34 PIPELINE -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">the fix, mechanically</div>
+      <h2 style="font-size:2rem">Make the machine stateless — the code is the interface.</h2>
+      <p class="sub">No console, no manual login. A reviewed commit in a shared repo is the only way to start a
+      job — the machine runs it unattended and disposes of itself when done.</p>
+      <div class="steps">
+        <div class="step"><h4>1 · Commit in</h4><p>a reviewed commit is the only way to start a job — no console, no manual login</p></div>
+        <div class="step"><h4>2 · Run unattended</h4><p>the code runs by itself; it stops itself when done or idle</p></div>
+        <div class="step"><h4>3 · State detaches</h4><p>the model / results move to cheap, durable storage before the machine dies</p></div>
+        <div class="step"><h4>4 · Teardown</h4><p>the expensive machine is deleted; nothing valuable was ever only on it</p></div>
+      </div>
+      <p class="lede" style="margin-top:1.3rem;color:var(--accent);font-size:1.05rem">This is Habit One from Part 2
+      (build an interface) applied to a whole machine, not just a function.</p>
+    </div>
+  </section>
+
+  <!-- 35 AUTOKILL -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">the real win</div>
+      <h2>Failure got cheap.</h2>
+      <div class="two-pane">
+        <div>
+          <p class="sub">Every run pinned to a reviewed commit. And "autokill": if a run is going to fail, it gets
+          stopped before it costs much — automatically, not because someone happened to notice.</p>
+          <div class="stat-line"><span class="n">54</span><span>jobs died at setup / pre-checks, having burned about zero GPU-hours</span></div>
+          <div class="stat-line dim"><span class="n">before</span><span>a broken run used to sit on a live GPU until a human happened to notice</span></div>
+        </div>
+        <div class="quote-box">
+          <p class="strike">"can you shut this pod down?"</p>
+          <p class="strike">"extend my auto-shutdown 3 hrs"</p>
+          <p class="strike">"what is this pod — $2/hr, idle?"</p>
+        </div>
+      </div>
+      <p class="caption" style="margin-top:1rem">Real chat logs — humans doing autokill's job by hand, one Slack
+      message at a time. Now struck through, because the fix turned a manual ritual into a system property.</p>
+    </div>
+  </section>
+
+  <!-- 36 RESULTS -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">what happened after</div>
+      <h2>Failure got cheap. The babysitting stopped.</h2>
+      <ul class="lead-list">
+        <li><span class="k">54</span><span>jobs died at setup / pre-check on zero GPU-hours — failing fast before the meter starts.</span></li>
+        <li><span class="k">141</span><span>jobs auto-recovered from 598 preemptions — nobody got paged.</span></li>
+        <li><span class="k">0</span><span>manual shutdowns: the "can you shut this pod down?" Slack ritual disappeared.</span></li>
+        <li><span class="k cool">3,738</span><span>GPU-hours still burned by cancelled jobs — the discipline that isn't wired up yet.</span></li>
+      </ul>
+      <p class="caption" style="margin-top:1rem">From 668 managed jobs. The last row is honest: even a good fix has
+      a gap. That's not a flaw in the story — it's the next thing to go build.</p>
+    </div>
+  </section>
+
+  <!-- 37 BEHAVIOUR -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">what happened after · the people</div>
+      <h2>And then the behaviour changed.</h2>
+      <p class="sub">Rollout was a brawl — people resisted, argued, and access nearly got pulled over it. A pilot
+      ironed out the kinks. Then, slowly, the habits took.</p>
+      <div style="margin-top:.6rem">
+        <div class="beh-row"><b>The "cheating" phase collapsed.</b><span>People tried to camp in old-style sessions
+        to dodge the new rules — then, like a student who finds studying easier than cheating, discovered better
+        code wasn't actually harder.</span></div>
+        <div class="beh-row"><b>Jupyter became experiment tracking, not production.</b><span>The interactivity
+        people swore they needed turned into proper tools for tracking experiments.</span></div>
+        <div class="beh-row"><b>Datasets got prepared once.</b><span>Kept ready in storage, not re-downloaded on
+        every single run.</span></div>
+        <div class="beh-row"><b>Most real training moved off notebooks.</b><span>Interactive sessions are now just
+        for getting started.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 38 PART 05 DIVIDER · YOUR STARTER KIT -->
+  <section>
+    <div class="slide">
+      <div class="act">
+        <div class="ghost">05</div>
+        <div class="num">05 / Your Starter Kit</div>
+        <div class="rule"></div>
+        <h2>Five things you can<br>start doing Monday.</h2>
+        <p class="thesis">Not a framework. Not a new tool to learn. Five habits, aimed at you — not your manager.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 39 TAKEAWAYS -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">what you'll take away</div>
+      <ul class="lead-list">
+        <li><span class="k">01</span><span><b>Handle failure like you mean it.</b> Wrap the flaky call. Catch it, retry it, or fail loudly — don't just hope it works.</span></li>
+        <li><span class="k">02</span><span><b>Make your code deletable.</b> Small, named functions beat one heroic script — Habit Two, applied to your own notebook.</span></li>
+        <li><span class="k">03</span><span><b>Version-control every run.</b> A commit hash is cheaper than "wait, which version made this number?"</span></li>
+        <li><span class="k">04</span><span><b>Checkpoint your state.</b> Assume the machine dies mid-run, because eventually it will.</span></li>
+        <li><span class="k">05</span><span><b>Ask for — and give — a real review.</b> "lgtm" is not communication. It's a shrug.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 40 CLOSE -->
+  <section>
+    <div class="slide">
+      <div class="eyebrow">where this leaves you</div>
+      <p class="sub" style="font-size:1.05rem">"What's obvious to you is amazing to others." — Derek Sivers</p>
+      <p class="lede" style="font-size:1.6rem;margin-top:.3rem"><span class="strike">"Boss, GPU top-up karwa do."</span></p>
+      <h2 style="margin-top:1.2rem">Build the habit, and neither<br>sentence has to be said again.</h2>
+      <p class="sub" style="margin-top:1.1rem;font-size:1.08rem">Every gap in Part 1 has a fix in Part 2, and a
+      receipt in Part 3. None of it needed genius. It needed a process that didn't depend on anyone's willpower.</p>
+      <p class="caption" style="margin-top:1rem;font-style:italic;font-family:var(--font-display);font-size:.95rem;color:var(--dim)">
+      "If you build a man a fire, you keep him warm for the night. But if you set a man on fire, you keep him warm
+      for the rest of his life." — Terry Pratchett (an argument, it turns out, for systems over willpower.)</p>
+      <p class="meta" style="margin-top:1.6rem">Thank you. · Questions — especially the ones where you think I'm wrong.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+  const C = { accent:'#11696E', neutral:'#D9CBAE', ink:'#2A2018', dim:'#8A7D6B', line:'#E4D6BC' };
+  if (window.Chart){
+    Chart.defaults.color = C.dim;
+    Chart.defaults.font.family = "'IBM Plex Sans', system-ui, sans-serif";
+    Chart.defaults.font.size = 12;
+    Chart.defaults.borderColor = C.line;
+  }
+  const grid = { grid:{color:C.line}, ticks:{color:C.dim} };
+
+  const builders = {
+    cBimodal(ctx){
+      new Chart(ctx,{type:'bar',
+        data:{labels:['0-5','5-10','10-20','20-40','40-60','60-80','80-100'],
+          datasets:[{label:'machines',data:[232,41,33,27,19,44,114],
+            backgroundColor:C.accent,borderRadius:3,borderSkipped:false}]},
+        options:{responsive:true,maintainAspectRatio:false,
+          plugins:{legend:{display:false},
+            title:{display:true,text:'Per-machine average GPU utilisation (%) — two humps, empty middle',color:C.dim}},
+          scales:{x:{...grid,title:{display:true,text:'avg GPU utilisation bucket (%)',color:C.dim}},
+                  y:{...grid,title:{display:true,text:'number of machines',color:C.dim}}}}});
+    },
+    cDigest(ctx){
+      new Chart(ctx,{
+        data:{labels:['May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+          datasets:[
+            {type:'bar',label:'compute $/day',yAxisID:'y',
+             data:[102.6,9.7,31.5,98.7,79.6,105.1,128.1,125.2],
+             backgroundColor:'rgba(17,105,110,0.55)',borderColor:C.accent,borderWidth:1,borderRadius:3},
+            {type:'line',label:'avg GPU utilisation %',yAxisID:'y1',
+             data:[28.9,26.9,25.3,26.9,27.8,19.1,25.3,16.8],
+             borderColor:C.ink,backgroundColor:C.ink,tension:.3,borderWidth:2,
+             pointRadius:3,pointBackgroundColor:C.ink}]},
+        options:{responsive:true,maintainAspectRatio:false,
+          plugins:{legend:{labels:{color:C.dim}}},
+          scales:{x:{...grid},
+            y:{...grid,position:'left',title:{display:true,text:'compute $/day',color:C.dim},grid:{drawOnChartArea:false}},
+            y1:{...grid,position:'right',min:0,max:60,title:{display:true,text:'avg GPU util %',color:C.dim},grid:{drawOnChartArea:false}}}}});
+    }
+  };
+
+  const rendered = new Set();
+  const isPrint = /print-pdf/i.test(location.search);
+  if (window.Chart && isPrint) Chart.defaults.animation = false;
+  function build(cv){ if(!rendered.has(cv.id) && builders[cv.id]){ builders[cv.id](cv.getContext('2d')); rendered.add(cv.id); } }
+  function renderVisible(){ document.querySelectorAll('.slides section.present canvas').forEach(build); }
+  function renderAll(){ document.querySelectorAll('.slides canvas').forEach(build); }
+  Reveal.initialize({
+    hash:true, controls:true, progress:true, slideNumber:false,
+    transition:'fade', transitionSpeed:'fast',
+    width:1280, height:720, margin:0.04, center:false,
+    pdfMaxPagesPerSlide:1, pdfSeparateFragments:false
+  }).then(()=> isPrint ? renderAll() : renderVisible());
+  Reveal.on('slidechanged', renderVisible);
+</script>
+</body>
+</html>
