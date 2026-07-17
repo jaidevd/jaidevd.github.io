@@ -10,9 +10,23 @@
 		
 		
 		
-			<lastBuildDate>Mon, 11 May 2026 19:50:12 +0530</lastBuildDate>
+			<lastBuildDate>Sun, 12 Jul 2026 10:45:26 +0530</lastBuildDate>
 		
 			<atom:link href="https://jaidevd.com/tags/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Game-Theory</title>
+				<link>https://jaidevd.com/tags/game-theory/</link>
+				<pubDate>Sun, 12 Jul 2026 10:45:26 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/game-theory/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Math</title>
+				<link>https://jaidevd.com/tags/math/</link>
+				<pubDate>Sun, 12 Jul 2026 10:45:26 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/math/</guid>
+				<description></description>
+			</item>
 			<item>
 				<title>Advice</title>
 				<link>https://jaidevd.com/tags/advice/</link>
@@ -49,7 +63,7 @@
 				<description></description>
 			</item>
 			<item>
-				<title>Machine-Learning</title>
+				<title>Machine Learning</title>
 				<link>https://jaidevd.com/tags/machine-learning/</link>
 				<pubDate>Mon, 23 Mar 2026 19:20:04 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/machine-learning/</guid>
@@ -403,13 +417,6 @@
 				<link>https://jaidevd.com/tags/perceptron/</link>
 				<pubDate>Sun, 17 Jul 2016 14:19:40 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/perceptron/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Math</title>
-				<link>https://jaidevd.com/tags/math/</link>
-				<pubDate>Wed, 06 Jul 2016 14:45:55 +0530</pubDate>
-				<guid>https://jaidevd.com/tags/math/</guid>
 				<description></description>
 			</item>
 			<item>

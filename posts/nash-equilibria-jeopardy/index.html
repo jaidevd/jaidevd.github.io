@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no"/>
 
-    <title> | Jaidev&#39;s Blog</title>
+    <title>Finding Nash Equilibria in Jeopardy! | Jaidev&#39;s Blog</title>
     
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -45,8 +45,10 @@
       </script></head>
 
 	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="Jaidev&#39;s Blog">
-	<meta name="twitter:description" content="Thoughts on data science, statistics and machine learning.">
+	<meta name="twitter:title" content="Finding Nash Equilibria in Jeopardy!">
+	<meta name="twitter:description" content="Spoiler Alert: It’s unusual for post about a game show like Jeopardy! to have a spoiler, but if you are a die hard fan of the show and haven’t seen the second semifinal game of season 2 of Pop Culture Jeopardy! (it’s on Netflix), then don’t read this just yet.
+(Here on I’m just going to write Jeopardy without the exclamation mark, for convenience.)
+The last round in a game of Jeopardy is called “Final Jeopardy”. When the round begins, the three contestants (individually, usually, but in the case of Pop Culture Jeopardy, teams of two) are shown the category of the final clue.">
 
 
     <body>
@@ -161,396 +163,265 @@
         <div id="content" class="content-container">
         
 
-  <h1>
-    Archives
-  </h1>
-  <div>
-     
-      
-      
-          <h3>2026</h3> 
+<h1 class="post-title">Finding Nash Equilibria in Jeopardy!</h1>
+    
+    <time>July 12, 2026</time>
+    
+    <div>
+        <p>
+        <p><strong>Spoiler Alert</strong>: It&rsquo;s unusual for post about a game show like <em>Jeopardy!</em> to
+have a spoiler, but if you are a die hard fan of the show and haven&rsquo;t seen the
+second semifinal game of season 2 of <em>Pop Culture Jeopardy!</em> (it&rsquo;s on Netflix),
+then don&rsquo;t read this just yet.</p>
+<p>(Here on I&rsquo;m just going to write <em>Jeopardy</em> without the exclamation mark, for
+convenience.)</p>
+<hr>
+<p>The last round in a game of <em>Jeopardy</em> is called &ldquo;Final Jeopardy&rdquo;. When the round
+begins, the three contestants (individually, usually, but in the case of Pop
+Culture Jeopardy, teams of two) are shown the category of the final clue.</p>
+<p>The contestants are then required to make a wager. They have the option of
+betting any portion of their currently accumulated score - including the options
+of betting nothing, and betting all of it. These wagers are secret, in that only
+the host knows how much each team has bet. As a contestant, I would know nothing
+about the bets placed by my competitors.</p>
+<p>And then the clue is revealed to the contestants. They have thirty seconds to
+write down their answers. If a team is right, their wagers are added to their
+total score. And if they are wrong, their wagers are subtracted from their total
+score. Whoever is left with the highest score at the end of this round wins the
+game.</p>
+<p>Let&rsquo;s say I&rsquo;m a contestant with 10,000 points<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. The category is &ldquo;browsers&rdquo;. I
+think I know <em>a lot</em> more about browsers than my competitors, so I go all in and
+make a wager of 10,000. After the wagers, the clue follows, &ldquo;This North American
+word for a biscuit is what browsers use to save data.&rdquo; I write down my reply,
+&ldquo;What is a cookie?&rdquo;, and now my score is 20,000. Now whether that&rsquo;s enough for
+me to win depends on how my competitors fared.</p>
+<p>All in all, that moment when teams place their bets is
+stuffed with enough calculation and deliberation to drive a contestant insane.
+And that&rsquo;s exactly what my wife and I thought happened a few weeks ago in a
+semifinal of the second season of <em>Pop Culture Jeopardy</em>.</p>
+<p>Of the three teams playing that game, two were evenly matched, with 22,000
+points each. The third was an underdog at only 3,600 points - with no hopes of
+winning. The category was &ldquo;Iconic Songs&rdquo;. The clue was,</p>
+<blockquote>
+<p>Scribbled on airline stationery, the words &ldquo;Belladonna&rdquo; &amp; &ldquo;Castanetta&rdquo; appear
+in an early draft of this song.</p>
+</blockquote>
+<p>The host began with the underdog. They didn&rsquo;t know the answer. It is then
+revealed that they had bet 1738 points. They were now down to 1862 points. The
+host then turns to one of the stronger teams. Their reply is, &ldquo;What is &lsquo;We
+didn&rsquo;t start the fire&rsquo;?&rdquo;, which is wrong. And it
+turns out that they went all in. They bet 22,000  points and were now down to
+zero. The audience groans, but everyone understands that they <em>had</em> to go big on
+this, since they were tied for the first place with the other exceptionally
+strong team.</p>
+<p>The host now turns to the other strong team, who were also at 22,000 points.
+Their response is &ldquo;What is Uptown Funk?&rdquo;, which is also incorrect. The correct
+response, the host tells us, is &ldquo;What is Bohemian Rhapsody&rsquo;?&rdquo; There&rsquo;s a pause at
+this critical moment. It then turns out that this team, too, had gone all in.
+They too are now down to zero. The audience groans even louder.</p>
+<p>But it takes another second for the participants, the host and the audience to
+realize the implication: the two stronger, equally matched teams, who had long,
+impressive streaks of wins behind them, stood at zero. And it was the underdog
+who had the positive score!</p>
+<p>It was easily the most shocking thing I&rsquo;ve seen on a game of Jeopardy. After my
+wife and I had stopped yelling and groaning at the TV, I couldn&rsquo;t help thinking
+that there might be a very rational explanation for this seemingly inexplicable
+result. I had a feeling that, irrespective of the outcome, the stronger teams going all in was actually the right thing for them to do. So that night I dug out an old game theory textbook<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<h2 id="final-jeopardy-as-a-two-player-normal-form-game">Final Jeopardy as a Two-player Normal-form Game</h2>
+<p>Even though the game has three players, in this situation the two stronger teams
+were essentially playing against each other - they didn&rsquo;t have to beat the
+underdog <em>per se</em>, they just had to beat each other. So a two-player game is a
+reasonable approximation. In order to define a game, we need the following:</p>
+<ol>
+<li>The set of players: we&rsquo;ll just call the two strong teams the <em>row</em> player and
+the <em>column</em> player, as is the convention with tabular representations of
+normal-form games.</li>
+<li>The strategies available to each player: here, too, we simplify things by
+constraining the moves available to either player to just two pure
+strategies: either bet nothing (strategy 0) or go all in (strategy 1).</li>
+<li>The payoffs available to both players according to their respective
+strategies: We assume that the players&rsquo; answers are independent. The row and
+column players answer correctly with probabilities $p_r$ and $p_c$
+respectively, and one player&rsquo;s chance of answering correctly is unaffected by
+the other&rsquo;s. We also normalize their current score to unity, for convenience.</li>
+</ol>
+<p>Thus, we get the following payoff matrix:</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th><strong>Column: Bet 0</strong></th>
+					<th><strong>Column: Bet 1</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Row: Bet 0</strong></td>
+					<td>$(1,1)$</td>
+					<td>$(1,2p_c)$</td>
+			</tr>
+			<tr>
+					<td><strong>Row: Bet 1</strong></td>
+					<td>$(2p_r,1)$</td>
+					<td>$(2p_r,2p_c)$</td>
+			</tr>
+	</tbody>
+</table>
+<br>
+<p>Each cell represents one of the four situations in the game: both players go all
+in, both players bet nothing, and the remaining two scenarios where one player
+went all in and the other bet nothing. And in each cell, the payoffs to either
+player are represented by a 2-tuple, the first value being the payoff earned by
+the row player, and the second value being that earned by the column player.</p>
+<p>Doing a quick sanity check, we see that if a player bets nothing, they stay with
+a payoff of 1 regardless of whether they are right or wrong. That&rsquo;s why in the
+first row the first element is always 1, and in the first column, the second
+element is always 1.</p>
+<p>Next, if a player $i$ goes all in with a probability $p_i$ of being right, then
+their expected payoff is $2p_i$. That&rsquo;s why the first value in the second row is
+always $2p_r$ and the second value in the second column is always $2p_c$.</p>
+<p>Let&rsquo;s put ourselves in the shoes of the row player and try to figure out what
+our dominant strategy ought to be. If the column player bets 0, then the row
+player is constrained to getting a payoff of either 1 or $2p_r$, depending on
+what the <em>row</em> player chooses to do. Further, betting 1 is a good idea for the
+row player only if $2p_r &gt; 1$, or $p_r &gt; \frac{1}{2}$.</p>
+<p>We notice that, regardless of what the column player does, it is always better
+for the row player to go all in, provided their probability of answering
+correctly is greater than 50%. By symmetry, the same argument applies to the
+column player. Going all in is therefore a Nash equilibrium: neither player can
+improve their expected payoff by unilaterally deviating from it.</p>
+<p>Thus, in this (oversimplified) game, where players are highly skilled and
+equally matched, going all in is indeed the smart thing to do.</p>
+<h2 id="mixed-strategies-deciding-how-much-to-bet">Mixed Strategies: Deciding How Much to Bet</h2>
+<p>We&rsquo;ve taken quite a few liberties in our model. A contestant on
+<em>Jeopardy</em> is not restricted to the binary choice of betting nothing or going
+all in. They may wager <strong>any</strong> fraction of their current score. So let&rsquo;s throw
+another wrench in the works and see if our all-in equilibrium holds up. Let&rsquo;s
+say now, that the strategies available to the players are not just two, but
+infinite: they can bet any fraction $q$ of their current score.</p>
+<p>If we continue
+to normalize the current score to unity, then each player&rsquo;s strategy is simply a
+number $q \in [0,1]$, where $q=0$ corresponds to betting nothing and $q=1$ to
+betting everything.</p>
+<p>This changes the nature of the game considerably. Instead of a $2\times2$ payoff
+matrix, each player now has infinitely many strategies. In the language of
+game theory, we have moved from a finite normal-form game to one with a
+continuous strategy space.</p>
+<p>At first glance, this appears to make the analysis much harder.
+The key observation is that the exact amounts wagered matter only in one respect:
+<strong>which player wagered more</strong>.</p>
+<p>Suppose the row player wagers $q_r$ and the column player wagers $q_c$, with
+$q_r &gt; q_c$. If both players answer correctly, the row player finishes with the
+higher score. If both answer incorrectly, the column player loses less and
+therefore finishes ahead. And if exactly one player answers correctly, the wager
+is irrelevant—the player with the correct answer wins regardless of how much
+either player bet.</p>
+<p>Those four possibilities are summarized below:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Row</th>
+					<th>Column</th>
+					<th>Winner</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Correct</td>
+					<td>Correct</td>
+					<td>Higher wager</td>
+			</tr>
+			<tr>
+					<td>Correct</td>
+					<td>Wrong</td>
+					<td>Row</td>
+			</tr>
+			<tr>
+					<td>Wrong</td>
+					<td>Correct</td>
+					<td>Column</td>
+			</tr>
+			<tr>
+					<td>Wrong</td>
+					<td>Wrong</td>
+					<td>Lower wager</td>
+			</tr>
+	</tbody>
+</table>
+<br>
+<p>This simple observation is the entire game. Once we know whether the row player
+wagered more or less than the column player, the exact values of $q_r$ and $q_c$
+no longer matter. The analysis therefore reduces to asking whether it is <strong>better to wager slightly more than your opponent, or slightly
+less.</strong></p>
+<p>The answer turns out to depend on only one quantity: the probability of
+answering the clue correctly.</p>
+<p>Suppose the row player wagers slightly <strong>more</strong> than the column player. They win
+in two situations: either both players answer correctly, or only the row player
+does. The probability of this is</p>
+<p>$$ p_rp_c + p_r(1-p_c) = p_r $$</p>
+<p>Now suppose the row player wagers slightly <strong>less</strong> than the column player. This
+time they win if both players are wrong, or if only the row player is correct.
+The corresponding probability is</p>
+<p>$$ (1-p_r)(1-p_c) + p_r(1-p_c) = 1-p_c $$</p>
+<p>You&rsquo;ll notice that this expression doesn&rsquo;t contain the term $p_r$. But that&rsquo;s neither an error nor a surprise. The thing is that once the row player chooses to wager less, their own probability
+of answering correctly is irrelevant. The only thing that
+matters is whether the column player is wrong.</p>
+<p>Since both players are highly skilled, we know that $p_r,p_c&gt;\tfrac12$. In other
+words, it is more likely that both players answer correctly than that they both
+answer incorrectly. Consequently, each player would rather be the one who
+wagered <strong>more</strong>.</p>
+<p>This has an interesting implication. If the column player wagers any amount
+strictly less than their entire score, the row player can always improve their
+chances by wagering just a little more. The same reasoning applies in the
+opposite direction. The only wager that cannot be outbid is an all-in wager.</p>
+<p>Thus, this race has an inevitable finish line: both players
+wager everything. If one bets anything less than all they have, the other can
+always outbid them. The only way of making it impossible for a player to be
+outbid is to bet everything. Neither player can improve their prospects by unilaterally
+changing their wager, making $(q_r,q_c)=(1,1)$ the unique Nash equilibrium of
+the game.</p>
+<p>So, it can be proved that both teams did the right thing indeed. The fact that
+they lost later doesn&rsquo;t make their decision to go all in any less rational. Had
+both teams answered correctly, nobody would have questioned their wagers. It was
+only because both happened to miss that the strategy looked foolish.
+<a href="https://www.amazon.com/Thinking-Bets-Making-Smarter-Decisions/dp/0735216355">Annie Duke has written</a> about the practice of &ldquo;resulting&rdquo; - the idea that
+the quality of an outcome determines the quality of a decision. The key idea is
+to  acknowledge the role of luck in the outcome.</p>
+<hr>
+<p>Now, there&rsquo;s no way that players would have been writing payoff matrices and
+iteratively eliminating dominated strategies in order to find Nash equilibria in the
+few seconds before they submit their wagers. These results would have come a lot
+more naturally, intuitively to them.</p>
+<p>But what is a good mathematical result if not common sense made formal?</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Originally, <em>Jeopardy</em> used won money as a proxy for the score. <em>Pop Culture
+Jeopardy</em> has points, instead.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><em>The Art of Strategy</em>, by Dixit and Nalebuff&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
 
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jul 12</span>
-                    <span>
-                      <a href="/posts/nash-equilibria-jeopardy/">Finding Nash Equilibria in Jeopardy!</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">May 11</span>
-                    <span>
-                      <a href="/posts/resting-on-your-laurels/">Resting on Your Laurels</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Apr 24</span>
-                    <span>
-                      <a href="/posts/remembering-peru/">Remembering Peru</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Mar 23</span>
-                    <span>
-                      <a href="/posts/plotcaptions/">The PlotCaptions Dataset: Automating the Narration of Visual Analytics</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Mar 12</span>
-                    <span>
-                      <a href="/posts/optimizing-torch-models/">Notes on Optimizing Torch Models</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-          <h3>2025</h3> 
+        </p>
+    </div>
+    
 
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Aug 27</span>
-                    <span>
-                      <a href="/posts/bridge-of-asses/">The Bridge of Asses: Learning Coding with Novices</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Mar 14</span>
-                    <span>
-                      <a href="/posts/invisible-women-review/">Book Review: Invisible Women by Caroline Criado Perez</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Mar 11</span>
-                    <span>
-                      <a href="/posts/bayesian-storytelling/">Bayesian Storytelling</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jan 31</span>
-                    <span>
-                      <a href="/posts/more-pixels/">More Pixels</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jan 7</span>
-                    <span>
-                      <a href="/posts/beer-mekong/">Beer on the Mekong - Growth, Discovery and Creativity in 2025</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-          <h3>2024</h3> 
+    
 
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Oct 10</span>
-                    <span>
-                      <a href="/posts/feed-the-trolls/">Do Feed the Trolls</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jun 21</span>
-                    <span>
-                      <a href="/posts/ocr-misconceptions/">Misconceptions about OCR Bounding Boxes</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">May 21</span>
-                    <span>
-                      <a href="/posts/essays-of-revolt-review/">Essays of Revolt - Jack London</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Apr 7</span>
-                    <span>
-                      <a href="/posts/the-great-arc-review/">Book Review: The Great Arc - John Keay</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Feb 12</span>
-                    <span>
-                      <a href="/posts/room-of-ones-own-review/">Book Review: A Room of One&#39;s Own - Virginia Woolf</a>
-                    </span>
-                  </li>
-              
-          </ul>
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/math">#math</a>
+        
+            <a class="tag" href="/tags/game-theory">#game-theory</a>
+        
       
-          <h3>2022</h3> 
-
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Dec 24</span>
-                    <span>
-                      <a href="/posts/myth-of-sisyphus/">Open World Games and the Myth of Sisyphus</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Sep 30</span>
-                    <span>
-                      <a href="/posts/obj-detection-stratification/">Effective Train/Test Stratification for Object Detection</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jun 17</span>
-                    <span>
-                      <a href="/posts/code-readability-process/">A Process for Readable Code</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-          <h3>2021</h3> 
-
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">May 8</span>
-                    <span>
-                      <a href="/posts/world-without-emai-review/">Book Review: A World Without Email - Cal Newport</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-          <h3>2020</h3> 
-
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Dec 29</span>
-                    <span>
-                      <a href="/posts/travels-with-charley-review/">Book Review: Travels with Charley - John Steinbeck</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jul 10</span>
-                    <span>
-                      <a href="/posts/baluta-review/">Book Review: Baluta - Daya Pawar</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">May 15</span>
-                    <span>
-                      <a href="/posts/city-of-djinns-review/">Book Review: City of Djinns - William Dalrymple</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-          <h3>2019</h3> 
-
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Nov 27</span>
-                    <span>
-                      <a href="/posts/to-a-god-unknown-review/">Book Review: To a God Unknown - John Steinbeck</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Feb 19</span>
-                    <span>
-                      <a href="/posts/treasure-island-review/">Book Review: Treasure Island - R L Stevenson</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-          <h3>2018</h3> 
-
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Dec 13</span>
-                    <span>
-                      <a href="/posts/rabies-laziness-privilege/">Rabies, Laziness &amp; Privilege</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Aug 17</span>
-                    <span>
-                      <a href="/posts/weighted-loss-functions-for-instance-segmentation/">Weighted Loss Functions for Instance Segmentation</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Feb 25</span>
-                    <span>
-                      <a href="/posts/in-dubious-battle-review/">Book Review: In Dubious Battle - John Steinbeck</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-          <h3>2017</h3> 
-
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Nov 22</span>
-                    <span>
-                      <a href="/posts/how-not-to-ask-questions/">How Not to Ask Questions After a Talk</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Mar 24</span>
-                    <span>
-                      <a href="/posts/view-from-cheap-seats-review/">Book Review: The View from the Cheap Seats - Neil Gaiman</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-          <h3>2016</h3> 
-
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Aug 3</span>
-                    <span>
-                      <a href="/posts/playing-with-the-konmari-method/">Playing With the Konmari Method</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jul 17</span>
-                    <span>
-                      <a href="/posts/linearity-bayesian-classifiers/">On the Linearity of Bayesian Classifiers</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jul 6</span>
-                    <span>
-                      <a href="/posts/perceptron-convergence/">A Geometric Proof of the Perceptron Convergence Theorem</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jun 30</span>
-                    <span>
-                      <a href="/posts/mm-problem/">Understanding Allen Downey&#39;s Solution to the M&amp;M Problem</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jun 14</span>
-                    <span>
-                      <a href="/posts/evangelism-in-foss/">Evangelism in Foss</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-          <h3>2015</h3> 
-
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Aug 27</span>
-                    <span>
-                      <a href="/posts/bookshelf/">Organizing a Bookshelf with Multivariate Analysis</a>
-                    </span>
-                  </li>
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Jun 20</span>
-                    <span>
-                      <a href="/posts/fourier-limitations/">Limitations of the Fourier Transform</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-          <h3>2014</h3> 
-
-          <ul class="archives-list"> 
-            
-              
-             
-                  <li class="archives-list-item">
-                    <span class="archives-list-item-date">Apr 18</span>
-                    <span>
-                      <a href="/posts/emd-edge-effects/">Edge Effects in Empirical Mode Decomposition</a>
-                    </span>
-                  </li>
-              
-          </ul>
-      
-  </div>
-
-  <div class="page-footer"></div>
+    </div>
 
 
 	
