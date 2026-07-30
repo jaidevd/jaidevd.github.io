@@ -10,9 +10,30 @@
 		
 		
 		
-			<lastBuildDate>Sun, 12 Jul 2026 10:45:26 +0530</lastBuildDate>
+			<lastBuildDate>Sun, 26 Jul 2026 14:26:48 +0530</lastBuildDate>
 		
 			<atom:link href="https://jaidevd.com/tags/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Code</title>
+				<link>https://jaidevd.com/tags/code/</link>
+				<pubDate>Sun, 26 Jul 2026 14:26:48 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/code/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Design</title>
+				<link>https://jaidevd.com/tags/design/</link>
+				<pubDate>Sun, 26 Jul 2026 14:26:48 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/design/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Software</title>
+				<link>https://jaidevd.com/tags/software/</link>
+				<pubDate>Sun, 26 Jul 2026 14:26:48 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/software/</guid>
+				<description></description>
+			</item>
 			<item>
 				<title>Game-Theory</title>
 				<link>https://jaidevd.com/tags/game-theory/</link>
@@ -81,13 +102,6 @@
 				<link>https://jaidevd.com/tags/torch/</link>
 				<pubDate>Thu, 12 Mar 2026 13:00:00 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/torch/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Code</title>
-				<link>https://jaidevd.com/tags/code/</link>
-				<pubDate>Wed, 27 Aug 2025 12:47:10 +0530</pubDate>
-				<guid>https://jaidevd.com/tags/code/</guid>
 				<description></description>
 			</item>
 			<item>

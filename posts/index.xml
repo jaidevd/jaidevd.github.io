@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Sun, 12 Jul 2026 10:45:26 +0530</lastBuildDate>
+			<lastBuildDate>Sun, 26 Jul 2026 14:26:48 +0530</lastBuildDate>
 		
 			<atom:link href="https://jaidevd.com/posts/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Notes on Fred Brooks&#39;s &#39;No Silver Bullet&#39;</title>
+				<link>https://jaidevd.com/posts/no-silver-bullet/</link>
+				<pubDate>Sun, 26 Jul 2026 14:26:48 +0530</pubDate>
+				<guid>https://jaidevd.com/posts/no-silver-bullet/</guid>
+				<description>&lt;p&gt;I had a simple problem. An OCR engine found text anywhere on a PDF page. A&#xA;separate parser could tell me whether a rectangle on that page contained text,&#xA;an image, both, or neither. Given a piece of OCR output, I needed to decide&#xA;whether it came from a text layer or from pixels that merely looked like text.&#xA;When neither answer was reliable, the system would say “unknown”.&lt;/p&gt;&#xA;&lt;p&gt;The problem was easy to state, easy to understand and easy to test. So why did&#xA;it take me hours?&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>Finding Nash Equilibria in Jeopardy!</title>
 				<link>https://jaidevd.com/posts/nash-equilibria-jeopardy/</link>

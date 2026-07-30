@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Notes on Fred Brooks&#39;s &#39;No Silver Bullet&#39; | Jaidev&#39;s Blog</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.451b6e38641765521cd0143a30a4850aa45ea864fced9f15574a558c29633078.css"/>
+
+    
+    
+    
+
+    
+    
+
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-R6EBGCKHP1');
+        }
+      </script></head>
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Notes on Fred Brooks&#39;s &#39;No Silver Bullet&#39;">
+	<meta name="twitter:description" content="I had a simple problem. An OCR engine found text anywhere on a PDF page. A separate parser could tell me whether a rectangle on that page contained text, an image, both, or neither. Given a piece of OCR output, I needed to decide whether it came from a text layer or from pixels that merely looked like text. When neither answer was reliable, the system would say “unknown”.
+The problem was easy to state, easy to understand and easy to test. So why did it take me hours?">
+
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Jaidev&#39;s Blog</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/about/">About Me</a>
+  
+    <a class="color-link nav-link" href="/archive/">Archive</a>
+  
+  <a class="color-link nav-link" href="" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://jaidevd.com/js/main.min.54a3138c8f05f2b9fd74947ce85883e313c50cf2f5644df90d19bdb1f58cb0ba.js" integrity="sha256-VKMTjI8F8rn9dJR86FiD4xPFDPL1ZE35DRm9sfWMsLo=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Notes on Fred Brooks&#39;s &#39;No Silver Bullet&#39;</h1>
+    
+    <time>July 26, 2026</time>
+    
+    <div>
+        <p>
+        <p>I had a simple problem. An OCR engine found text anywhere on a PDF page. A
+separate parser could tell me whether a rectangle on that page contained text,
+an image, both, or neither. Given a piece of OCR output, I needed to decide
+whether it came from a text layer or from pixels that merely looked like text.
+When neither answer was reliable, the system would say “unknown”.</p>
+<p>The problem was easy to state, easy to understand and easy to test. So why did
+it take me hours?</p>
+<p>At first, I could not decide where in the module the new code belonged. This was
+absurd. The module was only about 800 lines of Python, all written by me, and
+not long ago. The insertion point was not mysterious either: after OCR finishes
+on each page. That narrowed it down enough.</p>
+<p>I went there, added a comment: &ldquo;Update the dataframe with the best guess of
+where each row came from: text, image or unknown.&rdquo; Copilot suggested about
+fifteen lines which did the job reasonably well. I accepted them, moved them
+into a function, ran the tests and prepared to commit.</p>
+<p>Then I looked at the diff. The new function resembled several others. The module
+was making repeated passes over the same data, calling parsers with slightly
+different interfaces and extracting one kind of information at a time. It was
+wasteful and inelegant.</p>
+<p>I could have committed the feature as it was. Instead, I started refactoring. I
+changed the type hints, docstrings, return values and arguments. Then I began
+deleting code. Eventually, three similar parser functions became one flexible
+function which did everything I needed. I pushed the commit just in time for a
+demo. The client was happy.</p>
+<p>But they would have been just as happy if I had not spent time on the refactor.</p>
+<p>At the time, I believed I had made the responsible choice. I could either
+refactor now, or save time today and repay it later while debugging under
+pressure. The second option seemed like living on borrowed time. That is, after
+all, why technical debt is called so.</p>
+<hr>
+<p>The first time I read <em>No Silver Bullet</em> was over a decade ago, when I was a
+naive, idealistic developer. I had the rare fortune of working under good
+programming mentors, on a product that was already well established in the
+market. Everything I did belonged neatly on an efficient assembly line. It was
+easy to accept Brooks’s argument as gospel.</p>
+<p>Over the years, however, I moved between startups, consulting engagements and
+products—many of them highly chaotic. I kept returning to <em>No Silver Bullet</em>.
+Now, I think, it is time to assess its thesis more carefully and pragmatically.
+In doing so, I have also softened my ideas about what constitutes good
+programming.</p>
+<p>What follows is a sequence of annotations and notes on <em>No Silver Bullet</em>. It is
+not a summary. It is not even complete. It is simply a stake in the ground:
+something for me to return to a decade from now.</p>
+<p>The more things change, the more they stay the same.</p>
+<h2 id="notes-from-the-essay">Notes From the Essay</h2>
+<p><em>Note</em>: I have a paperback copy of the second edition of <a href="https://www.pearson.com/en-us/subject-catalog/p/mythical-man-month-the-essays-on-software-engineering-anniversary-edition/P200000000149?view=educator"><em>The Mythical
+Man-Month: Essays on Software Engineering, Anniversary Edition with Four New
+Chapters</em></a>, published by Pearson. The page numbers that follow are from this
+copy. However, a <a href="https://worrydream.com/refs/Brooks_1986_-_No_Silver_Bullet.pdf">PDF is available courtesy of Bret Victor</a>.</p>
+<p>Brooks&rsquo;s central thesis is that all software work is cleanly divisible into two
+disjoint categories (the categories themselves Brooks has borrowed from
+Aristotle):</p>
+<ol>
+<li>the <em>essential</em>: the complex conceptual structures that compose the abstract
+software entity<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> - which have an inherent, irreducible complexity in
+software which is necessary for the product to do its job; and</li>
+<li>the <em>accidental</em>: the representation of these entities into programming
+languages and their execution with space and time constraints - which are
+fundamentally a result of less-than-perfect minds and tools.</li>
+</ol>
+<p>Right in the abstract, Brooks delivers a blow:</p>
+<blockquote>
+<p>Unless it is more than 9/10 of all effort, shrinking the accidental activities
+to zero time will not give an order of magnitude improvement. (p180)</p>
+</blockquote>
+<p>On the face of it, it seems like he&rsquo;s arguing against all that clean coders
+stand for: modularity, testability and clarity. But a careful reading is a
+little more nuanced. He&rsquo;s saying that unless dealing with bad code occupies an
+overwhelmingly high amount of your time, eliminating it cannot produce an
+order-of-magnitude gain. I agree with his proposed direction, but not with his
+magnitude. A blunt reading would mean that I won&rsquo;t wait until I start investing
+in refactoring and housekeeping until the effects of bad code start costing me
+more than four out of five weekdays. I&rsquo;ll probably start even if it costs me
+only two days a week. Secondly, he argues for an &ldquo;order of magnitude&rdquo; gain. I&rsquo;ll
+settle even for a commensurate gain.</p>
+<p>His broader point is still valid, though. Eliminating accidental complexity is
+no silver bullet. The takeaway here is that being eternally bullish on clean
+code has diminishing returns.</p>
+<p>So Brooks&rsquo;s alternative, clearly, is to attack essential complexity in order to
+yield an order-of-magnitude improvement, to which, he says,</p>
+<blockquote>
+<p>There is no royal road, but there is a road. (p181)</p>
+</blockquote>
+<p>And that road (at least to my mind, and to my slightly different semantics),
+passes inevitably through <em>first</em> pruning the accidental complexity before even
+hoping to eventually penetrate the essence of the system. Drawing analogies from
+medicine and germ theory, he writes</p>
+<blockquote>
+<p>&hellip; progress would be made stepwise&hellip; a persistent, unremitting care would
+have to be paid to a discipline of cleanliness. So it is with software
+engineering today. (ibid)</p>
+</blockquote>
+<p>What is a &ldquo;discipline of cleanliness&rdquo; if not a commitment to clean code?</p>
+<p>He then dives deeper into the essential difficulties. This essential complexity,
+he says, is what is <em>actually</em> hard in writing software: <em>the specification,
+design and testing of the conceptual construct, not the labour of representing
+it and testing the fidelity of the representation</em> (p182). This irreducible
+essence, he proposes, has four properties: complexity, conformity, changeability
+and invisibility.</p>
+<h2 id="on-essential-complexity">On Essential Complexity</h2>
+<p>When writing about complexity, Brooks throws another curveball:</p>
+<blockquote>
+<p>The complexity of software is an essential property, not an accidental one.
+Hence descriptions of a software entity that abstract away its complexity
+often abstract away its essence. (p183)</p>
+</blockquote>
+<p>This seems like a direct challenge to abstraction, a staple of every major
+programming tradition. So either we have found a contradiction, or we have
+misunderstood Brooks, abstraction, or both. The problem resolves itself as one
+reads on. Brooks is not arguing against abstraction itself. His target is an
+abstraction that goes beyond hiding detail and begins to corrupt the model.</p>
+<p>Suppose a function tells you that a piece of text can come only from a text
+layer or an image, but never from a third source. That is not merely a simplified
+interface. It is a false description of the domain. Adding the third
+answer—“unknown”—was not complicating the abstraction. It was repairing it.</p>
+<p>He concludes the section by enumerating a bunch of not just technical, but also
+management problems (all accidental) which complexity begets. Complexity leads
+to difficulties in communication, and hence to bugs, unmet deadlines and budget
+overruns. Complexity leads to unreliable programs and unforeseen states.
+Complexity leads to complicated interfaces which make programs hard to extend
+without side-effects.</p>
+<p>Unfortunately, as stated, we can&rsquo;t attack complexity itself beyond a point lest
+we lose the essence of the system. This, perhaps, is what Einstein meant when he
+said that everything ought to be made as simple as possible, but no simpler.</p>
+<p>Brooks goes on to write about the remaining three properties of the irreducible
+essence. There&rsquo;s not much I can add to the commentary here, except to note what
+he says about invisibility: software is extremely hard to visualize. You often
+end up with</p>
+<blockquote>
+<p>&hellip;not one, but several directed graphs superimposed one upon another. These
+are usually not even planar, much less hierarchical. (p185)</p>
+</blockquote>
+<p>And he further notes that this invisibility &ldquo;<em>not only impedes the process of
+design within one mind, it severely hinders communication among minds.</em> (p186)&rdquo;</p>
+<h2 id="on-past-wins-against-accidental-complexity">On Past Wins Against Accidental Complexity</h2>
+<p>Brooks then enumerates past breakthroughs that he proposes have solved
+accidental difficulties: high-level languages, time-sharing and unified
+programming environments. If the distinction between
+essential and accidental difficulties is not clear, this section of the essay
+has many good examples.</p>
+<blockquote>
+<p>&hellip;each attacked a different major difficulty in building software, but they
+have been the accidental, not the essential, difficulties. (p186)</p>
+</blockquote>
+<blockquote>
+<p>What does a high-level language accomplish? It frees a program from much of
+its accidental complexity&hellip; it eliminates a whole level of complexity that
+was never inherent in the program at all. (p186)</p>
+</blockquote>
+<p>It&rsquo;s revealing that Brooks says that something as revolutionary as high-level
+languages only addressed accidental complexity. If an elitist were to put this
+bluntly, Python programming or Java programming isn&rsquo;t a real job. Programming,
+however, is. This seems like a hard pill to swallow, especially since
+programmers absolutely <em>love</em> to learn, talk and write about affordances of
+programming languages. Discourse around programming languages is a worthy
+endeavour in and of itself, but ultimately, let&rsquo;s not forget that while all
+craftsmen nerd-out endlessly about their favourite tools, they know that the
+tools themselves are not the craft.</p>
+<p>Next, Brooks talks about time-sharing, especially as an antidote to
+batch-processing.</p>
+<blockquote>
+<p>The slow turnaround of batch-programming means that we inevitably forget the
+minutiae, if not the very thrust, of what we were thinking when we stopped
+programming and called for compilation and execution. This interruption of
+consciousness is costly in time, for we must refresh. The most serious effect
+may well be the decay of grasp of all that is going on in a complex system.
+(p187)</p>
+</blockquote>
+<p>This I find surprisingly relevant even today, and not remotely for the same
+reasons as those of Brooks. I think that this phenomenon of batch processing
+having slow turnarounds and ultimately causing programmers to lose track of
+their goals is <em>precisely</em> what ails AI and ML programming <em>today</em>. The
+following scenario is distressingly common: you launch a long running expensive
+GPU job on a Friday evening, and by your calculations you ought to have a
+trained model on your hands by Monday morning. But when you return to your desk
+on Monday, you realize that the job had crashed right as you closed the door
+behind you on Friday evening.</p>
+<p><a href="https://xkcd.com/303/"><img src="https://imgs.xkcd.com/comics/compiling.png" alt="XKCD: Compiling"></a></p>
+<p>In the comic above, replace &ldquo;code compiling&rdquo; with &ldquo;model training&rdquo;.</p>
+<p>A side effect of long running batches is also that AI / ML developers spend far
+too much time simply staring at loss curves: a sureshot recipe for (sometimes
+even literal) tunnel vision.</p>
+<h2 id="on-potential-silver-bullets">On Potential Silver Bullets</h2>
+<p>Brooks returns to OOP briefly in the concluding section of the essay. He
+divides<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> OOP into two fundamental ideas:</p>
+<ul>
+<li>abstract data types–the idea that one must be able to specify an object with
+no more than a name, a set of values and operations, while hiding the <em>hows</em>
+of it–, and</li>
+<li>hierarchical types, aka classes (emphasis on their role as interfaces)</li>
+</ul>
+<p>He notes that both these are abstract, that each may exist without the other,
+and that each</p>
+<blockquote>
+<p>&hellip; removes one more accidental difficulty from the process, allowing the
+designer to express the essence of his design without having to express large
+amounts of syntactic material that add no new information content. For both
+abstract types and hierarchical types, the result is to remove a higher-order
+sort of accidental difficulty and allow a higher-order expression of design.
+(p189)</p>
+</blockquote>
+<blockquote>
+<p>An order-of-magnitude gain can be made by OOP only if the unnecessary
+underbrush of type specification remaining today in our programming language
+is itself responsible for nine-tenths of the work involved in designing a
+program product. I doubt it. (p190)</p>
+</blockquote>
+<p>I&rsquo;m perhaps not alone in feeling somewhat bleak upon reading this. Many of us
+would swear by OOP design, and it&rsquo;s not exactly encouraging to be told that it
+cannot provide a tenfold gain. But when the prize we seek is a silver bullet,
+something that promises an order-of-magnitude gain, the cost of the bullet
+should also be an order-of-magnitude higher. In other words, we swear by OOP
+because we settle for commensurate, not order-of-magnitue higher, gains.</p>
+<p>Here, Brooks finally reaches the section I&rsquo;d been waiting for: <strong>automatic
+programming as a silver bullet</strong><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>—the closest analogue in the essay to
+today&rsquo;s claims about AI coding agents. Brooks had the bad (or perhaps the good)
+fortune of dying exactly two weeks before ChatGPT was released. The modern
+discourse around AI coding agents is so ridiculous that regardless of what
+anyone might have said about the essence and accidents of computer programming,
+we today are sure to accept it as the silver bullet. Nevertheless, it&rsquo;s
+heartening to read what Brooks said about automatic programming.</p>
+<blockquote>
+<p>The hard thing about building software is deciding what to say, not saying it.
+No facilitation of expression can give more than marginal gains. (p191)</p>
+</blockquote>
+<p>He then quotes David Parnas,</p>
+<blockquote>
+<p>&hellip; automatic programming always has been a euphemism for programming with a
+higher-level language than was presently available to the programmer (p193).</p>
+</blockquote>
+<p>Those of us who have regularly been using coding agents would understand what
+Parnas and Brooks both meant. Thinking about code and typing it down is hardly
+the most expensive part of the job.</p>
+<h2 id="on-promising-attacks-on-the-essence">On Promising Attacks on the Essence</h2>
+<p>This is the last section of the essay, in which Brooks enumerates a few methods
+which, while clearly not silver bullets, can still go a long way towards better
+<em>formulation</em>. He&rsquo;s particular about pointing out that none of these are
+dramatic or spectacular, but are simply steady.</p>
+<p>One idea he brings up is continuous refinement of requirements and rapid
+prototyping.</p>
+<blockquote>
+<p>&hellip; it is really impossible for clients, even those working with software
+engineers, to specify completely, precisely, and correctly the exact
+requirements of a modern software product before having built and tried some
+versions of the product they are specifying.</p>
+</blockquote>
+<p>It&rsquo;s tempting for programmers to imagine their non-technical managers as
+Dilbert&rsquo;s pointy-haired boss, and not without reason. But we must pause to ask
+ourselves if we speak and write so precisely that our specifications might as
+well be the code.</p>
+<blockquote>
+<p>&hellip;one of the most promising of the current technological efforts, and one
+which attacks the essence, not the accidents, of the software problem, is the
+development of approaches and tools for rapid prototyping of systems as part
+of the iterative specification of requirements. (p200)</p>
+</blockquote>
+<p>This is perhaps the best argument I&rsquo;ve read against premature generalization. My
+most frequent code review comment is YAGNI, and the replies almost always are
+&ldquo;but what if we <em>do</em> need it in the future?&rdquo; That kind of thinking is precisely
+what goes against rapid prototyping.</p>
+<p>The last strategy Brooks writes about is how and why to cultivate good software
+designers.</p>
+<blockquote>
+<p>Great designs come from great designers. Software construction is a <em>creative</em>
+process. Sound methodology can empower and liberate the creative mind; it
+cannot enflame or inspire the drudge.</p>
+</blockquote>
+<blockquote>
+<p>Study after study shows that the very best designers produce structures that
+are faster, smaller, simpler, cleaner and produced with less effort. The
+differences between the great and the average approach an order of magnitude.
+(p202)</p>
+</blockquote>
+<p>By the end of the essay, when you look back at all the highlighted parts, it
+seems like a collection of truisms you&rsquo;ve always wanted to believe because
+programmers you respect have held similar opinions; but you did not have
+(or did not hear or read) compelling arguments for them. That &ldquo;NSB&rdquo; builds its
+case very completely, and ruthlessly, is why the essay has stood the test of time.</p>
+<p>Brooks reflected on &ldquo;NSB&rdquo; 13 years later in another essay called <em>&lsquo;No Silver
+Bullet&rsquo; Refired</em>. It is no less interesting, and my copy of it is peppered with
+as many highlights as the original essay. I&rsquo;m going to leave you only with some
+parts of the concluding text, which include quotes from R L Glass,</p>
+<blockquote>
+<p>&hellip; evolutionary improvements rather than to wait—or hope—for revolutionary
+ones.</p>
+</blockquote>
+<blockquote>
+<p>But some of us—those of us crusty enough to think that we are realists—see
+this as a breath of fresh air. At last we can focus on something a little more
+viable than pie in the sky. (p226)</p>
+</blockquote>
+<p>This reminds me of the writing of Oliver Burkeman, who often espouses accepting
+the finitude of life, because it is only this acceptance that can free you from
+looking for silver bullets.</p>
+<blockquote>
+<p>Let’s start by admitting defeat: none of this is ever going to happen. But you
+know what? That’s <em>excellent</em> news<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.</p>
+</blockquote>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>In the first essay in the book, <em>The Tar Pit</em>, Brooks enumerates and
+defines various types of programming entities. A <em>program</em> is something that&rsquo;s
+complete in itself, meant to be run by the author on the system on which it was
+developed. A <em>programming product</em> is a program that can be run, tested,
+repaired and extended by anybody. A <em>programming system</em> is a collection of
+interacting programs, coordinated in function and disciplined in format—an
+entire facility for large tasks. Finally, a <em>programming systems product</em> has
+all of the above properties. (p5-6)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Brooks credits this distinction to a suggestion from Mark Sherman of Dartmouth.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Although what AI was in Brooks&rsquo;s day is far removed from our current view
+of it.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Burkeman, Oliver. <em>Four Thousand Weeks: Time Management for
+Mortals</em>. Penguin Vintage, 2022&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+        </p>
+    </div>
+    
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/software">#software</a>
+        
+            <a class="tag" href="/tags/design">#design</a>
+        
+            <a class="tag" href="/tags/code">#code</a>
+        
+      
+    </div>
+
+
+	
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://jaidevd.com/js/main.min.54a3138c8f05f2b9fd74947ce85883e313c50cf2f5644df90d19bdb1f58cb0ba.js" integrity="sha256-VKMTjI8F8rn9dJR86FiD4xPFDPL1ZE35DRm9sfWMsLo=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>
