@@ -2,13 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jaidevd.com/</loc>
+    <lastmod>2026-08-07T14:50:23+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/scattered-sparks/</loc>
+    <lastmod>2026-08-07T14:50:23+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/scattered-sparks/tiny-experiments/</loc>
+    <lastmod>2026-08-07T14:50:23+05:30</lastmod>
+  </url><url>
     <loc>https://jaidevd.com/tags/code/</loc>
     <lastmod>2026-07-26T14:26:48+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/design/</loc>
-    <lastmod>2026-07-26T14:26:48+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/</loc>
     <lastmod>2026-07-26T14:26:48+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/no-silver-bullet/</loc>
@@ -67,6 +73,9 @@
   </url><url>
     <loc>https://jaidevd.com/tags/torch/</loc>
     <lastmod>2026-03-12T13:00:00+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/scattered-sparks/ulysses/</loc>
+    <lastmod>2026-01-07T15:57:53+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/python/</loc>
     <lastmod>2025-08-27T12:47:10+05:30</lastmod>

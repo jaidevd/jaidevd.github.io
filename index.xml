@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Sun, 26 Jul 2026 14:26:48 +0530</lastBuildDate>
+			<lastBuildDate>Fri, 07 Aug 2026 14:50:23 +0530</lastBuildDate>
 		
 			<atom:link href="https://jaidevd.com/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Tiny Experiments by Anne-Laure Le Cunff</title>
+				<link>https://jaidevd.com/scattered-sparks/tiny-experiments/</link>
+				<pubDate>Fri, 07 Aug 2026 14:50:23 +0530</pubDate>
+				<guid>https://jaidevd.com/scattered-sparks/tiny-experiments/</guid>
+				<description>&lt;p&gt;Thanks are due to &lt;a href=&#34;https://www.linkedin.com/in/shivan1&#34;&gt;Shivani Bhardwaj&lt;/a&gt; for lending me her copy of this book. Here&amp;rsquo;s one of the appendices from it.&lt;/p&gt;&#xA;&lt;h1 id=&#34;experimentalist-toolkit&#34;&gt;Experimentalist Toolkit&lt;/h1&gt;&#xA;&lt;p&gt;(A printable version available at &lt;a href=&#34;https://nesslabs.com/toolkit&#34;&gt;https://nesslabs.com/toolkit&lt;/a&gt;)&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;    &lt;img class=&#34;article-image&#34; src=&#34;https://jaidevd.com/scattered-sparks/tiny-experiments/tiny-experiments.jpg&#34; alt=&#34;&#34;&gt;&#xA;    &#xA;&#xA;&#xA;&lt;p&gt;Start by selecting the question that best describes the current situation and go&#xA;to the corresponding quadrant.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Where&lt;/strong&gt; can I start?&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;How&lt;/strong&gt; can I maintain momentum?&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;What&lt;/strong&gt; can I do next?&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Who&lt;/strong&gt; can I keep growing with?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;the-tools&#34;&gt;The Tools&lt;/h2&gt;&#xA;&lt;h3 id=&#34;pact-commit-to-curisosity&#34;&gt;Pact: Commit to Curisosity&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Adopt an experimental mindeet with the Three Menal Shifts: from response 1 to&#xA;response 2, from fixed ladders to growth loops, from outcome to process.&lt;/li&gt;&#xA;&lt;li&gt;Challenge cognitive scripts with Field Notes: take notes on insights, your&#xA;energy, your mood and encounters.&lt;/li&gt;&#xA;&lt;li&gt;Design small iterative experiments with a Pact: I will [action] for&#xA;[duration]. A pact is purposeful, actionable, continuous and trackable.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;act-paractice-mindful-productivity&#34;&gt;Act: Paractice Mindful Productivity&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Open magic windows with a Kairos ritual: a short ritual that is practical and&#xA;enjoyable.&lt;/li&gt;&#xA;&lt;li&gt;Listen to procrastination with the triple check: Head—is it appropriate?&#xA;Hand—is it doable? Heart—is it exciting?&lt;/li&gt;&#xA;&lt;li&gt;Leverage imperfection with the Ambition Dials: identify perfectionist&#xA;patterns, challenge your unrealistic targetrs, choose progress over&#xA;perfection.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;react-collaborate-with-uncertainty&#34;&gt;React: Collaborate with Uncertainty&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Create metacognitive growth loops with plus-minus-next. Take note of&#xA;accomplishments; personal or professional. Then identify challenges or&#xA;obstacles and setbacks. Then use them to inform actions and next steps.&lt;/li&gt;&#xA;&lt;li&gt;Broaden the decision frame with the steering sheet (shown below).&lt;/li&gt;&#xA;&lt;li&gt;Dance with disruption with the two-step reset: processing the subjective&#xA;experience, managing the objective consequences.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&#xA;&#xA;    &lt;img class=&#34;article-image&#34; src=&#34;https://jaidevd.com/scattered-sparks/tiny-experiments/steering-sheet.jpg&#34; alt=&#34;&#34;&gt;&#xA;    &#xA;&#xA;&#xA;&lt;h3 id=&#34;impact-grow-with-the-world&#34;&gt;Impact: Grow with the World&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Unlock social flow with a Curisosity Circle: start scrappy, be up front, don&amp;rsquo;t&#xA;overthink it, make it cozy, don&amp;rsquo;t hold the reins too tight.&lt;/li&gt;&#xA;&lt;li&gt;Learn in public with the Public Pillars: make a pledge, choose a platform,&#xA;practice and iterate.&lt;/li&gt;&#xA;&lt;li&gt;Do generative work with the Five Keys: do the work first, grow lateral roots,&#xA;prioritize impact over image, close the loops to open doors, play along the&#xA;way.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+			</item>
 			<item>
 				<title>Notes on Fred Brooks&#39;s &#39;No Silver Bullet&#39;</title>
 				<link>https://jaidevd.com/posts/no-silver-bullet/</link>
@@ -54,6 +61,13 @@
 				<pubDate>Thu, 12 Mar 2026 13:00:00 +0530</pubDate>
 				<guid>https://jaidevd.com/posts/optimizing-torch-models/</guid>
 				<description>&lt;p&gt;ML researchers are from Mars and the ML engineers responsible for deploying&#xA;models are from Venus. The two have vastly different motivations. The ML&#xA;researcher&amp;rsquo;s job, given a dataset and some compute, is to find the&#xA;lowest possible loss on a task. In this pursuit, no engineering cost is too&#xA;high. No tech debt is too large. Worse still, if they get published, they must&#xA;include their code in their paper. Reproducible research only means that&#xA;everyone be able to reproduce benchmarks and charts from the original paper. It&#xA;usually has very little to do with production.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Ulysses, by Alfred Lord Tennyson</title>
+				<link>https://jaidevd.com/scattered-sparks/ulysses/</link>
+				<pubDate>Wed, 07 Jan 2026 15:57:53 +0530</pubDate>
+				<guid>https://jaidevd.com/scattered-sparks/ulysses/</guid>
+				<description></description>
 			</item>
 			<item>
 				<title>The Bridge of Asses: Learning Coding with Novices</title>
