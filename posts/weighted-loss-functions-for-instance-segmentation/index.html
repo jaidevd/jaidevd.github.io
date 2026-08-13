@@ -9,6 +9,50 @@
 
     <title>Weighted Loss Functions for Instance Segmentation | Jaidev&#39;s Blog</title>
     
+    
+    
+    <meta name="description" content="Why F1 and other classification metrics can look great on an instance segmentation model that&#39;s actually failing, and how a weighted loss fixes it.">
+    <link rel="canonical" href="https://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/">
+
+    
+    <meta property="og:site_name" content="Jaidev&#39;s Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Weighted Loss Functions for Instance Segmentation">
+    <meta property="og:description" content="Why F1 and other classification metrics can look great on an instance segmentation model that&#39;s actually failing, and how a weighted loss fixes it.">
+    <meta property="og:url" content="https://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/">
+    
+    
+        
+        
+            
+        
+    
+    
+    <meta property="og:image" content="https://jaidevd.com/img/segmentation.png">
+
+    
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "author": {
+    "@type": "Person",
+    "name": "Jaidev Deshpande"
+  },
+  "dateModified": "2018-08-17T14:52:19+05:30",
+  "datePublished": "2018-08-17T14:52:19+05:30",
+  "description": "Why F1 and other classification metrics can look great on an instance segmentation model that's actually failing, and how a weighted loss fixes it.",
+  "headline": "Weighted Loss Functions for Instance Segmentation",
+  "mainEntityOfPage": "https://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/",
+  "publisher": {
+    "@type": "Person",
+    "name": "Jaidev Deshpande"
+  },
+  "url": "https://jaidevd.com/posts/weighted-loss-functions-for-instance-segmentation/"
+}
+    </script>
+    
+    
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -19,7 +63,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.c585293008076c95d5e250b27fbf7e5861427dabe773e64b600635d283d5b4a5.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.1b09c01ad6eb5e1275eacdf9b0f972d0090600fc5c326ea72ddea5f281e987e8.css"/>
 
     
     
@@ -46,8 +90,7 @@
 
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="Weighted Loss Functions for Instance Segmentation">
-	<meta name="twitter:description" content="This post is a follow up to my talk, Practical Image Classification &amp; Object Detection at PyData Delhi 2018. You can watch the talk here: and see the slides here.
-I spoke at length about the different kinds of problems in computer vision and how they are interpreted in deep learning architectures. I spent a fair bit of time on instance and semantic segmentation (for an introduction to these problems, watch Justin Johnson’s lecture from the Stanford CS231 course here). In short, semantic segmentation deals with designating each pixel of an image as belonging to a class, and instance segmentation deals with identifying which instance of a class each pixel belongs to. The following images show an example of semantic versus instance segmentation.">
+	<meta name="twitter:description" content="Why F1 and other classification metrics can look great on an instance segmentation model that&#39;s actually failing, and how a weighted loss fixes it.">
 
 
     <body>

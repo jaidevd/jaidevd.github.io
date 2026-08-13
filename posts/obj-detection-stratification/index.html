@@ -9,6 +9,50 @@
 
     <title>Effective Train/Test Stratification for Object Detection | Jaidev&#39;s Blog</title>
     
+    
+    
+    <meta name="description" content="Why naive train/test splits overfit object detection models, and a stratification method that accounts for object count and size.">
+    <link rel="canonical" href="https://jaidevd.com/posts/obj-detection-stratification/">
+
+    
+    <meta property="og:site_name" content="Jaidev&#39;s Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Effective Train/Test Stratification for Object Detection">
+    <meta property="og:description" content="Why naive train/test splits overfit object detection models, and a stratification method that accounts for object count and size.">
+    <meta property="og:url" content="https://jaidevd.com/posts/obj-detection-stratification/">
+    
+    
+        
+        
+            
+        
+    
+    
+    <meta property="og:image" content="https://jaidevd.com/posts/obj-detection-stratification/thumbnail-pedestrian-bad.png">
+
+    
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "author": {
+    "@type": "Person",
+    "name": "Jaidev Deshpande"
+  },
+  "dateModified": "2022-09-30T19:47:39+05:30",
+  "datePublished": "2022-09-30T19:47:39+05:30",
+  "description": "Why naive train/test splits overfit object detection models, and a stratification method that accounts for object count and size.",
+  "headline": "Effective Train/Test Stratification for Object Detection",
+  "mainEntityOfPage": "https://jaidevd.com/posts/obj-detection-stratification/",
+  "publisher": {
+    "@type": "Person",
+    "name": "Jaidev Deshpande"
+  },
+  "url": "https://jaidevd.com/posts/obj-detection-stratification/"
+}
+    </script>
+    
+    
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -19,7 +63,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.c585293008076c95d5e250b27fbf7e5861427dabe773e64b600635d283d5b4a5.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.1b09c01ad6eb5e1275eacdf9b0f972d0090600fc5c326ea72ddea5f281e987e8.css"/>
 
     
     
@@ -47,8 +91,7 @@
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:image" content="https://jaidevd.com/posts/obj-detection-stratification/thumbnail-pedestrian-bad.png">
 	<meta name="twitter:title" content="Effective Train/Test Stratification for Object Detection">
-	<meta name="twitter:description" content="TL;DR: Here’s a talk based on this post:
-There’s an unavoidable, inherent difficulty in fine-tuning deep neural networks, which stems from the lack of training data. It would seem ridiculous to a layperson that a pretrained vision model (containing millions of parameters, trained on millions of images) could learn to solve highly specific problems. Therefore, when fine-tuned models do perform well, they seem all the more miraculous. But on the other hand, we also know that it is easier to move from the general to the specific, than the reverse. Specialization after generalization is easier than the reverse.">
+	<meta name="twitter:description" content="Why naive train/test splits overfit object detection models, and a stratification method that accounts for object count and size.">
 
 
     <body>

@@ -9,6 +9,50 @@
 
     <title>On the Linearity of Bayesian Classifiers | Jaidev&#39;s Blog</title>
     
+    
+    
+    <meta name="description" content="An experimental check of Simon Haykin&#39;s claim that perceptrons and Bayesian classifiers coincide only when the underlying data is Gaussian.">
+    <link rel="canonical" href="https://jaidevd.com/posts/linearity-bayesian-classifiers/">
+
+    
+    <meta property="og:site_name" content="Jaidev&#39;s Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="On the Linearity of Bayesian Classifiers">
+    <meta property="og:description" content="An experimental check of Simon Haykin&#39;s claim that perceptrons and Bayesian classifiers coincide only when the underlying data is Gaussian.">
+    <meta property="og:url" content="https://jaidevd.com/posts/linearity-bayesian-classifiers/">
+    
+    
+        
+        
+            
+        
+    
+    
+    <meta property="og:image" content="https://jaidevd.com/img/linear-bayes-2.png">
+
+    
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "author": {
+    "@type": "Person",
+    "name": "Jaidev Deshpande"
+  },
+  "dateModified": "2016-07-17T14:19:40+05:30",
+  "datePublished": "2016-07-17T14:19:40+05:30",
+  "description": "An experimental check of Simon Haykin's claim that perceptrons and Bayesian classifiers coincide only when the underlying data is Gaussian.",
+  "headline": "On the Linearity of Bayesian Classifiers",
+  "mainEntityOfPage": "https://jaidevd.com/posts/linearity-bayesian-classifiers/",
+  "publisher": {
+    "@type": "Person",
+    "name": "Jaidev Deshpande"
+  },
+  "url": "https://jaidevd.com/posts/linearity-bayesian-classifiers/"
+}
+    </script>
+    
+    
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -19,7 +63,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.c585293008076c95d5e250b27fbf7e5861427dabe773e64b600635d283d5b4a5.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.1b09c01ad6eb5e1275eacdf9b0f972d0090600fc5c326ea72ddea5f281e987e8.css"/>
 
     
     
@@ -46,7 +90,7 @@
 
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="On the Linearity of Bayesian Classifiers">
-	<meta name="twitter:description" content="In his book, Neural Networks - A Comprehensive Foundation, Simon Haykin has an entire section (3.10) dedicated to how perceptrons and Bayesian classifiers are closely related when operating in a Gaussian environment. However, it is not until the end of the section that Haykin mentions that the relation is only limited to linearity. What is interesting about this is that a Perceptron can produce the same classification “model” as a Bayesian classifier, provided that the underlying data is drawn from a Gaussian distribution. This post is an experimental verification of that.">
+	<meta name="twitter:description" content="An experimental check of Simon Haykin&#39;s claim that perceptrons and Bayesian classifiers coincide only when the underlying data is Gaussian.">
 
 
     <body>

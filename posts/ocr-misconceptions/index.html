@@ -9,6 +9,50 @@
 
     <title>Misconceptions about OCR Bounding Boxes | Jaidev&#39;s Blog</title>
     
+    
+    
+    <meta name="description" content="Four common assumptions about OCR bounding boxes that break down once you&#39;ve processed enough real-world PDFs.">
+    <link rel="canonical" href="https://jaidevd.com/posts/ocr-misconceptions/">
+
+    
+    <meta property="og:site_name" content="Jaidev&#39;s Blog">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Misconceptions about OCR Bounding Boxes">
+    <meta property="og:description" content="Four common assumptions about OCR bounding boxes that break down once you&#39;ve processed enough real-world PDFs.">
+    <meta property="og:url" content="https://jaidevd.com/posts/ocr-misconceptions/">
+    
+    
+        
+        
+            
+        
+    
+    
+    <meta property="og:image" content="https://jaidevd.com/posts/ocr-misconceptions/gramener.png">
+
+    
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "author": {
+    "@type": "Person",
+    "name": "Jaidev Deshpande"
+  },
+  "dateModified": "2024-06-21T22:04:01+05:30",
+  "datePublished": "2024-06-21T22:04:01+05:30",
+  "description": "Four common assumptions about OCR bounding boxes that break down once you've processed enough real-world PDFs.",
+  "headline": "Misconceptions about OCR Bounding Boxes",
+  "mainEntityOfPage": "https://jaidevd.com/posts/ocr-misconceptions/",
+  "publisher": {
+    "@type": "Person",
+    "name": "Jaidev Deshpande"
+  },
+  "url": "https://jaidevd.com/posts/ocr-misconceptions/"
+}
+    </script>
+    
+    
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -19,7 +63,7 @@
     
     
     
-    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.c585293008076c95d5e250b27fbf7e5861427dabe773e64b600635d283d5b4a5.css"/>
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.1b09c01ad6eb5e1275eacdf9b0f972d0090600fc5c326ea72ddea5f281e987e8.css"/>
 
     
     
@@ -46,8 +90,7 @@
 
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="Misconceptions about OCR Bounding Boxes">
-	<meta name="twitter:description" content="Over the last year, I have been working on an application that auto-translates documents while maintaining the layout and formatting. It has many bells and whistles, from simple geometric tricks to sophisticated gen-AI algorithms and microservices. But basically, the app performs the simple task of identifying text in documents, machine-translating them, and reinserting them such that the output document “looks” like the input.
-Most documents that my app has to process are PDFs. PDFs are ubiquitous but notoriously hard to analyze. Since pretty much every app is capable of producing a PDF file, its layout can get particularly nasty. Moreover there is no single semantic description of what comprises a document - e.g. an email is as much a document as a boarding pass. Who’s to say that a selfie is not a document? This means that my users can upload almost anything into the app, and as long as it has some text, it ought to be serviceable.">
+	<meta name="twitter:description" content="Four common assumptions about OCR bounding boxes that break down once you&#39;ve processed enough real-world PDFs.">
 
 
     <body>
