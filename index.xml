@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Thu, 20 Aug 2026 11:52:39 +0530</lastBuildDate>
+			<lastBuildDate>Mon, 07 Sep 2026 16:21:44 +0530</lastBuildDate>
 		
 			<atom:link href="https://jaidevd.com/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>How to Run a Standup Meeting</title>
+				<link>https://jaidevd.com/scattered-sparks/standup-rules/</link>
+				<pubDate>Mon, 07 Sep 2026 16:21:44 +0530</pubDate>
+				<guid>https://jaidevd.com/scattered-sparks/standup-rules/</guid>
+				<description>&lt;p&gt;The standup is for coordination, not narration. The goal is to make people aware of what matters and drive them to action, with as little collective overhead as possible.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-be-on-time&#34;&gt;1. Be on time&lt;/h2&gt;&#xA;&lt;p&gt;Don&amp;rsquo;t be late. We have standups after standups after standups; one late meeting creates a cascade of suffering.&lt;/p&gt;&#xA;&lt;p&gt;Calendar RSVP is mandatory. Declining is perfectly acceptable. Keeping everyone guessing about whether you&amp;rsquo;re coming is not.&lt;/p&gt;&#xA;&lt;p&gt;If you are unavoidably late, tell your colleagues.&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>Read Like an Artist | Austin Kleon</title>
 				<link>https://jaidevd.com/scattered-sparks/read-like-an-artist/</link>
