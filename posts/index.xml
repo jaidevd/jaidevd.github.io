@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Sun, 26 Jul 2026 14:26:48 +0530</lastBuildDate>
+			<lastBuildDate>Mon, 14 Sep 2026 23:17:22 +0530</lastBuildDate>
 		
 			<atom:link href="https://jaidevd.com/posts/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Learning Tools vs Learning the Craft</title>
+				<link>https://jaidevd.com/posts/tools-vs-craft/</link>
+				<pubDate>Mon, 14 Sep 2026 23:17:22 +0530</pubDate>
+				<guid>https://jaidevd.com/posts/tools-vs-craft/</guid>
+				<description>&lt;p&gt;This is the second in a series of essays about my experience with the largest&#xA;data science and programming MOOC in the world—the &lt;a href=&#34;https://study.iitm.ac.in/ds/&#34;&gt;IIT Madras Degree Programme&#xA;in Data Science and Applications&lt;/a&gt;. The first essay&#xA;was about learning and practicing programming, and can be read&#xA;&lt;a href=&#34;https://jaidevd.com/posts/bridge-of-asses/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;Four years ago, as a part of the &lt;a href=&#34;https://study.iitm.ac.in/ds/academics.html&#34;&gt;data science diploma&lt;/a&gt;, I took the &lt;a href=&#34;https://study.iitm.ac.in/ds/course_pages/BSCS2008.html&#34;&gt;Machine Learning&#xA;Practice&lt;/a&gt; course. It had two OPPEs—online proctored programming exams—worth&#xA;nearly half of the course grade. We were given a list of questions, most of&#xA;which were numericals, i.e. you needed to type in a number in the answer field.&#xA;There was a link to a dataset, and a Google colab notebook. While the score&#xA;depended almost entirely on the answer, the notebook, too, needed to be&#xA;submitted as a buffer.&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>Notes on Fred Brooks&#39;s &#39;No Silver Bullet&#39;</title>
 				<link>https://jaidevd.com/posts/no-silver-bullet/</link>

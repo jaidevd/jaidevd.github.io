@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Learning Tools vs Learning the Craft | Jaidev&#39;s Blog</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://jaidevd.com/css/main.min.c585293008076c95d5e250b27fbf7e5861427dabe773e64b600635d283d5b4a5.css"/>
+
+    
+    
+    
+
+    
+    
+
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6EBGCKHP1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-R6EBGCKHP1');
+        }
+      </script></head>
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Learning Tools vs Learning the Craft">
+	<meta name="twitter:description" content="This is the second in a series of essays about my experience with the largest data science and programming MOOC in the world—the IIT Madras Degree Programme in Data Science and Applications. The first essay was about learning and practicing programming, and can be read here.
+Four years ago, as a part of the data science diploma, I took the Machine Learning Practice course. It had two OPPEs—online proctored programming exams—worth nearly half of the course grade. We were given a list of questions, most of which were numericals, i.e. you needed to type in a number in the answer field. There was a link to a dataset, and a Google colab notebook. While the score depended almost entirely on the answer, the notebook, too, needed to be submitted as a buffer.">
+
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Jaidev&#39;s Blog</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/about/">About Me</a>
+  
+    <a class="color-link nav-link" href="/scattered-sparks/">Scattered Sparks</a>
+  
+    <a class="color-link nav-link" href="/archive/">Archive</a>
+  
+  <a class="color-link nav-link" href="" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.linkedin.com/in/jaidevd/" target="_blank" rel="noopener" title="LinkedIn">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M2,3.654102 C2,2.69908141 2.79442509,1.92397846 3.77383592,1.92397846 L24.2261641,1.92397846 C25.2058917,1.92397846 26,2.69908141 26,3.654102 L26,24.3462148 C26,25.3015521 25.2058917,26.0760215 24.2261641,26.0760215 L3.77383592,26.0760215 C2.79442509,26.0760215 2,25.3015521 2,24.3465315 L2,3.65378524 L2,3.654102 Z M9.27526132,22.1415901 L9.27526132,11.2356668 L5.65030092,11.2356668 L5.65030092,22.1415901 L9.27557808,22.1415901 L9.27526132,22.1415901 Z M7.46341463,9.74691162 C8.72727273,9.74691162 9.51409566,8.90940767 9.51409566,7.86284447 C9.49033893,6.79252455 8.72727273,5.97846056 7.48748812,5.97846056 C6.24675325,5.97846056 5.43649034,6.79252455 5.43649034,7.86284447 C5.43649034,8.90940767 6.22299652,9.74691162 7.4396579,9.74691162 L7.46309788,9.74691162 L7.46341463,9.74691162 Z M11.2815965,22.1415901 L14.9062401,22.1415901 L14.9062401,16.0519481 C14.9062401,15.7263225 14.9299968,15.4000634 15.0256573,15.1675641 C15.2876148,14.5159962 15.8840672,13.8416218 16.8856509,13.8416218 C18.1970225,13.8416218 18.7218879,14.8416218 18.7218879,16.3078872 L18.7218879,22.1415901 L22.3465315,22.1415901 L22.3465315,15.8885017 C22.3465315,12.5388027 20.5584416,10.9800443 18.1735825,10.9800443 C16.2182452,10.9800443 15.3595185,12.072854 14.8824834,12.8172315 L14.9065569,12.8172315 L14.9065569,11.2359835 L11.2819132,11.2359835 C11.3291099,12.2591067 11.2815965,22.1419069 11.2815965,22.1419069 L11.2815965,22.1415901 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://jaidevd.com/js/main.min.54a3138c8f05f2b9fd74947ce85883e313c50cf2f5644df90d19bdb1f58cb0ba.js" integrity="sha256-VKMTjI8F8rn9dJR86FiD4xPFDPL1ZE35DRm9sfWMsLo=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Learning Tools vs Learning the Craft</h1>
+    
+    <time>September 14, 2026</time>
+    
+    <div>
+        <p>
+        <p>This is the second in a series of essays about my experience with the largest
+data science and programming MOOC in the world—the <a href="https://study.iitm.ac.in/ds/">IIT Madras Degree Programme
+in Data Science and Applications</a>. The first essay
+was about learning and practicing programming, and can be read
+<a href="https://jaidevd.com/posts/bridge-of-asses/">here</a>.</p>
+<hr>
+<p>Four years ago, as a part of the <a href="https://study.iitm.ac.in/ds/academics.html">data science diploma</a>, I took the <a href="https://study.iitm.ac.in/ds/course_pages/BSCS2008.html">Machine Learning
+Practice</a> course. It had two OPPEs—online proctored programming exams—worth
+nearly half of the course grade. We were given a list of questions, most of
+which were numericals, i.e. you needed to type in a number in the answer field.
+There was a link to a dataset, and a Google colab notebook. While the score
+depended almost entirely on the answer, the notebook, too, needed to be
+submitted as a buffer.</p>
+<p>Online proctoring is generally harrowing for everyone. Nobody likes to be locked
+up in their bedrooms for three hours, with webcams on and someone watching if
+you&rsquo;re up to mischief. In this case, we had to share our screens, take apart a
+dataset, train models on it, and answer questions about it.</p>
+<p>I finished the exam in about two hours. I had time to spare, and there were a
+few questions that I found somewhat ill-posed. So I spent some time writing an
+appendix to my notebook. I carefully noted that this was indeed only an
+appendix, and proceeded to show, one by one, how there were bugs in the
+proposed boilerplate code, and assumptions in the questions that reduced the
+underlying machine learning problem into something absurd. It wasn&rsquo;t
+grade-grubbing. It wasn&rsquo;t even really a complaint. It was at best a bug report,
+the kind that a well-intentioned user shares. To give you a taste of how
+seemingly benign my criticism was, these are some problems I pointed out:</p>
+<ul>
+<li>The dataset had a &ldquo;Country&rdquo; column which needed to be one-hot encoded. The way
+the boilerplate code was written (which could not be changed), suggested that
+the train and test splits of the datasets were encoded <em>differently</em>. This is
+plain wrong: a country could easily be absent in the train set but present in
+the test set. One could have worked around it by just ignoring the unseen
+categories, but that would mean that there could be a series of features in
+the test dataset which were full of zeros<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</li>
+<li>Another problem involved <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.RFE.html">recursive feature
+elimination</a>,
+but neither the question paper nor the boilerplate mentioned the estimator to
+be used<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.
+Given the nature of the ML problem at hand, I thought the reasonable default
+was to use a simple linear regression. I hoped it would be acceptable
+to the staff.</li>
+<li>One of the problems had this phrase in it: &ldquo;Ridge estimator with fixed
+learning rate 0.5&rdquo;. I knew that <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html">ridge
+regression</a>
+doesn&rsquo;t use gradient descent,
+and therefore doesn&rsquo;t have a learning rate. One of the subquestions in the
+same problem mentioned a &ldquo;regularization parameter of 0.5&rdquo;. I assumed it was a
+typo, and carried on.</li>
+<li>A later problem needed to be solved by performing a <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html">grid
+search</a>
+over a set of hyperparameters. One of them was the regularization rate itself, which had 10
+logspace values. By itself, this isn&rsquo;t too expensive, and it&rsquo;s in fact a
+fairly normal practice. But by this time in the exam, the model pipeline had
+acquired a <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html">polynomial feature
+generation</a>
+step of degree 3. In addition, the earlier &ldquo;Country&rdquo;
+column had been one-hot-encoded into ~200 features. When you try to extract
+all combinations of linear, quadratic, and cubic features from 200 variables,
+together they make up more than a million features! The Google colab notebook
+had not nearly enough RAM to hold all of them, and neither did I have enough
+time to wait for the brute-force grid search to finish. The problem became
+tractable only when I restricted the polynomials to quadratic.</li>
+</ul>
+<p>As I wrote this, I started feeling mildly indignant. By this time, we&rsquo;d had our
+share of that particularly nasty species of examiners who, instead of being
+content with testing students on the subject matter, thrive on trickery. We knew
+that the MLP examiners were a lot nicer, but we just didn&rsquo;t want to take any
+chances. In each absurd situation I&rsquo;d done the reasonable thing, and all I hoped
+for was a constructive dialog later. After I had turned my paper in, I shared
+the appendix on the discussion forum of the course.</p>
+<p>And all hell broke loose.</p>
+<p>Almost 50 other students came with their own rants and complaints. Even though
+the course team conceded after a brief debate—they weren&rsquo;t tricksters—the
+discussions continued for days. Much later, after I had put enough distance
+between myself and the course, I looked at the thread once again, and I saw two
+distinct camps emerge from it. The first was of the opinion that it was simply
+an unfairly difficult exam. The other, which I led, didn&rsquo;t feel too strongly
+about the difficulty. It wasn&rsquo;t the first time we had a hard paper, and it
+wouldn&rsquo;t be the last. What bothered me was the bad design of the exam. The first
+camp insisted that the next exam ought to be an open-book one. My point was that
+no amount of documentation or Q&amp;A, not even an LLM could have helped with
+problems which were ill-posed. The first camp was quick to remind me that I
+already had years of experience with machine learning, and so my criticism came
+from a place of privilege. It took me a while to convince them that this had
+nothing to do with any one person&rsquo;s experience or expertise. The bigger point
+was that even the world&rsquo;s greatest ML engineer would fail this exam.</p>
+<p>This post is about why it took so much effort to direct the discussion to the
+right place. Instead of being about machine learning, the entire course ended up
+being about pandas, scikit-learn and Google colab. Most of us found it extremely
+hard to punch through the veil of tools and libraries and finally see the
+<em>practice</em> of machine learning for what it truly is. There were a few other
+technology-specific courses too, but they were clear about what they were
+teaching. A course called &ldquo;Programming Concepts in Java&rdquo; wasn&rsquo;t about Java—it
+was about OOP, abstractions, interfaces and concurrency. A course on system
+commands wasn&rsquo;t about bash—it was about the Unix philosophy. Yet another course
+on modern web development heavily relied on Flask and VueJS. But what they ended
+up teaching was REST-ful APIs, MVCs and expressing UI elements as a function of
+the state of the system.</p>
+<p>So I grew to believe that libraries, packages, modules and frameworks <em>cannot</em>
+and <em>should</em> not be taught or learnt, except via practice. There&rsquo;s no theory to
+it. If at all there are such courses, they belong in the lab, not in the
+classroom. There&rsquo;s no such thing as learning or teaching a library. You either
+know how to use it through muscle memory, or you look it up. A plumbing course
+would necessarily teach you how to use a wrench—but that&rsquo;s clearly not
+the essence of the course.</p>
+<p>I said this to whoever would listen. I screamed this from the rooftops. When I
+lectured students I told them to steer clear of courses that promised to teach a
+specific technology or a framework. In every workshop I made it a point to
+separate the tool from the technique.</p>
+<p>But if I were asked if I felt the same way today, I&rsquo;d hesitate. I would say that
+my original position was a bit extreme and perhaps even somewhat simplistic.
+After all, there&rsquo;s a lot of merit in <em>studying</em> libraries and tools not for what
+they can do, but <em>how</em> they do it. There are few things more instructive to a
+programmer than to study the work of others. I would still do my damnedest to draw a
+distinction between a) studying a subject, b) knowing how to use the necessary
+tools and c) studying the tools. But once that line is drawn, I&rsquo;d encourage you
+to exercise all three options.</p>
+<p>What you&rsquo;re reading is an attempt to reconcile my original position with my
+current one, and perhaps to illuminate some milestones along the way.</p>
+<hr>
+<p>My original position—that tools and libraries cannot and should not be
+taught—stems from the fact that they&rsquo;re ephemeral. What&rsquo;s relevant today could
+be obsolete tomorrow, rendering all the &rsquo;learning&rsquo; useless. To save oneself from
+this, one needs to go a level above the tools. On the other hand, even if a
+course explicitly promised to teach you all about sklearn, it would be
+impossible to do so.</p>
+<p>I’m sure that nobody in the MLP course intended it to become an sklearn course.
+Everyone knows that there’s a lot more to practicing machine learning than
+knowing how to use sklearn well. (Even LLMs can spit out reasonable sklearn
+code. That doesn’t make them good ML practitioners. A carpenter would not get
+distracted by how to use a saw or a hammer. They’d focus on making good
+furniture.) But this was not made explicitly clear to students. Assessments,
+quizzes and exams were almost entirely about reading and writing sklearn code.
+Novices are particularly susceptible to confusing the tools for the craft
+itself. And yet, even though so much of the course was about sklearn,
+tragically, the design philosophy of sklearn was never taught.</p>
+<p>Think of the typical flow that is used to train ML models. Here&rsquo;s an
+illustration: we begin with two different entities—an &ldquo;empty&rdquo; model (which has
+an algorithm attached to it) and the data. The algorithm consumes the data and
+mutates the model. We still have two entities—but they’re not the same ones we
+began with. The model now has a “state” which represents its learning. The
+model, which earlier only allowed itself to be trained, now supports one more
+function—it can predict things, it can operate on more and more data.</p>
+<p>What kind of a programming method would capture this flow well?
+We need something that can put data and an algorithm together to
+create a stateful object, while still keeping the data isolated (some latent
+abstraction of the data must, naturally, be captured in the model if it is to
+learn—these abstractions are precisely the weights or parameters of the
+models). Thus, we see that object-oriented programming is an intuitive and
+natural paradigm for implementing machine learning algorithms. As such, sklearn
+is highly object-oriented.</p>
+<p>Unfortunately, students do not have a good handle on object-oriented Python
+by the time they reach the MLP course. They do know what classes, objects and
+methods are—but this isn’t reinforced well enough. As a result, most of the
+discussion forum posts we saw in the MLP category stemmed from wrong methods being
+called on wrong objects.</p>
+<p>The good news is that sklearn’s API is cleanly organized. Their user guide
+has clearly defined sections on supervised and unsupervised learning,
+cross-validation, data transformations, preprocessing and evaluation metrics.
+Each of these represents a crucial component in the machine learning pipeline.
+Data has to first be loaded from disk into memory, then preprocessed and
+transformed so it is ready to be consumed by a model. A model is then selected
+based on the task at hand, trained, and finally
+evaluated. Any one of a wide variety of data loaders, preprocessors and
+transformers, models, CV strategies and evaluation metrics can fit into this
+pipeline. The interesting thing is that sklearn’s API is so uniform that you can
+replace one preprocessor with another, by changing just a few characters in your
+code.</p>
+<p>This, in a nutshell, is what I mean by the design philosophy of a library.
+Looking back to the MLP course, I feel like students would have had a much
+better time had they known that such a philosophy <em>even existed</em>. Similar,
+opinionated design is found in many other places. In Unix, it manifests as
+&ldquo;doing one thing and doing it well&rdquo;. NumPy, by making a contiguous and
+homogenous array the fundamental data structure, forces you to think in terms of
+parallelizable and vectorized operations. So, ephemeral as tools and libraries
+may be, their study can be enlightening. The dissonance happens when the study
+of the tool is confused with the study of the craft.</p>
+<p>Interestingly, the most instructive piece I&rsquo;ve read about separating
+tools from craft comes not from programming or even STEM, but from literature.
+Stephen King, in his memoir <a href="https://en.wikipedia.org/wiki/On_Writing%3A_A_Memoir_of_the_Craft">&ldquo;On
+Writing&rdquo;</a>,
+writes about how every writer should
+build their own toolbox. And like a carpenter&rsquo;s toolbox, the writer&rsquo;s toolbox,
+too, must have layers. Paraphrasing roughly, the top layers should be
+filled with common tools like vocabulary and grammar—words, and how they go
+together. The deeper layers then contain the intangibles: style, taste and your
+voice—tools that get sharper with practice. If I were to draw even the most
+tenuous analogy to a programmer&rsquo;s toolbox, the effect is surprisingly fitting. A
+good programmer would fill the top layers with programming languages, their
+idioms and their affordances: the &ldquo;vocabulary&rdquo; and the &ldquo;grammar&rdquo;. The lower
+layers would then contain the design of solutions, opinions on structure, and
+ultimately the knack for writing good code.</p>
+<p>Now, this is simply <em>an</em> analogy. There are many others. The broader point is
+that if we are (perhaps forced) to obsess over tools; we&rsquo;re better off doing so
+with the requisite seriousness, and not simply as a means to an end.</p>
+<hr>
+<p>In some of the more memorable discussion threads on various course forums, my
+fellow students usually asked how to think in terms of a library. One such
+discussion was about thinking in NumPy, where the OP began by admitting that
+they felt intimidated when they saw instructors and other students wield
+numpy arrays and operations with the flourish of a master. Now, this person
+wasn&rsquo;t a novice programmer, and was actually pretty good at Python itself. Even
+NumPy wasn&rsquo;t an insurmountable problem. The problem was constantly having to
+remember or look up the right method or function.</p>
+<p>It was clear to me that they were &ldquo;intimidated&rdquo; not by the skill of experts, but
+simply by their muscle memory. I told them that nobody &ldquo;knows&rdquo; NumPy—there&rsquo;s
+nothing to know, and that I was sure that longtime users and even maintainers of
+NumPy end up looking things up all the time. While a good part of that practice
+does accumulate at our fingertips, that is mostly a function of time and
+exposure. In fact I would go so far as to recommend that nobody should be
+worried about remembering function signatures at all. No part of a programmer&rsquo;s mind
+should be a substitute for even the smallest part of documentation. But coming
+back specifically to NumPy—I think that once you get arrays, vectorized
+operations, broadcasting and ufuncs, there remain no fundamental differences
+between the Pythonic way of thinking and the array-oriented way of
+thinking (or coding). At that point, Python is NumPy is Python.</p>
+<p>Strangely, this proposition did nothing to quell the anxiety of the OP. They
+maintained that NumPy&rsquo;s way of solving problems was very different from
+Python&rsquo;s. This, I thought, was attributable only to the additional abstraction
+introduced by NumPy, which hides some details. The trouble is that to novices,
+such abstraction looks like magic. And sure enough, when another post on the
+same thread was written like a NumPy cheatsheet, the thread was marked by the OP
+as &ldquo;solved&rdquo;. To be fair, the OP did say that they were currently bothered by
+looming exams.</p>
+<p>In short, when grades are on the line, few are likely to bother with design
+philosophy, and would rather just get on with the usage.</p>
+<p>In a stark, idealistic contrast to this situation, Richard Dawkins writes in an
+essay on tutorial-driven teaching<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>,</p>
+<blockquote>
+<p>Each week my tutorial assignment was to read one DPhil thesis. My essay was to
+be a combination of DPhil examiner&rsquo;s report, proposal for follow-up research,
+review of the history of the subject in which the thesis fell, and theoretical
+and philosophical discussion of the issues that the thesis raised. Never for
+one moment did it occur to either of us (the tutor and the pupil) to wonder
+whether this assignment would be directly useful to me in answering some exam
+question&hellip; The whole field of zoology was fair game for the examiners and the
+only thing we could rely upon was a presumption that our question papers would
+not be too unfairly different from the recent predecessors. The examiners when
+setting the papers, and our tutors when handing out essay topics, neither knew
+nor cared which subjects had been covered in the lectures.</p>
+</blockquote>
+<p>And if all of this sounds very idealistic, that&rsquo;s because it is. Dawkins was
+writing in the defence of the tutorial-driven method as against the
+lecture-driven method. The latter consists primarily of a lecturer<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> talking to a
+roomful of students, while the former has a tutor, who is not
+necessarily an authority on the subject, tutoring only one or a few
+students<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>.</p>
+<p>Dawkins writes further that the purpose of a lecture should be not to inform,
+but to inspire. And that&rsquo;s precisely what I was doing when I told my friends
+that &ldquo;Python is NumPy is Python.&rdquo; It didn&rsquo;t land, not because it was wrong, and
+not for lack of someone to walk them through it individually. The &ldquo;cheatsheet&rdquo;
+post did its job, with something that could be memorized rather than
+understood. Unfortunately, a good examinee has less time than a good student.</p>
+<p>This duality between a good examinee and a good student, which is itself a
+polymorphism of the duality between learning a tool and learning a craft, is a
+recurring theme across many discussion threads. A year after my OPPE, a friend
+shared a Kaggle notebook from his capstone project, and asked for feedback.
+There was no pressure this time—the project had been submitted and the exam had
+finished. In the notebook I saw plenty of examples of badly chosen chart types,
+an excess of estimators and spurious grid search methods<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>. It seemed that the notebook was
+written solely from the perspective of demonstrating how much pandas, sklearn
+and matplotlib someone knows regardless of whether it helps the ML problem
+itself! At one point, the discussion turned to how the toppers of the Kaggle
+competition had obtained an edge by using a <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html">stacking
+classifier</a>,
+and the OP did not consider it because &ldquo;it was never taught.&rdquo; This
+made me lose my mind, in a manner of speaking. I went on a rant that allowed me
+to crystallize my thesis, which I&rsquo;d tacitly held since my own OPPE, about how
+distracting it can be to focus too much on tools.</p>
+<p>Around the same time, in a different thread, another student made almost the
+inverse complaint: that the &ldquo;theory&rdquo; component of these courses tested exactly
+the wrong thing—memorizing syntax and method signatures with no internet
+access—while the &ldquo;practical&rdquo; component, ironically, allowed you to look things
+up. My answer there was the same answer, restated:</p>
+<ol>
+<li>the brain isn&rsquo;t built to hold function signatures,</li>
+<li>practice is the only real teacher,</li>
+<li>your mileage may vary</li>
+</ol>
+<p>In this particular thread I admitted upfront that my advice was too idealistic
+to be practical for everyone. But then, if you want to ace exams, <strong>and</strong>
+develop expertise with tools and libraries and frameworks, <strong>and</strong> be competent
+in the long term&hellip; that’s pretty idealistic in the first place.</p>
+<p>So, if becoming a well-rounded AI/ML engineer is the goal, none of the above is
+too idealistic.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>See how sklearn&rsquo;s <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html"><code>OneHotEncoder</code> handles unseen categories</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>If a feature is to be discarded, there needs to be something to tell you
+that it is useless. That something is an estimator; it evaluates the
+relative importance of various features.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Dawkins, R. (2021). Tutorial-driven Teaching. In <em>Books do Furnish a
+Life: Reading and Writing Science</em> (pp. 71, 74). Penguin Books.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Dawkins&rsquo; essay also suggests an etymology for the word &ldquo;lecture&rdquo;. Back in
+the day, only professors could afford textbooks. So they&rsquo;d just read things
+out to a classroom at large—thus, &ldquo;lecturing&rdquo; them. It&rsquo;s not like
+textbooks are all that cheap today either. Mehran Sahami, in <a href="https://youtu.be/KkMDCCdjyW8?list=PL3A72B818DD970512&amp;t=1137">one of his
+lectures</a>,
+says, &ldquo;There&rsquo;s nothing quite like the extortion that is textbooks.&rdquo;&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>This remains the default way of teaching at Oxford and Cambridge.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>For instance, deciding whether to fit the intercept in a linear model, or
+whether to shuffle the training data is not a hyperparameter!&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+        </p>
+    </div>
+    
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/mooc">#mooc</a>
+        
+            <a class="tag" href="/tags/python">#python</a>
+        
+            <a class="tag" href="/tags/learning">#learning</a>
+        
+            <a class="tag" href="/tags/personal">#personal</a>
+        
+            <a class="tag" href="/tags/code">#code</a>
+        
+      
+    </div>
+
+
+	
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="mailto:deshpande.jaidev@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="https://twitter.com/jaidevd" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.youtube.com/playlist?list=PLllKLgiXxcqe3MlAk-6ZrQP82Dr5mgI0d" target="_blank" rel="noopener" title="YouTube">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.9775568,20.4086648 C25.6900568,21.4913352 24.8430398,22.343892 23.7673295,22.6332386 C21.8177557,23.1590909 14,23.1590909 14,23.1590909 C14,23.1590909 6.18228693,23.1590909 4.23265625,22.6332386 C3.15704545,22.343892 2.30988068,21.4913352 2.02240483,20.4086648 C1.5,18.4464062 1.5,14.3522727 1.5,14.3522727 C1.5,14.3522727 1.5,10.258196 2.02240483,8.29575284 C2.30988068,7.21321023 3.15704545,6.36066193 4.23265625,6.07118892 C6.18228693,5.54545455 14,5.54545455 14,5.54545455 C14,5.54545455 21.8177557,5.54545455 23.7673295,6.07118892 C24.8430398,6.36066193 25.6900568,7.21321023 25.9775568,8.29575284 C26.5,10.258196 26.5,14.3522727 26.5,14.3522727 C26.5,14.3522727 26.5,18.4464062 25.9775568,20.4086648 Z M11.4431818,10.6351278 L11.4431818,18.0694318 L17.9772727,14.3521023 L11.4431818,10.6351278 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+    <a class="social-icon" href="https://www.linkedin.com/in/jaidevd/" target="_blank" rel="noopener" title="LinkedIn">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M2,3.654102 C2,2.69908141 2.79442509,1.92397846 3.77383592,1.92397846 L24.2261641,1.92397846 C25.2058917,1.92397846 26,2.69908141 26,3.654102 L26,24.3462148 C26,25.3015521 25.2058917,26.0760215 24.2261641,26.0760215 L3.77383592,26.0760215 C2.79442509,26.0760215 2,25.3015521 2,24.3465315 L2,3.65378524 L2,3.654102 Z M9.27526132,22.1415901 L9.27526132,11.2356668 L5.65030092,11.2356668 L5.65030092,22.1415901 L9.27557808,22.1415901 L9.27526132,22.1415901 Z M7.46341463,9.74691162 C8.72727273,9.74691162 9.51409566,8.90940767 9.51409566,7.86284447 C9.49033893,6.79252455 8.72727273,5.97846056 7.48748812,5.97846056 C6.24675325,5.97846056 5.43649034,6.79252455 5.43649034,7.86284447 C5.43649034,8.90940767 6.22299652,9.74691162 7.4396579,9.74691162 L7.46309788,9.74691162 L7.46341463,9.74691162 Z M11.2815965,22.1415901 L14.9062401,22.1415901 L14.9062401,16.0519481 C14.9062401,15.7263225 14.9299968,15.4000634 15.0256573,15.1675641 C15.2876148,14.5159962 15.8840672,13.8416218 16.8856509,13.8416218 C18.1970225,13.8416218 18.7218879,14.8416218 18.7218879,16.3078872 L18.7218879,22.1415901 L22.3465315,22.1415901 L22.3465315,15.8885017 C22.3465315,12.5388027 20.5584416,10.9800443 18.1735825,10.9800443 C16.2182452,10.9800443 15.3595185,12.072854 14.8824834,12.8172315 L14.9065569,12.8172315 L14.9065569,11.2359835 L11.2819132,11.2359835 C11.3291099,12.2591067 11.2815965,22.1419069 11.2815965,22.1419069 L11.2815965,22.1415901 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/jaidevd" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://jaidevd.com/js/main.min.54a3138c8f05f2b9fd74947ce85883e313c50cf2f5644df90d19bdb1f58cb0ba.js" integrity="sha256-VKMTjI8F8rn9dJR86FiD4xPFDPL1ZE35DRm9sfWMsLo=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

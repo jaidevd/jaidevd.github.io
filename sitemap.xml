@@ -2,10 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://jaidevd.com/scattered-sparks/standup-rules/</loc>
-    <lastmod>2026-09-07T16:21:44+05:30</lastmod>
+    <loc>https://jaidevd.com/tags/code/</loc>
+    <lastmod>2026-09-14T23:17:22+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/</loc>
+    <lastmod>2026-09-14T23:17:22+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/learning/</loc>
+    <lastmod>2026-09-14T23:17:22+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/posts/tools-vs-craft/</loc>
+    <lastmod>2026-09-14T23:17:22+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/mooc/</loc>
+    <lastmod>2026-09-14T23:17:22+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/personal/</loc>
+    <lastmod>2026-09-14T23:17:22+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/posts/</loc>
+    <lastmod>2026-09-14T23:17:22+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/python/</loc>
+    <lastmod>2026-09-14T23:17:22+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/tags/</loc>
+    <lastmod>2026-09-14T23:17:22+05:30</lastmod>
+  </url><url>
+    <loc>https://jaidevd.com/scattered-sparks/standup-rules/</loc>
     <lastmod>2026-09-07T16:21:44+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/scattered-sparks/</loc>
@@ -26,22 +50,13 @@
     <loc>https://jaidevd.com/scattered-sparks/tiny-experiments/</loc>
     <lastmod>2026-08-07T14:50:23+05:30</lastmod>
   </url><url>
-    <loc>https://jaidevd.com/tags/code/</loc>
-    <lastmod>2026-07-26T14:26:48+05:30</lastmod>
-  </url><url>
     <loc>https://jaidevd.com/tags/design/</loc>
     <lastmod>2026-07-26T14:26:48+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/no-silver-bullet/</loc>
     <lastmod>2026-07-26T14:26:48+05:30</lastmod>
   </url><url>
-    <loc>https://jaidevd.com/posts/</loc>
-    <lastmod>2026-07-26T14:26:48+05:30</lastmod>
-  </url><url>
     <loc>https://jaidevd.com/tags/software/</loc>
-    <lastmod>2026-07-26T14:26:48+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/</loc>
     <lastmod>2026-07-26T14:26:48+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/nash-equilibria-jeopardy/</loc>
@@ -54,9 +69,6 @@
     <lastmod>2026-07-12T10:45:26+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/advice/</loc>
-    <lastmod>2026-05-11T19:50:12+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/personal/</loc>
     <lastmod>2026-05-11T19:50:12+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/resting-on-your-laurels/</loc>
@@ -91,9 +103,6 @@
   </url><url>
     <loc>https://jaidevd.com/scattered-sparks/ulysses/</loc>
     <lastmod>2026-01-07T15:57:53+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/python/</loc>
-    <lastmod>2025-08-27T12:47:10+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/posts/bridge-of-asses/</loc>
     <lastmod>2025-08-27T12:47:10+05:30</lastmod>
@@ -216,12 +225,6 @@
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/data-structures/</loc>
-    <lastmod>2022-06-17T05:00:00+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/learning/</loc>
-    <lastmod>2022-06-17T05:00:00+05:30</lastmod>
-  </url><url>
-    <loc>https://jaidevd.com/tags/mooc/</loc>
     <lastmod>2022-06-17T05:00:00+05:30</lastmod>
   </url><url>
     <loc>https://jaidevd.com/tags/readability/</loc>

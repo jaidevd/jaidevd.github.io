@@ -10,14 +10,42 @@
 		
 		
 		
-			<lastBuildDate>Sun, 26 Jul 2026 14:26:48 +0530</lastBuildDate>
+			<lastBuildDate>Mon, 14 Sep 2026 23:17:22 +0530</lastBuildDate>
 		
 			<atom:link href="https://jaidevd.com/tags/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Code</title>
 				<link>https://jaidevd.com/tags/code/</link>
-				<pubDate>Sun, 26 Jul 2026 14:26:48 +0530</pubDate>
+				<pubDate>Mon, 14 Sep 2026 23:17:22 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/code/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Learning</title>
+				<link>https://jaidevd.com/tags/learning/</link>
+				<pubDate>Mon, 14 Sep 2026 23:17:22 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/learning/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Mooc</title>
+				<link>https://jaidevd.com/tags/mooc/</link>
+				<pubDate>Mon, 14 Sep 2026 23:17:22 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/mooc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Personal</title>
+				<link>https://jaidevd.com/tags/personal/</link>
+				<pubDate>Mon, 14 Sep 2026 23:17:22 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/personal/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Python</title>
+				<link>https://jaidevd.com/tags/python/</link>
+				<pubDate>Mon, 14 Sep 2026 23:17:22 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/python/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -53,13 +81,6 @@
 				<link>https://jaidevd.com/tags/advice/</link>
 				<pubDate>Mon, 11 May 2026 19:50:12 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/advice/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Personal</title>
-				<link>https://jaidevd.com/tags/personal/</link>
-				<pubDate>Mon, 11 May 2026 19:50:12 +0530</pubDate>
-				<guid>https://jaidevd.com/tags/personal/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -102,13 +123,6 @@
 				<link>https://jaidevd.com/tags/torch/</link>
 				<pubDate>Thu, 12 Mar 2026 13:00:00 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/torch/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Python</title>
-				<link>https://jaidevd.com/tags/python/</link>
-				<pubDate>Wed, 27 Aug 2025 12:47:10 +0530</pubDate>
-				<guid>https://jaidevd.com/tags/python/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -305,20 +319,6 @@
 				<link>https://jaidevd.com/tags/data-structures/</link>
 				<pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/data-structures/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Learning</title>
-				<link>https://jaidevd.com/tags/learning/</link>
-				<pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-				<guid>https://jaidevd.com/tags/learning/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Mooc</title>
-				<link>https://jaidevd.com/tags/mooc/</link>
-				<pubDate>Fri, 17 Jun 2022 05:00:00 +0530</pubDate>
-				<guid>https://jaidevd.com/tags/mooc/</guid>
 				<description></description>
 			</item>
 			<item>
