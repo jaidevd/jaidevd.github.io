@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Being Bayesian — Stress-Testing India's Loudest Stories</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/monokai.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ---- indiafoss talk layout (theme tokens + base type live in style.css) ---- */
+    .reveal section { text-align: left; }
+    .reveal h2.q { text-align: center; margin-bottom: 0.2em; }
+    .center { text-align: center; }
+
+    /* chart panel lifted on the paper, as in every essay */
+    .reveal section:has(.chart-hero) { text-align: center; }
+    .chart-hero {
+      width: auto !important; height: auto !important;
+      max-width: 92%; max-height: 470px !important; object-fit: contain;
+      background: var(--paper); border: 1px solid var(--hair); border-radius: 5px;
+      box-shadow: 0 3px 18px rgba(42,26,22,0.12);
+      display: inline-block; margin: 0.2em auto;
+    }
+    .chart-hero.small { max-height: 340px !important; }
+    .src-note { text-align: center; font-family: var(--font-mono); font-size: 0.58em;
+                color: var(--muted); margin-top: 0.4em; }
+
+    /* the loud claim — a quote pulled from a headline, LinkedIn post, or op-ed */
+    .claim-card {
+      background: var(--paper); border-left: 4px solid var(--muted);
+      border-radius: 0 6px 6px 0; padding: 0.85em 1.15em;
+      font-family: var(--font-display); font-style: italic; font-size: 1.18em;
+      line-height: 1.45; margin: 0.7em auto; max-width: 88%; color: var(--text);
+    }
+    .claim-card .src {
+      display: block; margin-top: 0.5em; font-family: var(--font-sans); font-style: normal;
+      font-size: 0.5em; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+    }
+
+    /* the gut-check — a sniff test, no data yet */
+    .gut-check {
+      text-align: center; font-family: var(--font-sans); font-size: 0.85em;
+      font-weight: 600; color: var(--accent-3); margin-top: 0.9em;
+    }
+    .gut-check .tag {
+      text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85em;
+      border-bottom: 1px dashed var(--accent-3); padding-bottom: 0.1em; margin-right: 0.4em;
+    }
+
+    /* the posterior — the belief that actually moved */
+    .posterior-line {
+      text-align: center; font-family: var(--font-display); font-size: 1.35em;
+      line-height: 1.5; max-width: 88%; margin: 0.6em auto; color: var(--text);
+    }
+    .posterior-line strong { color: var(--accent); font-weight: 600; }
+    .posterior-note {
+      text-align: center; font-size: 0.82em; color: var(--muted);
+      max-width: 82%; margin: 0.6em auto 0;
+    }
+
+    .bignum { font-family: var(--font-display); font-size: 1.7em; font-weight: 600; color: var(--accent); line-height: 1.1; }
+
+    /* five-step method flow */
+    .flow5 { display: flex; align-items: stretch; justify-content: center; gap: 0.5em; margin: 0.9em 0 0.4em; flex-wrap: nowrap; }
+    .flow5 .flow-box { flex: 1; background: var(--paper); border: 1.5px solid var(--text); border-radius: 6px;
+                padding: 0.55em 0.4em; text-align: center; min-width: 0; }
+    .flow5 .flow-box .t { font-family: var(--font-display); font-weight: 600; font-size: 0.92em; display: block; }
+    .flow5 .flow-box .m { font-size: 0.56em; color: var(--muted); display: block; margin-top: 0.25em; line-height: 1.3; }
+    .flow5 .flow-box.trig { border-color: var(--accent-3); }
+    .flow5 .flow-box.skep { border-style: dashed; border-color: var(--muted); }
+    .flow5 .flow-box.inv { border-color: var(--accent-2); }
+    .flow5 .flow-box.post { border-color: var(--accent); border-width: 2px; }
+    .flow5-arrow { display: flex; align-items: center; color: var(--accent-3); font-size: 1.3em; }
+
+    /* generic pipeline (sampling / file-structure diagrams) */
+    .flow { display: flex; align-items: stretch; justify-content: center; gap: 0.6em; margin: 0.9em 0; flex-wrap: nowrap; }
+    .flow-box { flex: 1; background: var(--paper); border: 1.5px solid var(--text); border-radius: 6px;
+                padding: 0.7em 0.9em; text-align: center; min-width: 0; }
+    .flow-box .t { font-family: var(--font-display); font-weight: 600; font-size: 1em; display: block; }
+    .flow-box .m { font-size: 0.62em; color: var(--muted); display: block; margin-top: 0.3em; line-height: 1.35; }
+    .flow-box.mid { border-color: var(--accent-2); }
+    .flow-box.out { border-color: var(--accent); border-width: 2px; }
+    .flow-arrow { display: flex; align-items: center; color: var(--accent-3); font-size: 1.5em; }
+
+    /* synthesis table */
+    table.synth { border-collapse: collapse; width: 100%; margin: 0.6em auto; font-size: 0.62em; }
+    table.synth th, table.synth td { padding: 0.5em 0.7em; border-bottom: 1px solid var(--hair); text-align: left; vertical-align: top; }
+    table.synth th { font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.05em;
+                     font-size: 0.9em; color: var(--accent); border-bottom: 2px solid var(--accent); }
+    table.synth td.claim { font-weight: 600; }
+    table.synth td.loud { color: var(--muted); font-style: italic; }
+    table.synth td.honest { font-family: var(--font-display); font-style: italic; color: var(--text); }
+    table.synth td.honest strong { color: var(--accent); font-style: normal; }
+    .stack-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.62em; font-weight: 600;
+                   color: var(--accent); background: var(--paper); border: 1px solid var(--hair);
+                   border-radius: 999px; padding: 0.3em 0.9em; margin: 0 0.2em; }
+
+    /* real code, shown as real code — a deliberate contrast against the warm paper */
+    .code-block { max-width: 84%; margin: 0.6em auto 0; border-radius: 6px; overflow: hidden;
+                  box-shadow: 0 3px 18px rgba(42,26,22,0.16); }
+    .code-block pre { margin: 0; width: 100%; box-shadow: none; }
+    .code-block pre code { font-family: var(--font-mono) !important; font-size: 0.56em !important;
+                            line-height: 1.55 !important; padding: 0.85em 1.05em !important; max-height: none !important; }
+    .code-label { text-align: center; font-family: var(--font-sans); font-size: 0.55em; color: var(--muted);
+                  text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 0.35em; }
+
+    /* the honest git-log timeline */
+    .timeline { max-width: 92%; margin: 0.7em auto 0; border-left: 2px solid var(--hair); padding-left: 1.2em; }
+    .timeline .tl-row { position: relative; margin: 0.5em 0; }
+    .timeline .tl-row::before { content: ""; position: absolute; left: -1.63em; top: 0.3em;
+                                 width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+    .timeline .tl-date { font-family: var(--font-mono); font-size: 0.55em; color: var(--muted);
+                          display: inline-block; width: 4.2em; vertical-align: top; }
+    .timeline .tl-msg { font-family: var(--font-display); font-size: 0.86em; display: inline-block; width: calc(100% - 4.4em); }
+    .timeline .tl-msg .sub { display: block; font-size: 0.78em; color: var(--muted); font-style: italic; margin-top: 0.1em; }
+    .timeline .tl-row.crisis::before { background: var(--accent-2); }
+    .timeline .tl-row.crisis .tl-msg { color: var(--accent-2); font-weight: 600; }
+    .timeline .tl-row.crisis .tl-msg .sub { color: var(--accent-2); opacity: 0.75; font-weight: 400; }
+
+    .qr-cta { display: flex; flex-direction: column; align-items: center; gap: 0.35em; margin-top: 0.9em; }
+    .qr-cta .url { font-family: var(--font-mono); font-size: 1.2rem; font-weight: 700; color: var(--accent); }
+    .qr-cta .sub { font-family: var(--font-sans); font-size: 0.85rem; color: var(--muted); }
+
+    /* QR placeholder — pending the real forms */
+    .qr-placeholder { border: 3px dashed var(--muted); border-radius: 10px; background: var(--paper);
+                       color: var(--muted); display: flex; align-items: center; justify-content: center; }
+    .qr-placeholder svg { width: 58%; height: 58%; }
+    .chart-placeholder { max-width: 90%; height: 340px; margin: 0.7em auto 0; border: 3px dashed var(--muted);
+                          border-radius: 8px; background: var(--paper); display: flex; flex-direction: column;
+                          align-items: center; justify-content: center; gap: 0.5em; color: var(--muted); }
+    .chart-placeholder .cp-title { font-family: var(--font-mono); font-size: 0.8em; font-weight: 700; letter-spacing: 0.04em; }
+    .chart-placeholder .cp-sub { font-family: var(--font-sans); font-size: 0.68em; max-width: 70%; text-align: center; }
+
+    /* one-question-per-slide quiz format */
+    .quiz-eyebrow { text-align: center; font-family: var(--font-mono); font-size: 0.68em; letter-spacing: 0.1em;
+                    color: var(--accent-3); text-transform: uppercase; margin-bottom: 0.9em; }
+    .quiz-q { font-family: var(--font-display); font-size: 1.65em; line-height: 1.4; text-align: center;
+              max-width: 84%; margin: 0 auto; }
+    .quiz-q strong { color: var(--accent); }
+    .quiz-bins { text-align: center; font-family: var(--font-mono); font-size: 0.78em; color: var(--muted); margin-top: 0.7em; }
+    .quiz-qr { display: flex; align-items: center; justify-content: center; gap: 0.9em; margin-top: 1.6em; }
+    .quiz-qr .qr-placeholder { width: 92px; height: 92px; flex: 0 0 auto; }
+    .quiz-qr .qr-meta { text-align: left; font-family: var(--font-mono); font-size: 0.62em; color: var(--muted); }
+    .quiz-qr .qr-meta strong { display: block; color: var(--accent); font-size: 1.05em; letter-spacing: 0.03em; }
+    /* heatmap table: separated, rounded cells; wider gap between cohorts */
+    .reveal table.metrics.heat { border-collapse: separate; border-spacing: 4px 4px; }
+    .reveal table.metrics.heat th, .reveal table.metrics.heat td { border-bottom: none; }
+    .reveal table.metrics.heat td.hc { border-radius: 6px; }
+    .reveal table.metrics.heat tr.gap td { height: 6px; padding: 0; }
+    .quiz-tbd { text-align: center; border: 3px dashed var(--muted); border-radius: 10px; padding: 1.8em;
+                max-width: 70%; margin: 0.5em auto; font-family: var(--font-mono); color: var(--muted); font-size: 0.85em; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ===================== TITLE ===================== -->
+<section data-state="title">
+  <img src="assets/bb-logo.png" alt="The Being Bayesian logo: a figure pushing a boulder up a maroon bell curve, beside a taller teal bell curve"
+       style="position:absolute; right:1.25rem; top:0; transform:translateY(calc(-100% - 0.5rem)); height:175px; opacity:0.9; margin:0; pointer-events:none;">
+  <h1>Being Bayesian</h1>
+  <h3>Stress-Testing India's Loudest Stories with Open Data and FOSS</h3>
+  <p style="margin-top:1.3em; font-family:var(--font-sans); font-size:1.2em; font-weight:600; color:var(--text);">Jaidev Deshpande &nbsp;&middot;&nbsp; <a href="https://beingbayesian.in" style="color:var(--accent);">beingbayesian.in</a></p>
+  <p style="margin-top:0.7em; font-family:var(--font-sans); font-size:1.25em; font-weight:700; color:var(--accent-3);">IndiaFOSS 2026</p>
+  <aside class="notes">Hi, I'm Jaidev. For the last two years I've written a newsletter called Being Bayesian, where I take apart popular, confidently-stated claims about the Indian economy and society using the country's own public microdata. Before any of that — I want to ask you something else first.</aside>
+</section>
+
+<section>
+  <h2 class="center">How my sabbatical started</h2>
+  <div style="display:flex; align-items:center; justify-content:center; gap:1.6em; margin-top:0.5em;">
+    <img src="assets/xkcd-duty-calls.png" alt="xkcd comic: a person refuses to come to bed, saying 'someone is wrong on the internet'" style="height:480px; margin:0;">
+    <img src="assets/linkedin-lunatics.png" alt="Screenshot of the r/LinkedInLunatics subreddit header" style="width:640px; height:auto; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+  </div>
+  <aside class="notes">This is, genuinely, how it started. Someone wrong on the internet, and then a slow descent into r/LinkedInLunatics. Two years later, here we are.</aside>
+</section>
+
+<section>
+  <h2 class="center">Quiz Time!</h2>
+  <div style="display:flex; flex-direction:column; align-items:center; gap:0.5em; margin-top:0.6em;">
+    <a href="https://qr.sli.do/9n88RSJys7jkPkKQcWztv9" target="_blank" rel="noopener">
+      <img src="assets/quiz-qr.png" alt="QR code for the audience quiz on Slido"
+           style="width:400px; height:400px; margin:0; padding:24px; background:#fff; border-radius:10px; box-shadow:0 3px 18px rgba(42,26,22,0.12); image-rendering:pixelated;">
+    </a>
+  </div>
+  <aside class="notes">Scan this now, no name attached; we only care about the shape of the room. Answer with your gut. This isn't a new idea: Hans Rosling ran the same experiment for years, asking audiences basic multiple-choice questions about the state of the world, and people scored worse than chimps picking bananas at random. Our instincts are systematically, not randomly, wrong. Let's see if we do any better.</aside>
+</section>
+
+<section>
+  <p class="quiz-q" style="font-size:1.2em;">A loud opinion online, no data attached. It rests on one person's experience. <strong>How much of India does that cover?</strong></p>
+  <table class="metrics small heat" style="margin-top:0.4em;">
+    <thead><tr><th></th><th style="text-align:left;">Group</th><th style="text-align:center;">Share of adults</th><th style="text-align:center;">Share online</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="2" style="color:var(--accent); font-weight:700; font-size:1.08em; vertical-align:middle;">Gender</td><td style="text-align:left; font-family:var(--font-sans); color:var(--text); font-weight:600; font-size:1.08em;">Men</td><td class="hc" style="background:#7E2731; color:#FFFFFF; text-align:center; font-weight:600;">49.8%</td><td class="hc" style="background:#7C1F2B; color:#FFFFFF; text-align:center; font-weight:600;">65%</td></tr>
+      <tr><td style="text-align:left; font-family:var(--font-sans); color:var(--text); font-weight:600; font-size:1.08em;">Women</td><td class="hc" style="background:#7C1F2B; color:#FFFFFF; text-align:center; font-weight:600;">50.2%</td><td class="hc" style="background:#A68380; color:var(--text); text-align:center; font-weight:600;">49%</td></tr>
+      <tr class="gap"><td colspan="4"></td></tr>
+      <tr><td rowspan="2" style="color:var(--accent); font-weight:700; font-size:1.08em; vertical-align:middle;">Age</td><td style="text-align:left; font-family:var(--font-sans); color:var(--text); font-weight:600; font-size:1.08em;">Under 30</td><td class="hc" style="background:#C4AFA9; color:var(--text); text-align:center; font-weight:600;">34.2%</td><td class="hc" style="background:#7C1F2B; color:#FFFFFF; text-align:center; font-weight:600;">83%</td></tr>
+      <tr><td style="text-align:left; font-family:var(--font-sans); color:var(--text); font-weight:600; font-size:1.08em;">30 and over</td><td class="hc" style="background:#7C1F2B; color:#FFFFFF; text-align:center; font-weight:600;">65.8%</td><td class="hc" style="background:#C5B0A9; color:var(--text); text-align:center; font-weight:600;">43%</td></tr>
+      <tr class="gap"><td colspan="4"></td></tr>
+      <tr><td rowspan="2" style="color:var(--accent); font-weight:700; font-size:1.08em; vertical-align:middle;">Education</td><td style="text-align:left; font-family:var(--font-sans); color:var(--text); font-weight:600; font-size:1.08em;">Higher education</td><td class="hc" style="background:#E9DFD5; color:var(--text); text-align:center; font-weight:600;">14.3%</td><td class="hc" style="background:#7C1F2B; color:#FFFFFF; text-align:center; font-weight:600;">96%</td></tr>
+      <tr><td style="text-align:left; font-family:var(--font-sans); color:var(--text); font-weight:600; font-size:1.08em;">Below higher</td><td class="hc" style="background:#7C1F2B; color:#FFFFFF; text-align:center; font-weight:600;">85.7%</td><td class="hc" style="background:#C2ACA5; color:var(--text); text-align:center; font-weight:600;">52%</td></tr>
+      <tr class="gap"><td colspan="4"></td></tr>
+      <tr><td rowspan="2" style="color:var(--accent); font-weight:700; font-size:1.08em; vertical-align:middle;">Region</td><td style="text-align:left; font-family:var(--font-sans); color:var(--text); font-weight:600; font-size:1.08em;">Urban</td><td class="hc" style="background:#CCBAB2; color:var(--text); text-align:center; font-weight:600;">31.1%</td><td class="hc" style="background:#7C1F2B; color:#FFFFFF; text-align:center; font-weight:600;">72%</td></tr>
+      <tr><td style="text-align:left; font-family:var(--font-sans); color:var(--text); font-weight:600; font-size:1.08em;">Rural</td><td class="hc" style="background:#7C1F2B; color:#FFFFFF; text-align:center; font-weight:600;">68.9%</td><td class="hc" style="background:#AD8D89; color:var(--text); text-align:center; font-weight:600;">51%</td></tr>
+      <tr class="gap"><td colspan="4"></td></tr>
+      <tr><td rowspan="2" style="color:var(--accent); font-weight:700; font-size:1.08em; vertical-align:middle;">Income</td><td style="text-align:left; font-family:var(--font-sans); color:var(--text); font-weight:600; font-size:1.08em;">Richest fifth</td><td class="hc" style="background:#E1D5CC; color:var(--text); text-align:center; font-weight:600;">20%</td><td class="hc" style="background:#7C1F2B; color:#FFFFFF; text-align:center; font-weight:600;">75%</td></tr>
+      <tr><td style="text-align:left; font-family:var(--font-sans); color:var(--text); font-weight:600; font-size:1.08em;">Other four fifths</td><td class="hc" style="background:#7C1F2B; color:#FFFFFF; text-align:center; font-weight:600;">80%</td><td class="hc" style="background:#AF908C; color:var(--text); text-align:center; font-weight:600;">52%</td></tr>
+    </tbody>
+  </table>
+  <p class="src-note">Shading compares the two groups within each pair, column by column &middot; Share of adults: PLFS 2023&ndash;24, survey-weighted microdata (income fifths are 20% by definition) &middot; Share online: Data For India, 2023</p>
+  <aside class="notes">An opinion with no data behind it is really a request: trust me. And what you're trusting is the person's own experience, which is a sample of one life. So the question isn't whether the opinion is right. It's how much of India that one life can speak for. This is the one time in the talk I'll do the actual Bayesian maths instead of borrowing the vocabulary. Two ingredients. The right-hand column is what every hot take quotes: men, the young, the educated, city-dwellers and the rich are all far more likely to be online. That's P(online given who you are). The middle column is the prior, how India's adults are actually spread across these groups, computed from the raw PLFS microdata and weighted by the survey multiplier. Bayes' rule turns the two into who's actually in the online crowd.</aside>
+</section>
+
+<section>
+  <p class="posterior-line">If they come with no evidence, the average influencer is speaking for no more than <strong>1 in 12</strong> Indians.</p>
+  <blockquote class="quote center" style="margin:1em auto 0; max-width:78%;">
+    &ldquo;What can be asserted without evidence can also be dismissed without evidence.&rdquo;
+    <footer style="text-align:center;">&mdash; Christopher Hitchens</footer>
+  </blockquote>
+  <aside class="notes">Now take the typical influencer. The most generous definition I can give him is just two traits: a man, with a college degree, who's online. That's 8% of India's adults, about one in twelve. Define him by income instead of education, an online man in the richest fifth, and you get one in twelve again, from a completely different table. Add one more real trait, like his age, and it drops to one in nineteen or one in thirty-one, and that's even assuming every one of those men is online. I'm stopping at age on purpose. You can make anyone unrepresentative by piling on traits, so the headline is the kindest number, not the most dramatic one. His experience might be perfectly true for people like him. It just isn't evidence about the other eleven, and the further a claim is from people like him, rural women on welfare for instance, the less it's worth. An opinion with no data behind it shouldn't move you, however popular it looks. Dismissing it isn't the same as disproving it; it just means not updating.</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Influencer 1 of 4</span>
+  <h2>The one who's trying to sell you something</h2>
+  <div style="display:grid; grid-template-columns:auto 1fr; gap:1.6em; align-items:center; margin-top:0.3em;">
+    <div style="display:flex; flex-direction:column; gap:0.6em;">
+      <img src="assets/01-shocking-data.jpg" alt="Social media post: 'SHOCKING DATA! Almost 2 Lakh Kirana Stores are forced to Shut down due to E Commerce apps!'"
+         style="width:350px; height:auto; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+      <img src="assets/01-bridge-the-gap.png" alt="LinkedIn-style list: 'Here's how they can bridge the gap' with tech integration, omni-channel presence, customer experience, and training and upskilling"
+         style="width:350px; height:auto; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+    </div>
+    <p class="claim-card" style="margin:0; font-size:0.85em;">&ldquo;Kirana stores are dying. Here's how they can bridge the gap.&rdquo;
+    <span class="src">A product, pitched as a ubiquitous, transformative solution &middot; Case 1: kirana stores</span></p>
+  </div>
+  <aside class="notes">So who are these people with a one-in-twelve view of the country and a feed that tells them it's half? Four types, and you'll recognise every one. The seller has a product, and needs you to believe it's the answer to everything. First the panic, "shocking data, two lakh kirana stores shut down", then the pitch: here's how they can bridge the gap, tech integration, omni-channel presence, data analytics. The problem is always sized to fit the solution.</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Influencer 2 of 4</span>
+  <h2>The jingoist</h2>
+  <div style="display:grid; grid-template-columns:auto 1fr; gap:1.4em; align-items:center; margin-top:0.2em;">
+    <img src="assets/02-delivery-rain.jpg" alt="A food-delivery rider in an orange raincoat, seen from behind, cycling through heavy rain in night-time city traffic"
+         style="height:590px; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+    <p class="claim-card" style="margin:0; font-size:0.9em;">&ldquo;Leave our founders alone. It's not exploitation, it's <em>public service</em>!&rdquo;
+    <span class="src">Criticism of a business, recast as an attack on the nation &middot; Case 2: gig work</span></p>
+  </div>
+  <aside class="notes">The jingoist takes any criticism of a business and turns it into an attack on the country. Gig platforms aren't employers under scrutiny; they're nation-builders, and asking what the workers actually earn is ingratitude.</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Influencer 3 of 4</span>
+  <h2>The pointless contrarian</h2>
+  <div style="display:grid; grid-template-columns:auto 1fr; gap:1.4em; align-items:center; margin-top:0.2em;">
+    <img src="assets/03-twenty-hours-joker.png" alt="Still from a podcast interview, the speaker's face covered by a cartoon Joker mask, captioned 'I work 20 hours a day, seven days a week.'"
+         style="height:560px; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+    <p class="claim-card" style="margin:0; font-size:0.9em;">&ldquo;Work-life balance is a western concept. I work 140 hours every week.&rdquo;
+    <span class="src">Contrarian for its own sake &middot; Case 3: the 90-hour week</span></p>
+  </div>
+  <aside class="notes">The pointless contrarian says the opposite of what everyone else says, because that's what gets attention. Work-life balance is a western concept; I work 140 hours a week. It's not an argument, it's a flex, and it only works if nobody asks what those hours would cost anyone else.</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Influencer 4 of 4</span>
+  <h2>The bully</h2>
+  <div style="display:flex; align-items:center; justify-content:center; gap:1.6em; margin-top:0.3em;">
+    <p class="claim-card" style="margin:0; flex:1 1 0; font-size:0.9em;">&ldquo;I am heavily taxed. Income tax is the only kind of tax there is. It funds freebies, which makes people lazier. I get nothing.&rdquo;
+      <span class="src">Punching down, at the people with the least &middot; Case 4: welfare</span></p>
+    <img src="assets/cartman-poor.gif" alt="Eric Cartman from South Park declaring &#39;From this moment on, I am poor&#39;"
+         style="width:470px; flex:0 0 auto; margin:0; border-radius:8px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+  </div>
+  <aside class="notes">The bully punches down. He's heavily taxed, income tax is the only tax there is, it funds freebies, freebies make people lazier, and he gets nothing. It's always aimed at the people with the least, who are the least likely to be online to answer back. Four types, four claims, and in each case the person has a narrow view of the country and a reason to want it to be true. Let's see what the data says about each of them.</aside>
+</section>
+
+<!-- ===================== CASE 1 — KIRANA STORES ===================== -->
+
+<section>
+  <span class="stage-tag">Case 1 &middot; Retail</span>
+  <h2>Quick commerce is killing kirana stores</h2>
+  <div style="display:grid; grid-template-columns:auto 1fr; gap:1.4em; align-items:center; margin-top:0.3em;">
+    <img class="chart-hero" style="max-height:540px !important; margin:0;" src="assets/01-online-grocery-shopping.png" alt="Map of India: online grocery shopping is concentrated in a few metros; half of it happens in 20 districts and about 15% in Delhi NCR alone">
+    <div>
+      <p class="claim-card" style="margin:0; font-size:0.95em;">&ldquo;About 2,00,000 kirana stores have shut down in the last year because of predatory e-commerce practices.&rdquo;
+    <span class="src">AICPDF (traders' federation), widely reshared as breaking, shocking data</span></p>
+      <p class="gut-check" style="text-align:left; margin-top:0.5em;"><span class="tag">Gut check</span> 200,000 sounds huge. Huge compared to what?</p>
+      <h4 style="color:var(--accent); margin:0.7em 0 0;">India has about 13 million kirana stores</h4>
+      <table class="metrics small" style="margin:0.4em 0 0; width:100%;">
+    <tbody>
+      <tr><td>200,000 closures against ~13M kirana stores</td><td><strong>1.5%</strong> national closure rate</td></tr>
+      <tr><td>&hellip; even limited to metro India alone</td><td><strong>5%</strong></td></tr>
+      <tr class="hl"><td>Households that shop online for groceries at all</td><td><strong>7%</strong> &mdash; 93% stay offline</td></tr>
+      <tr><td>&hellip; even inside urban India specifically</td><td><strong>83%</strong> still don't shop online</td></tr>
+      <tr><td>Historical base rate: Amazon/Flipkart-era, COVID lockdown surge</td><td>displaced only <strong>1&ndash;2%</strong>, then <strong>~0.5%</strong></td></tr>
+    </tbody>
+  </table>
+      <p class="src-note" style="text-align:left;">HCES 2023&ndash;24</p>
+    </div>
+  </div>
+  <aside class="notes">This one came from a trade federation and went everywhere on social media with SHOCKING DATA energy. Before opening a dataset: 200,000 is a big number in isolation. But India doesn't have a small number of kirana stores. Let's find out how big. India has roughly thirteen million kirana stores. Two hundred thousand closures against that base is a 1.5% closure rate nationally, 5% if you only count metros. And only 7% of Indian households shop online for groceries at all — 93% never do. Even in urban India specifically, 83% of households don't shop online. This isn't new either: Amazon and Flipkart's big retail push only ever displaced 1 to 2% of local stores, and even the COVID lockdown e-commerce surge only got to about half a percent.</aside>
+</section>
+
+<!-- ===================== CASE 2 — GIG ECONOMY ===================== -->
+
+<section>
+  <span class="stage-tag">Case 2 &middot; Labour</span>
+  <h2>Gig work liberates India's poor and uneducated</h2>
+  <p class="claim-card" style="margin:0.2em auto 0; max-width:92%; font-size:0.85em;">&ldquo;Workers who once faced barriers like lack of education or technical skills now earn &#8377;15,000 to &#8377;45,000 or even more.&rdquo;
+    <span class="src">the platform-economy narrative, echoing NITI Aayog's own optimistic framing</span></p>
+  <img class="chart-hero" style="width:auto !important; height:430px !important; max-height:none !important; max-width:none; margin:0.5em auto 0; display:block;" src="assets/02-education-income-gender.png" alt="Line chart: average monthly income by education level, men and women, split by casual/salaried/self-employed">
+  <aside class="notes">This is the LinkedIn-influencer-as-amateur-economist claim: platforms have liberated people once locked out by lack of education, and here are the numbers to prove it. Before we even reach for PLFS: does the phrase "gig worker" mean anything to India's official labour classification? This is the chart's own caption, straight from the notebook: for men, higher education pays off only by a small margin. It helps women significantly — a salaried woman with no schooling earns about 6,600 rupees a month; a salaried graduate woman earns about 14,900, more than double. But she's still earning about 24% less than a salaried male graduate, who's at about 19,600. The essay's "no meaningful income gain from education" line is true for men. It's the opposite of true for women, and that half of the finding just never got written down.</aside>
+</section>
+
+<!-- ===================== CASE 3 — 90-HOUR WORKWEEK ===================== -->
+
+<section>
+  <span class="stage-tag">Case 3 &middot; Work &amp; Care</span>
+  <h2>The 90-hr Workweek</h2>
+  <img class="chart-hero" style="width:auto !important; height:400px !important; max-height:none !important; max-width:none; margin:0.3em auto 0; display:block;" src="assets/03-remaining-time.png" alt="Chart: remaining weekly time budget after paid work and chores — sleep, TV, talking, self-care">
+  <table class="metrics small" style="margin:0.6em auto 0; width:88%;">
+    <tbody>
+      <tr><td>Best case: both genders cap chores at 1 hr/day</td><td>women's ceiling rises to only <strong>~67 hrs/wk</strong></td></tr>
+      <tr><td>To reach 90, you'd have to cut</td><td>~1 hr sleep/night, all TV (10&ndash;12 hrs/wk), most talk &amp; text time (15 hrs/wk)</td></tr>
+      <tr class="hl"><td>Deficit still remaining after those cuts</td><td>women <strong>22 hrs</strong> &middot; men <strong>34 hrs</strong></td></tr>
+    </tbody>
+  </table>
+  <aside class="notes">Three captains of industry, three escalating numbers, and the explicit dismissal of work-life balance as a foreign import. So: if a salaried, white-collar Indian actually worked 90 hours a week, what would have to give? Even in the most generous scenario — everyone caps chores at an hour a day — women's work-time ceiling only rises to 67 hours a week. Getting anyone to 90 means cutting an hour of sleep every single night, giving up television entirely, giving up most talking and texting with people you care about. And you're still 22 hours short for women, 34 for men.</aside>
+</section>
+
+<!-- ===================== CASE 4 — PUBLIC WELFARE ===================== -->
+
+<section>
+  <span class="stage-tag">Case 4 &middot; Welfare</span>
+  <h2>Welfare makes people lazy &mdash; and wasteful</h2>
+  <img class="chart-hero" style="width:auto !important; height:360px !important; max-height:none !important; max-width:none; margin:0.3em auto 0; display:block;" src="assets/06-health-insurance-intoxicants-panels.png" alt="Chart: per-capita intoxicant spend, insured vs not-insured, rural and urban">
+  <table class="metrics small" style="margin:0.6em auto 0; width:88%;">
+    <tbody>
+      <tr><td>Urban PMJAY/scheme beneficiaries vs. non-beneficiaries</td><td>spend <strong>&#8377;2/month more</strong> on gutkha</td></tr>
+      <tr><td>Rural beneficiaries vs. non-beneficiaries</td><td>spend <strong>&#8377;4/month less</strong></td></tr>
+      <tr class="hl"><td>Entire spread across every group in the chart</td><td>&plusmn;<strong>&#8377;15</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="src-note" style="margin-top:0.35em; text-align:center;">HCES, propensity-score matched on household size, caste, religion &amp; region &mdash; not a raw comparison</p>
+  <aside class="notes">Two of the Prime Minister's own economic advisors wrote this: government spending on health insurance is up, spending on intoxicants is up, therefore moral hazard — people take more risks because they feel insured. The hole is immediate: two things rising together doesn't mean one causes the other. Are we even looking at the same households? Instead of two national trend lines, I compared insured and uninsured households directly, split rural and urban. But not a naive comparison: households are first matched by propensity score on things like size, caste, religion and region, trimmed to common support, then compared within matched strata — the same rigor you'd want turned on any of the loud claims we started with. Urban beneficiaries spend about two rupees a month more on gutkha than urban non-beneficiaries. Rural beneficiaries actually spend four rupees less than rural non-beneficiaries. The entire chart, top to bottom, spans about fifteen rupees.</aside>
+</section>
+
+<section>
+  <h2 class="center">But welfare's real effects hide where headlines don't look</h2>
+  <img class="chart-hero" src="assets/06-lpg-subsidy-education.png" alt="Chart: education spending per student, LPG subsidy beneficiary vs non-beneficiary households">
+  <p class="posterior-line" style="margin-top:0.5em; font-size:1.1em;">LPG-subsidy households spend nearly <strong>&#8377;60 more</strong> on education per student &mdash; and two-thirds of that goes straight into private coaching.</p>
+  <aside class="notes">While the headline claim about vice spending falls apart, a genuine welfare effect was sitting one tab over, on a subsidy nobody was even arguing about. An LPG subsidy meant for cooking gas quietly turns into a child's tuition fee. That's the kind of finding no headline thinks to go looking for.</aside>
+</section>
+
+<section>
+  <img class="chart-hero" style="height:450px !important; max-height:none !important; width:auto !important;" src="assets/06-free-electricity-education.png" alt="Bar chart: difference in education budget between free-electricity beneficiaries and non-beneficiaries, coaching down, fees up">
+  <table class="metrics small" style="margin-top:0.3em;">
+    <tbody>
+      <tr class="hl"><td>LPG Subsidy &rarr; Education</td><td>+&#8377;59 total &mdash; <strong>+&#8377;41 to coaching</strong> (published)</td></tr>
+      <tr><td>Health Insurance &rarr; Education</td><td>&minus;&#8377;44 total, but <strong>+&#8377;54 to coaching</strong> &mdash; hidden by fees falling &minus;&#8377;74 (never published)</td></tr>
+      <tr><td>Free Electricity &rarr; Education</td><td>+&#8377;74 total, but <strong>&minus;&#8377;70 from coaching</strong>, +&#8377;99 to fees &mdash; the opposite direction entirely</td></tr>
+    </tbody>
+  </table>
+  <aside class="notes">The published essay makes the LPG finding sound like the general shape of how welfare works — a subsidy frees up cash, some of it drifts into coaching. But I ran the identical propensity-score-matched comparison on all five schemes this essay analysed, and it isn't one shape. Health insurance shows an even bigger coaching shift than LPG — fifty-four rupees, more than LPG's forty-one — except the overall education total is negative, because formal school fees dropped even more. And free electricity does the opposite of everything else: fees go up by ninety-nine rupees, coaching goes down by seventy. The essay picked the cleanest one to tell. The other two are just as real, and they complicate the story instead of completing it. Small bonus that didn't fit anywhere: midday-meal households spend 145 rupees more on ready-to-eat food at home, even after subtracting the value of meals eaten at school — the single largest food-category effect in the entire five-scheme dataset, and nobody's written a sentence about it yet.</aside>
+</section>
+
+<!-- ===================== ACT 5B — DATA SOURCES ===================== -->
+
+<section>
+  <h2 class="center">Elements of the Analysis</h2>
+  <div class="flow" style="flex-direction:column; align-items:stretch; max-width:52%; margin:0.9em auto 0; gap:0.5em;">
+    <div class="flow-box"><span class="t">1 &middot; The Data</span></div>
+    <div class="flow-box mid"><span class="t">2 &middot; Survey Design &amp; Interpretation</span></div>
+    <div class="flow-box mid"><span class="t">3 &middot; The Maths &amp; Stats</span></div>
+    <div class="flow-box out"><span class="t">4 &middot; LLMs</span></div>
+  </div>
+  <aside class="notes">Four claims, one process. Now the unglamorous, reusable part: what it actually takes, under the hood, to run that process on Indian open data.</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Element 1 &middot; The data</span>
+  <h2 class="center">Looking for Data, and Inspiration</h2>
+  <div style="display:flex; justify-content:center; margin-top:0.5em;">
+      <a href="https://microdata.gov.in" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.35em; text-decoration:none;">
+        <img src="assets/data-mospi.png" alt="Ministry of Statistics and Programme Implementation, Government of India" style="height:130px; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+        <span style="font-family:var(--font-mono); font-size:0.6em; color:var(--accent);">microdata.gov.in</span>
+      </a>
+  </div>
+  <p class="center muted" style="font-size:0.7em; margin:0.4em 0 0;">HCES &middot; PLFS &middot; Time Use Survey</p>
+  <div style="display:grid; grid-template-columns:auto auto; justify-content:center; align-items:end; gap:1.1em 2.4em; margin-top:1.1em;">
+      <a href="https://datameet.org" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.35em; text-decoration:none;">
+        <img src="assets/data-datameet.png" alt="DataMeet" style="height:100px; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+        <span style="font-family:var(--font-mono); font-size:0.6em; color:var(--accent);">datameet.org</span>
+      </a>
+      <a href="https://dataforindia.com" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.35em; text-decoration:none;">
+        <img src="assets/data-dataforindia.png" alt="Data For India" style="height:100px; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+        <span style="font-family:var(--font-mono); font-size:0.6em; color:var(--accent);">dataforindia.com</span>
+      </a>
+      <a href="https://diagramchasing.fun" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.35em; text-decoration:none;">
+        <img src="assets/data-diagramchasing.png" alt="Diagram Chasing: visual stories and tools that make public data worth looking at" style="height:100px; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+        <span style="font-family:var(--font-mono); font-size:0.6em; color:var(--accent);">diagramchasing.fun</span>
+      </a>
+      <a href="https://bharatviz.org" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.35em; text-decoration:none;">
+        <img src="assets/data-bharatviz.png" alt="BharatViz: Mapping India" style="height:100px; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+        <span style="font-family:var(--font-mono); font-size:0.6em; color:var(--accent);">bharatviz.org</span>
+      </a>
+  </div>
+  <aside class="notes">Where the data comes from, and who helps you use it. The raw microdata lives on MoSPI's portal, microdata.gov.in: HCES behind the kirana and welfare cases, PLFS behind gig work and the cold open, the Time Use Survey behind the 90-hour week. Underneath it, a community that makes it usable: DataMeet, Data For India, Diagram Chasing and BharatViz.</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Element 2 &middot; Survey Design &amp; Interpretation</span>
+  <div style="position:relative; height:630px; margin-top:0.4em;">
+    <img src="assets/survey-consumption-form.png" alt="Questionnaire page: quantity and value of cereals and cereal substitutes consumed by the household during the last 30 days, with item codes and a cereal sub-total row" style="position:absolute; left:4%; top:0; height:560px; width:auto; margin:0; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12);">
+    <img src="assets/survey-time-diary.png" alt="Questionnaire page: particulars of activities for each household member aged 6 and above, from 4 AM the day before the interview to 4 AM on the day, recorded in half-hour slots with activity codes" style="position:absolute; right:2%; bottom:0; width:760px; height:auto; margin:0; z-index:2; border-radius:6px; border:1px solid var(--hair); box-shadow:0 3px 18px rgba(42,26,22,0.12); box-shadow:0 6px 28px rgba(42,26,22,0.28);">
+  </div>
+  <aside class="notes">This is what the data actually looks like before it becomes a CSV: pages of a paper questionnaire. On the left, a household is asked about the quantity and value of every cereal it consumed in the last 30 days, item by item, each with a code, and split by where it came from: free, the ration shop, or elsewhere. Notice the row near the bottom: cereal sub-total, code 129. It sits in the same list, coded exactly like any other item. Forget to drop it and your cereal total silently doubles. And the 30 days is specific to this page; other pages ask about the last week or the last year. On the right, a time-use diary: for every household member aged six and over, every activity from 4 AM the day before to 4 AM on the day of the interview, in half-hour slots, up to three activities at once, each with an activity code. One person becomes dozens of rows. Every one of these design choices decides how you have to read the numbers.</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Element 3 &middot; The Maths &amp; Stats</span>
+  <h2 class="center" style="font-size:1.3em;">It all comes down to comparing aggregates of separate groups. Then look for statistical and numerical significance.</h2>
+  <div class="two-col" style="margin-top:0.4em; align-items:start;">
+    <div class="center">
+      <h4 style="color:var(--accent);">Weighted aggregate of a group</h4>
+      <div style="font-size:0.85em;">\[ \bar{y}_g = \frac{\sum_{i \in g} w_i \, y_i}{\sum_{i \in g} w_i} \]</div>
+      <p class="posterior-note" style="margin-top:0.2em; max-width:100%;">\(w_i\) = the survey multiplier: how many households row \(i\) stands for</p>
+      <h4 style="color:var(--accent); margin-top:0.9em;">Ordinary least squares</h4>
+      <div style="font-size:0.85em;">\[ y_i = \beta_0 + \beta_1 T_i + \gamma^{\top} x_i + \varepsilon_i \]</div>
+      <p class="posterior-note" style="margin-top:0.2em; max-width:100%;">\(\beta_1\) = the gap between the groups, holding everything in \(x_i\) fixed</p>
+    </div>
+    <div class="center">
+      <h4 style="color:var(--accent-3);">Two-sided t-test</h4>
+      <svg viewBox="0 0 520 250" style="width:100%; max-width:520px; height:auto; display:block; margin:0.2em auto 0;" role="img" aria-label="Two overlapping bell curves: non-beneficiaries in teal and beneficiaries in maroon, shifted to the right. Dashed lines mark each group's mean, and a bracket between them marks the gap being tested.">
+        <line x1="30" y1="195" x2="490" y2="195" stroke="var(--muted)" stroke-width="1"/>
+        <path d="M30.0,194.8 L31.9,194.8 L33.8,194.7 L35.7,194.7 L37.7,194.7 L39.6,194.6 L41.5,194.6 L43.4,194.5 L45.3,194.4 L47.2,194.4 L49.2,194.3 L51.1,194.2 L53.0,194.1 L54.9,194.0 L56.8,193.8 L58.8,193.7 L60.7,193.6 L62.6,193.4 L64.5,193.2 L66.4,193.0 L68.3,192.8 L70.2,192.5 L72.2,192.3 L74.1,192.0 L76.0,191.7 L77.9,191.3 L79.8,190.9 L81.8,190.5 L83.7,190.1 L85.6,189.6 L87.5,189.1 L89.4,188.5 L91.3,187.9 L93.3,187.2 L95.2,186.5 L97.1,185.8 L99.0,185.0 L100.9,184.1 L102.8,183.2 L104.8,182.2 L106.7,181.1 L108.6,180.0 L110.5,178.8 L112.4,177.6 L114.3,176.2 L116.2,174.8 L118.2,173.4 L120.1,171.8 L122.0,170.2 L123.9,168.4 L125.8,166.6 L127.8,164.8 L129.7,162.8 L131.6,160.8 L133.5,158.7 L135.4,156.5 L137.3,154.2 L139.2,151.8 L141.2,149.4 L143.1,146.9 L145.0,144.3 L146.9,141.7 L148.8,139.0 L150.8,136.3 L152.7,133.4 L154.6,130.6 L156.5,127.7 L158.4,124.8 L160.3,121.8 L162.2,118.8 L164.2,115.8 L166.1,112.8 L168.0,109.8 L169.9,106.9 L171.8,103.9 L173.8,100.9 L175.7,98.0 L177.6,95.1 L179.5,92.3 L181.4,89.6 L183.3,86.9 L185.2,84.3 L187.2,81.8 L189.1,79.4 L191.0,77.1 L192.9,74.9 L194.8,72.8 L196.8,70.9 L198.7,69.1 L200.6,67.4 L202.5,65.9 L204.4,64.6 L206.3,63.4 L208.2,62.4 L210.2,61.6 L212.1,60.9 L214.0,60.4 L215.9,60.1 L217.8,60.0 L219.8,60.1 L221.7,60.3 L223.6,60.7 L225.5,61.3 L227.4,62.1 L229.3,63.0 L231.2,64.2 L233.2,65.4 L235.1,66.9 L237.0,68.5 L238.9,70.2 L240.8,72.1 L242.8,74.1 L244.7,76.3 L246.6,78.5 L248.5,80.9 L250.4,83.4 L252.3,85.9 L254.3,88.6 L256.2,91.3 L258.1,94.1 L260.0,97.0 L261.9,99.9 L263.8,102.8 L265.8,105.8 L267.7,108.8 L269.6,111.8 L271.5,114.8 L273.4,117.8 L275.3,120.7 L277.2,123.7 L279.2,126.6 L281.1,129.6 L283.0,132.4 L284.9,135.2 L286.8,138.0 L288.8,140.7 L290.7,143.4 L292.6,146.0 L294.5,148.5 L296.4,151.0 L298.3,153.3 L300.2,155.6 L302.2,157.9 L304.1,160.0 L306.0,162.1 L307.9,164.1 L309.8,166.0 L311.8,167.8 L313.7,169.5 L315.6,171.2 L317.5,172.8 L319.4,174.3 L321.3,175.7 L323.2,177.1 L325.2,178.4 L327.1,179.6 L329.0,180.7 L330.9,181.8 L332.8,182.8 L334.8,183.8 L336.7,184.7 L338.6,185.5 L340.5,186.3 L342.4,187.0 L344.3,187.7 L346.2,188.3 L348.2,188.9 L350.1,189.4 L352.0,189.9 L353.9,190.4 L355.8,190.8 L357.8,191.2 L359.7,191.5 L361.6,191.9 L363.5,192.2 L365.4,192.4 L367.3,192.7 L369.2,192.9 L371.2,193.1 L373.1,193.3 L375.0,193.5 L376.9,193.7 L378.8,193.8 L380.8,193.9 L382.7,194.0 L384.6,194.1 L386.5,194.2 L388.4,194.3 L390.3,194.4 L392.2,194.5 L394.2,194.5 L396.1,194.6 L398.0,194.6 L399.9,194.7 L401.8,194.7 L403.8,194.8 L405.7,194.8 L407.6,194.8 L409.5,194.8 L411.4,194.9 L413.3,194.9 L415.2,194.9 L417.2,194.9 L419.1,194.9 L421.0,194.9 L422.9,194.9 L424.8,194.9 L426.8,195.0 L428.7,195.0 L430.6,195.0 L432.5,195.0 L434.4,195.0 L436.3,195.0 L438.2,195.0 L440.2,195.0 L442.1,195.0 L444.0,195.0 L445.9,195.0 L447.8,195.0 L449.7,195.0 L451.7,195.0 L453.6,195.0 L455.5,195.0 L457.4,195.0 L459.3,195.0 L461.3,195.0 L463.2,195.0 L465.1,195.0 L467.0,195.0 L468.9,195.0 L470.8,195.0 L472.8,195.0 L474.7,195.0 L476.6,195.0 L478.5,195.0 L480.4,195.0 L482.3,195.0 L484.2,195.0 L486.2,195.0 L488.1,195.0 L490.0,195.0 L490,195 L30,195 Z" fill="var(--accent-2)" fill-opacity="0.18"/>
+        <path d="M30.0,195.0 L31.9,195.0 L33.8,195.0 L35.7,195.0 L37.7,195.0 L39.6,195.0 L41.5,195.0 L43.4,195.0 L45.3,195.0 L47.2,195.0 L49.2,195.0 L51.1,195.0 L53.0,195.0 L54.9,195.0 L56.8,195.0 L58.8,195.0 L60.7,195.0 L62.6,195.0 L64.5,195.0 L66.4,195.0 L68.3,195.0 L70.2,195.0 L72.2,195.0 L74.1,195.0 L76.0,195.0 L77.9,195.0 L79.8,195.0 L81.8,195.0 L83.7,195.0 L85.6,195.0 L87.5,195.0 L89.4,195.0 L91.3,195.0 L93.3,195.0 L95.2,194.9 L97.1,194.9 L99.0,194.9 L100.9,194.9 L102.8,194.9 L104.8,194.9 L106.7,194.9 L108.6,194.9 L110.5,194.8 L112.4,194.8 L114.3,194.8 L116.2,194.8 L118.2,194.7 L120.1,194.7 L122.0,194.6 L123.9,194.6 L125.8,194.5 L127.8,194.5 L129.7,194.4 L131.6,194.3 L133.5,194.2 L135.4,194.1 L137.3,194.0 L139.2,193.9 L141.2,193.8 L143.1,193.7 L145.0,193.5 L146.9,193.3 L148.8,193.1 L150.8,192.9 L152.7,192.7 L154.6,192.4 L156.5,192.2 L158.4,191.9 L160.3,191.5 L162.2,191.2 L164.2,190.8 L166.1,190.4 L168.0,189.9 L169.9,189.4 L171.8,188.9 L173.8,188.3 L175.7,187.7 L177.6,187.0 L179.5,186.3 L181.4,185.5 L183.3,184.7 L185.2,183.8 L187.2,182.8 L189.1,181.8 L191.0,180.7 L192.9,179.6 L194.8,178.4 L196.8,177.1 L198.7,175.7 L200.6,174.3 L202.5,172.8 L204.4,171.2 L206.3,169.5 L208.2,167.8 L210.2,166.0 L212.1,164.1 L214.0,162.1 L215.9,160.0 L217.8,157.9 L219.8,155.6 L221.7,153.3 L223.6,151.0 L225.5,148.5 L227.4,146.0 L229.3,143.4 L231.2,140.7 L233.2,138.0 L235.1,135.2 L237.0,132.4 L238.9,129.6 L240.8,126.6 L242.8,123.7 L244.7,120.7 L246.6,117.8 L248.5,114.8 L250.4,111.8 L252.3,108.8 L254.3,105.8 L256.2,102.8 L258.1,99.9 L260.0,97.0 L261.9,94.1 L263.8,91.3 L265.8,88.6 L267.7,85.9 L269.6,83.4 L271.5,80.9 L273.4,78.5 L275.3,76.3 L277.2,74.1 L279.2,72.1 L281.1,70.2 L283.0,68.5 L284.9,66.9 L286.8,65.4 L288.8,64.2 L290.7,63.0 L292.6,62.1 L294.5,61.3 L296.4,60.7 L298.3,60.3 L300.2,60.1 L302.2,60.0 L304.1,60.1 L306.0,60.4 L307.9,60.9 L309.8,61.6 L311.8,62.4 L313.7,63.4 L315.6,64.6 L317.5,65.9 L319.4,67.4 L321.3,69.1 L323.2,70.9 L325.2,72.8 L327.1,74.9 L329.0,77.1 L330.9,79.4 L332.8,81.8 L334.8,84.3 L336.7,86.9 L338.6,89.6 L340.5,92.3 L342.4,95.1 L344.3,98.0 L346.2,100.9 L348.2,103.9 L350.1,106.9 L352.0,109.8 L353.9,112.8 L355.8,115.8 L357.8,118.8 L359.7,121.8 L361.6,124.8 L363.5,127.7 L365.4,130.6 L367.3,133.4 L369.2,136.3 L371.2,139.0 L373.1,141.7 L375.0,144.3 L376.9,146.9 L378.8,149.4 L380.8,151.8 L382.7,154.2 L384.6,156.5 L386.5,158.7 L388.4,160.8 L390.3,162.8 L392.2,164.8 L394.2,166.6 L396.1,168.4 L398.0,170.2 L399.9,171.8 L401.8,173.4 L403.8,174.8 L405.7,176.2 L407.6,177.6 L409.5,178.8 L411.4,180.0 L413.3,181.1 L415.2,182.2 L417.2,183.2 L419.1,184.1 L421.0,185.0 L422.9,185.8 L424.8,186.5 L426.8,187.2 L428.7,187.9 L430.6,188.5 L432.5,189.1 L434.4,189.6 L436.3,190.1 L438.2,190.5 L440.2,190.9 L442.1,191.3 L444.0,191.7 L445.9,192.0 L447.8,192.3 L449.7,192.5 L451.7,192.8 L453.6,193.0 L455.5,193.2 L457.4,193.4 L459.3,193.6 L461.3,193.7 L463.2,193.8 L465.1,194.0 L467.0,194.1 L468.9,194.2 L470.8,194.3 L472.8,194.4 L474.7,194.4 L476.6,194.5 L478.5,194.6 L480.4,194.6 L482.3,194.7 L484.2,194.7 L486.2,194.7 L488.1,194.8 L490.0,194.8 L490,195 L30,195 Z" fill="var(--accent)" fill-opacity="0.18"/>
+        <path d="M30.0,194.8 L31.9,194.8 L33.8,194.7 L35.7,194.7 L37.7,194.7 L39.6,194.6 L41.5,194.6 L43.4,194.5 L45.3,194.4 L47.2,194.4 L49.2,194.3 L51.1,194.2 L53.0,194.1 L54.9,194.0 L56.8,193.8 L58.8,193.7 L60.7,193.6 L62.6,193.4 L64.5,193.2 L66.4,193.0 L68.3,192.8 L70.2,192.5 L72.2,192.3 L74.1,192.0 L76.0,191.7 L77.9,191.3 L79.8,190.9 L81.8,190.5 L83.7,190.1 L85.6,189.6 L87.5,189.1 L89.4,188.5 L91.3,187.9 L93.3,187.2 L95.2,186.5 L97.1,185.8 L99.0,185.0 L100.9,184.1 L102.8,183.2 L104.8,182.2 L106.7,181.1 L108.6,180.0 L110.5,178.8 L112.4,177.6 L114.3,176.2 L116.2,174.8 L118.2,173.4 L120.1,171.8 L122.0,170.2 L123.9,168.4 L125.8,166.6 L127.8,164.8 L129.7,162.8 L131.6,160.8 L133.5,158.7 L135.4,156.5 L137.3,154.2 L139.2,151.8 L141.2,149.4 L143.1,146.9 L145.0,144.3 L146.9,141.7 L148.8,139.0 L150.8,136.3 L152.7,133.4 L154.6,130.6 L156.5,127.7 L158.4,124.8 L160.3,121.8 L162.2,118.8 L164.2,115.8 L166.1,112.8 L168.0,109.8 L169.9,106.9 L171.8,103.9 L173.8,100.9 L175.7,98.0 L177.6,95.1 L179.5,92.3 L181.4,89.6 L183.3,86.9 L185.2,84.3 L187.2,81.8 L189.1,79.4 L191.0,77.1 L192.9,74.9 L194.8,72.8 L196.8,70.9 L198.7,69.1 L200.6,67.4 L202.5,65.9 L204.4,64.6 L206.3,63.4 L208.2,62.4 L210.2,61.6 L212.1,60.9 L214.0,60.4 L215.9,60.1 L217.8,60.0 L219.8,60.1 L221.7,60.3 L223.6,60.7 L225.5,61.3 L227.4,62.1 L229.3,63.0 L231.2,64.2 L233.2,65.4 L235.1,66.9 L237.0,68.5 L238.9,70.2 L240.8,72.1 L242.8,74.1 L244.7,76.3 L246.6,78.5 L248.5,80.9 L250.4,83.4 L252.3,85.9 L254.3,88.6 L256.2,91.3 L258.1,94.1 L260.0,97.0 L261.9,99.9 L263.8,102.8 L265.8,105.8 L267.7,108.8 L269.6,111.8 L271.5,114.8 L273.4,117.8 L275.3,120.7 L277.2,123.7 L279.2,126.6 L281.1,129.6 L283.0,132.4 L284.9,135.2 L286.8,138.0 L288.8,140.7 L290.7,143.4 L292.6,146.0 L294.5,148.5 L296.4,151.0 L298.3,153.3 L300.2,155.6 L302.2,157.9 L304.1,160.0 L306.0,162.1 L307.9,164.1 L309.8,166.0 L311.8,167.8 L313.7,169.5 L315.6,171.2 L317.5,172.8 L319.4,174.3 L321.3,175.7 L323.2,177.1 L325.2,178.4 L327.1,179.6 L329.0,180.7 L330.9,181.8 L332.8,182.8 L334.8,183.8 L336.7,184.7 L338.6,185.5 L340.5,186.3 L342.4,187.0 L344.3,187.7 L346.2,188.3 L348.2,188.9 L350.1,189.4 L352.0,189.9 L353.9,190.4 L355.8,190.8 L357.8,191.2 L359.7,191.5 L361.6,191.9 L363.5,192.2 L365.4,192.4 L367.3,192.7 L369.2,192.9 L371.2,193.1 L373.1,193.3 L375.0,193.5 L376.9,193.7 L378.8,193.8 L380.8,193.9 L382.7,194.0 L384.6,194.1 L386.5,194.2 L388.4,194.3 L390.3,194.4 L392.2,194.5 L394.2,194.5 L396.1,194.6 L398.0,194.6 L399.9,194.7 L401.8,194.7 L403.8,194.8 L405.7,194.8 L407.6,194.8 L409.5,194.8 L411.4,194.9 L413.3,194.9 L415.2,194.9 L417.2,194.9 L419.1,194.9 L421.0,194.9 L422.9,194.9 L424.8,194.9 L426.8,195.0 L428.7,195.0 L430.6,195.0 L432.5,195.0 L434.4,195.0 L436.3,195.0 L438.2,195.0 L440.2,195.0 L442.1,195.0 L444.0,195.0 L445.9,195.0 L447.8,195.0 L449.7,195.0 L451.7,195.0 L453.6,195.0 L455.5,195.0 L457.4,195.0 L459.3,195.0 L461.3,195.0 L463.2,195.0 L465.1,195.0 L467.0,195.0 L468.9,195.0 L470.8,195.0 L472.8,195.0 L474.7,195.0 L476.6,195.0 L478.5,195.0 L480.4,195.0 L482.3,195.0 L484.2,195.0 L486.2,195.0 L488.1,195.0 L490.0,195.0" fill="none" stroke="var(--accent-2)" stroke-width="2"/>
+        <path d="M30.0,195.0 L31.9,195.0 L33.8,195.0 L35.7,195.0 L37.7,195.0 L39.6,195.0 L41.5,195.0 L43.4,195.0 L45.3,195.0 L47.2,195.0 L49.2,195.0 L51.1,195.0 L53.0,195.0 L54.9,195.0 L56.8,195.0 L58.8,195.0 L60.7,195.0 L62.6,195.0 L64.5,195.0 L66.4,195.0 L68.3,195.0 L70.2,195.0 L72.2,195.0 L74.1,195.0 L76.0,195.0 L77.9,195.0 L79.8,195.0 L81.8,195.0 L83.7,195.0 L85.6,195.0 L87.5,195.0 L89.4,195.0 L91.3,195.0 L93.3,195.0 L95.2,194.9 L97.1,194.9 L99.0,194.9 L100.9,194.9 L102.8,194.9 L104.8,194.9 L106.7,194.9 L108.6,194.9 L110.5,194.8 L112.4,194.8 L114.3,194.8 L116.2,194.8 L118.2,194.7 L120.1,194.7 L122.0,194.6 L123.9,194.6 L125.8,194.5 L127.8,194.5 L129.7,194.4 L131.6,194.3 L133.5,194.2 L135.4,194.1 L137.3,194.0 L139.2,193.9 L141.2,193.8 L143.1,193.7 L145.0,193.5 L146.9,193.3 L148.8,193.1 L150.8,192.9 L152.7,192.7 L154.6,192.4 L156.5,192.2 L158.4,191.9 L160.3,191.5 L162.2,191.2 L164.2,190.8 L166.1,190.4 L168.0,189.9 L169.9,189.4 L171.8,188.9 L173.8,188.3 L175.7,187.7 L177.6,187.0 L179.5,186.3 L181.4,185.5 L183.3,184.7 L185.2,183.8 L187.2,182.8 L189.1,181.8 L191.0,180.7 L192.9,179.6 L194.8,178.4 L196.8,177.1 L198.7,175.7 L200.6,174.3 L202.5,172.8 L204.4,171.2 L206.3,169.5 L208.2,167.8 L210.2,166.0 L212.1,164.1 L214.0,162.1 L215.9,160.0 L217.8,157.9 L219.8,155.6 L221.7,153.3 L223.6,151.0 L225.5,148.5 L227.4,146.0 L229.3,143.4 L231.2,140.7 L233.2,138.0 L235.1,135.2 L237.0,132.4 L238.9,129.6 L240.8,126.6 L242.8,123.7 L244.7,120.7 L246.6,117.8 L248.5,114.8 L250.4,111.8 L252.3,108.8 L254.3,105.8 L256.2,102.8 L258.1,99.9 L260.0,97.0 L261.9,94.1 L263.8,91.3 L265.8,88.6 L267.7,85.9 L269.6,83.4 L271.5,80.9 L273.4,78.5 L275.3,76.3 L277.2,74.1 L279.2,72.1 L281.1,70.2 L283.0,68.5 L284.9,66.9 L286.8,65.4 L288.8,64.2 L290.7,63.0 L292.6,62.1 L294.5,61.3 L296.4,60.7 L298.3,60.3 L300.2,60.1 L302.2,60.0 L304.1,60.1 L306.0,60.4 L307.9,60.9 L309.8,61.6 L311.8,62.4 L313.7,63.4 L315.6,64.6 L317.5,65.9 L319.4,67.4 L321.3,69.1 L323.2,70.9 L325.2,72.8 L327.1,74.9 L329.0,77.1 L330.9,79.4 L332.8,81.8 L334.8,84.3 L336.7,86.9 L338.6,89.6 L340.5,92.3 L342.4,95.1 L344.3,98.0 L346.2,100.9 L348.2,103.9 L350.1,106.9 L352.0,109.8 L353.9,112.8 L355.8,115.8 L357.8,118.8 L359.7,121.8 L361.6,124.8 L363.5,127.7 L365.4,130.6 L367.3,133.4 L369.2,136.3 L371.2,139.0 L373.1,141.7 L375.0,144.3 L376.9,146.9 L378.8,149.4 L380.8,151.8 L382.7,154.2 L384.6,156.5 L386.5,158.7 L388.4,160.8 L390.3,162.8 L392.2,164.8 L394.2,166.6 L396.1,168.4 L398.0,170.2 L399.9,171.8 L401.8,173.4 L403.8,174.8 L405.7,176.2 L407.6,177.6 L409.5,178.8 L411.4,180.0 L413.3,181.1 L415.2,182.2 L417.2,183.2 L419.1,184.1 L421.0,185.0 L422.9,185.8 L424.8,186.5 L426.8,187.2 L428.7,187.9 L430.6,188.5 L432.5,189.1 L434.4,189.6 L436.3,190.1 L438.2,190.5 L440.2,190.9 L442.1,191.3 L444.0,191.7 L445.9,192.0 L447.8,192.3 L449.7,192.5 L451.7,192.8 L453.6,193.0 L455.5,193.2 L457.4,193.4 L459.3,193.6 L461.3,193.7 L463.2,193.8 L465.1,194.0 L467.0,194.1 L468.9,194.2 L470.8,194.3 L472.8,194.4 L474.7,194.4 L476.6,194.5 L478.5,194.6 L480.4,194.6 L482.3,194.7 L484.2,194.7 L486.2,194.7 L488.1,194.8 L490.0,194.8" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        <line x1="218.2" y1="195" x2="218.2" y2="46.0" stroke="var(--accent-2)" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <line x1="301.8" y1="195" x2="301.8" y2="46.0" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <path d="M218.2,38.0 L218.2,32.0 L301.8,32.0 L301.8,38.0" fill="none" stroke="var(--text)" stroke-width="1.2"/>
+        <text x="260.0" y="26.0" text-anchor="middle" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="var(--text)">the gap</text>
+        <text x="152.8" y="83.3" text-anchor="end" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="var(--text)">Non-beneficiaries</text>
+        <rect x="34.8" y="89.3" width="118" height="3" rx="1.5" fill="var(--accent-2)"/>
+        <text x="367.2" y="83.3" text-anchor="start" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="var(--text)">Beneficiaries</text>
+        <rect x="367.2" y="89.3" width="88" height="3" rx="1.5" fill="var(--accent)"/>
+        <text x="218.2" y="213" text-anchor="middle" font-family="var(--font-mono)" font-size="13" fill="var(--text)">&#563;&#8203;<tspan baseline-shift="sub" font-size="10">C</tspan></text>
+        <text x="301.8" y="213" text-anchor="middle" font-family="var(--font-mono)" font-size="13" fill="var(--text)">&#563;&#8203;<tspan baseline-shift="sub" font-size="10">T</tspan></text>
+        <text x="260.0" y="237" text-anchor="middle" font-family="var(--font-sans)" font-size="13" fill="var(--muted)">Is the gap between the means big, next to the spread within each group?</text>
+      </svg>
+    </div>
+  </div>
+  <aside class="notes">Strip away the jargon and every analysis in this talk is the same move: split households into groups, compute each group's weighted average, and compare. The weighted average is the formula on the left. Each row's value is multiplied by its survey multiplier, how many real households that one row stands in for, and divided by the total weight. Then two questions. Statistical significance: is the gap bigger than chance? The two-sided t-test on the right asks whether the beneficiaries' average is genuinely different from the non-beneficiaries', in either direction. And numerical significance: even if it's real, does it matter? Two rupees a month is statistically detectable and practically a rounding error. The one other tool that matters a lot is ordinary least squares. Regress the outcome on a group indicator plus the things you want to hold fixed, household size, caste, region, and the coefficient on the indicator is the gap between the groups after those are accounted for. Weight it by the multiplier too; with survey data that's weighted least squares. Every row in these surveys carries a weight, usually called "multiplier," sometimes shortened to "mult" — recording how many real households or people that one response stands in for nationally. This is the single most common way a well-meaning FOSS person gets NSS data wrong: load the file, call .mean() on a column, and get a number that looks plausible and is nowhere near the truth. This exact function lives in hces.py and gets imported by five different welfare notebooks; the workweek essay hand-rolls the identical line inline. Every number in this talk is a multiplier-weighted estimate, never a raw average.</aside>
+</section>
+
+<section>
+  <span class="stage-tag">Element 4 &middot; LLMs</span>
+  <h2 class="center">LLMs</h2>
+  <ul class="release" style="font-size:1.05em; margin-top:0.8em;">
+    <li>Survey documentation runs to <strong>hundreds of pages</strong></li>
+    <li>Almost everything is <strong>coded</strong></li>
+    <li>Questionnaires are <strong>not linear</strong></li>
+    <li>LLMs <em><strong>will</strong></em> hallucinate</li>
+  </ul>
+  <p class="gut-check" style="margin-top:1.1em;"><span class="tag">Pro-tip</span> Write unit tests</p>
+  <aside class="notes">Survey documentation runs to hundreds of pages. Almost everything is coded. Questionnaires are not linear. LLMs will hallucinate.</aside>
+</section>
+
+<section style="text-align:center;">
+  <h2 class="center">A Confession</h2>
+  <blockquote class="quote center" style="margin:0.3em auto 0; max-width:82%; border-left:none; padding-left:0;">
+    &ldquo;The amount of energy needed to refute bullshit is an order of magnitude bigger than that needed to produce it.&rdquo;
+    <footer style="text-align:center;">&mdash; Alberto Brandolini, the Bullshit Asymmetry Principle</footer>
+  </blockquote>
+  <img src="assets/bb-logo.png" alt="The Being Bayesian logo: a figure pushing a boulder up a maroon bell curve, beside a taller teal bell curve"
+       style="display:block; height:220px; margin:0.6em auto;">
+  <blockquote class="quote center" style="margin:0 auto; max-width:70%; border-left:none; padding-left:0;">
+    &ldquo;One must imagine Sisyphus happy.&rdquo;
+    <footer style="text-align:center;">&mdash; Albert Camus, <em>The Myth of Sisyphus</em></footer>
+  </blockquote>
+  <aside class="notes">Brandolini's law: the energy needed to refute bullshit is an order of magnitude bigger than the energy needed to produce it. Doing this is pushing a boulder up a hill that resets every day. One must imagine Sisyphus happy.</aside>
+</section>
+
+<section style="text-align:center;">
+  <p style="font-family:var(--font-display); font-size:2.2em; font-weight:600; margin:0;"><a href="https://beingbayesian.in" style="color:var(--accent);">beingbayesian.in</a></p>
+  <a href="https://beingbayesian.in" target="_blank" rel="noopener">
+    <img src="assets/beingbayesian-qr.png" alt="QR code linking to beingbayesian.in"
+         style="display:block; width:360px; height:360px; margin:0.6em auto 0; border-radius:10px; box-shadow:0 3px 18px rgba(42,26,22,0.12); image-rendering:pixelated;">
+  </a>
+  <aside class="notes">beingbayesian.in: the newsletter, the essays, and the data and code behind every claim in this talk. Thank you.</aside>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/math/math.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  // Speaker notes are authored as Markdown inside each <aside class="notes">.
+  // Render them to HTML before Reveal reads them (reveal's own markdown plugin skips notes).
+  document.querySelectorAll('aside.notes').forEach(function (el) {
+    var raw = el.textContent.replace(/^\n/, '').replace(/\s+$/, '');
+    if (!raw) return;
+    var lines = raw.split('\n');
+    var widths = lines.filter(function (l) { return l.trim(); })
+                      .map(function (l) { return l.match(/^ */)[0].length; });
+    var pad = widths.length ? Math.min.apply(null, widths) : 0;
+    el.innerHTML = marked.parse(lines.map(function (l) { return l.slice(pad); }).join('\n'));
+  });
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    width: 1280,
+    height: 760,
+    margin: 0.06,
+    minScale: 0.2,
+    maxScale: 2.0,
+    plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3],
+  });
+</script>
+</body>
+</html>
