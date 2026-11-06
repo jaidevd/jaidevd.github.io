@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Mon, 14 Sep 2026 23:17:22 +0530</lastBuildDate>
+			<lastBuildDate>Fri, 06 Nov 2026 09:57:34 +0530</lastBuildDate>
 		
 			<atom:link href="https://jaidevd.com/tags/personal/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Purvagraha</title>
+				<link>https://jaidevd.com/posts/purvagraha/</link>
+				<pubDate>Fri, 06 Nov 2026 09:57:34 +0530</pubDate>
+				<guid>https://jaidevd.com/posts/purvagraha/</guid>
+				<description>&lt;p&gt;There&amp;rsquo;s a fascinating Sanskrit word — पूर्वाग्रह — which translates to prejudice or&#xA;preconception. But the translation misses something: the suffix आग्रह does not&#xA;mean either judgment (-judice) or conception. It means insistence, or appeal.&#xA;And when this insistence crosses over a moral boundary, it becomes दुराग्रह — a&#xA;stubborn, obstinate insistence on something. This word is closer to हठ (or हट्ट in&#xA;Marathi). Unfortunately, I cannot find a suitable English word or phrase that&#xA;accurately conveys the meaning of either दुराग्रह or हट्ट.&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>Learning Tools vs Learning the Craft</title>
 				<link>https://jaidevd.com/posts/tools-vs-craft/</link>

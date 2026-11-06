@@ -10,9 +10,30 @@
 		
 		
 		
-			<lastBuildDate>Mon, 14 Sep 2026 23:17:22 +0530</lastBuildDate>
+			<lastBuildDate>Fri, 06 Nov 2026 09:57:34 +0530</lastBuildDate>
 		
 			<atom:link href="https://jaidevd.com/tags/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Absurdism</title>
+				<link>https://jaidevd.com/tags/absurdism/</link>
+				<pubDate>Fri, 06 Nov 2026 09:57:34 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/absurdism/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Personal</title>
+				<link>https://jaidevd.com/tags/personal/</link>
+				<pubDate>Fri, 06 Nov 2026 09:57:34 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/personal/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Writing</title>
+				<link>https://jaidevd.com/tags/writing/</link>
+				<pubDate>Fri, 06 Nov 2026 09:57:34 +0530</pubDate>
+				<guid>https://jaidevd.com/tags/writing/</guid>
+				<description></description>
+			</item>
 			<item>
 				<title>Code</title>
 				<link>https://jaidevd.com/tags/code/</link>
@@ -32,13 +53,6 @@
 				<link>https://jaidevd.com/tags/mooc/</link>
 				<pubDate>Mon, 14 Sep 2026 23:17:22 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/mooc/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Personal</title>
-				<link>https://jaidevd.com/tags/personal/</link>
-				<pubDate>Mon, 14 Sep 2026 23:17:22 +0530</pubDate>
-				<guid>https://jaidevd.com/tags/personal/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -105,7 +119,7 @@
 				<description></description>
 			</item>
 			<item>
-				<title>Machine Learning</title>
+				<title>Machine-Learning</title>
 				<link>https://jaidevd.com/tags/machine-learning/</link>
 				<pubDate>Mon, 23 Mar 2026 19:20:04 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/machine-learning/</guid>
@@ -144,13 +158,6 @@
 				<link>https://jaidevd.com/tags/journal/</link>
 				<pubDate>Tue, 11 Mar 2025 12:12:14 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/journal/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Writing</title>
-				<link>https://jaidevd.com/tags/writing/</link>
-				<pubDate>Tue, 11 Mar 2025 12:12:14 +0530</pubDate>
-				<guid>https://jaidevd.com/tags/writing/</guid>
 				<description></description>
 			</item>
 			<item>
@@ -242,13 +249,6 @@
 				<link>https://jaidevd.com/tags/science-writing/</link>
 				<pubDate>Sun, 07 Apr 2024 00:00:00 +0530</pubDate>
 				<guid>https://jaidevd.com/tags/science-writing/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Absurdism</title>
-				<link>https://jaidevd.com/tags/absurdism/</link>
-				<pubDate>Sat, 24 Dec 2022 10:04:06 +0530</pubDate>
-				<guid>https://jaidevd.com/tags/absurdism/</guid>
 				<description></description>
 			</item>
 			<item>
